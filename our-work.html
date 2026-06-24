@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Work — Poster Lab Store</title>
+  <meta name="description" content="Poster Lab Store real quality gallery and captured room photos.">
+  <link rel="icon" type="image/png" href="assets/poster-lab-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Poster Lab Store home">
+      <span class="brand-mark">
+        <img src="assets/poster-lab-logo.png" alt aria-hidden="true">
+      </span>
+      <span>
+        <strong>Poster Lab Store</strong>
+        <small data-t="brandSubtitle">Framed posters for modern rooms</small>
+      </span>
+    </a>
+    <nav class="header-actions" aria-label="Store navigation">
+      <a href="index.html" data-t="navShop">Shop</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+        <span data-theme-icon aria-hidden="true">☀</span>
+        <span data-t="themeToggle">Light</span>
+      </button>
+      <button class="lang-toggle" type="button" data-lang-toggle data-t="langToggle" aria-label="Switch language">AR</button>
+      <button class="cart-button" type="button" data-open-cart aria-label="Open cart">
+        <span data-t="navCart">Cart</span>
+        <strong data-cart-count>0</strong>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="store-section our-work-shell">
+      <div class="our-work-hero">
+        <p class="eyebrow" data-t="ourWorkEyebrow">Real quality captures</p>
+        <h1 data-t="ourWorkTitle">Our Work</h1>
+        <p data-t="ourWorkSubtitle">See the print finish, frame depth, and room styling from real photos.</p>
+        <div class="our-work-hero-actions">
+          <a class="primary-link" href="index.html" data-t="backToShop">Back to shop</a>
+          <button class="secondary-link" type="button" data-open-cart data-t="heroActionCart">Open cart</button>
+        </div>
+      </div>
+
+      <section class="our-work-reel" aria-label="Quality reel">
+        <div class="our-work-reel-stage">
+          <img data-our-work-reel-image src="assets/our-work/our-work-01.jpg" alt="Framed room capture 01" loading="eager" decoding="async">
+        </div>
+        <div class="our-work-reel-meta">
+          <strong data-our-work-reel-caption>Framed room capture 01</strong>
+          <div class="our-work-reel-controls" data-our-work-reel-controls data-playing="true">
+            <button type="button" data-work-reel-prev aria-label="Previous image">‹</button>
+            <button type="button" data-work-reel-toggle aria-label="Pause reel">Pause</button>
+            <button type="button" data-work-reel-next aria-label="Next image">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-t="ourWorkGalleryLabel">Captured photos</p>
+            <h2>Real rooms and real framing</h2>
+          </div>
+        </div>
+        <div class="our-work-grid" data-our-work-grid></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Store contact and support">
+    <div class="footer-panel">
+      <p>Need help choosing the right poster or frame? Message us on WhatsApp and get fast local support before you order.</p>
+      <a class="footer-link" href="https://wa.me/201010414187" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+    </div>
+  </footer>
+
+  <div class="toast-notification" aria-live="polite" aria-atomic="true"></div>
+
+  <aside class="cart-drawer" data-cart-drawer aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow" data-t="cartEyebrow">Your order</p>
+          <h2 id="cartTitle" data-t="cartTitle">Cart</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-cart aria-label="Close cart">x</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <form class="checkout-form" id="checkoutForm">
+        <label>
+          <span data-t="cartNameLabel">Name</span>
+          <input id="customerName" name="customerName" placeholder="Your name" data-t-placeholder="cartNamePlaceholder" required>
+        </label>
+        <label>
+          <span data-t="cartPhoneLabel">Phone</span>
+          <input id="customerPhone" name="customerPhone" placeholder="Your phone number" data-t-placeholder="cartPhonePlaceholder" required>
+        </label>
+        <label>
+          <span data-t="cartAddressLabel">Address</span>
+          <textarea id="customerAddress" name="customerAddress" rows="3" placeholder="Delivery address" data-t-placeholder="cartAddressPlaceholder" required></textarea>
+        </label>
+        <label>
+          <span data-t="cartPaymentLabel">Payment method</span>
+          <select id="paymentMethod" name="paymentMethod">
+            <option value="Vodafone Cash to 01090927525" data-t="cartVodafoneOption">Vodafone Cash - 01090927525</option>
+            <option value="Instapay QR / qnbziad49015@instapay" data-t="cartInstapayOption">Instapay QR - qnbziad49015@instapay</option>
+          </select>
+        </label>
+        <div class="payment-reminder">
+          <strong><span data-t="cartTotalLabel">Total:</span> <span id="cartTotal">EGP 0</span></strong>
+          <small data-t="cartWhatsappHint">WhatsApp will include items, sizes, frames, totals, payment method, product links, and uploaded design filenames.</small>
+        </div>
+        <button class="checkout-button" type="submit" data-t="cartCheckoutBtn">Review order</button>
+      </form>
+      <section class="payment-confirmation" id="paymentConfirmation" hidden aria-live="polite">
+        <div class="confirmation-header">
+          <p class="eyebrow" data-t="confEyebrow">Final confirmation</p>
+          <h3 data-t="confTitle">Check details, then send order</h3>
+          <p data-t="confHint">Your WhatsApp message will include every poster, selected frame, selected size, price total, customer details, product links, and uploaded design filenames.</p>
+        </div>
+        <div class="confirmation-methods">
+          <article class="payment-card" data-payment-cash hidden>
+            <strong>VF-Cash</strong>
+            <strong>01090927525</strong>
+          </article>
+          <article class="payment-card" data-payment-qr hidden>
+            <img src="assets/instapay-qr.jpeg" alt="Instapay QR code for Poster Lab Store">
+          </article>
+        </div>
+        <div class="confirmation-summary" id="confirmationSummary"></div>
+        <div class="upload-progress" data-upload-progress role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+          <span data-t="uploadProgressLabel">Uploading poster to server</span>
+          <div><i data-upload-progress-bar></i></div>
+        </div>
+        <div class="confirmation-actions">
+          <button class="secondary-button" type="button" data-edit-checkout data-t="confEditBtn">Edit details</button>
+          <button class="checkout-button" type="button" data-send-whatsapp data-t="confSendBtn">Send final order to WhatsApp</button>
+        </div>
+      </section>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

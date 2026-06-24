@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster Lab Store</title>
+  <meta name="description"
+    content="Poster Lab Store sells modern framed car posters and art prints for home decor fans.">
+  <link rel="icon" type="image/png" href="assets/poster-lab-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Poster Lab Store home">
+      <span class="brand-mark">
+        <img src="assets/poster-lab-logo.png" alt aria-hidden="true">
+      </span>
+      <span>
+        <strong>Poster Lab Store</strong>
+        <small data-t="brandSubtitle">Framed posters for modern rooms</small>
+      </span>
+    </a>
+    <nav class="header-actions" aria-label="Store navigation">
+      <a href="#products" data-t="navShop">Shop</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+        <span data-theme-icon aria-hidden="true">☀</span>
+        <span data-t="themeToggle">Light</span>
+      </button>
+      <button class="lang-toggle" type="button" data-lang-toggle data-t="langToggle"
+        aria-label="Switch language">AR</button>
+      <button class="cart-button" type="button" data-open-cart aria-label="Open cart">
+        <span data-t="navCart">Cart</span>
+        <strong data-cart-count>0</strong>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow" data-t="heroEyebrow">Local framed poster store</p>
+        <h1 data-t="heroTitle">Poster Lab Store</h1>
+        <p class="hero-text" data-t="heroText">Cars, paint studies, and bold
+          wall art printed with black, white, or wood
+          frames for rooms that deserve a focal point.</p>
+        <ol class="order-steps" aria-label="How to order">
+          <li data-t="stepChoose">Choose a poster</li>
+          <li data-t="stepCustomize">Pick size and frame</li>
+          <li data-t="stepWhatsapp">Send order on WhatsApp</li>
+        </ol>
+        <div class="hero-actions">
+          <a class="primary-link" href="#products" data-t="heroActionShop">Shop posters</a>
+          <button class="secondary-link" type="button" data-open-cart data-t="heroActionCart">Open cart</button>
+        </div>
+      </div>
+      <div class="hero-stage" aria-hidden="true">
+        <img class="hero-card hero-card-one" src="assets/Blue Porsche 3/upscalemedia-transformed blue porsche 3_01.png"
+          alt="Blue Porsche 3 framed poster">
+        <img class="hero-card hero-card-two" src="assets/Red Ferrari.png" alt="Red Ferrari framed poster">
+        <div class="lab-badge">
+          <span data-t="badgeFramed">Framed</span>
+          <span data-t="badgePrints"> Local Prints </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar-band" id="products" aria-label="Search and filters">
+      <div class="toolbar">
+        <label class="search-box">
+          <span data-t="searchLabel">Search</span>
+          <input id="searchInput" type="search" placeholder="Search cars, paint, abstract..."
+            data-t-placeholder="searchPlaceholder" autocomplete="off">
+        </label>
+        <label>
+          <span data-t="categoryLabel">Category</span>
+          <select id="categoryFilter">
+            <option value="all" data-t="catAll">All posters</option>
+            <option value="cars" data-t="catCars">Cars</option>
+            <option value="abstract" data-t="catAbstract">Abstract</option>
+            <option value="custom" data-t="catCustom">Custom upload</option>
+            <option value="paint" data-t="catPaint">Paint art</option>
+          </select>
+        </label>
+        <label>
+          <span data-t="sizeLabel">Size</span>
+          <select id="sizeFilter">
+            <option value="all" data-t="sizeAll">All sizes</option>
+            <option value="20x30">20x30 cm</option>
+            <option value="30x40">30x40 cm</option>
+            <option value="40x50">40x50 cm</option>
+            <option value="50x70">50x70 cm</option>
+          </select>
+        </label>
+        <label>
+          <span data-t="frameLabel">Frame</span>
+          <select id="frameFilter">
+            <option value="all" data-t="frameAll">All frames</option>
+            <option value="None" data-t="frameNone">None</option>
+            <option value="Black" data-t="frameBlack">Black</option>
+            <option value="White" data-t="frameWhite">White</option>
+            <option value="Wood" data-t="frameWood">Wood</option>
+          </select>
+        </label>
+        <label>
+          <span data-t="sortLabel">Sort</span>
+          <select id="sortFilter">
+            <option value="featured" data-t="sortFeatured">Featured</option>
+            <option value="price-low" data-t="sortPriceLow">Price low to
+              high</option>
+            <option value="price-high" data-t="sortPriceHigh">Price high to
+              low</option>
+            <option value="name" data-t="sortName">Name</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="store-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" data-t="freshDropsEyebrow">Fresh drops</p>
+          <h2 data-t="freshDropsTitle">Framed posters for bold interiors</h2>
+        </div>
+        <p id="resultCount">6 products</p>
+      </div>
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="detail-shell" id="productDetail" hidden></section>
+  </main>
+
+  <footer class="site-footer" aria-label="Store contact and support">
+    <div class="footer-panel">
+      <p>Need help choosing the right poster or frame? Message us on WhatsApp
+        and get fast local support before you order.</p>
+      <a class="footer-link" href="https://wa.me/201010414187" target="_blank" rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp">Chat on
+        WhatsApp</a>
+    </div>
+  </footer>
+
+  <div class="toast-notification" aria-live="polite" aria-atomic="true"></div>
+
+  <aside class="cart-drawer" data-cart-drawer aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow" data-t="cartEyebrow">Your order</p>
+          <h2 id="cartTitle" data-t="cartTitle">Cart</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-cart aria-label="Close cart">x</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <form class="checkout-form" id="checkoutForm">
+        <label>
+          <span data-t="cartNameLabel">Name</span>
+          <input id="customerName" name="customerName" placeholder="Your name" data-t-placeholder="cartNamePlaceholder"
+            required>
+        </label>
+        <label>
+          <span data-t="cartPhoneLabel">Phone</span>
+          <input id="customerPhone" name="customerPhone" placeholder="Your phone number"
+            data-t-placeholder="cartPhonePlaceholder" required>
+        </label>
+        <label>
+          <span data-t="cartAddressLabel">Address</span>
+          <textarea id="customerAddress" name="customerAddress" rows="3" placeholder="Delivery address"
+            data-t-placeholder="cartAddressPlaceholder" required></textarea>
+        </label>
+        <label>
+          <span data-t="cartPaymentLabel">Payment method</span>
+          <select id="paymentMethod" name="paymentMethod">
+            <option value="Vodafone Cash to 01090927525" data-t="cartVodafoneOption">Vodafone Cash - 01090927525
+            </option>
+            <option value="Instapay QR / qnbziad49015@instapay" data-t="cartInstapayOption">Instapay QR -
+              qnbziad49015@instapay</option>
+          </select>
+        </label>
+        <div class="payment-reminder">
+          <strong><span data-t="cartTotalLabel">Total:</span> <span id="cartTotal">EGP 0</span></strong>
+          <small data-t="cartWhatsappHint">WhatsApp will include items, sizes,
+            frames, totals, payment method, product
+            links, and uploaded design filenames.</small>
+        </div>
+        <button class="checkout-button" type="submit" data-t="cartCheckoutBtn">Continue to payment confirmation</button>
+      </form>
+      <section class="payment-confirmation" id="paymentConfirmation" hidden aria-live="polite">
+        <div class="confirmation-header">
+          <p class="eyebrow" data-t="confEyebrow">Final confirmation</p>
+          <h3 data-t="confTitle">Complete payment, then send the order</h3>
+          <p data-t="confHint">Your WhatsApp message will include every
+            poster, selected frame, selected size, price
+            total, customer details, product links, and uploaded design
+            filenames.</p>
+        </div>
+        <div class="confirmation-methods">
+          <article class="payment-card" data-payment-cash hidden>
+            <strong>VF-Cash</strong>
+            <strong>01090927525</strong>
+          </article>
+          <article class="payment-card" data-payment-qr hidden>
+            <img src="assets/instapay-qr.jpeg" alt="Instapay QR code for Poster Lab Store">
+          </article>
+        </div>
+        <div class="confirmation-summary" id="confirmationSummary"></div>
+        <div class="upload-progress" data-upload-progress role="progressbar" aria-valuemin="0" aria-valuemax="100"
+          aria-valuenow="0" hidden>
+          <span data-t="uploadProgressLabel">Uploading poster to server</span>
+          <div><i data-upload-progress-bar></i></div>
+        </div>
+        <div class="confirmation-actions">
+          <button class="secondary-button" type="button" data-edit-checkout data-t="confEditBtn">Edit details</button>
+          <button class="checkout-button" type="button" data-send-whatsapp data-t="confSendBtn">Send final order to
+            WhatsApp</button>
+        </div>
+      </section>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
