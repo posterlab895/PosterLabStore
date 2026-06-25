@@ -100,7 +100,7 @@ const translations = {
 
     confEyebrow: "Final confirmation",
     confTitle: "Check details, then send order",
-    confHint: "Your WhatsApp message will include every poster, selected frame, selected size, price total, customer details, product links, and uploaded design filenames.",
+    confHint: "Your WhatsApp message will include every poster, selected frame, selected size, total price, customer details, product links, and uploaded design filenames.",
     confTotal: "Order total: ",
     confItemsCount: "customized framed poster item",
     confItemsCountPlural: "customized framed poster items",
@@ -132,7 +132,7 @@ const translations = {
     faqQ1: "How do I place an order?",
     faqA1: "Browse the shop, choose your favorite poster, select the size and frame option, then add it to your cart. When you're ready, go to the cart, enter your name, phone, address, and payment method, then click \"Place order\" to send the order via WhatsApp.",
     faqQ2: "What sizes are available?",
-    faqA2: "We offer four sizes: 20x30 cm, 30x40 cm, 40x50 cm, and 50x70 cm. Prices vary by size — larger sizes cost more. All sizes can be framed or unframed.",
+    faqA2: "We offer four sizes: 20x30 cm, 30x40 cm, 40x50 cm, and 50x70 cm. Prices vary by size � larger sizes cost more. All sizes can be framed or unframed.",
     faqQ3: "What frame options do you offer?",
     faqA3: "We offer three options: no frame (poster only), black frame, and white frame. Frames add EGP 120 to the price. All frames are high-quality and ready to hang.",
     faqQ4: "Can I upload my own design?",
@@ -140,7 +140,7 @@ const translations = {
     faqQ5: "What payment methods do you accept?",
     faqA5: "We accept VF-Cash and Instapay. Payment is made before we start printing your order. You'll receive the payment details after placing your order.",
     faqQ6: "How long does delivery take?",
-    faqA6: "Delivery typically takes 3–7 business days depending on your location. We deliver anywhere in Egypt. A delivery fee of EGP 35 is added to each order.",
+    faqA6: "Delivery typically takes 3�7 business days depending on your location. We deliver anywhere in Egypt. A delivery fee of EGP 35 is added to each order.",
     faqQ7: "Can I cancel or change my order?",
     faqA7: "You can cancel or modify your order within 2 hours of placing it. After that, production may have already started. Contact us on WhatsApp to make changes.",
     faqQ8: "Do you offer refunds or exchanges?",
@@ -148,7 +148,7 @@ const translations = {
     faqQ9: "How do I contact you?",
     faqA9: "You can reach us directly on WhatsApp by clicking the WhatsApp icon button at the bottom of any page. We typically respond within a few hours during business days.",
     faqContactTitle: "Still have questions?",
-    faqContactText: "Chat with us on WhatsApp — we're happy to help!",
+    faqContactText: "Chat with us on WhatsApp � we're happy to help!",
     faqWhatsappBtn: "Chat on WhatsApp",
     couponLabel: "Coupon code",
     couponPlaceholder: "Enter coupon code",
@@ -346,6 +346,9 @@ const products = [
 
 if (typeof footballProducts !== 'undefined') {
   products.push(...footballProducts);
+}
+if (typeof carProducts !== 'undefined') {
+  products.push(...carProducts);
 }
 
 const OUR_WORK_MEDIA = [
@@ -816,18 +819,18 @@ function showAccountPanel() {
     ` : `
       <form id="accountForm" style="display:grid;gap:12px">
         <div id="accountLoginFields" style="display:grid;gap:10px">
-          <input id="accountEmail" type="email" placeholder="${isAr ? "Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ" : "Email"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
-          <input id="accountPassword" type="password" placeholder="${isAr ? "ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±" : "Password"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="accountEmail" type="email" placeholder="${isAr ? "البريد الإلكتروني" : "Email"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="accountPassword" type="password" placeholder="${isAr ? "كلمة المرور" : "Password"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
           <button id="accountLoginBtn" class="checkout-button" type="button">${isAr ? "تسجيل الدخول" : "Login"}</button>
           <p style="text-align:center;color:var(--muted);font-size:0.82rem;margin:4px 0">
             <a href="#" id="showRegisterToggle" style="color:var(--accent);font-weight:800">${isAr ? "إنشاء حساب جديد" : "Create new account"}</a>
           </p>
         </div>
         <div id="accountRegisterFields" style="display:grid;gap:10px;display:none">
-          <input id="regName" type="text" placeholder="${isAr ? "Ø§Ù„Ø§Ø³Ù…" : "Name"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
-          <input id="regEmail" type="email" placeholder="${isAr ? "Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ" : "Email"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
-          <input id="regPhone" type="tel" placeholder="${isAr ? "Ø±Ù‚Ù… Ø§Ù„Ù‡Ø§ØªÙ" : "Phone"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
-          <input id="regPassword" type="password" placeholder="${isAr ? "ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±" : "Password"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="regName" type="text" placeholder="${isAr ? "الاسم" : "Name"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="regEmail" type="email" placeholder="${isAr ? "البريد الإلكتروني" : "Email"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="regPhone" type="tel" placeholder="${isAr ? "رقم الهاتف" : "Phone"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="regPassword" type="password" placeholder="${isAr ? "كلمة المرور" : "Password"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
           <button id="accountRegisterBtn" class="checkout-button" type="button">${isAr ? "إنشاء حساب" : "Register"}</button>
           <p style="text-align:center;color:var(--muted);font-size:0.82rem;margin:4px 0">
             <a href="#" id="showLoginToggle" style="color:var(--accent);font-weight:800">${isAr ? "لديك حساب؟ تسجيل الدخول" : "Have an account? Login"}</a>
@@ -948,7 +951,7 @@ function showWishlistPanel() {
             <strong style="color:var(--text-strong);font-size:0.9rem">${getProductName(p)}</strong>
             <p style="margin:2px 0 0;color:var(--warm);font-weight:800;font-size:0.85rem">${t("from")} ${money(p.basePrice)}</p>
           </div>
-          <button class="icon-button" data-wishlist-remove="${p.id}" style="width:36px;min-width:36px;height:36px" title="${isAr ? "Ø¥Ø²Ø§Ù„Ø©" : "Remove"}">x</button>
+          <button class="icon-button" data-wishlist-remove="${p.id}" style="width:36px;min-width:36px;height:36px" title="${isAr ? "إزالة" : "Remove"}">x</button>
         </article>
       `).join('') : `<p class="empty-state">${isAr ? "المفضلة فارغة" : "Wishlist is empty"}</p>`}
     </div>
@@ -1347,7 +1350,7 @@ function renderDetail(productId) {
   if (!product.frames.includes(state.detailFrame)) state.detailFrame = product.frames[0];
 
   if (productDetail) {
-    document.title = `${name} â€” ${t("brandTitle")}`;
+    document.title = `${name} � ${t("brandTitle")}`;
     productDetail.hidden = false;
     const rawPreview = product.isCustom && state.customUpload ? state.customUpload.url : product.image;
     const previewImage = rawPreview && rawPreview.startsWith('data:') ? rawPreview : productImageUrl(rawPreview);
@@ -1479,7 +1482,7 @@ async function addToCart(productId, size = "30x40", frame = "Black") {
   renderCart();
   openCart();
   flashCartBubble();
-  showToast(`${t("addedToCart")} â€” ${getProductName(product)}`);
+  showToast(`${t("addedToCart")} � ${getProductName(product)}`);
 }
 
 function cartLineTotal(item) {
@@ -1586,7 +1589,7 @@ function renderConfirmation(savedOrder) {
 
   const uploadHintMsg = currentLang === "ar"
     ? "💡 اضغط مطولاً على الصورة لحفظها ومشاركتها في واتساب!"
-    : "ðŸ’¡ Long-press the image to save or share it directly to WhatsApp!";
+    : "💡 Long-press the image to save or share it directly to WhatsApp!";
 
   confirmationSummary.innerHTML = `
     ${orderId ? `<span style="font-weight:950;font-size:1.1rem;color:var(--text-strong)">${currentLang === "ar" ? "رقم الطلب" : "Order #"}: ${orderId}</span>` : ""}
@@ -1606,7 +1609,7 @@ function renderConfirmation(savedOrder) {
     const name = product.name;
     return `
             <article style="display: flex; flex-direction: column; align-items: center; background: rgba(0, 0, 0, 0.3); padding: 10px; border-radius: 12px; border: 1px solid var(--lime); margin-bottom: 8px;">
-              <img src="${item.upload.url}" alt="${name} ${currentLang === "ar" ? "Ù…Ø¹Ø§ÙŠÙ†Ø© Ø§Ù„ØªØµÙ…ÙŠÙ…" : "uploaded design preview"}" style="max-width: 100%; height: auto; max-height: 200px; border-radius: 8px; object-fit: contain; margin-bottom: 6px;">
+              <img src="${item.upload.url}" alt="${name} ${currentLang === "ar" ? "معاينة التصميم" : "uploaded design preview"}" style="max-width: 100%; height: auto; max-height: 200px; border-radius: 8px; object-fit: contain; margin-bottom: 6px;">
               <span style="font-weight: 800; font-size: 0.85rem; color: #fff;">${item.upload.name}</span>
             </article>
           `;

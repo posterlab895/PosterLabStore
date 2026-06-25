@@ -1184,26 +1184,6 @@ const footballProducts = [
     "name": "Football Player #60",
     "category": "football",
     "tag": "Football",
-    "image": "assets/football-players/imgdownloader-4fc78e58.png",
-    "basePrice": 50,
-    "sizes": {
-      "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
-    },
-    "frames": [
-      "None",
-      "Black",
-      "White"
-    ],
-    "description": ""
-  },
-  {
-    "id": "fp-061",
-    "name": "Football Player #61",
-    "category": "football",
-    "tag": "Football",
     "image": "assets/football-players/imgdownloader-50a85694.png",
     "basePrice": 50,
     "sizes": {
@@ -3820,7 +3800,6 @@ const footballProductImages = [
   "assets/football-players/imgdownloader-47250261.png",
   "assets/football-players/imgdownloader-49277124.png",
   "assets/football-players/imgdownloader-4ee99b15.png",
-  "assets/football-players/imgdownloader-4fc78e58.png",
   "assets/football-players/imgdownloader-50a85694.png",
   "assets/football-players/imgdownloader-529a59ee.png",
   "assets/football-players/imgdownloader-52ecd0ec.png",
