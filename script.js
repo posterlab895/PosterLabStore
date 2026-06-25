@@ -1,12 +1,14 @@
-const WHATSAPP_NUMBER = "201010414187";
+﻿const WHATSAPP_NUMBER = "201010414187";
 const DELIVERY_FEE = 35;
 const POSTER_FALLBACK_IMAGE = "assets/poster-lab-logo.png";
 const CUSTOM_UPLOAD_ACCEPT = ".jpg,.jpeg,.png,.webp,.gif,.bmp,.avif,.heic,.heif,.tif,.tiff,image/*";
+const SESSION_PAGE_KEY = "pls-page";
+const SESSION_SCROLL_KEY = "pls-scroll";
 const frameOptions = {
   None: { label: "Poster only", price: 0, hint: "Poster only, no frame" },
   Black: { label: "Black frame", price: 120 },
   White: { label: "White frame", price: 120 },
-  Wood: { label: "Wood frame", price: 140 }
+
 };
 
 const translations = {
@@ -37,6 +39,7 @@ const translations = {
     catCustom: "Custom upload",
     catCars: "Cars",
     catPaint: "Paint art",
+    catFootball: "Football",
     catAbstract: "Abstract",
     sizeLabel: "Size",
     sizeAll: "All sizes",
@@ -88,12 +91,11 @@ const translations = {
     cartAddressLabel: "Address",
     cartAddressPlaceholder: "Delivery address",
     cartPaymentLabel: "Payment method",
-    cartInstapayOption: "Instapay QR - qnbziad49015@instapay",
-    cartVodafoneOption: "Vodafone Cash - 01090927525",
+    cartInstapayOption: "Instapay",
+    cartVodafoneOption: "VF-Cash",
     cartWhatsappHint: "WhatsApp will include items, sizes, frames, totals, payment method, product links, and uploaded design filenames.",
     cartCheckoutBtn: "Review order",
     productLink: "Product page link",
-    backToShop: "Back to shop",
     backToShop: "Back to shop",
 
     confEyebrow: "Final confirmation",
@@ -119,6 +121,44 @@ const translations = {
     ourWorkButton: "Watch real quality video",
     ourWorkGalleryLabel: "Captured photos",
     ourWorkReelLabel: "Quality reel",
+    clearCart: "Clear cart",
+    navAccount: "Account",
+    navWishlist: "Wishlist",
+    navAdmin: "Admin",
+    navFaq: "FAQ",
+    faqEyebrow: "Got questions?",
+    faqTitle: "Frequently Asked Questions",
+    faqSubtitle: "Everything you need to know about ordering framed posters from Poster Lab Store.",
+    faqQ1: "How do I place an order?",
+    faqA1: "Browse the shop, choose your favorite poster, select the size and frame option, then add it to your cart. When you're ready, go to the cart, enter your name, phone, address, and payment method, then click \"Place order\" to send the order via WhatsApp.",
+    faqQ2: "What sizes are available?",
+    faqA2: "We offer four sizes: 20x30 cm, 30x40 cm, 40x50 cm, and 50x70 cm. Prices vary by size — larger sizes cost more. All sizes can be framed or unframed.",
+    faqQ3: "What frame options do you offer?",
+    faqA3: "We offer three options: no frame (poster only), black frame, and white frame. Frames add EGP 120 to the price. All frames are high-quality and ready to hang.",
+    faqQ4: "Can I upload my own design?",
+    faqA4: "Yes! Use the \"Upload Your Custom Design\" product to upload any photo or design. We'll print it as a high-quality framed poster. You can upload JPG, PNG, or any common image format.",
+    faqQ5: "What payment methods do you accept?",
+    faqA5: "We accept VF-Cash and Instapay. Payment is made before we start printing your order. You'll receive the payment details after placing your order.",
+    faqQ6: "How long does delivery take?",
+    faqA6: "Delivery typically takes 3–7 business days depending on your location. We deliver anywhere in Egypt. A delivery fee of EGP 35 is added to each order.",
+    faqQ7: "Can I cancel or change my order?",
+    faqA7: "You can cancel or modify your order within 2 hours of placing it. After that, production may have already started. Contact us on WhatsApp to make changes.",
+    faqQ8: "Do you offer refunds or exchanges?",
+    faqA8: "Yes. If your poster arrives damaged or defective, we will replace it free of charge. Contact us within 48 hours of delivery with a photo of the issue.",
+    faqQ9: "How do I contact you?",
+    faqA9: "You can reach us directly on WhatsApp by clicking the WhatsApp icon button at the bottom of any page. We typically respond within a few hours during business days.",
+    faqContactTitle: "Still have questions?",
+    faqContactText: "Chat with us on WhatsApp — we're happy to help!",
+    faqWhatsappBtn: "Chat on WhatsApp",
+    couponLabel: "Coupon code",
+    couponPlaceholder: "Enter coupon code",
+    couponApply: "Apply",
+    couponRemove: "Remove",
+    orderNoteLabel: "Order notes (optional)",
+    orderNotePlaceholder: "Any special instructions...",
+    orderConfirmed: "Order placed successfully!",
+    trackOrder: "Track order",
+    whatsappChat: "Chat with us on WhatsApp",
   },
   ar: {
     brandTitle: "بوستر لاب ستور",
@@ -128,7 +168,6 @@ const translations = {
     langToggle: "EN",
     themeToggle: "فاتح",
     themeToggleDark: "داكن",
-
     heroEyebrow: "طلب بوسترات بسهولة",
     heroTitle: "بوستر لاب ستور",
     heroText: "اختر البوستر، حدد المقاس والإطار، ثم أرسل طلبك مباشرة على واتساب.",
@@ -139,7 +178,6 @@ const translations = {
     stepWhatsapp: "أرسل الطلب على واتساب",
     badgeFramed: "مؤطر",
     badgePrints: "طباعة محلية",
-
     searchLabel: "بحث",
     searchPlaceholder: "ابحث باسم البوستر أو النوع...",
     categoryLabel: "الفئة",
@@ -147,6 +185,7 @@ const translations = {
     catCustom: "تصميم خاص",
     catCars: "سيارات",
     catPaint: "لوحات فنية",
+    catFootball: "كرة قدم",
     catAbstract: "تجريدي",
     sizeLabel: "المقاس",
     sizeAll: "كل المقاسات",
@@ -155,40 +194,36 @@ const translations = {
     frameNone: "بدون إطار",
     frameBlack: "أسود",
     frameWhite: "أبيض",
-    frameWood: "خشبي",
     sortLabel: "ترتيب",
     sortFeatured: "مميز",
     sortPriceLow: "السعر: من الأقل للأعلى",
     sortPriceHigh: "السعر: من الأعلى للأقل",
     sortName: "الاسم",
-
     freshDropsEyebrow: "تسوق البوسترات",
-    freshDropsTitle: "اختار المفضل عندك",
+    freshDropsTitle: "اختر ما يعجبك",
     resultCountProduct: "منتج",
     resultCountProducts: "منتجات",
-    noProductsFound: "لم يتم العثور على بوسترات.",
-    tryDifferentSearch: "جرّب البحث بكلمات أخرى أو تغيير الفلاتر.",
+    noProductsFound: "لم نجد بوسترات مطابقة.",
+    tryDifferentSearch: "جرب بحثا بكلمات أخرى أو تغيير الفلاتر.",
     from: "تبدأ من",
     sizesAvailable: "٤ مقاسات متاحة",
     customize: "عرض التفاصيل",
     orderNow: "أضف للسلة",
-    uploadDesignBtn: "رفع التصميم",
+    uploadDesignBtn: "رفع تصميمك",
     addPosterBtn: "إضافة البوستر",
-
     detailEyebrow: "جاهز للطلب",
-    detailPosterSize: "١. اختار المقاس",
-    detailFrameColor: "٢. اختار الإطار",
+    detailPosterSize: "١. اختر المقاس",
+    detailFrameColor: "٢. اختر الإطار",
     detailUploadLabel: "ارفع صورتك أو تصميمك",
     detailUploadHint: "ارفع ملف JPG أو PNG أو أي تصميم قبل الإضافة للسلة.",
     detailSelectedFile: "الملف المختار: ",
-    detailAddBtn: "إضافة البوستر المخصص للسلة",
+    detailAddBtn: "إضافة البوستر للسلة",
     detailAddPosterBtn: "أضف هذا البوستر",
     pleaseUploadAlert: "يرجى رفع صورتك أو تصميمك أولاً.",
-
     cartEyebrow: "طلبك",
     cartTitle: "السلة",
     cartEmpty: "سلتك فارغة.",
-    cartStartOrderHint: "أضف بوستراً مؤطراً لبدء الطلب.",
+    cartStartOrderHint: "أضف بوسترا للبدء.",
     cartEach: "للقطعة",
     cartTotalLabel: "الإجمالي:",
     cartNameLabel: "الاسم",
@@ -198,38 +233,75 @@ const translations = {
     cartAddressLabel: "العنوان",
     cartAddressPlaceholder: "عنوان التوصيل بالتفصيل",
     cartPaymentLabel: "طريقة الدفع",
-    cartInstapayOption: "إنستا باي QR - qnbziad49015@instapay",
-    cartVodafoneOption: "فودافون كاش - 01090927525",
-    cartWhatsappHint: "سوف تتضمن رسالة الواتساب المنتجات، المقاسات، الإطارات، الإجماليات، طريقة الدفع، تفاصيل العميل، روابط المنتجات، وأسماء ملفات التصاميم المرفوعة.",
+    cartInstapayOption: "إنستاباي",
+    cartVodafoneOption: "فودافون كاش",
+    cartWhatsappHint: "ستشمل رسالة الواتساب المنتجات، المقاسات، الإطارات، الإجمالي، طريقة الدفع، بيانات العميل، وروابط المنتجات.",
     cartCheckoutBtn: "مراجعة الطلب",
-    productLink: "رابط صفحة المنتج",
+    productLink: "رابط المنتج",
     backToShop: "العودة للتسوق",
-    backToShop: "العودة للتسوق",
-
-    confEyebrow: "التأكيد النهائي",
-    confTitle: "راجع التفاصيل، ثم أرسل الطلب",
-    confHint: "سوف تحتوي رسالتك على الواتساب على كل بوستر، الإطار المختار، المقاس المختار، إجمالي السعر، تفاصيل العميل، روابط المنتجات، وأسماء ملفات التصاميم المرفوعة.",
+    confEyebrow: "التأكيد",
+    confTitle: "راجع الطلب ثم أرسله",
+    confHint: "ستحتوي رسالتك على الواتساب على كل بوستر، والإطار، والمقاس، والإجمالي، وبيانات العميل، وروابط المنتجات.",
     confTotal: "إجمالي الطلب: ",
-    confItemsCount: "بوستر مخصص مضاف",
-    confItemsCountPlural: "بوسترات مخصصة مضافة",
+    confItemsCount: "بوستر مضاف",
+    confItemsCountPlural: "بوسترات مضافة",
     confEditBtn: "تعديل البيانات",
-    confSendBtn: "إرسال الطلب النهائي عبر واتساب",
+    confSendBtn: "إرسال عبر واتساب",
     confAddFirstAlert: "يرجى إضافة بوستر واحد على الأقل إلى السلة.",
     addedToCart: "تمت الإضافة إلى السلة",
-    confUploadSummaryTitle: "التصاميم المرفوعة:",
-    uploadProgressLabel: "جاري رفع البوستر إلى السيرفر",
+    confUploadSummaryTitle: "التصميمات المرفوعة:",
+    uploadProgressLabel: "جاري رفع البوستر...",
     deliveryFeeLabel: "التوصيل",
     subtotalLabel: "المجموع الفرعي",
     sizeGuideTitle: "دليل المقاسات",
-    sizeGuideHint: "اختار المقاس المناسب للحائط عندك.",
+    sizeGuideHint: "اختر المقاس المناسب لحائطك.",
     addToCartSimple: "أضف للسلة",
+    navAccount: "حسابي",
+    navWishlist: "المفضلة",
+    navAdmin: "الإدارة",
+    navFaq: "الأسئلة",
+    couponLabel: "كود الخصم",
+    couponPlaceholder: "أدخل كود الخصم",
+    couponApply: "تطبيق",
+    couponRemove: "إزالة",
+    orderNoteLabel: "ملاحظات الطلب",
+    orderNotePlaceholder: "أي ملاحظات؟",
+    paymentCod: "الدفع عند الاستلام",
+    orderConfirmed: "تم تأكيد الطلب!",
+    trackOrder: "تتبع الطلب",
     ourWorkTitle: "شغلنا",
     ourWorkEyebrow: "صور جودة حقيقية",
-    ourWorkSubtitle: "شوف خامة الطباعة وعمق البرواز وتنسيق الغرفة من صور حقيقية.",
-    ourWorkButton: "شاهد فيديو الجودة الحقيقية",
-    ourWorkGalleryLabel: "الصور المصورة",
-    ourWorkReelLabel: "استعراض الجودة",
-  }
+    ourWorkSubtitle: "شوف جودة الطباعة وعمق البرواز وتنسيق الغرف.",
+    ourWorkButton: "شاهد جودتنا",
+    ourWorkGalleryLabel: "المعرض",
+    ourWorkReelLabel: "فيديو الجودة",
+    clearCart: "تفريغ السلة",
+    whatsappChat: "تحدث معنا",
+    faqEyebrow: "عندك أسئلة؟",
+    faqTitle: "الأسئلة الشائعة",
+    faqSubtitle: "كل ما تحتاج معرفته عن طلب البوسترات من Poster Lab Store.",
+    faqQ1: "كيف أطلب؟",
+    faqA1: "تصفح المتجر، اختر البوستر المناسب، حدد المقاس والإطار، ثم أضف للسلة. لما تخلص، اذهب للسلة وأدخل اسمك ورقم هاتفك وعنوانك وطريقة الدفع، ثم اضغط \"إرسال الطلب\" لترسله عبر واتساب.",
+    faqQ2: "ما المقاسات المتاحة؟",
+    faqA2: "نوفر أربع مقاسات: 20x30 سم، 30x40 سم، 40x50 سم، و50x70 سم. الأسعار تختلف حسب المقاس — المقاسات الأكبر أغلى. كل المقاسات تنفع مع أو بدون إطار.",
+    faqQ3: "ما خيارات الإطارات؟",
+    faqA3: "نوفر ثلاثة خيارات: بدون إطار (بوستر فقط)، إطار أسود، وإطار أبيض. الإطارات تضيف 120 جنيهاً للسعر. كل الإطارات عالية الجودة وجاهزة للتعليق.",
+    faqQ4: "هل أقدر أرفع تصميمي الخاص؟",
+    faqA4: "نعم! استخدم منتج \"ارفع تصميمك الخاص\" لرفع أي صورة أو تصميم. سنطبعه كبوستر مؤطر عالي الجودة. تقدر ترفع JPG أو PNG أو أي صيغة صور شائعة.",
+    faqQ5: "ما طرق الدفع المتاحة؟",
+    faqA5: "نقبل فودافون كاش وإنستاباي. يتم الدفع قبل بدء طباعة طلبك. هتستلم تفاصيل الدفع بعد تأكيد الطلب.",
+    faqQ6: "كم تستغرق التوصيلة؟",
+    faqA6: "التوصيل عادة يستغرق 3–7 أيام عمل حسب موقعك. نوصل في كل مصر. رسوم التوصيل 35 جنيهاً تضاف لكل طلب.",
+    faqQ7: "هل أقدر ألغي أو أغير طلبي؟",
+    faqA7: "تقدر تلغي أو تعدل طلبك خلال ساعتين من تقديمه. بعد كده ممكن يكون الإنتاج بدأ. تواصل معنا على واتساب للتعديل.",
+    faqQ8: "هل توفرون استرجاع أو استبدال؟",
+    faqA8: "نعم. لو وصل البوستر تالف أو فيه عيب، سنستبدله مجاناً. تواصل معنا خلال 48 ساعة من الاستلام مع صورة المشكلة.",
+    faqQ9: "كيف أتواصل معكم؟",
+    faqA9: "تقدر تتواصل معنا مباشرة على واتساب بالضغط على زر الواتساب في أي صفحة. نرد عادة خلال ساعات في أيام العمل.",
+    faqContactTitle: "لسه عندك أسئلة؟",
+    faqContactText: "تحدث معنا على واتساب — يسعدنا مساعدتك!",
+    faqWhatsappBtn: "تحدث على واتساب",
+  },
 };
 
 const currency = new Intl.NumberFormat("en-EG", {
@@ -240,394 +312,41 @@ const currency = new Intl.NumberFormat("en-EG", {
 
 const products = [
   {
-    id: "custom-upload",
-    name: "Upload Your Design",
-    nameAr: "رفع تصميمك الخاص",
+    id: "custom-design",
+    name: "Upload Your Custom Design",
+    nameAr: "ارفع تصميمك الخاص",
     category: "custom",
     tag: "Custom upload",
-    tagAr: "تصميم خاص",
-    image: "assets/custom-upload.jpg",
-    gallery: ["assets/custom-upload.jpg"],
-    basePrice: 60,
-    sizes: { "20x30": 60, "30x40": 80, "40x50": 90, "50x70": 120 },
-    frames: ["None", "Black", "White", "Wood"],
+    tagAr: "رفع خاص",
     isCustom: true,
-    description: "Upload your own photo, artwork, logo, or poster design. Choose poster size and optional frame before sending the final order.",
-    descriptionAr: "ارفع صورتك الخاصة، عملك الفني، شعارك أو تصميم البوستر الخاص بك. اختر مقاس البوستر والإطار الاختياري قبل إرسال الطلب النهائي."
+    image: "assets/Custom/Upload-Your-Custom-Design.png",
+    gallery: ["assets/Custom/Upload-Your-Custom-Design.png"],
+    basePrice: 50,
+    sizes: { '20x30': 50, '30x40': 60, '40x50': 70, '50x70': 90 },
+    frames: ['None', 'Black', 'White'],
+    description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
+    descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
   },
   {
-    id: "porsche-gt3-rs",
-    name: "Porsche GT3 RS",
-    nameAr: "Porsche GT3 RS",
-    category: "cars",
-    tag: "Car poster",
-    tagAr: "بوستر سيارة",
-    image: "assets/Porsche GT3 RS.png",
-    gallery: ["assets/Porsche GT3 RS.png"],
+    id: "customize-song",
+    name: "Customize Your Song",
+    nameAr: "خصص أغنيتك",
+    category: "custom",
+    tag: "Custom song",
+    tagAr: "أغنية مخصصة",
+    image: "assets/Custom/Customize-Your-Song.png",
+    gallery: ["assets/Custom/Customize-Your-Song.png"],
     basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A premium Porsche poster with bold racing style and crisp detail for modern interiors.",
-    descriptionAr: "بوستر بورشه فاخر بتصميم سباق جريء وتفاصيل واضحة للمساحات العصرية."
-  },
-  {
-    id: "red-ferrari",
-    name: "Red Ferrari",
-    nameAr: "Red Ferrari",
-    category: "cars",
-    tag: "Car poster",
-    tagAr: "بوستر سيارة",
-    image: "assets/Red Ferrari.png",
-    gallery: ["assets/Red Ferrari.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A dynamic Ferrari poster with striking contrast and a performance-inspired look.",
-    descriptionAr: "بوستر فيراري ديناميكي بتباين قوي ومظهر مستوحى من الأداء."
-  },
-  {
-    id: "red-bull-racing",
-    name: "RedBull Racing",
-    nameAr: "RedBull Racing",
-    category: "cars",
-    tag: "Car poster",
-    tagAr: "بوستر سيارة",
-    image: "assets/Dark Blue RedBull.png",
-    gallery: ["assets/Dark Blue RedBull.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A striking Red Bull racing poster with vivid colors and sharp energy.",
-    descriptionAr: "بوستر ريد بول السباقي بألوان زاهية وطاقة حادة."
-  },
-  {
-    id: "space-astronauts",
-    name: "Space Astronauts",
-    nameAr: "Space Astronauts",
-    category: "abstract",
-    tag: "Space art",
-    tagAr: "فن الفضاء",
-    image: "assets/Space Astronauts.png",
-    gallery: ["assets/Space Astronauts.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A futuristic astronaut poster with vibrant planets and cosmic energy.",
-    descriptionAr: "بوستر رواد فضاء مستقبلي بألوان كوكبية زاهية وطاقة كونية."
-  },
-  {
-    id: "minecraft-avengers",
-    name: "Minecraft Avengers",
-    nameAr: "Minecraft Avengers",
-    category: "abstract",
-    tag: "Gaming art",
-    tagAr: "فن ألعاب",
-    image: "assets/Minecraft Avengers.png",
-    gallery: ["assets/Minecraft Avengers.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A bold Minecraft Avengers poster that mixes gaming and pop culture for colorful spaces.",
-    descriptionAr: "بوستر Minecraft Avengers جريء يمزج بين الألعاب والثقافة الشعبية لمساحات ملونة."
-  },
-  {
-    id: "monaliza",
-    name: "Monaliza",
-    nameAr: "Monaliza",
-    category: "abstract",
-    tag: "Art poster",
-    tagAr: "بوستر فني",
-    image: "assets/Monaliza.png",
-    gallery: ["assets/Monaliza.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A stylish Monaliza poster with classic art inspiration and modern edge.",
-    descriptionAr: "بوستر Monaliza أنيق مستوحى من الفن الكلاسيكي مع لمسة عصرية."
-  },
-  {
-    id: "spiderman",
-    name: "Spiderman",
-    nameAr: "Spiderman",
-    category: "abstract",
-    tag: "Superhero art",
-    tagAr: "فن خارق",
-    image: "assets/Spiderman.png",
-    gallery: ["assets/Spiderman.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A dynamic Spiderman poster with crisp comic-style visuals for fan spaces.",
-    descriptionAr: "بوستر سبايدرمان ديناميكي بصور أسلوب الكوميك الواضحة لمساحات المعجبين."
-  },
-  {
-    id: "blue-porsche-3",
-    name: "Blue Porsche Series",
-    nameAr: "سلسلة بورشه الزرقاء",
-    category: "cars",
-    tag: "Car poster set",
-    tagAr: "مجموعة بوسترات سيارات",
-    image: "assets/Blue Porsche 3/upscalemedia-transformed blue porsche 3_01.png",
-    gallery: [
-      "assets/Blue Porsche 3/upscalemedia-transformed blue porsche 3_01.png",
-      "assets/Blue Porsche 3/upscalemedia-transformed blue porsche 3_02.png",
-      "assets/Blue Porsche 3/upscalemedia-transformed blue porsche 3_03.png"
-    ],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A three-image Blue Porsche poster set that shows the car in three bold compositions.",
-    descriptionAr: "مجموعة بثلاث صور لبورشه زرقاء تعرض السيارة في ثلاث تركيبات جريئة."
-  },
-  {
-    id: "red-ferrari-3",
-    name: "Red Ferrari Series",
-    nameAr: "سلسلة فيراري الحمراء",
-    category: "cars",
-    tag: "Car poster set",
-    tagAr: "مجموعة بوسترات سيارات",
-    image: "assets/Red Ferrari 3/upscalemedia-transformed ferrari 3 (1).png",
-    gallery: [
-      "assets/Red Ferrari 3/upscalemedia-transformed ferrari 3 (1).png",
-      "assets/Red Ferrari 3/upscalemedia-transformed ferrari 3 (2).png",
-      "assets/Red Ferrari 3/upscalemedia-transformed ferrari 3 (3).png"
-    ],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A three-image Ferrari poster set with dramatic red speed styling.",
-    descriptionAr: "مجموعة بثلاث صور لبوستر فيراري بتصميم أحمر درامي وسرعة مميزة."
-  },
-  {
-    id: "yellow-porsche-3",
-    name: "Yellow Porsche Series",
-    nameAr: "سلسلة بورشه الصفراء",
-    category: "cars",
-    tag: "Car poster set",
-    tagAr: "مجموعة بوسترات سيارات",
-    image: "assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_01.png",
-    gallery: [
-      "assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_01.png",
-      "assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_02.png",
-      "assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_03.png"
-    ],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A three-image Yellow Porsche poster set with bright racing energy.",
-    descriptionAr: "مجموعة بثلاث صور لبوستر بورشه صفراء بطاقة سباقية مشرقة."
-  },
-  {
-    id: "atelier-splash",
-    name: "Atelier Splash",
-    nameAr: "أتولييه سبلاش",
-    category: "paint",
-    tag: "Studio art",
-    tagAr: "فن ستوديو",
-    image: "assets/atelier-splash.png",
-    gallery: ["assets/atelier-splash.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "Bright painterly motion with a clean frame-friendly layout.",
-    descriptionAr: "حركة لونية مبهجة بتكوين مناسب جدًا للتأطير."
-  },
-  {
-    id: "classic-redline",
-    name: "Classic Redline",
-    nameAr: "كلاسيك ريدلاين",
-    category: "cars",
-    tag: "Car poster",
-    tagAr: "بوستر سيارة",
-    image: "assets/classic-redline.png",
-    gallery: ["assets/classic-redline.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A sharp monochrome racing poster that works well in black frames.",
-    descriptionAr: "بوستر سباق أحادي اللون يبدو أنيقًا داخل الإطار الأسود."
-  },
-  {
-    id: "color-riot",
-    name: "Color Riot",
-    nameAr: "كولور رايوت",
-    category: "abstract",
-    tag: "Abstract art",
-    tagAr: "فن تجريدي",
-    image: "assets/color-riot.png",
-    gallery: ["assets/color-riot.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A loud color splash print for playful rooms and studios.",
-    descriptionAr: "طباعة تجريدية مليئة بالألوان للمساحات الحيوية."
-  },
-  {
-    id: "gallery-wave",
-    name: "Gallery Wave",
-    nameAr: "غاليري ويف",
-    category: "paint",
-    tag: "Art print",
-    tagAr: "طباعة فنية",
-    image: "assets/gallery-wave.png",
-    gallery: ["assets/gallery-wave.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A calm framed wave print with a soft gallery look.",
-    descriptionAr: "طباعة أمواج هادئة بطابع مناسب للمعارض والإطارات."
-  },
-  {
-    id: "midnight-turbo",
-    name: "Midnight Turbo",
-    nameAr: "ميدنايت تيربو",
-    category: "cars",
-    tag: "Car poster",
-    tagAr: "بوستر سيارة",
-    image: "assets/midnight-turbo.png",
-    gallery: ["assets/midnight-turbo.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A darker performance poster that feels premium in a frame.",
-    descriptionAr: "بوستر أداء داكن يمنح الإطار مظهرًا فاخرًا."
-  },
-  {
-    id: "neon-drift",
-    name: "Neon Drift",
-    nameAr: "نيون دريفت",
-    category: "cars",
-    tag: "Car poster",
-    tagAr: "بوستر سيارة",
-    image: "assets/neon-drift.png",
-    gallery: ["assets/neon-drift.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A neon-toned racing poster with a bold street style.",
-    descriptionAr: "بوستر سباقي بنكهة نيون ولمسة شارع جريئة."
-  },
-  {
-    id: "orange-f1",
-    name: "Orange F1",
-    nameAr: "أورنج إف 1",
-    category: "cars",
-    tag: "F1 poster",
-    tagAr: "بوستر فورمولا 1",
-    image: "assets/Orange F1.png",
-    gallery: ["assets/Orange F1.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "Fast orange racing art for a clean modern wall.",
-    descriptionAr: "فن سباقي برتقالي سريع يناسب الجدران العصرية."
-  },
-  {
-    id: "yellow-cadillac-landscape",
-    name: "Yellow Cadillac Landscape",
-    nameAr: "منظر كاديلاك أصفر",
-    category: "cars",
-    tag: "Landscape poster",
-    tagAr: "بوستر منظر",
-    image: "assets/Yellow Cadillac Landscape.png",
-    gallery: ["assets/Yellow Cadillac Landscape.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A cinematic landscape-style car print with room for framing.",
-    descriptionAr: "طباعة سيارة بأسلوب سينمائي مناسب جدًا للتأطير."
-  },
-  {
-    id: "redbull-night-shift",
-    name: "Red Bull Night Shift",
-    nameAr: "ريد بول نايت شفت",
-    category: "cars",
-    tag: "Racing poster",
-    tagAr: "بوستر سباق",
-    image: "assets/Dark Blue RedBull.png",
-    gallery: ["assets/Dark Blue RedBull.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A dark racing poster that looks clean in minimal interiors.",
-    descriptionAr: "بوستر سباق داكن يبدو نظيفًا في المساحات البسيطة."
-  },
-  {
-    id: "modern-monaliza",
-    name: "Win The Day",
-    nameAr: "اكسب اليوم",
-    category: "abstract",
-    tag: "Quote poster",
-    tagAr: "بوستر اقتباس",
-    image: "assets/Monaliza.png",
-    gallery: ["assets/Monaliza.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A clean quote-style poster for focus and momentum.",
-    descriptionAr: "بوستر اقتباس نظيف يمنح المساحة طاقة وتركيزًا."
-  },
-  {
-    id: "spider-verse-wall",
-    name: "Mamba Mentality",
-    nameAr: "عقلية مامبا",
-    category: "abstract",
-    tag: "Quote poster",
-    tagAr: "بوستر اقتباس",
-    image: "assets/Spiderman.png",
-    gallery: ["assets/Spiderman.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A basketball quote poster with a strong frame-ready look.",
-    descriptionAr: "بوستر اقتباس بسمة كرة السلة ومظهر مناسب للتأطير."
-  },
-  {
-    id: "cosmic-orbit",
-    name: "Just Do It",
-    nameAr: "فقط افعلها",
-    category: "abstract",
-    tag: "Quote poster",
-    tagAr: "بوستر اقتباس",
-    image: "assets/Space Astronauts.png",
-    gallery: ["assets/Space Astronauts.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A football-inspired quote poster with simple wall energy.",
-    descriptionAr: "بوستر اقتباس مستوحى من كرة القدم بطاقة بسيطة وواضحة."
-  },
-  {
-    id: "ferrari-heat",
-    name: "Ferrari Heat",
-    nameAr: "فيراري هيت",
-    category: "cars",
-    tag: "Car poster",
-    tagAr: "بوستر سيارة",
-    image: "assets/Red Ferrari.png",
-    gallery: ["assets/Red Ferrari.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A sharp Ferrari print with a strong display-frame look.",
-    descriptionAr: "طباعة فيراري واضحة ومناسبة جدًا للإطار."
-  },
-  {
-    id: "voxel-heroes",
-    name: "Game Time",
-    nameAr: "وقت اللعب",
-    category: "abstract",
-    tag: "Quote poster",
-    tagAr: "بوستر اقتباس",
-    image: "assets/Minecraft Avengers.png",
-    gallery: ["assets/Minecraft Avengers.png"],
-    basePrice: 50,
-    sizes: { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
-    frames: ["None", "Black", "White", "Wood"],
-    description: "A sports quote poster with a focused, modern wall feel.",
-    descriptionAr: "بوستر اقتباس رياضي بمظهر حديث ومركز."
+    sizes: { '20x30': 50, '30x40': 60, '40x50': 70, '50x70': 90 },
+    frames: ['None', 'Black', 'White'],
+    description: "Customize a song poster with your favorite lyrics, artist, and design.",
+    descriptionAr: "خصص بوستر أغنية بكلماتك المفضلة والفنان والتصميم."
   }
 ];
+
+if (typeof footballProducts !== 'undefined') {
+  products.push(...footballProducts);
+}
 
 const OUR_WORK_MEDIA = [
   {
@@ -676,6 +395,57 @@ const LOCAL_STORAGE_LANG_KEY = "poster-lab-lang";
 const LOCAL_STORAGE_THEME_KEY = "poster-lab-theme";
 const LOCAL_STORAGE_UPLOAD_KEY = "poster-lab-custom-upload";
 const LOCAL_STORAGE_CART_KEY = "poster-lab-cart";
+
+const LOCAL_STORAGE_USERS_KEY = "pls-users";
+const LOCAL_STORAGE_SESSION_KEY = "pls-session";
+const LOCAL_STORAGE_ORDERS_KEY = "pls-orders";
+const LOCAL_STORAGE_COUPONS_KEY = "pls-coupons";
+const LOCAL_STORAGE_WISHLIST_KEY = "pls-wishlist";
+const LOCAL_STORAGE_REVIEWS_KEY = "pls-reviews";
+const LOCAL_STORAGE_PRODUCTS_KEY = "pls-products";
+
+function lsGet(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
+  catch { return fallback; }
+}
+function lsSet(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function getUsers() { return lsGet(LOCAL_STORAGE_USERS_KEY, []); }
+function saveUsers(u) { lsSet(LOCAL_STORAGE_USERS_KEY, u); }
+function getSession() { return lsGet(LOCAL_STORAGE_SESSION_KEY, null); }
+function saveSession(s) { lsSet(LOCAL_STORAGE_SESSION_KEY, s); }
+function getOrders() { return lsGet(LOCAL_STORAGE_ORDERS_KEY, []); }
+function saveOrders(o) { lsSet(LOCAL_STORAGE_ORDERS_KEY, o); }
+function getCouponsData() { return lsGet(LOCAL_STORAGE_COUPONS_KEY, []); }
+function saveCouponsData(c) { lsSet(LOCAL_STORAGE_COUPONS_KEY, c); }
+function getWishlistData() { return lsGet(LOCAL_STORAGE_WISHLIST_KEY, []); }
+function saveWishlistData(w) { lsSet(LOCAL_STORAGE_WISHLIST_KEY, w); }
+function getReviewsData() { return lsGet(LOCAL_STORAGE_REVIEWS_KEY, []); }
+function saveReviewsData(r) { lsSet(LOCAL_STORAGE_REVIEWS_KEY, r); }
+
+function getMergedProducts() {
+  const custom = lsGet(LOCAL_STORAGE_PRODUCTS_KEY, []);
+  const merged = products.map(p => ({ ...p }));
+  custom.forEach(cp => {
+    if (cp._deleted) {
+      const idx = merged.findIndex(m => m.id === cp.id);
+      if (idx >= 0) merged.splice(idx, 1);
+      return;
+    }
+    const idx = merged.findIndex(m => m.id === cp.id);
+    if (idx >= 0) merged[idx] = { ...merged[idx], ...cp };
+    else merged.push(cp);
+  });
+  return merged;
+}
+
+function generateOrderId() {
+  const ts = Date.now().toString(36).toUpperCase();
+  const rand = Math.random().toString(36).substring(2, 5).toUpperCase();
+  return `PLS-${ts}-${rand}`;
+}
 
 const DB_NAME = "PosterLabStoreDB";
 const DB_VERSION = 1;
@@ -755,7 +525,14 @@ async function initializeCartImages() {
   }
 }
 
-function loadCustomUpload() {
+async function loadCustomUpload() {
+  try {
+    const blob = await getImageFromDB("pending-upload");
+    if (blob) {
+      const url = URL.createObjectURL(blob);
+      return { name: "restored-design", url, isObjectUrl: true, file: blob };
+    }
+  } catch {}
   return null;
 }
 
@@ -796,20 +573,27 @@ function saveCart() {
   localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(cleanCart));
 }
 
+const PER_PAGE = 21;
+
 const state = {
   lang: localStorage.getItem(LOCAL_STORAGE_LANG_KEY) || "en",
-  theme: localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || "dark",
+  theme: localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || "light",
   search: "",
   category: "all",
   size: "all",
   frame: "all",
   sort: "featured",
+  page: parseInt(sessionStorage.getItem(SESSION_PAGE_KEY)) || 1,
   cart: loadCart(),
   selectedProduct: null,
   detailSize: "30x40",
   detailFrame: "Black",
   customUpload: loadCustomUpload(),
-  confirmedForm: null
+  confirmedForm: null,
+  user: getSession(),
+  wishlist: getWishlistData(),
+  appliedCoupon: null,
+  orderNote: ""
 };
 
 const productGrid = document.querySelector("#productGrid");
@@ -856,27 +640,26 @@ function showToast(message) {
 }
 
 function money(amount) {
-  return currency.format(amount).replace("EGP", "EGP ");
+  const formatted = currency.format(amount);
+  return formatted.includes("EGP\u00a0") ? formatted.replace("EGP\u00a0", "EGP ") : formatted;
 }
 
 function getProduct(id) {
-  return products.find((product) => product.id === id);
+  return getMergedProducts().find((product) => product.id === id);
 }
 
 function productImageUrl(path) {
-  return new URL(path, window.location.href).href;
+  if (!path || path.startsWith('data:') || path.startsWith('blob:')) return path;
+  return new URL(path.replace(/#/g, '%23').replace(/ /g, '%20'), window.location.href).href;
 }
 
 function displayImageForItem(product, item = null) {
-  return item?.upload?.url || product.image;
+  const src = item?.upload?.url || product.image;
+  return src && src.startsWith('data:') ? src : productImageUrl(src);
 }
 
 function itemUnitPrice(product, size, frame) {
   return product.sizes[size] + frameOptions[frame].price;
-}
-
-function cartSubtotal() {
-  return state.cart.reduce((sum, item) => sum + cartLineTotal(item), 0);
 }
 
 function orderDeliveryFee() {
@@ -886,7 +669,6 @@ function orderDeliveryFee() {
 function sizeGuideMarkup() {
   return `
     <button class="size-guide-button" type="button" data-size-guide-toggle>
-      <span aria-hidden="true">▦</span>
       ${t("sizeGuideTitle")}
     </button>
   `;
@@ -964,6 +746,350 @@ function getFrameOptionHint(frameKey) {
   return frameOptions[frameKey]?.hint || "";
 }
 
+function registerUser(name, email, phone, password) {
+  const users = getUsers();
+  if (users.find(u => u.email === email)) return { success: false, msg: "Email already registered" };
+  const user = { id: 'u-' + Date.now(), name, email, phone, password: btoa(password), addresses: [], createdAt: new Date().toISOString() };
+  users.push(user);
+  saveUsers(users);
+  state.user = { id: user.id, name: user.name, email: user.email, phone: user.phone, addresses: user.addresses };
+  saveSession(state.user);
+  updateUserUI();
+  return { success: true, user: state.user };
+}
+
+function loginUser(email, password) {
+  const users = getUsers();
+  const user = users.find(u => u.email === email && u.password === btoa(password));
+  if (!user) return { success: false, msg: "Invalid email or password" };
+  state.user = { id: user.id, name: user.name, email: user.email, phone: user.phone, addresses: user.addresses };
+  saveSession(state.user);
+  updateUserUI();
+  return { success: true, user: state.user };
+}
+
+function logoutUser() {
+  state.user = null;
+  saveSession(null);
+  updateUserUI();
+}
+
+function updateUserUI() {
+  document.querySelectorAll("[data-account-link]").forEach(el => {
+    if (state.user) {
+      el.innerHTML = `<span data-account-name>${state.user.name}</span>`;
+      el.href = "#";
+      el.dataset.showAccount = "true";
+    } else {
+      el.innerHTML = `<span data-t="navAccount">Account</span>`;
+      el.href = "#";
+      el.dataset.showAccount = "true";
+    }
+  });
+  const accountName = document.querySelector("[data-account-name]");
+  if (accountName) accountName.textContent = state.user ? state.user.name : t("navAccount");
+}
+
+function showAccountPanel() {
+  const existing = document.querySelector("[data-account-panel]");
+  if (existing) existing.remove();
+  const panel = document.createElement("aside");
+  panel.className = "cart-drawer is-open";
+  panel.dataset.accountPanel = "";
+  panel.setAttribute("aria-hidden", "false");
+  const isAr = state.lang === "ar";
+  panel.innerHTML = `<div class="drawer-panel" role="dialog" aria-modal="true">
+    <div class="drawer-header">
+      <h2>${state.user ? (isAr ? "حسابي" : "My Account") : (isAr ? "تسجيل الدخول" : "Account")}</h2>
+      <button class="icon-button close-account-panel" type="button">x</button>
+    </div>
+    ${state.user ? `
+      <div style="display:grid;gap:12px;padding:0 0 16px;border-bottom:1px solid var(--line);margin-bottom:16px">
+        <p style="font-weight:900;color:var(--text-strong)">${isAr ? "مرحباً" : "Welcome"}, ${state.user.name}</p>
+        <p style="color:var(--muted);font-size:0.85rem">${state.user.email}</p>
+      </div>
+      <div style="display:grid;gap:8px">
+        <button class="secondary-link" type="button" data-view-orders style="justify-content:flex-start;padding:12px 16px;min-height:48px">${isAr ? "طلباتي" : "My Orders"}</button>
+        <button class="secondary-link" type="button" data-view-wishlist style="justify-content:flex-start;padding:12px 16px;min-height:48px">${isAr ? "المفضلة" : "Wishlist"} (${state.wishlist.length})</button>
+        <button class="secondary-link" type="button" data-logout-btn style="justify-content:flex-start;padding:12px 16px;min-height:48px;border-color:var(--danger);color:var(--danger)">${isAr ? "تسجيل الخروج" : "Logout"}</button>
+      </div>
+    ` : `
+      <form id="accountForm" style="display:grid;gap:12px">
+        <div id="accountLoginFields" style="display:grid;gap:10px">
+          <input id="accountEmail" type="email" placeholder="${isAr ? "Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ" : "Email"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="accountPassword" type="password" placeholder="${isAr ? "ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±" : "Password"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <button id="accountLoginBtn" class="checkout-button" type="button">${isAr ? "تسجيل الدخول" : "Login"}</button>
+          <p style="text-align:center;color:var(--muted);font-size:0.82rem;margin:4px 0">
+            <a href="#" id="showRegisterToggle" style="color:var(--accent);font-weight:800">${isAr ? "إنشاء حساب جديد" : "Create new account"}</a>
+          </p>
+        </div>
+        <div id="accountRegisterFields" style="display:grid;gap:10px;display:none">
+          <input id="regName" type="text" placeholder="${isAr ? "Ø§Ù„Ø§Ø³Ù…" : "Name"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="regEmail" type="email" placeholder="${isAr ? "Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ" : "Email"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="regPhone" type="tel" placeholder="${isAr ? "Ø±Ù‚Ù… Ø§Ù„Ù‡Ø§ØªÙ" : "Phone"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <input id="regPassword" type="password" placeholder="${isAr ? "ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±" : "Password"}" style="min-height:50px;padding:0 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--field-bg);color:var(--text);font-weight:700">
+          <button id="accountRegisterBtn" class="checkout-button" type="button">${isAr ? "إنشاء حساب" : "Register"}</button>
+          <p style="text-align:center;color:var(--muted);font-size:0.82rem;margin:4px 0">
+            <a href="#" id="showLoginToggle" style="color:var(--accent);font-weight:800">${isAr ? "لديك حساب؟ تسجيل الدخول" : "Have an account? Login"}</a>
+          </p>
+        </div>
+        <p id="accountMsg" style="text-align:center;font-weight:800;font-size:0.85rem;color:var(--danger);margin:0"></p>
+      </form>
+    `}</div>`;
+  document.body.appendChild(panel);
+
+  panel.addEventListener("click", (e) => {
+    if (e.target === panel || e.target.closest(".close-account-panel")) panel.remove();
+  });
+
+  if (state.user) {
+    panel.querySelector("[data-logout-btn]")?.addEventListener("click", () => {
+      logoutUser();
+      panel.remove();
+      showToast(isAr ? "تم تسجيل الخروج" : "Logged out");
+    });
+    panel.querySelector("[data-view-orders]")?.addEventListener("click", () => {
+      panel.remove();
+      showUserOrders();
+    });
+    panel.querySelector("[data-view-wishlist]")?.addEventListener("click", () => {
+      panel.remove();
+      showWishlistPanel();
+    });
+  } else {
+    setupAccountForm(panel, isAr);
+  }
+}
+
+function setupAccountForm(panel, isAr) {
+  const loginFields = panel.querySelector("#accountLoginFields");
+  const regFields = panel.querySelector("#accountRegisterFields");
+  const msg = panel.querySelector("#accountMsg");
+
+  panel.querySelector("#showRegisterToggle")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginFields.style.display = "none";
+    regFields.style.display = "grid";
+  });
+  panel.querySelector("#showLoginToggle")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    regFields.style.display = "none";
+    loginFields.style.display = "grid";
+  });
+
+  panel.querySelector("#accountLoginBtn")?.addEventListener("click", () => {
+    const email = panel.querySelector("#accountEmail").value.trim();
+    const password = panel.querySelector("#accountPassword").value.trim();
+    if (!email || !password) { msg.textContent = isAr ? "يرجى إدخال البريد الإلكتروني وكلمة المرور" : "Please enter email and password"; return; }
+    const result = loginUser(email, password);
+    if (result.success) { panel.remove(); showToast(isAr ? "تم تسجيل الدخول" : "Logged in"); }
+    else msg.textContent = result.msg;
+  });
+
+  panel.querySelector("#accountRegisterBtn")?.addEventListener("click", () => {
+    const name = panel.querySelector("#regName").value.trim();
+    const email = panel.querySelector("#regEmail").value.trim();
+    const phone = panel.querySelector("#regPhone").value.trim();
+    const password = panel.querySelector("#regPassword").value.trim();
+    if (!name || !email || !password) { msg.textContent = isAr ? "يرجى ملء جميع الحقول" : "Please fill all fields"; return; }
+    const result = registerUser(name, email, phone, password);
+    if (result.success) { panel.remove(); showToast(isAr ? "تم إنشاء الحساب" : "Account created"); }
+    else msg.textContent = result.msg;
+  });
+}
+
+function showUserOrders() {
+  const orders = getOrders().filter(o => state.user && o.userEmail === state.user.email).reverse();
+  const isAr = state.lang === "ar";
+  const panel = document.createElement("aside");
+  panel.className = "cart-drawer is-open";
+  panel.setAttribute("aria-hidden", "false");
+  panel.innerHTML = `<div class="drawer-panel" role="dialog" aria-modal="true">
+    <div class="drawer-header">
+      <h2>${isAr ? "طلباتي" : "My Orders"}</h2>
+      <button class="icon-button close-account-panel" type="button">x</button>
+    </div>
+    <div style="display:grid;gap:12px">
+      ${orders.length ? orders.map(o => `
+        <article style="display:grid;gap:6px;padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
+            <strong style="color:var(--text-strong);font-size:0.9rem">${o.id}</strong>
+            <span style="font-size:0.78rem;color:var(--muted)">${new Date(o.date).toLocaleDateString()}</span>
+          </div>
+          <span style="color:var(--accent-strong);font-weight:800;font-size:0.82rem">${o.status || 'pending'}</span>
+          <span style="font-weight:800">EGP ${o.total}</span>
+          <span style="font-size:0.82rem;color:var(--muted)">${o.items ? o.items.length : 0} ${isAr ? "منتج" : "items"}</span>
+        </article>
+      `).join('') : `<p class="empty-state">${isAr ? "لا توجد طلبات بعد" : "No orders yet"}</p>`}
+    </div>
+  </div>`;
+  document.body.appendChild(panel);
+  panel.addEventListener("click", (e) => {
+    if (e.target === panel || e.target.closest(".close-account-panel")) panel.remove();
+  });
+}
+
+function showWishlistPanel() {
+  const isAr = state.lang === "ar";
+  const panel = document.createElement("aside");
+  panel.className = "cart-drawer is-open";
+  panel.setAttribute("aria-hidden", "false");
+  const wishlistProducts = getMergedProducts().filter(p => state.wishlist.includes(p.id));
+  panel.innerHTML = `<div class="drawer-panel" role="dialog" aria-modal="true">
+    <div class="drawer-header">
+      <h2>${isAr ? "المفضلة" : "Wishlist"}</h2>
+      <button class="icon-button close-account-panel" type="button">x</button>
+    </div>
+    <div style="display:grid;gap:12px">
+      ${wishlistProducts.length ? wishlistProducts.map(p => `
+        <article style="display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)">
+          <img src="${productImageUrl(p.image)}" alt="${getProductName(p)}" style="width:60px;height:60px;object-fit:cover;border-radius:6px">
+          <div>
+            <strong style="color:var(--text-strong);font-size:0.9rem">${getProductName(p)}</strong>
+            <p style="margin:2px 0 0;color:var(--warm);font-weight:800;font-size:0.85rem">${t("from")} ${money(p.basePrice)}</p>
+          </div>
+          <button class="icon-button" data-wishlist-remove="${p.id}" style="width:36px;min-width:36px;height:36px" title="${isAr ? "Ø¥Ø²Ø§Ù„Ø©" : "Remove"}">x</button>
+        </article>
+      `).join('') : `<p class="empty-state">${isAr ? "المفضلة فارغة" : "Wishlist is empty"}</p>`}
+    </div>
+  </div>`;
+  document.body.appendChild(panel);
+  panel.addEventListener("click", (e) => {
+    if (e.target === panel || e.target.closest(".close-account-panel")) panel.remove();
+    const removeBtn = e.target.closest("[data-wishlist-remove]");
+    if (removeBtn) {
+      const pid = removeBtn.dataset.wishlistRemove;
+      toggleWishlist(pid);
+      panel.remove();
+      showWishlistPanel();
+    }
+  });
+}
+
+function toggleWishlist(productId) {
+  const idx = state.wishlist.indexOf(productId);
+  if (idx >= 0) state.wishlist.splice(idx, 1);
+  else state.wishlist.push(productId);
+  saveWishlistData(state.wishlist);
+  renderProducts();
+}
+
+function isInWishlist(productId) {
+  return state.wishlist.includes(productId);
+}
+
+function validateCoupon(code, subtotal) {
+  const coupons = getCouponsData();
+  const coupon = coupons.find(c => c.code === code.toUpperCase());
+  if (!coupon) return { valid: false, msg: "Invalid coupon code" };
+  if (coupon.maxUses && coupon.uses >= coupon.maxUses) return { valid: false, msg: "Coupon has expired" };
+  if (subtotal < (coupon.minOrder || 0)) return { valid: false, msg: `Minimum order EGP ${coupon.minOrder} required` };
+  let discount = coupon.type === 'percent' ? subtotal * (coupon.value / 100) : coupon.value;
+  if (discount > subtotal) discount = subtotal;
+  return { valid: true, discount, coupon };
+}
+
+function applyCoupon(code) {
+  const subtotal = cartSubtotal();
+  const result = validateCoupon(code, subtotal);
+  const removeBtn = document.querySelector("[data-coupon-remove]");
+  if (result.valid) {
+    state.appliedCoupon = result.coupon;
+    if (removeBtn) removeBtn.hidden = false;
+    showToast(`Coupon applied! You save EGP ${Math.round(result.discount)}`);
+  } else {
+    state.appliedCoupon = null;
+    if (removeBtn) removeBtn.hidden = true;
+    showToast(result.msg);
+  }
+  renderCart();
+}
+
+function removeCoupon() {
+  state.appliedCoupon = null;
+  const removeBtn = document.querySelector("[data-coupon-remove]");
+  if (removeBtn) removeBtn.hidden = true;
+  renderCart();
+}
+
+function getDiscountedTotal() {
+  const subtotal = cartSubtotal();
+  if (!state.appliedCoupon) return subtotal;
+  const result = validateCoupon(state.appliedCoupon.code, subtotal);
+  return result.valid ? subtotal - result.discount : subtotal;
+}
+
+function cartGrandTotal() {
+  const subtotalWithDiscount = getDiscountedTotal();
+  return subtotalWithDiscount + orderDeliveryFee();
+}
+
+function cartSubtotal() {
+  return state.cart.reduce((sum, item) => sum + cartLineTotal(item), 0);
+}
+
+function submitReview(productId, rating, comment, authorName) {
+  const reviews = getReviewsData();
+  const review = {
+    id: 'rev-' + Date.now(),
+    productId,
+    rating: Math.min(5, Math.max(1, rating)),
+    comment: comment.trim(),
+    author: authorName.trim() || 'Anonymous',
+    date: new Date().toISOString()
+  };
+  reviews.push(review);
+  saveReviewsData(reviews);
+  return review;
+}
+
+function getProductReviews(productId) {
+  return getReviewsData().filter(r => r.productId === productId).reverse();
+}
+
+function getProductRating(productId) {
+  const reviews = getProductReviews(productId);
+  if (!reviews.length) return { avg: 0, count: 0 };
+  const sum = reviews.reduce((s, r) => s + r.rating, 0);
+  return { avg: sum / reviews.length, count: reviews.length };
+}
+
+function createOrder(formData) {
+  const items = state.cart.map(item => ({ ...item }));
+  const subtotal = cartSubtotal();
+  const discount = state.appliedCoupon ? (subtotal - getDiscountedTotal()) : 0;
+  const delivery = orderDeliveryFee();
+  const total = subtotal - discount + delivery;
+  const order = {
+    id: generateOrderId(),
+    date: new Date().toISOString(),
+    customerName: formData.customerName,
+    customerPhone: formData.customerPhone,
+    customerAddress: formData.customerAddress,
+    paymentMethod: formData.paymentMethod,
+    orderNote: formData.orderNote || '',
+    items,
+    subtotal,
+    discount,
+    deliveryFee: delivery,
+    total,
+    status: 'pending',
+    userEmail: state.user ? state.user.email : null,
+    appliedCoupon: state.appliedCoupon ? { code: state.appliedCoupon.code, discount } : null
+  };
+  const orders = getOrders();
+  orders.push(order);
+  saveOrders(orders);
+
+  if (state.appliedCoupon) {
+    const coupons = getCouponsData();
+    const coup = coupons.find(c => c.code === state.appliedCoupon.code);
+    if (coup) { coup.uses = (coup.uses || 0) + 1; saveCouponsData(coupons); }
+  }
+
+  return order;
+}
+
 function updateLanguageUI() {
   const currentLang = state.lang || "en";
   document.documentElement.lang = currentLang;
@@ -986,6 +1112,7 @@ function updateLanguageUI() {
   if (searchInput) {
     searchInput.placeholder = t("searchPlaceholder");
   }
+  updateUserUI();
 }
 
 function updateThemeUI() {
@@ -996,7 +1123,9 @@ function updateThemeUI() {
     const icon = button.querySelector("[data-theme-icon]");
     const text = button.querySelector("[data-t]");
     button.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-    if (icon) icon.textContent = theme === "dark" ? "☀" : "☾";
+    if (icon) icon.innerHTML = theme === "dark"
+      ? '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>';
     if (text) text.textContent = label;
   });
 }
@@ -1022,23 +1151,16 @@ function toggleLanguage() {
   }
 }
 
-function preloadProductImages(list = products) {
-  const preload = () => {
-    list.flatMap((product) => product.gallery?.length ? product.gallery : [product.image])
-      .filter(Boolean)
-      .slice(0, 18)
-      .forEach((src) => {
-        const img = new Image();
-        img.decoding = "async";
-        img.src = src;
-      });
-  };
-
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(preload);
-  } else {
-    window.setTimeout(preload, 300);
-  }
+function preloadProductImages(list) {
+  const targets = list || filteredProducts().slice(0, PER_PAGE);
+  targets.forEach((product, i) => {
+    const src = product.gallery?.length ? product.gallery[0] : product.image;
+    if (!src) return;
+    const img = new Image();
+    img.decoding = "async";
+    img.fetchPriority = i < 6 ? "high" : "low";
+    img.src = productImageUrl(src);
+  });
 }
 
 function filteredProducts() {
@@ -1071,6 +1193,11 @@ function renderProducts() {
   if (!productGrid) return;
   const list = filteredProducts();
   const currentLang = state.lang || "en";
+  const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+  if (state.page > totalPages) state.page = totalPages;
+  sessionStorage.setItem(SESSION_PAGE_KEY, state.page);
+  const start = (state.page - 1) * PER_PAGE;
+  const pageItems = list.slice(start, start + PER_PAGE);
   const productCountText = currentLang === "ar"
     ? `${list.length} ${list.length === 1 ? t("resultCountProduct") : t("resultCountProducts")}`
     : `${list.length} ${list.length === 1 ? "product" : "products"}`;
@@ -1081,22 +1208,21 @@ function renderProducts() {
     return;
   }
 
-  productGrid.innerHTML = list.map((product, index) => {
+  productGrid.innerHTML = pageItems.map((product, index) => {
     const name = getProductName(product);
     const tag = currentLang === "ar" && product.tagAr ? product.tagAr : product.tag;
     const desc = currentLang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
-    const sceneImage = sceneImageForIndex(index);
+    const sceneImage = sceneImageForIndex(start + index);
 
     return `
       <article class="product-card" style="--delay: ${index * 65}ms">
-        <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">
-          <span class="frame-preview frame-preview-black"></span>
-          <img src="${product.image}" loading="lazy" decoding="async" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
+        <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <span class="frame-preview frame-preview-black"></span>\n          <img src="${productImageUrl(product.image)}" loading="${index < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${index < 6 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
           <span class="product-tag">${tag}</span>
           ${galleryBadge(product) ? `<span class="product-gallery-badge">${galleryBadge(product)}</span>` : ""}
+          <button class="icon-button wishlist-btn ${isInWishlist(product.id) ? 'in-wishlist' : ''}" type="button" data-wishlist-toggle="${product.id}" aria-label="${isInWishlist(product.id) ? (currentLang === "ar" ? "إزالة من المفضلة" : "Remove from wishlist") : (currentLang === "ar" ? "أضف للمفضلة" : "Add to wishlist")}"><svg viewBox="0 0 24 24" width="18" height="18" fill="${isInWishlist(product.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
         </a>
         <div class="product-info">
-          <h2>${name}</h2>
+          <h3>${name}</h3>
           <p class="product-summary">${desc}</p>
           <div class="product-meta">
             <span>${t("from")} ${money(product.basePrice)}</span>
@@ -1113,6 +1239,31 @@ function renderProducts() {
       </article>
     `;
   }).join("");
+
+  const pageNav = document.createElement("div");
+  pageNav.className = "pagination";
+  pageNav.setAttribute("role", "navigation");
+  pageNav.setAttribute("aria-label", currentLang === "ar" ? "تصفح الصفحات" : "Pagination");
+
+  if (totalPages > 1) {
+    var pagesHtml = "";
+    for (var p = 1; p <= totalPages; p++) {
+      if (totalPages > 7) {
+        if (p === 1 || p === totalPages || (p >= state.page - 1 && p <= state.page + 1)) {
+          pagesHtml += `<button type="button" class="page-btn${p === state.page ? " is-active" : ""}" data-page="${p}">${p}</button>`;
+        } else if (p === state.page - 2 || p === state.page + 2) {
+          pagesHtml += `<span class="page-ellipsis">...</span>`;
+        }
+      } else {
+        pagesHtml += `<button type="button" class="page-btn${p === state.page ? " is-active" : ""}" data-page="${p}">${p}</button>`;
+      }
+    }
+    pageNav.innerHTML = pagesHtml;
+  }
+
+  var existing = productGrid.parentNode.querySelector(".pagination");
+  if (existing) existing.remove();
+  if (pageNav.innerHTML) productGrid.parentNode.insertBefore(pageNav, productGrid.nextSibling);
 }
 
 function showOurWorkImage(index) {
@@ -1196,23 +1347,26 @@ function renderDetail(productId) {
   if (!product.frames.includes(state.detailFrame)) state.detailFrame = product.frames[0];
 
   if (productDetail) {
-    document.title = `${name} — ${t("brandTitle")}`;
+    document.title = `${name} â€” ${t("brandTitle")}`;
     productDetail.hidden = false;
-    const previewImage = product.isCustom && state.customUpload ? state.customUpload.url : product.image;
+    const rawPreview = product.isCustom && state.customUpload ? state.customUpload.url : product.image;
+    const previewImage = rawPreview && rawPreview.startsWith('data:') ? rawPreview : productImageUrl(rawPreview);
     const sceneImage = sceneImageForIndex(products.findIndex((item) => item.id === product.id));
     productDetail.innerHTML = `
       <article class="detail product-detail-layout">
       <div class="detail-gallery">
-        <div class="detail-main-image frame-${state.detailFrame.toLowerCase()}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">
-          <img id="detailMainImage" src="${previewImage}" loading="eager" decoding="async" fetchpriority="high" alt="${name} ${currentLang === "ar" ? "معرض البوستر" : "framed poster gallery image"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
+        <div class="detail-main-image frame-${state.detailFrame.toLowerCase()}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <img id="detailMainImage" src="${previewImage}" loading="eager" decoding="async" fetchpriority="high" alt="${name} ${currentLang === "ar" ? "معرض البوستر" : "framed poster gallery image"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
         </div>
         ${product.gallery && product.gallery.length > 1 ? `
           <div class="thumb-row">
-            ${product.gallery.map((image) => `
-              <button type="button" class="${image === previewImage ? "is-active" : ""}" data-gallery-image="${image}" aria-label="Show gallery image">
-                <img src="${image}" loading="lazy" decoding="async" alt="${name} thumbnail" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
+            ${product.gallery.map((image) => {
+              const imgSrc = image && image.startsWith('data:') ? image : productImageUrl(image);
+              const isActive = (rawPreview === image) || (rawPreview && rawPreview.startsWith('data:') && image === rawPreview);
+              return `
+              <button type="button" class="${isActive ? "is-active" : ""}" data-gallery-image="${imgSrc}" aria-label="Show gallery image">
+                <img src="${imgSrc}" loading="lazy" decoding="async" alt="${name} thumbnail" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
               </button>
-            `).join("")}
+            `}).join("")}
           </div>
         ` : ""}
         <a class="watch-quality-link detail-work-link" href="our-work.html" data-t="ourWorkButton">${t("ourWorkButton")}</a>
@@ -1325,7 +1479,7 @@ async function addToCart(productId, size = "30x40", frame = "Black") {
   renderCart();
   openCart();
   flashCartBubble();
-  showToast(`${t("addedToCart")} — ${getProductName(product)}`);
+  showToast(`${t("addedToCart")} â€” ${getProductName(product)}`);
 }
 
 function cartLineTotal(item) {
@@ -1334,14 +1488,12 @@ function cartLineTotal(item) {
   return itemUnitPrice(product, item.size, item.frame) * item.quantity;
 }
 
-function cartGrandTotal() {
-  return cartSubtotal() + orderDeliveryFee();
-}
-
 function renderCart() {
   const totalQuantity = state.cart.reduce((sum, item) => sum + item.quantity, 0);
   if (cartCount) cartCount.textContent = totalQuantity;
   if (cartTotal) cartTotal.textContent = money(cartGrandTotal());
+  const clearBtn = document.querySelector("[data-clear-cart]");
+  if (clearBtn) clearBtn.hidden = state.cart.length === 0;
   if (!cartItems) return;
   const currentLang = state.lang || "en";
 
@@ -1373,7 +1525,9 @@ function renderCart() {
   }).join("") + `
     <div class="cart-fee-summary">
       <span>${t("subtotalLabel")}</span><strong>${money(cartSubtotal())}</strong>
+      ${state.appliedCoupon ? `<span style="color:var(--danger)">Discount (${state.appliedCoupon.code})</span><strong style="color:var(--danger)">-${money(cartSubtotal() - getDiscountedTotal())}</strong>` : ""}
       <span>${t("deliveryFeeLabel")}</span><strong>${money(orderDeliveryFee())}</strong>
+      <span style="font-weight:950;color:var(--text-strong)">${t("cartTotalLabel")}</span><strong style="font-size:1.2rem">${money(cartGrandTotal())}</strong>
     </div>
   `;
 }
@@ -1405,34 +1559,43 @@ async function updateQuantity(key, delta) {
 
 function readCheckoutForm() {
   const fields = checkoutForm.elements;
+  const orderNoteEl = document.querySelector("[data-order-note]");
   return {
     customerName: fields.customerName.value.trim(),
     customerPhone: fields.customerPhone.value.trim(),
     customerAddress: fields.customerAddress.value.trim(),
-    paymentMethod: fields.paymentMethod.value
+    paymentMethod: fields.paymentMethod.value,
+    orderNote: orderNoteEl ? orderNoteEl.value.trim() : ""
   };
 }
 
-function renderConfirmation() {
-  const details = readCheckoutForm();
+function renderConfirmation(savedOrder) {
+  const details = savedOrder || readCheckoutForm();
   state.confirmedForm = details;
   const uploadedItems = state.cart.filter((item) => item.upload);
   const currentLang = state.lang || "en";
   const orderTotalLabel = t("confTotal");
+  const orderId = savedOrder ? savedOrder.id : null;
+  const subtotal = savedOrder ? savedOrder.subtotal : cartSubtotal();
+  const discount = savedOrder ? savedOrder.discount : (state.appliedCoupon ? cartSubtotal() - getDiscountedTotal() : 0);
+  const delivery = savedOrder ? savedOrder.deliveryFee : orderDeliveryFee();
+  const total = savedOrder ? savedOrder.total : cartGrandTotal();
   const itemsCountText = currentLang === "ar"
     ? `${state.cart.length} ${state.cart.length === 1 ? t("confItemsCount") : t("confItemsCountPlural")}`
     : `${state.cart.length} customized framed poster ${state.cart.length === 1 ? "item" : "items"}`;
 
   const uploadHintMsg = currentLang === "ar"
     ? "💡 اضغط مطولاً على الصورة لحفظها ومشاركتها في واتساب!"
-    : "💡 Long-press the image to save or share it directly to WhatsApp!";
+    : "ðŸ’¡ Long-press the image to save or share it directly to WhatsApp!";
 
   confirmationSummary.innerHTML = `
-    <strong>${orderTotalLabel} ${money(cartGrandTotal())}</strong>
-    <span>${t("subtotalLabel")}: ${money(cartSubtotal())}</span>
-    <span>${t("deliveryFeeLabel")}: ${money(orderDeliveryFee())}</span>
+    ${orderId ? `<span style="font-weight:950;font-size:1.1rem;color:var(--text-strong)">${currentLang === "ar" ? "رقم الطلب" : "Order #"}: ${orderId}</span>` : ""}
+    <strong>${orderTotalLabel} ${money(total)}</strong>
+    <span>${t("subtotalLabel")}: ${money(subtotal)}</span>
+    ${discount > 0 ? `<span style="color:var(--danger)">${currentLang === "ar" ? "الخصم" : "Discount"}: -${money(discount)}</span>` : ""}
+    <span>${t("deliveryFeeLabel")}: ${money(delivery)}</span>
     <span>${details.customerName} / ${details.customerPhone}</span>
-    <span>${details.paymentMethod}</span>
+    <span>${details.paymentMethod === "VF-Cash" ? "VF-Cash - 01090927525" : details.paymentMethod === "Instapay" ? "Instapay - qnbziad49015@instapay" : details.paymentMethod}</span>
     <span>${itemsCountText}</span>
     ${uploadedItems.length ? `
       <div class="uploaded-summary">
@@ -1443,7 +1606,7 @@ function renderConfirmation() {
     const name = product.name;
     return `
             <article style="display: flex; flex-direction: column; align-items: center; background: rgba(0, 0, 0, 0.3); padding: 10px; border-radius: 12px; border: 1px solid var(--lime); margin-bottom: 8px;">
-              <img src="${item.upload.url}" alt="${name} ${currentLang === "ar" ? "معاينة التصميم" : "uploaded design preview"}" style="max-width: 100%; height: auto; max-height: 200px; border-radius: 8px; object-fit: contain; margin-bottom: 6px;">
+              <img src="${item.upload.url}" alt="${name} ${currentLang === "ar" ? "Ù…Ø¹Ø§ÙŠÙ†Ø© Ø§Ù„ØªØµÙ…ÙŠÙ…" : "uploaded design preview"}" style="max-width: 100%; height: auto; max-height: 200px; border-radius: 8px; object-fit: contain; margin-bottom: 6px;">
               <span style="font-weight: 800; font-size: 0.85rem; color: #fff;">${item.upload.name}</span>
             </article>
           `;
@@ -1456,15 +1619,12 @@ function renderConfirmation() {
   const cashCard = paymentConfirmation.querySelector("[data-payment-cash]");
   const qrCard = paymentConfirmation.querySelector("[data-payment-qr]");
   if (cashCard && qrCard) {
-    if (details.paymentMethod.includes("Vodafone Cash")) {
+    if (details.paymentMethod.includes("VF-Cash")) {
       cashCard.removeAttribute("hidden");
       qrCard.setAttribute("hidden", "true");
     } else if (details.paymentMethod.includes("Instapay")) {
       qrCard.removeAttribute("hidden");
       cashCard.setAttribute("hidden", "true");
-    } else {
-      cashCard.setAttribute("hidden", "true");
-      qrCard.setAttribute("hidden", "true");
     }
   }
 
@@ -1502,10 +1662,15 @@ function resetCartAfterOrder() {
   });
   state.cart = [];
   state.confirmedForm = null;
+  state.appliedCoupon = null;
   localStorage.removeItem(LOCAL_STORAGE_CART_KEY);
   hideConfirmation();
   renderCart();
   closeCart();
+  const couponInput = document.querySelector("[data-coupon-input]");
+  if (couponInput) couponInput.value = "";
+  const couponRemove = document.querySelector("[data-coupon-remove]");
+  if (couponRemove) couponRemove.hidden = true;
 }
 
 function isMobileDevice() {
@@ -1556,7 +1721,7 @@ async function getUploadBlobForItem(item) {
   return null;
 }
 
-function buildWhatsAppMessage() {
+function buildWhatsAppMessage(savedOrder) {
   const details = state.confirmedForm || readCheckoutForm();
   const currentLang = state.lang || "en";
   const isAr = currentLang === "ar";
@@ -1572,16 +1737,27 @@ function buildWhatsAppMessage() {
     product: isAr ? "المنتج" : "Product",
     customization: isAr ? "التخصيص" : "Customization",
     link: isAr ? "رابط المنتج" : "Product Link",
-    totalPrice: isAr ? "السعر الإجمالي" : "Total Price"
+    totalPrice: isAr ? "السعر الإجمالي" : "Total Price",
+    orderId: isAr ? "رقم الطلب" : "Order ID",
+    note: isAr ? "ملاحظات" : "Notes",
+    discount: isAr ? "الخصم" : "Discount"
   };
+
+  const orderId = savedOrder ? savedOrder.id : null;
+  const subtotal = savedOrder ? savedOrder.subtotal : cartSubtotal();
+  const discount = savedOrder ? savedOrder.discount : (state.appliedCoupon ? cartSubtotal() - getDiscountedTotal() : 0);
+  const delivery = savedOrder ? savedOrder.deliveryFee : orderDeliveryFee();
+  const total = savedOrder ? savedOrder.total : cartGrandTotal();
 
   const lines = [
     `*${tMsg.title}*`,
+    orderId ? `*${tMsg.orderId}:* ${orderId}` : "",
     `----------------------------------`,
     `*${tMsg.customer}:* ${details.customerName}`,
     `*${tMsg.phone}:* ${details.customerPhone}`,
     `*${tMsg.address}:* ${details.customerAddress}`,
-    `*${tMsg.payment}:* ${details.paymentMethod}`,
+    `*${tMsg.payment}:* ${details.paymentMethod === "VF-Cash" ? "VF-Cash - 01090927525" : details.paymentMethod === "Instapay" ? "Instapay - qnbziad49015@instapay" : details.paymentMethod}`,
+    details.orderNote ? `*${tMsg.note}:* ${details.orderNote}` : "",
     `----------------------------------`
   ];
 
@@ -1601,9 +1777,10 @@ function buildWhatsAppMessage() {
 
   lines.push(
     `----------------------------------`,
-    `*${tMsg.subtotal}:* ${money(cartSubtotal())}`,
-    `*${tMsg.delivery}:* ${money(orderDeliveryFee())}`,
-    `*${tMsg.totalPrice}:* ${money(cartGrandTotal())}`
+    `*${tMsg.subtotal}:* ${money(subtotal)}`,
+    discount > 0 ? `*${tMsg.discount}:* -${money(discount)}` : "",
+    `*${tMsg.delivery}:* ${money(delivery)}`,
+    `*${tMsg.totalPrice}:* ${money(total)}`
   );
 
   return lines.filter(line => line !== "").join("\n");
@@ -1615,7 +1792,25 @@ function handleCheckout(event) {
     showToast(t("confAddFirstAlert"));
     return;
   }
+  const couponInput = document.querySelector("[data-coupon-input]");
+  if (couponInput && couponInput.value.trim() && !state.appliedCoupon) {
+    applyCoupon(couponInput.value.trim());
+  }
+  const formData = readCheckoutForm();
+  if (!formData.customerName || !formData.customerPhone || !formData.customerAddress) {
+    showToast(state.lang === "ar" ? "يرجى ملء جميع الحقول" : "Please fill all required fields");
+    return;
+  }
   renderConfirmation();
+}
+
+function setSendButtonLoading(loading) {
+  document.querySelectorAll("[data-send-whatsapp]").forEach((btn) => {
+    btn.disabled = loading;
+    btn.textContent = loading
+      ? (state.lang === "ar" ? "جاري الإرسال..." : "Sending...")
+      : t("confSendBtn");
+  });
 }
 
 async function sendWhatsAppOrder() {
@@ -1625,10 +1820,26 @@ async function sendWhatsAppOrder() {
   }
 
   const isAr = state.lang === "ar";
+
+  const formData = readCheckoutForm();
+  const order = createOrder(formData);
+  showToast(`${isAr ? "تم إنشاء الطلب" : "Order created"}: ${order.id}`);
+
+  const orderIdEl = confirmationSummary.querySelector(".order-id-display");
+  if (orderIdEl) orderIdEl.textContent = order.id;
+  else {
+    const header = confirmationSummary.querySelector("strong");
+    if (header) {
+      header.insertAdjacentHTML("beforebegin",
+        `<span class="order-id-display" style="font-weight:950;font-size:1.1rem;color:var(--text-strong)">${isAr ? "رقم الطلب" : "Order #"}: ${order.id}</span>`);
+    }
+  }
+
+  setSendButtonLoading(true);
   showToast(isAr ? "جاري رفع صور المنتجات إلى الخادم الآمن..." : "Uploading product images to secure server...");
   setUploadProgress(8, true);
 
-  let message = buildWhatsAppMessage();
+  let message = buildWhatsAppMessage(order);
   const uploadPromises = [];
   const uploadTotal = state.cart.reduce((total, item) => {
     const product = getProduct(item.productId);
@@ -1676,7 +1887,7 @@ async function sendWhatsAppOrder() {
 
   try {
     const results = await Promise.all(uploadPromises);
-    let linkSection = isAr ? "\n\n*روابط تنزيل صور المنتجات:*" : "\n\n*Product Image Download Links:*";
+    let linkSection = isAr ? "\\n\\n*روابط تنزيل صور المنتجات:*" : "\n\n*Product Image Download Links:*";
     results.forEach((res) => {
       linkSection += `\n- *${res.label}:*`;
       res.urls.forEach((url, i) => {
@@ -1689,20 +1900,30 @@ async function sendWhatsAppOrder() {
   } catch (err) {
     console.error("Failed to upload some product images:", err);
     showToast(isAr ? "حدث خطأ أثناء رفع بعض الصور" : "Error uploading some images");
+    setSendButtonLoading(false);
   }
 
+  await new Promise((resolve) => window.requestAnimationFrame(() => resolve()));
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  const a = document.createElement("a");
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
   setTimeout(() => {
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-    setUploadProgress(0, false);
-    resetCartAfterOrder();
-  }, 1500);
+    if (!document.hidden) {
+      window.location.href = url;
+    }
+  }, 500);
 }
 
 const searchInput = document.querySelector("#searchInput");
 if (searchInput) {
   searchInput.addEventListener("input", (event) => {
     state.search = event.target.value;
+    state.page = 1;
     renderProducts();
   });
 }
@@ -1711,6 +1932,7 @@ const categoryFilter = document.querySelector("#categoryFilter");
 if (categoryFilter) {
   categoryFilter.addEventListener("change", (event) => {
     state.category = event.target.value;
+    state.page = 1;
     renderProducts();
   });
 }
@@ -1719,6 +1941,7 @@ const sizeFilter = document.querySelector("#sizeFilter");
 if (sizeFilter) {
   sizeFilter.addEventListener("change", (event) => {
     state.size = event.target.value;
+    state.page = 1;
     renderProducts();
   });
 }
@@ -1727,6 +1950,7 @@ const frameFilter = document.querySelector("#frameFilter");
 if (frameFilter) {
   frameFilter.addEventListener("change", (event) => {
     state.frame = event.target.value;
+    state.page = 1;
     renderProducts();
   });
 }
@@ -1735,11 +1959,20 @@ const sortFilter = document.querySelector("#sortFilter");
 if (sortFilter) {
   sortFilter.addEventListener("change", (event) => {
     state.sort = event.target.value;
+    state.page = 1;
     renderProducts();
   });
 }
 
 document.addEventListener("click", (event) => {
+  var productLink = event.target.closest("a[href*='product.html']");
+  if (productLink || event.target.closest("[data-quick-add]")) {
+    var card = (productLink || event.target.closest("[data-quick-add]")).closest(".product-card");
+    var top = card ? card.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2 - card.offsetHeight / 2) : window.scrollY;
+    sessionStorage.setItem(SESSION_SCROLL_KEY, Math.max(0, Math.round(top)));
+    sessionStorage.setItem(SESSION_PAGE_KEY, state.page);
+  }
+
   const themeToggle = event.target.closest("[data-theme-toggle]");
   if (themeToggle) {
     toggleTheme();
@@ -1749,6 +1982,15 @@ document.addEventListener("click", (event) => {
   const langToggle = event.target.closest("[data-lang-toggle]");
   if (langToggle) {
     toggleLanguage();
+    return;
+  }
+
+  const pageBtn = event.target.closest("[data-page]");
+  if (pageBtn) {
+    state.page = parseInt(pageBtn.dataset.page);
+    sessionStorage.setItem(SESSION_PAGE_KEY, state.page);
+    renderProducts();
+    productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
 
@@ -1790,6 +2032,44 @@ document.addEventListener("click", (event) => {
 
   const closeButton = event.target.closest("[data-close-cart]");
   if (closeButton) closeCart();
+
+  const accountLink = event.target.closest("[data-show-account]");
+  if (accountLink) { event.preventDefault(); showAccountPanel(); }
+
+  const couponApply = event.target.closest("[data-coupon-apply]");
+  if (couponApply) {
+    const input = document.querySelector("[data-coupon-input]");
+    if (input && input.value.trim()) applyCoupon(input.value.trim());
+    else showToast(state.lang === "ar" ? "أدخل كود الخصم" : "Enter coupon code");
+  }
+
+  const couponRemove = event.target.closest("[data-coupon-remove]");
+  if (couponRemove) {
+    document.querySelector("[data-coupon-input]").value = "";
+    document.querySelector("[data-coupon-remove]").hidden = true;
+    removeCoupon();
+  }
+
+  const wishlistToggle = event.target.closest("[data-wishlist-toggle]");
+  if (wishlistToggle) {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleWishlist(wishlistToggle.dataset.wishlistToggle);
+    showToast(isInWishlist(wishlistToggle.dataset.wishlistToggle)
+      ? (state.lang === "ar" ? "أضيف للمفضلة" : "Added to wishlist")
+      : (state.lang === "ar" ? "أزيل من المفضلة" : "Removed from wishlist"));
+  }
+
+  const clearCartBtn = event.target.closest("[data-clear-cart]");
+  if (clearCartBtn) {
+    if (state.cart.length) {
+      const isAr = state.lang === "ar";
+      if (confirm(isAr ? "هل أنت متأكد من تفريغ السلة؟" : "Are you sure you want to clear the cart?")) {
+        resetCartAfterOrder();
+        showToast(isAr ? "تم تفريغ السلة" : "Cart cleared");
+      }
+    }
+  }
 
   if (event.target === cartDrawer) closeCart();
 
@@ -1852,6 +2132,24 @@ document.addEventListener("click", (event) => {
   const plusButton = event.target.closest("[data-qty-plus]");
   if (plusButton) updateQuantity(plusButton.dataset.qtyPlus, 1);
 
+  const whatsappChat = event.target.closest("[data-whatsapp-chat]");
+  if (whatsappChat) {
+    event.preventDefault();
+    const url = `https://wa.me/${WHATSAPP_NUMBER}`;
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => {
+      if (!document.hidden) {
+        window.location.href = url;
+      }
+    }, 500);
+  }
+
   const editCheckout = event.target.closest("[data-edit-checkout]");
   if (editCheckout) hideConfirmation();
 
@@ -1860,7 +2158,10 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeSizeGuide();
+  if (event.key === "Escape") {
+    closeSizeGuide();
+    closeCart();
+  }
 });
 
 document.addEventListener("change", (event) => {
@@ -1882,7 +2183,8 @@ document.addEventListener("change", (event) => {
     isObjectUrl: true,
     previewError: false
   };
-  state.customUploadFile = file; // Store raw file object
+  state.customUploadFile = file;
+  storeImageInDB("pending-upload", file);
   saveCustomUpload(state.customUpload);
   renderDetail(state.selectedProduct);
 
@@ -1896,16 +2198,72 @@ document.addEventListener("change", (event) => {
   previewProbe.src = objectUrl;
 });
 
+document.addEventListener("error", (event) => {
+  if (event.target.tagName === "IMG" && !event.target.hasAttribute("data-error-handled")) {
+    event.target.setAttribute("data-error-handled", "");
+    if (event.target.src !== productImageUrl(POSTER_FALLBACK_IMAGE)) {
+      event.target.src = POSTER_FALLBACK_IMAGE;
+    } else {
+      event.target.alt = "Image unavailable";
+      event.target.style.display = "none";
+    }
+  }
+}, true);
+
 if (checkoutForm) checkoutForm.addEventListener("submit", handleCheckout);
 
 // Run initial configurations
-updateLanguageUI();
-updateThemeUI();
-if (productGrid) renderProducts();
-if (ourWorkGrid) renderOurWork();
-renderCart();
-initializeCartImages();
-preloadProductImages();
+(async function init() {
+  state.user = getSession();
+  state.wishlist = getWishlistData();
+  updateLanguageUI();
+  updateThemeUI();
+  // FAQ accordion: close others when one opens
+  document.querySelectorAll(".faq-item").forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (item.open) {
+        document.querySelectorAll(".faq-item").forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      }
+    });
+  });
+
+  preloadProductImages();
+  if (productGrid) renderProducts();
+  if (productGrid) {
+    var savedScroll = sessionStorage.getItem(SESSION_SCROLL_KEY);
+    if (savedScroll) {
+      sessionStorage.removeItem(SESSION_SCROLL_KEY);
+      var pos = parseInt(savedScroll);
+      var doScroll = function() { window.scrollTo(0, pos); };
+      setTimeout(doScroll, 200);
+      setTimeout(doScroll, 600);
+      window.addEventListener("load", doScroll, { once: true });
+    }
+  }
+  if (ourWorkGrid) renderOurWork();
+  renderCart();
+  await initializeCartImages();
+  const savedUpload = await loadCustomUpload();
+  if (savedUpload) {
+    state.customUpload = savedUpload;
+  }
+  // Setup coupon input real-time check
+  const couponInput = document.querySelector("[data-coupon-input]");
+  const couponRemoveBtn = document.querySelector("[data-coupon-remove]");
+  if (couponInput && couponRemoveBtn) {
+    couponInput.addEventListener("input", () => {
+      if (!couponInput.value.trim()) {
+        state.appliedCoupon = null;
+        couponRemoveBtn.hidden = true;
+        renderCart();
+      }
+    });
+  }
+})();
+
+
 
 // Register Service Worker
 if ('serviceWorker' in navigator) {
@@ -1923,3 +2281,5 @@ if (pageProductId) {
   productDetail.hidden = false;
   productDetail.innerHTML = `<div class="empty-state"><strong>${t("noProductsFound")}</strong><p><a href="index.html">${t("heroActionShop")}</a></p></div>`;
 }
+
+

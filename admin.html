@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — Poster Lab Store</title>
+  <meta name="description" content="Poster Lab Store admin panel">
+  <link rel="icon" type="image/png" href="assets/poster-lab-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div id="adminApp">
+    <div id="adminLogin" class="admin-login-screen">
+      <div class="admin-login-card">
+        <img src="assets/poster-lab-logo.png" alt="Poster Lab Store" class="admin-login-logo">
+        <h1>Admin Panel</h1>
+        <p class="admin-login-subtitle">Poster Lab Store Management</p>
+        <div class="admin-login-form">
+          <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="current-password">
+          <button id="adminLoginBtn" class="checkout-button" data-action="login">Login</button>
+          <p id="adminLoginError" class="admin-error" hidden>Incorrect password</p>
+        </div>
+        <a href="index.html" class="admin-back-link">Back to store</a>
+      </div>
+    </div>
+    <div id="adminDashboard" hidden>
+      <header class="admin-header">
+        <div class="admin-header-left">
+          <img src="assets/poster-lab-logo.png" alt="PLS" class="admin-header-logo">
+          <h2>Poster Lab Store — Admin</h2>
+        </div>
+        <div class="admin-header-right">
+          <span id="adminStatsHeader"></span>
+          <button id="adminLogoutBtn" class="secondary-button" data-action="logout">Logout</button>
+        </div>
+      </header>
+      <nav class="admin-nav" id="adminNav">
+        <button class="admin-nav-btn is-active" data-admin-tab="dashboard">Dashboard</button>
+        <button class="admin-nav-btn" data-admin-tab="orders">Orders</button>
+        <button class="admin-nav-btn" data-admin-tab="products">Products</button>
+        <button class="admin-nav-btn" data-admin-tab="coupons">Coupons</button>
+        <button class="admin-nav-btn" data-admin-tab="analytics">Analytics</button>
+      </nav>
+      <main class="admin-main">
+        <section id="adminTabDashboard" class="admin-tab">
+          <div class="admin-stats-grid">
+            <article class="admin-stat-card"><strong id="statTotalOrders">0</strong><span>Total Orders</span></article>
+            <article class="admin-stat-card"><strong id="statTotalRevenue">EGP 0</strong><span>Total Revenue</span></article>
+            <article class="admin-stat-card"><strong id="statPendingOrders">0</strong><span>Pending</span></article>
+            <article class="admin-stat-card"><strong id="statProductsCount">0</strong><span>Products</span></article>
+          </div>
+          <div class="admin-section">
+            <h3>Recent Orders</h3>
+            <div id="adminRecentOrders" class="admin-table-wrap"></div>
+          </div>
+          <div class="admin-section">
+            <h3>Quick Actions</h3>
+            <div class="admin-quick-actions">
+              <button class="primary-link" data-admin-tab="orders">View all orders</button>
+              <button class="secondary-link" data-admin-tab="products">Manage products</button>
+              <button class="secondary-link" data-admin-tab="coupons">Create coupon</button>
+            </div>
+          </div>
+        </section>
+        <section id="adminTabOrders" class="admin-tab" hidden>
+          <div class="admin-section-header">
+            <h3>All Orders</h3>
+            <div class="admin-order-filters">
+              <select id="adminOrderStatusFilter">
+                <option value="all">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <input type="search" id="adminOrderSearch" placeholder="Search by name, phone, ID...">
+            </div>
+          </div>
+          <div id="adminOrdersList" class="admin-table-wrap"></div>
+        </section>
+        <section id="adminTabProducts" class="admin-tab" hidden>
+          <div class="admin-section-header">
+            <h3>Products</h3>
+            <button id="adminAddProductBtn" class="primary-link" data-action="add-product">+ Add Product</button>
+          </div>
+          <div id="adminProductsList" class="admin-table-wrap"></div>
+          <div id="adminProductForm" class="admin-product-form" hidden>
+            <h4 id="adminProductFormTitle">Add Product</h4>
+            <div class="admin-form-grid">
+              <label>Product ID <input id="apId" placeholder="e.g. my-poster"></label>
+              <label>Name (EN) <input id="apName" placeholder="English name"></label>
+              <label>Name (AR) <input id="apNameAr" placeholder="Arabic name"></label>
+              <label>Category
+                <select id="apCategory">
+                  <option value="cars">Cars</option>
+                  <option value="abstract">Abstract</option>
+                  <option value="paint">Paint art</option>
+                  <option value="custom">Custom upload</option>
+                </select>
+              </label>
+              <label>Tag (EN) <input id="apTag" placeholder="e.g. Car poster"></label>
+              <label>Tag (AR) <input id="apTagAr" placeholder="e.g. بوستر سيارة"></label>
+              <label>Image path <input id="apImage" placeholder="assets/my-poster.png"></label>
+              <label>Base price <input id="apBasePrice" type="number" placeholder="50"></label>
+              <label>Description (EN) <textarea id="apDescription" placeholder="English description"></textarea></label>
+              <label>Description (AR) <textarea id="apDescriptionAr" placeholder="Arabic description"></textarea></label>
+            </div>
+            <div class="admin-form-actions">
+              <button id="adminSaveProduct" class="primary-link" data-action="save-product">Save Product</button>
+              <button id="adminCancelProduct" class="secondary-button" data-action="cancel-product">Cancel</button>
+            </div>
+          </div>
+        </section>
+        <section id="adminTabCoupons" class="admin-tab" hidden>
+          <div class="admin-section-header">
+            <h3>Coupons</h3>
+            <button id="adminAddCouponBtn" class="primary-link" data-action="add-coupon">+ Add Coupon</button>
+          </div>
+          <div id="adminCouponForm" class="admin-product-form" hidden>
+            <h4>New Coupon</h4>
+            <div class="admin-form-grid two-col">
+              <label>Code <input id="acCode" placeholder="e.g. SAVE10"></label>
+              <label>Discount %
+                <select id="acType">
+                  <option value="percent">Percentage</option>
+                  <option value="fixed">Fixed (EGP)</option>
+                </select>
+              </label>
+              <label>Value <input id="acValue" type="number" placeholder="10"></label>
+              <label>Min order <input id="acMinOrder" type="number" placeholder="0"></label>
+              <label>Max uses <input id="acMaxUses" type="number" placeholder="100"></label>
+            </div>
+            <div class="admin-form-actions">
+              <button id="adminSaveCoupon" class="primary-link" data-action="save-coupon">Save Coupon</button>
+              <button id="adminCancelCoupon" class="secondary-button" data-action="cancel-coupon">Cancel</button>
+            </div>
+          </div>
+          <div id="adminCouponsList" class="admin-table-wrap"></div>
+        </section>
+        <section id="adminTabAnalytics" class="admin-tab" hidden>
+          <div class="admin-stats-grid">
+            <article class="admin-stat-card"><strong id="analyticsAvgOrder">EGP 0</strong><span>Avg Order</span></article>
+            <article class="admin-stat-card"><strong id="analyticsTopProduct">-</strong><span>Top Product</span></article>
+            <article class="admin-stat-card"><strong id="analyticsConversion">0%</strong><span>COD Rate</span></article>
+            <article class="admin-stat-card"><strong id="analyticsRepeatRate">0%</strong><span>Repeat Rate</span></article>
+          </div>
+          <div class="admin-section">
+            <h3>Sales by Month</h3>
+            <div id="analyticsChart" class="admin-chart"></div>
+          </div>
+          <div class="admin-section">
+            <h3>Popular Products</h3>
+            <div id="analyticsPopularProducts" class="admin-table-wrap"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <button class="whatsapp-float" data-whatsapp-chat aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button>
+  <script src="football-products.js"></script>
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

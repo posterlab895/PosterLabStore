@@ -1,12 +1,16 @@
-const CACHE_NAME = 'poster-lab-store-v12';
+const CACHE_NAME = 'poster-lab-store-v15';
 const IMAGE_CACHE_NAME = 'poster-lab-images-v1';
 const ASSETS = [
   './',
   './index.html',
   './product.html',
   './our-work.html',
+  './admin.html',
   './styles.css',
+  './admin.css',
+  './football-products.js',
   './script.js',
+  './admin.js',
   './assets/poster-lab-logo.png',
   './assets/instapay-qr.jpeg',
   './assets/size-guide.png',
@@ -34,6 +38,7 @@ const ASSETS = [
   './assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_01.png',
   './assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_02.png',
   './assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_03.png',
+  './assets/Yellow Cadillac Landscape.png',
   './assets/our-work/our-work-01.jpg',
   './assets/our-work/our-work-02.png',
   './assets/our-work/our-work-03.png',
