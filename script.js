@@ -2,7 +2,6 @@
 const DELIVERY_FEE = 35;
 const POSTER_FALLBACK_IMAGE = "assets/poster-lab-logo.png";
 const CUSTOM_UPLOAD_ACCEPT = ".jpg,.jpeg,.png,.webp,.gif,.bmp,.avif,.heic,.heif,.tif,.tiff,image/*";
-const SESSION_PAGE_KEY = "pls-page";
 const SESSION_SCROLL_KEY = "pls-scroll";
 const frameOptions = {
   None: { label: "Poster only", price: 0, hint: "Poster only, no frame" },
@@ -16,6 +15,7 @@ const translations = {
     brandTitle: "Poster Lab Store",
     brandSubtitle: "Pick, frame, order",
     navShop: "Shop",
+    navMenu: "Menu",
     navCart: "Cart",
     langToggle: "AR",
     themeToggle: "Light",
@@ -40,6 +40,7 @@ const translations = {
     catCars: "Cars",
     catPaint: "Paint art",
     catFootball: "Football",
+    catClubs: "Clubs",
     catAbstract: "Abstract",
     sizeLabel: "Size",
     sizeAll: "All sizes",
@@ -164,6 +165,7 @@ const translations = {
     brandTitle: "بوستر لاب ستور",
     brandSubtitle: "اختار، برواز، اطلب",
     navShop: "المتجر",
+    navMenu: "القائمة",
     navCart: "السلة",
     langToggle: "EN",
     themeToggle: "فاتح",
@@ -186,6 +188,7 @@ const translations = {
     catCars: "سيارات",
     catPaint: "لوحات فنية",
     catFootball: "كرة قدم",
+    catClubs: "أندية",
     catAbstract: "تجريدي",
     sizeLabel: "المقاس",
     sizeAll: "كل المقاسات",
@@ -321,26 +324,11 @@ const products = [
     isCustom: true,
     image: "assets/Custom/Upload-Your-Custom-Design.png",
     gallery: ["assets/Custom/Upload-Your-Custom-Design.png"],
-    basePrice: 50,
+    basePrice: 70,
     sizes: { '20x30': 50, '30x40': 60, '40x50': 70, '50x70': 90 },
     frames: ['None', 'Black', 'White'],
     description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
     descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
-  },
-  {
-    id: "customize-song",
-    name: "Customize Your Song",
-    nameAr: "خصص أغنيتك",
-    category: "custom",
-    tag: "Custom song",
-    tagAr: "أغنية مخصصة",
-    image: "assets/Custom/Customize-Your-Song.png",
-    gallery: ["assets/Custom/Customize-Your-Song.png"],
-    basePrice: 50,
-    sizes: { '20x30': 50, '30x40': 60, '40x50': 70, '50x70': 90 },
-    frames: ['None', 'Black', 'White'],
-    description: "Customize a song poster with your favorite lyrics, artist, and design.",
-    descriptionAr: "خصص بوستر أغنية بكلماتك المفضلة والفنان والتصميم."
   }
 ];
 
@@ -349,6 +337,9 @@ if (typeof footballProducts !== 'undefined') {
 }
 if (typeof carProducts !== 'undefined') {
   products.push(...carProducts);
+}
+if (typeof clubProducts !== 'undefined') {
+  products.push(...clubProducts);
 }
 
 const OUR_WORK_MEDIA = [
@@ -528,19 +519,14 @@ async function initializeCartImages() {
   }
 }
 
-async function loadCustomUpload() {
-  try {
-    const blob = await getImageFromDB("pending-upload");
-    if (blob) {
-      const url = URL.createObjectURL(blob);
-      return { name: "restored-design", url, isObjectUrl: true, file: blob };
-    }
-  } catch {}
+function loadCustomUpload() {
+  try { deleteImageFromDB("pending-upload"); } catch {}
   return null;
 }
 
 function saveCustomUpload(upload) {
   // Do not persist upload metadata to prevent reloading broken object URLs
+  deleteImageFromDB("pending-upload").catch(() => {});
 }
 
 function loadCart() {
@@ -582,15 +568,10 @@ const state = {
   lang: localStorage.getItem(LOCAL_STORAGE_LANG_KEY) || "en",
   theme: localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || "light",
   search: "",
-  category: "all",
-  size: "all",
-  frame: "all",
-  sort: "featured",
-  page: parseInt(sessionStorage.getItem(SESSION_PAGE_KEY)) || 1,
   cart: loadCart(),
   selectedProduct: null,
-  detailSize: "30x40",
-  detailFrame: "Black",
+  detailSize: "20x30",
+  detailFrame: "None",
   customUpload: loadCustomUpload(),
   confirmedForm: null,
   user: getSession(),
@@ -599,8 +580,7 @@ const state = {
   orderNote: ""
 };
 
-const productGrid = document.querySelector("#productGrid");
-const resultCount = document.querySelector("#resultCount");
+const productGrid = document.querySelector("#categorySections");
 const productDetail = document.querySelector("#productDetail");
 const cartDrawer = document.querySelector("[data-cart-drawer]");
 const cartItems = document.querySelector("#cartItems");
@@ -1110,10 +1090,11 @@ function updateLanguageUI() {
     elem.placeholder = t(key);
   });
 
-  // Specifically handle search input placeholder
-  const searchInput = document.querySelector("#searchInput");
-  if (searchInput) {
-    searchInput.placeholder = t("searchPlaceholder");
+  // Update nav search placeholder on language switch
+  const navSearch = document.querySelector("#navSearchInput");
+  if (navSearch) {
+    navSearch.placeholder = t("searchPlaceholder");
+    navSearch.setAttribute("dir", currentLang === "ar" ? "rtl" : "ltr");
   }
   updateUserUI();
 }
@@ -1159,114 +1140,292 @@ function preloadProductImages(list) {
   targets.forEach((product, i) => {
     const src = product.gallery?.length ? product.gallery[0] : product.image;
     if (!src) return;
-    const img = new Image();
-    img.decoding = "async";
-    img.fetchPriority = i < 6 ? "high" : "low";
-    img.src = productImageUrl(src);
+    const url = productImageUrl(src);
+    if (i < 6) {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = url;
+      link.fetchPriority = "high";
+      document.head.appendChild(link);
+    } else {
+      const img = new Image();
+      img.decoding = "async";
+      img.fetchPriority = "low";
+      img.src = url;
+    }
   });
 }
 
 function filteredProducts() {
   const search = state.search.trim().toLowerCase();
-  const filtered = products.filter((product) => {
+  return products.filter((product) => {
     const haystack = [
       product.name, product.nameAr,
-      product.category,
       product.tag, product.tagAr,
       product.description, product.descriptionAr
     ].filter(Boolean).join(" ").toLowerCase();
-    const matchesSearch = !search || haystack.includes(search);
-    const matchesCategory = state.category === "all" || product.category === state.category;
-    const matchesSize = state.size === "all" || Object.keys(product.sizes).includes(state.size);
-    const matchesFrame = state.frame === "all" || product.frames.includes(state.frame);
-    return matchesSearch && matchesCategory && matchesSize && matchesFrame;
-  });
-
-  return filtered.sort((a, b) => {
-    if (state.sort === "price-low") return a.basePrice - b.basePrice;
-    if (state.sort === "price-high") return b.basePrice - a.basePrice;
-    if (state.sort === "name") {
-      return a.name.localeCompare(b.name);
-    }
-    return 0;
+    return !search || haystack.includes(search);
   });
 }
 
 function renderProducts() {
-  if (!productGrid) return;
+  const container = document.querySelector("#categorySections");
+  if (!container) return;
   const list = filteredProducts();
   const currentLang = state.lang || "en";
-  const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
-  if (state.page > totalPages) state.page = totalPages;
-  sessionStorage.setItem(SESSION_PAGE_KEY, state.page);
-  const start = (state.page - 1) * PER_PAGE;
-  const pageItems = list.slice(start, start + PER_PAGE);
-  const productCountText = currentLang === "ar"
-    ? `${list.length} ${list.length === 1 ? t("resultCountProduct") : t("resultCountProducts")}`
-    : `${list.length} ${list.length === 1 ? "product" : "products"}`;
-  if (resultCount) resultCount.textContent = productCountText;
 
   if (!list.length) {
-    productGrid.innerHTML = `<div class="empty-state"><strong>${t("noProductsFound")}</strong><p>${t("tryDifferentSearch")}</p></div>`;
+    container.innerHTML = `<div class="empty-state" style="padding:60px clamp(16px,4vw,42px)"><strong>${t("noProductsFound")}</strong><p>${t("tryDifferentSearch")}</p></div>`;
     return;
   }
 
-  productGrid.innerHTML = pageItems.map((product, index) => {
-    const name = getProductName(product);
-    const tag = currentLang === "ar" && product.tagAr ? product.tagAr : product.tag;
-    const desc = currentLang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
-    const sceneImage = sceneImageForIndex(start + index);
+  // Group by category preserving defined order
+  const categoryOrder = ["custom", "cars", "football", "clubs"];
+  const categoryMeta = {
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
+    custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
+  };
 
-    return `
-      <article class="product-card" style="--delay: ${index * 65}ms">
-        <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <span class="frame-preview frame-preview-black"></span>\n          <img src="${productImageUrl(product.image)}" loading="${index < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${index < 6 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
-          <span class="product-tag">${tag}</span>
-          ${galleryBadge(product) ? `<span class="product-gallery-badge">${galleryBadge(product)}</span>` : ""}
-          <button class="icon-button wishlist-btn ${isInWishlist(product.id) ? 'in-wishlist' : ''}" type="button" data-wishlist-toggle="${product.id}" aria-label="${isInWishlist(product.id) ? (currentLang === "ar" ? "إزالة من المفضلة" : "Remove from wishlist") : (currentLang === "ar" ? "أضف للمفضلة" : "Add to wishlist")}"><svg viewBox="0 0 24 24" width="18" height="18" fill="${isInWishlist(product.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-        </a>
-        <div class="product-info">
-          <h3>${name}</h3>
-          <p class="product-summary">${desc}</p>
-          <div class="product-meta">
-            <span>${t("from")} ${money(product.basePrice)}</span>
-            <span>${t("sizesAvailable")}</span>
-          </div>
-          <div class="swatch-row" aria-label="Available frames">
-            ${product.frames.map((frame) => `<span class="frame-swatch ${frame.toLowerCase()}">${getFrameOptionLabel(frame)}</span>`).join("")}
-          </div>
-          <div class="card-actions">
-            ${product.isCustom ? "" : `<button class="quick-order-btn" type="button" data-quick-add="${product.id}">${t("orderNow")}</button>`}
-            <a class="view-customize-btn" href="product.html?id=${product.id}">${product.isCustom ? t("uploadDesignBtn") : t("customize")}</a>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
+  const groups = {};
+  list.forEach(p => {
+    const cat = p.category || "other";
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(p);
+  });
 
-  const pageNav = document.createElement("div");
-  pageNav.className = "pagination";
-  pageNav.setAttribute("role", "navigation");
-  pageNav.setAttribute("aria-label", currentLang === "ar" ? "تصفح الصفحات" : "Pagination");
+  let html = "";
+  categoryOrder.forEach(cat => {
+    const items = groups[cat];
+    if (!items || !items.length) return;
+    const meta = categoryMeta[cat] || { label: cat, icon: "" };
+    const count = currentLang === "ar"
+      ? `${items.length} ${items.length === 1 ? "منتج" : "منتجات"}`
+      : `${items.length} ${items.length === 1 ? "product" : "products"}`;
+    const showAll = items.length > 6;
+    const visible = showAll ? items.slice(0, 6) : items;
 
-  if (totalPages > 1) {
-    var pagesHtml = "";
-    for (var p = 1; p <= totalPages; p++) {
-      if (totalPages > 7) {
-        if (p === 1 || p === totalPages || (p >= state.page - 1 && p <= state.page + 1)) {
-          pagesHtml += `<button type="button" class="page-btn${p === state.page ? " is-active" : ""}" data-page="${p}">${p}</button>`;
-        } else if (p === state.page - 2 || p === state.page + 2) {
-          pagesHtml += `<span class="page-ellipsis">...</span>`;
-        }
-      } else {
-        pagesHtml += `<button type="button" class="page-btn${p === state.page ? " is-active" : ""}" data-page="${p}">${p}</button>`;
+    html += `<section class="category-section" data-cat="${cat}">\n`;
+    html += `  <div class="section-heading">\n`;
+    html += `    <div style="display:flex;align-items:center;gap:8px">\n`;
+    html += `      <span style="font-size:1.4rem">${meta.icon}</span>\n`;
+    html += `      <h2>${meta.label}</h2>\n`;
+    html += `    </div>\n`;
+    html += `    <span class="result-count">${count}</span>\n`;
+    html += `  </div>\n`;
+    html += `  <div class="category-scroll" data-scroll="${cat}">\n`;
+
+    visible.forEach((product, idx) => {
+      const name = getProductName(product);
+      const tag = currentLang === "ar" && product.tagAr ? product.tagAr : product.tag;
+      const desc = currentLang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
+      const sceneImage = sceneImageForIndex(idx);
+
+      html += `    <article class="product-card" style="--delay: ${idx * 65}ms">\n`;
+      html += `      <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
+      html += `        <span class="frame-preview frame-preview-black"></span>\n`;
+      html += `        <img src="${productImageUrl(product.image)}" loading="${idx < 3 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 3 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">\n`;
+      html += `        <span class="product-tag">${tag}</span>\n`;
+      if (galleryBadge(product)) {
+        html += `        <span class="product-gallery-badge">${galleryBadge(product)}</span>\n`;
       }
+      html += `        <div class="media-actions">\n`;
+      html += `          <button class="icon-button cart-icon-btn" type="button" data-quick-add="${product.id}" aria-label="${currentLang === "ar" ? "أضف للسلة" : "Add to cart"}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+      html += `        </div>\n`;
+      html += `      </a>\n`;
+      html += `      <div class="product-info">\n`;
+      html += `        <h3>${name}</h3>\n`;
+      html += `        <div class="product-meta">\n`;
+      html += `          <span class="price-value">${money(product.basePrice)}</span>\n`;
+      html += `          <span class="price-label">${t("from")}</span>\n`;
+      html += `        </div>\n`;
+      html += `      </div>\n`;
+      html += `    </article>\n`;
+    });
+
+    if (showAll) {
+      html += `    <div class="view-all-tile">\n`;
+      html += `      <a href="?cat=${cat}">${currentLang === "ar" ? `عرض الكل (${items.length})` : `View all (${items.length})`}</a>\n`;
+      html += `    </div>\n`;
     }
-    pageNav.innerHTML = pagesHtml;
+
+    html += `  </div>\n`;
+    html += `</section>\n`;
+  });
+
+  container.innerHTML = html;
+  wireDragScroll();
+}
+
+function wireDragScroll() {
+  document.querySelectorAll(".category-scroll").forEach(el => {
+    let down = false, startX = 0, prevX = 0, dragged = false;
+
+    function pointerDown(clientX) {
+      down = true;
+      dragged = false;
+      startX = prevX = clientX;
+      el.classList.add("dragging");
+    }
+
+    function pointerMove(clientX) {
+      if (!down) return;
+      const dx = clientX - prevX;
+      prevX = clientX;
+      if (Math.abs(clientX - startX) > 3) dragged = true;
+      el.scrollLeft -= dx;
+    }
+
+    function pointerUp() {
+      down = false;
+      el.classList.remove("dragging");
+    }
+
+    // Mouse
+    el.addEventListener("mousedown", e => { if (e.button !== 0) return; pointerDown(e.clientX); });
+    el.addEventListener("mousemove", e => pointerMove(e.clientX));
+    el.addEventListener("mouseup", pointerUp);
+    el.addEventListener("mouseleave", pointerUp);
+    el.addEventListener("dragstart", e => e.preventDefault());
+
+    // Touch
+    el.addEventListener("touchstart", e => { pointerDown(e.touches[0].clientX); }, { passive: true });
+    el.addEventListener("touchmove", e => { pointerMove(e.touches[0].clientX); }, { passive: true });
+    el.addEventListener("touchend", pointerUp, { passive: true });
+
+    el.addEventListener("click", e => {
+      if (dragged) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    }, true);
+  });
+}
+
+const CAT_PAGE_SIZE = 30;
+let catLoadedCount = 0;
+let catItems = [];
+let catParam = null;
+
+function renderSingleCategory(cat) {
+  const container = document.querySelector("#categorySections");
+  if (!container) return;
+  const currentLang = state.lang || "en";
+  catItems = products.filter(p => p.category === cat);
+  catParam = cat;
+  if (!catItems.length) {
+    container.innerHTML = `<div class="empty-state" style="padding:60px clamp(16px,4vw,42px)"><strong>${t("noProductsFound")}</strong></div>`;
+    return;
   }
 
-  var existing = productGrid.parentNode.querySelector(".pagination");
-  if (existing) existing.remove();
-  if (pageNav.innerHTML) productGrid.parentNode.insertBefore(pageNav, productGrid.nextSibling);
+  const meta = {
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
+    custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
+  }[cat] || { label: cat, icon: "" };
+
+  const total = catItems.length;
+  const count = currentLang === "ar"
+    ? `${total} ${total === 1 ? "منتج" : "منتجات"}`
+    : `${total} ${total === 1 ? "product" : "products"}`;
+
+  catLoadedCount = Math.min(CAT_PAGE_SIZE, total);
+
+  let html = `<div class="single-cat-header">\n`;
+  html += `  <div style="display:flex;align-items:center;gap:8px">\n`;
+  html += `    <span style="font-size:1.4rem">${meta.icon}</span>\n`;
+  html += `    <h2>${meta.label}</h2>\n`;
+  html += `  </div>\n`;
+  html += `  <span class="result-count">${count}</span>\n`;
+  html += `  <a class="back-link" href="index.html">${currentLang === "ar" ? "← العودة للرئيسية" : "← Back to home"}</a>\n`;
+  html += `</div>\n`;
+  html += `<div class="full-cat-grid" id="fullCatGrid">\n`;
+  html += catCardHtml(catItems.slice(0, catLoadedCount), 0, currentLang);
+  html += `</div>\n`;
+
+  container.innerHTML = html;
+  appendLoadMore();
+}
+
+function catCardHtml(items, startIdx, lang) {
+  return items.map((product, i) => {
+    const idx = startIdx + i;
+    const name = getProductName(product);
+    const tag = lang === "ar" && product.tagAr ? product.tagAr : product.tag;
+    const desc = lang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
+    const sceneImage = sceneImageForIndex(idx);
+
+    let card = `  <article class="product-card" style="--delay: ${idx * 20}ms">\n`;
+    card += `    <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
+    card += `      <span class="frame-preview frame-preview-black"></span>\n`;
+    card += `      <img src="${productImageUrl(product.image)}" loading="${idx < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 6 ? "high" : "auto"}" alt="${name} ${lang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">\n`;
+    card += `      <span class="product-tag">${tag}</span>\n`;
+    if (galleryBadge(product)) {
+      card += `      <span class="product-gallery-badge">${galleryBadge(product)}</span>\n`;
+    }
+    card += `      <div class="media-actions">\n`;
+    card += `        <button class="icon-button cart-icon-btn" type="button" data-quick-add="${product.id}" aria-label="${lang === "ar" ? "أضف للسلة" : "Add to cart"}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+    card += `      </div>\n`;
+    card += `    </a>\n`;
+    card += `    <div class="product-info">\n`;
+    card += `      <h3>${name}</h3>\n`;
+    card += `      <div class="product-meta">\n`;
+    card += `        <span class="price-value">${money(product.basePrice)}</span>\n`;
+    card += `        <span class="price-label">${t("from")}</span>\n`;
+    card += `      </div>\n`;
+    card += `    </div>\n`;
+    card += `  </article>\n`;
+    return card;
+  }).join("");
+}
+
+let catObserver = null;
+
+function appendLoadMore() {
+  const grid = document.querySelector("#fullCatGrid");
+  if (!grid) return;
+  const remaining = catItems.length - catLoadedCount;
+  const currentLang = state.lang || "en";
+  if (remaining <= 0) {
+    if (catObserver) catObserver.disconnect();
+    return;
+  }
+
+  // Remove old sentinel if any
+  const old = grid.parentNode.querySelector(".cat-load-sentinel");
+  if (old) old.remove();
+
+  const sentinel = document.createElement("div");
+  sentinel.className = "cat-load-sentinel";
+  sentinel.style.cssText = "height:1px";
+
+  // Also show a small status indicator
+  const loaded = catLoadedCount;
+  const total = catItems.length;
+  const info = document.createElement("p");
+  info.className = "cat-load-info";
+  info.textContent = currentLang === "ar"
+    ? `تم عرض ${loaded} من ${total}`
+    : `Showing ${loaded} of ${total}`;
+  info.style.cssText = "text-align:center;padding:8px clamp(16px,4vw,42px);font-size:0.85rem;font-weight:600;color:var(--muted);margin:0";
+
+  grid.parentNode.appendChild(info);
+  grid.parentNode.appendChild(sentinel);
+
+  if (catObserver) catObserver.disconnect();
+  catObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      const next = catItems.slice(catLoadedCount, catLoadedCount + CAT_PAGE_SIZE);
+      if (!next.length) return;
+      grid.insertAdjacentHTML("beforeend", catCardHtml(next, catLoadedCount, currentLang));
+      catLoadedCount += next.length;
+      appendLoadMore();
+    }
+  }, { rootMargin: "200px" });
+  catObserver.observe(sentinel);
 }
 
 function showOurWorkImage(index) {
@@ -1352,7 +1511,7 @@ function renderDetail(productId) {
   if (productDetail) {
     document.title = `${name} � ${t("brandTitle")}`;
     productDetail.hidden = false;
-    const rawPreview = product.isCustom && state.customUpload ? state.customUpload.url : product.image;
+    const rawPreview = product.isCustom ? "assets/Custom/Upload-Your-Custom-Design.png" : product.image;
     const previewImage = rawPreview && rawPreview.startsWith('data:') ? rawPreview : productImageUrl(rawPreview);
     const sceneImage = sceneImageForIndex(products.findIndex((item) => item.id === product.id));
     productDetail.innerHTML = `
@@ -1482,7 +1641,7 @@ async function addToCart(productId, size = "30x40", frame = "Black") {
   renderCart();
   openCart();
   flashCartBubble();
-  showToast(`${t("addedToCart")} � ${getProductName(product)}`);
+  showToast(`${t("addedToCart")} - ${getProductName(product)}`);
 }
 
 function cartLineTotal(item) {
@@ -1776,6 +1935,9 @@ function buildWhatsAppMessage(savedOrder) {
       `*${tMsg.customization}:* ${resolvedSize} | ${resolvedFrame}`,
       `*${tMsg.link}:* ${productImageUrl(`product.html?id=${product.id}`)}`
     );
+    if (item.upload) {
+      lines.push(`${isAr ? "الملف المرفوع:" : "Uploaded File:"} ${item.upload.name}`);
+    }
   });
 
   lines.push(
@@ -1922,58 +2084,21 @@ async function sendWhatsAppOrder() {
   }, 500);
 }
 
-const searchInput = document.querySelector("#searchInput");
-if (searchInput) {
-  searchInput.addEventListener("input", (event) => {
-    state.search = event.target.value;
-    state.page = 1;
-    renderProducts();
-  });
-}
 
-const categoryFilter = document.querySelector("#categoryFilter");
-if (categoryFilter) {
-  categoryFilter.addEventListener("change", (event) => {
-    state.category = event.target.value;
-    state.page = 1;
-    renderProducts();
-  });
-}
-
-const sizeFilter = document.querySelector("#sizeFilter");
-if (sizeFilter) {
-  sizeFilter.addEventListener("change", (event) => {
-    state.size = event.target.value;
-    state.page = 1;
-    renderProducts();
-  });
-}
-
-const frameFilter = document.querySelector("#frameFilter");
-if (frameFilter) {
-  frameFilter.addEventListener("change", (event) => {
-    state.frame = event.target.value;
-    state.page = 1;
-    renderProducts();
-  });
-}
-
-const sortFilter = document.querySelector("#sortFilter");
-if (sortFilter) {
-  sortFilter.addEventListener("change", (event) => {
-    state.sort = event.target.value;
-    state.page = 1;
-    renderProducts();
-  });
-}
-
+// Search icon opens the nav drawer (search field lives inside the drawer)
 document.addEventListener("click", (event) => {
+  const searchIcon = event.target.closest("[data-search-icon]");
+  if (searchIcon) {
+    openNav();
+    setTimeout(() => { const inp = document.querySelector("#navSearchInput"); if (inp) inp.focus(); }, 100);
+    return;
+  }
+
   var productLink = event.target.closest("a[href*='product.html']");
   if (productLink || event.target.closest("[data-quick-add]")) {
     var card = (productLink || event.target.closest("[data-quick-add]")).closest(".product-card");
     var top = card ? card.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2 - card.offsetHeight / 2) : window.scrollY;
     sessionStorage.setItem(SESSION_SCROLL_KEY, Math.max(0, Math.round(top)));
-    sessionStorage.setItem(SESSION_PAGE_KEY, state.page);
   }
 
   const themeToggle = event.target.closest("[data-theme-toggle]");
@@ -1985,15 +2110,6 @@ document.addEventListener("click", (event) => {
   const langToggle = event.target.closest("[data-lang-toggle]");
   if (langToggle) {
     toggleLanguage();
-    return;
-  }
-
-  const pageBtn = event.target.closest("[data-page]");
-  if (pageBtn) {
-    state.page = parseInt(pageBtn.dataset.page);
-    sessionStorage.setItem(SESSION_PAGE_KEY, state.page);
-    renderProducts();
-    productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
 
@@ -2022,6 +2138,8 @@ document.addEventListener("click", (event) => {
 
   const quickAdd = event.target.closest("[data-quick-add]");
   if (quickAdd) {
+    event.preventDefault();
+    event.stopPropagation();
     const product = getProduct(quickAdd.dataset.quickAdd);
     if (product?.isCustom) {
       window.location.href = `product.html?id=${product.id}`;
@@ -2215,8 +2333,116 @@ document.addEventListener("error", (event) => {
 
 if (checkoutForm) checkoutForm.addEventListener("submit", handleCheckout);
 
+// Brand click: scroll to top when already on home page
+document.querySelectorAll(".brand").forEach(el => {
+  el.addEventListener("click", () => window.scrollTo(0, 0));
+});
+
+// ── Nav drawer ──
+function buildNavMenu() {
+  const body = document.querySelector("[data-nav-body]");
+  if (!body) return;
+  const lang = state.lang || "en";
+  const cats = [
+    { id: "custom",   label: { en: "Custom upload", ar: "تصميم خاص" } },
+    { id: "cars",     label: { en: "Cars",          ar: "سيارات" } },
+    { id: "football", label: { en: "Football",      ar: "كرة قدم" } },
+    { id: "clubs",    label: { en: "Clubs",          ar: "أندية" } }
+  ];
+
+  const placeholder = lang === "ar" ? "ابحث عن لاعبين، سيارات..." : "Search players, cars...";
+  const searchVal = (state.search || "").replace(/"/g, "&quot;");
+
+  body.innerHTML = `
+    <div class="nav-search">
+      <input type="search" id="navSearchInput" class="nav-search-input" placeholder="${placeholder}" value="${searchVal}" autocomplete="off">
+    </div>
+    <a href="index.html" data-nav-close>${lang === "ar" ? "🏠 الرئيسية" : "🏠 Home"}</a>
+    <button class="nav-collection-toggle" data-collection-toggle>
+      ${lang === "ar" ? "📂 المجموعة" : "📂 Collection"}
+    </button>
+    <div class="nav-sub-collection" data-sub-collection hidden>
+      ${cats.map(c => `<a class="nav-sub" href="?cat=${c.id}" data-nav-close>${c.label[lang]}</a>`).join("")}
+    </div>
+    <div class="nav-divider"></div>
+    <a href="our-work.html" data-nav-close>${lang === "ar" ? "📸 أعمالنا" : "📸 Our Work"}</a>
+    <a href="faq.html" data-nav-close>${lang === "ar" ? "❓ الأسئلة الشائعة" : "❓ FAQ"}</a>
+    <a href="https://wa.me/201010414187" target="_blank" rel="noopener" data-nav-close>${lang === "ar" ? "💬 واتساب" : "💬 Contact Us"}</a>
+    <div class="nav-divider"></div>
+    <a href="index.html" data-nav-close style="font-size:0.85rem;color:var(--muted)">${lang === "ar" ? "© Poster Lab Store" : "© Poster Lab Store"}</a>
+  `;
+
+  // Wire nav search input
+  const navSearch = body.querySelector("#navSearchInput");
+  if (navSearch) {
+    navSearch.addEventListener("input", (e) => {
+      state.search = e.target.value;
+      if (window.renderProducts) renderProducts();
+    });
+  }
+
+  // Toggle collection sub-menu
+  const toggle = body.querySelector("[data-collection-toggle]");
+  const sub = body.querySelector("[data-sub-collection]");
+  if (toggle && sub) {
+    toggle.addEventListener("click", () => {
+      sub.hidden = !sub.hidden;
+    });
+  }
+}
+
+// Open / close
+const navDrawer = document.querySelector("[data-nav-drawer]");
+const openNavBtn = document.querySelector("[data-open-nav]");
+const closeNavBtn = document.querySelector("[data-close-nav]");
+
+function openNav() {
+  if (!navDrawer) return;
+  buildNavMenu();
+  navDrawer.setAttribute("aria-hidden", "false");
+  navDrawer.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+}
+function closeNav() {
+  if (!navDrawer) return;
+  navDrawer.setAttribute("aria-hidden", "true");
+  navDrawer.classList.remove("is-open");
+  document.body.style.overflow = "";
+}
+
+if (openNavBtn) openNavBtn.addEventListener("click", openNav);
+if (closeNavBtn) closeNavBtn.addEventListener("click", closeNav);
+if (navDrawer) {
+  navDrawer.addEventListener("click", e => {
+    if (e.target === navDrawer) closeNav();
+  });
+  // Close on any [data-nav-close] click
+  navDrawer.addEventListener("click", e => {
+    if (e.target.closest("[data-nav-close]")) closeNav();
+  });
+}
+
+// ── Device detection ──
+function detectDevice() {
+  const w = window.innerWidth;
+  let device;
+  if (w < 360)           device = "phone-small";
+  else if (w < 600)      device = "phone";
+  else if (w < 768)      device = "tablet-small";
+  else if (w < 1024)     device = "tablet";
+  else if (w < 1440)     device = "desktop";
+  else                   device = "wide";
+  document.documentElement.dataset.device = device;
+}
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(detectDevice, 150);
+});
+
 // Run initial configurations
 (async function init() {
+  detectDevice();
   state.user = getSession();
   state.wishlist = getWishlistData();
   updateLanguageUI();
@@ -2232,26 +2458,27 @@ if (checkoutForm) checkoutForm.addEventListener("submit", handleCheckout);
     });
   });
 
-  preloadProductImages();
-  if (productGrid) renderProducts();
-  if (productGrid) {
-    var savedScroll = sessionStorage.getItem(SESSION_SCROLL_KEY);
-    if (savedScroll) {
-      sessionStorage.removeItem(SESSION_SCROLL_KEY);
-      var pos = parseInt(savedScroll);
-      var doScroll = function() { window.scrollTo(0, pos); };
-      setTimeout(doScroll, 200);
-      setTimeout(doScroll, 600);
-      window.addEventListener("load", doScroll, { once: true });
+  const catParam = new URLSearchParams(window.location.search).get("cat");
+  if (catParam) {
+    renderSingleCategory(catParam);
+  } else {
+    preloadProductImages();
+    if (productGrid) renderProducts();
+    if (productGrid) {
+      var savedScroll = sessionStorage.getItem(SESSION_SCROLL_KEY);
+      if (savedScroll) {
+        sessionStorage.removeItem(SESSION_SCROLL_KEY);
+        var pos = parseInt(savedScroll);
+        var doScroll = function() { window.scrollTo(0, pos); };
+        setTimeout(doScroll, 200);
+        setTimeout(doScroll, 600);
+        window.addEventListener("load", doScroll, { once: true });
+      }
     }
   }
   if (ourWorkGrid) renderOurWork();
   renderCart();
   await initializeCartImages();
-  const savedUpload = await loadCustomUpload();
-  if (savedUpload) {
-    state.customUpload = savedUpload;
-  }
   // Setup coupon input real-time check
   const couponInput = document.querySelector("[data-coupon-input]");
   const couponRemoveBtn = document.querySelector("[data-coupon-remove]");
@@ -2268,13 +2495,13 @@ if (checkoutForm) checkoutForm.addEventListener("submit", handleCheckout);
 
 
 
-// Register Service Worker
+// Register Service Worker (deferred but not blocking)
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
+  setTimeout(() => {
     navigator.serviceWorker.register('sw.js')
       .then((reg) => console.log('Service Worker registered:', reg))
       .catch((err) => console.error('Service Worker registration failed:', err));
-  });
+  }, 0);
 }
 
 const pageProductId = getPageProductId();

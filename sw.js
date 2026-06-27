@@ -10,6 +10,7 @@ const ASSETS = [
   './admin.css',
   './football-products.js',
   './cars-products.js',
+  './clubs-products.js',
   './script.js',
   './admin.js',
   './assets/poster-lab-logo.png',
