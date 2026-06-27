@@ -641,6 +641,14 @@ function productImageUrl(path) {
   return new URL(clean, base).href;
 }
 
+function hideLoader() {
+  const el = document.getElementById('appLoader');
+  if (!el || el.classList.contains('hidden')) return;
+  el.classList.add('hidden');
+  el.addEventListener('transitionend', () => el.remove(), { once: true });
+  setTimeout(() => { if (el.parentNode) el.remove(); }, 400);
+}
+
 function displayImageForItem(product, item = null) {
   const src = item?.upload?.url || product.image;
   return src && src.startsWith('data:') ? src : productImageUrl(src);
@@ -2483,6 +2491,8 @@ window.addEventListener("resize", () => {
   }
   if (ourWorkGrid) renderOurWork();
   renderCart();
+  // Hide loading screen now that main content is rendered
+  hideLoader();
   await initializeCartImages();
   // Setup coupon input real-time check
   const couponInput = document.querySelector("[data-coupon-input]");
@@ -2517,5 +2527,8 @@ if (pageProductId) {
   productDetail.hidden = false;
   productDetail.innerHTML = `<div class="empty-state"><strong>${t("noProductsFound")}</strong><p><a href="index.html">${t("heroActionShop")}</a></p></div>`;
 }
+
+// Hide loading screen once all initial content is rendered
+hideLoader();
 
 

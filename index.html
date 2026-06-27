@@ -18,9 +18,11 @@
   <link rel="prefetch" href="product.html" as="document">
   <link rel="prefetch" href="faq.html" as="document">
   <script>(function(){var t=localStorage.getItem("poster-lab-theme");if(!t)t="light";document.documentElement.dataset.theme=t;var c=document.createElement("style");c.textContent='html{color-scheme:'+(t==="dark"?"dark":"light")+'}';document.head.appendChild(c)})();</script>
+<style>.app-loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#fff;transition:opacity .35s ease}[data-theme="dark"] .app-loader{background:#0f0f13}.app-loader.hidden{opacity:0;pointer-events:none}.loader-ring{position:relative;width:72px;height:72px}.loader-ring img{width:40px;height:40px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover}.loader-ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:3px solid #e5e7eb;border-top-color:#2563eb;animation:lspin .7s linear infinite}[data-theme="dark"] .loader-ring::after{border-color:#1f2937;border-top-color:#3b82f6}@keyframes lspin{to{transform:rotate(360deg)}}</style>
 </head>
 
 <body>
+  <div class="app-loader" id="appLoader"><div class="loader-ring"><img src="assets/poster-lab-logo.png" alt="Loading..." onerror="this.style.display='none'"></div></div>
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Poster Lab Store home">
       <span class="brand-mark">
