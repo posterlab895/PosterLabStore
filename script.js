@@ -631,10 +631,20 @@ function getProduct(id) {
   return getMergedProducts().find((product) => product.id === id);
 }
 
+let _supportsWebp = null;
+function supportsWebp() {
+  if (_supportsWebp === null) {
+    _supportsWebp = document.createElement('canvas').toDataURL('image/webp').indexOf('image/webp') === 5;
+  }
+  return _supportsWebp;
+}
+
 function productImageUrl(path) {
   if (!path || path.startsWith('data:') || path.startsWith('blob:')) return path;
+  if (supportsWebp()) {
+    path = path.replace(/\.(png|jpe?g)$/i, '.webp');
+  }
   const clean = path.replace(/#/g, '%23').replace(/ /g, '%20');
-  // Resolve relative to site root when on subdirectory pages (e.g., admin/)
   const base = window.location.pathname.includes('/admin/')
     ? window.location.href.replace(/\/admin\/.*$/, '/')
     : window.location.href;
@@ -1423,17 +1433,6 @@ function appendLoadMore() {
   sentinel.className = "cat-load-sentinel";
   sentinel.style.cssText = "height:1px";
 
-  // Also show a small status indicator
-  const loaded = catLoadedCount;
-  const total = catItems.length;
-  const info = document.createElement("p");
-  info.className = "cat-load-info";
-  info.textContent = currentLang === "ar"
-    ? `تم عرض ${loaded} من ${total}`
-    : `Showing ${loaded} of ${total}`;
-  info.style.cssText = "text-align:center;padding:8px clamp(16px,4vw,42px);font-size:0.85rem;font-weight:600;color:var(--muted);margin:0";
-
-  grid.parentNode.appendChild(info);
   grid.parentNode.appendChild(sentinel);
 
   if (catObserver) catObserver.disconnect();

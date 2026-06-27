@@ -118,7 +118,7 @@
       const dateStr = d.toLocaleDateString('en-EG', { day: '2-digit', month: 'short', year: 'numeric' });
       const itemsHtml = (detail && o.items && o.items.length)
         ? o.items.map(item => `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line)">
-            <img src="${item.image || '../assets/poster-lab-logo.png'}" alt="" style="width:32px;height:42px;object-fit:cover;border-radius:4px" onerror="this.src='../assets/poster-lab-logo.png'">
+            <img src="${typeof productImageUrl === 'function' ? productImageUrl(item.image || '../assets/poster-lab-logo.png') : (item.image || '../assets/poster-lab-logo.png')}" alt="" style="width:32px;height:42px;object-fit:cover;border-radius:4px" onerror="this.src='../assets/poster-lab-logo.png'">
             <span style="flex:1">${item.productName || item.name || 'Product'}</span>
             <span style="color:var(--muted);font-size:0.8rem">×${item.quantity || 1}</span>
             <span style="font-weight:700">${money(item.total || item.price || 0)}</span>
@@ -163,7 +163,7 @@
     </tr></thead><tbody>${list.map(p => {
       const img = p.image || '../assets/poster-lab-logo.png';
       return `<tr>
-        <td style="width:50px"><img src="${img}" alt="" style="width:40px;height:54px;object-fit:cover;border-radius:4px" onerror="this.src='../assets/poster-lab-logo.png'"></td>
+        <td style="width:50px"><img src="${typeof productImageUrl === 'function' ? productImageUrl(img) : img}" alt="" style="width:40px;height:54px;object-fit:cover;border-radius:4px" onerror="this.src='../assets/poster-lab-logo.png'"></td>
         <td><code>${p.id}</code></td>
         <td><strong>${p.name || ''}</strong>${p.nameAr ? `<br><small style="color:var(--muted)">${p.nameAr}</small>` : ''}</td>
         <td>${p.category || '—'}</td>

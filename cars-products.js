@@ -1820,26 +1820,6 @@ const carProducts = [
     "description": ""
   },
   {
-    "id": "car-092",
-    "name": "Car #092",
-    "category": "cars",
-    "tag": "Cars",
-    "image": "assets/cars/imgdownloader-f81b0687.png",
-    "basePrice": 50,
-    "sizes": {
-      "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
-    },
-    "frames": [
-      "None",
-      "Black",
-      "White"
-    ],
-    "description": ""
-  },
-  {
     "id": "car-093",
     "name": "Car #093",
     "category": "cars",
