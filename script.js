@@ -1511,7 +1511,7 @@ function renderDetail(productId) {
   if (productDetail) {
     document.title = `${name} � ${t("brandTitle")}`;
     productDetail.hidden = false;
-    const rawPreview = product.isCustom ? "assets/Custom/Upload-Your-Custom-Design.png" : product.image;
+    const rawPreview = product.image;
     const previewImage = rawPreview && rawPreview.startsWith('data:') ? rawPreview : productImageUrl(rawPreview);
     const sceneImage = sceneImageForIndex(products.findIndex((item) => item.id === product.id));
     productDetail.innerHTML = `
