@@ -27,7 +27,7 @@
         <p class="admin-login-subtitle">Poster Lab Store Management</p>
         <div class="admin-login-form">
           <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="current-password">
-          <button id="adminLoginBtn" class="checkout-button" data-action="login">Login</button>
+          <button id="adminLoginBtn" class="checkout-button" data-cmd="login">Login</button>
           <p id="adminLoginError" class="admin-error" hidden>Incorrect password</p>
         </div>
         <a href="../index.html" class="admin-back-link">Back to store</a>
@@ -41,7 +41,7 @@
         </div>
         <div class="admin-header-right">
           <span id="adminStatsHeader"></span>
-          <button id="adminLogoutBtn" class="secondary-button" data-action="logout">Logout</button>
+          <button id="adminLogoutBtn" class="secondary-button" data-cmd="logout">Logout</button>
         </div>
       </header>
       <nav class="admin-nav" id="adminNav">
@@ -104,8 +104,8 @@
                 <option value="paint">Paint art</option>
               </select>
             </div>
-            <button id="adminAddProductBtn" class="primary-link" data-action="add-product">+ Add Product</button>
-            <button id="adminClearProductsBtn" class="secondary-button" data-action="clear-products" style="border-color:var(--danger);color:var(--danger)">Clear All</button>
+            <button id="adminAddProductBtn" class="primary-link" data-cmd="add-product">+ Add Product</button>
+            <button id="adminClearProductsBtn" class="secondary-button" data-cmd="clear-products" style="border-color:var(--danger);color:var(--danger)">Clear All</button>
           </div>
           <div id="adminProductsList" class="admin-table-wrap"></div>
           <div id="adminProductForm" class="admin-product-form" hidden>
@@ -126,7 +126,8 @@
               <label>Tag (EN) <input id="apTag" placeholder="e.g. Car poster"></label>
               <label>Tag (AR) <input id="apTagAr" placeholder="e.g. بوستر سيارة"></label>
               <label>Image path <input id="apImage" placeholder="assets/my-poster.png" oninput="document.getElementById('apImagePreview').src=this.value||'../assets/poster-lab-logo.png'"></label>
-              <img id="apImagePreview" src="../assets/poster-lab-logo.png" alt="Preview" style="width:80px;height:auto;border-radius:6px;object-fit:cover;aspect-ratio:3/4;margin-top:4px">
+              <label>Upload image <input id="apImageUpload" type="file" accept="image/png,image/jpeg,image/webp"></label>
+              <img id="apImagePreview" src="../assets/poster-lab-logo.png" alt="Preview" style="width:80px;height:auto;border-radius:6px;object-fit:cover;aspect-ratio:3/4;margin-top:4px;cursor:pointer" onclick="document.getElementById('apImageUpload').click()">
               <label>Base price (EGP) <input id="apBasePrice" type="number" placeholder="50"></label>
               <label>Size prices (comma-separated: size=price)
                 <input id="apSizes" placeholder="20x30=50, 30x40=60, 40x50=70, 50x70=90">
@@ -138,15 +139,15 @@
               <label>Description (AR) <textarea id="apDescriptionAr" placeholder="Arabic description" rows="2"></textarea></label>
             </div>
             <div class="admin-form-actions">
-              <button id="adminSaveProduct" class="primary-link" data-action="save-product">Save Product</button>
-              <button id="adminCancelProduct" class="secondary-button" data-action="cancel-product">Cancel</button>
+              <button id="adminSaveProduct" class="primary-link" data-cmd="save-product">Save Product</button>
+              <button id="adminCancelProduct" class="secondary-button" data-cmd="cancel-product">Cancel</button>
             </div>
           </div>
         </section>
         <section id="adminTabCoupons" class="admin-tab" hidden>
           <div class="admin-section-header">
             <h3>Coupons</h3>
-            <button id="adminAddCouponBtn" class="primary-link" data-action="add-coupon">+ Add Coupon</button>
+            <button id="adminAddCouponBtn" class="primary-link" data-cmd="add-coupon">+ Add Coupon</button>
           </div>
           <div id="adminCouponForm" class="admin-product-form" hidden>
             <h4>New Coupon</h4>
@@ -163,8 +164,8 @@
               <label>Max uses <input id="acMaxUses" type="number" placeholder="100"></label>
             </div>
             <div class="admin-form-actions">
-              <button id="adminSaveCoupon" class="primary-link" data-action="save-coupon">Save Coupon</button>
-              <button id="adminCancelCoupon" class="secondary-button" data-action="cancel-coupon">Cancel</button>
+              <button id="adminSaveCoupon" class="primary-link" data-cmd="save-coupon">Save Coupon</button>
+              <button id="adminCancelCoupon" class="secondary-button" data-cmd="cancel-coupon">Cancel</button>
             </div>
           </div>
           <div id="adminCouponsList" class="admin-table-wrap"></div>

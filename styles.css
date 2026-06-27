@@ -1218,10 +1218,9 @@ textarea:focus {
   gap: 6px;
 }
 .drawer-actions .icon-button {
-  width: 36px;
-  min-width: 36px;
-  height: 36px;
-  font-size: 0.9rem;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
 }
 
 .icon-button {
@@ -1855,12 +1854,6 @@ textarea:focus {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@media (max-width: 600px) {
-  .category-scroll {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 /* ── Device‑specific responsive overrides ── */
 
 /* Phone-small < 360px */
@@ -2147,15 +2140,13 @@ textarea:focus {
   }
 
   .media-actions .icon-button {
-    width: 30px;
-    min-width: 30px;
-    height: 30px;
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
   }
   .media-actions .icon-button svg {
-    width: 15px;
-    height: 15px;
-  }
-
+    width: 18px;
+    height: 18px;
   }
 
   .real-quality-strip {
@@ -2257,19 +2248,17 @@ textarea:focus {
     display: none;
   }
   .media-actions .icon-button {
-    width: 26px;
-    min-width: 26px;
-    height: 26px;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
   }
   .media-actions .icon-button svg {
-    width: 13px;
-    height: 13px;
+    width: 16px;
+    height: 16px;
   }
 
   .our-work-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   }
 }
 
@@ -2277,7 +2266,7 @@ textarea:focus {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  z-index: 999;
+  z-index: 45;
   display: flex;
   align-items: center;
   justify-content: center;

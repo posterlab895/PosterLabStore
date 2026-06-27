@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  /* ───── config ───── */
   const ADMIN_PWD_KEY = 'pls-admin-password';
   const SESSION_KEY   = 'pls-admin-session';
   const ORDERS_KEY    = 'pls-orders';
@@ -9,7 +8,6 @@
   const PRODUCTS_KEY  = 'pls-products';
   const DEFAULT_PWD   = 'Poster895Lab$';
 
-  /* ───── helpers ───── */
   const $ = (s, p) => (p || document).querySelector(s);
   const $$ = (s, p) => (p || document).querySelectorAll(s);
 
@@ -21,7 +19,6 @@
     catch { return fallback; }
   }
 
-  /* ───── storage ───── */
   function getAdminPassword() { return localStorage.getItem(ADMIN_PWD_KEY) || DEFAULT_PWD; }
   function setAdminPassword(p) { localStorage.setItem(ADMIN_PWD_KEY, p); }
   function isLoggedIn() { return localStorage.getItem(SESSION_KEY) === 'true'; }
@@ -36,7 +33,6 @@
   function getAdminProducts() { return safeJSON(PRODUCTS_KEY, []); }
   function saveAdminProducts(p) { localStorage.setItem(PRODUCTS_KEY, JSON.stringify(p)); }
 
-  /* ───── merged products ───── */
   function allProducts() {
     const hard = (typeof products !== 'undefined' && Array.isArray(products)) ? products : [];
     const custom = getAdminProducts();
@@ -49,7 +45,16 @@
     return Object.values(map);
   }
 
-  /* ───── status colours ───── */
+  function getCategories() {
+    const cats = new Set();
+    allProducts().forEach(p => { if (p.category) cats.add(p.category); });
+    const order = ['football', 'cars', 'clubs', 'custom', 'abstract', 'paint'];
+    return [...cats].sort((a, b) => {
+      const ia = order.indexOf(a), ib = order.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
+  }
+
   const STATUS_COLORS = {
     pending:     'var(--warm)',
     confirmed:   'var(--accent)',
@@ -58,10 +63,8 @@
     delivered:   'var(--accent-strong)',
     cancelled:   'var(--danger)',
   };
-
   const STATUS_OPTIONS = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'];
 
-  /* ───── render helpers ───── */
   function statusSelect(current, orderId) {
     return `<select class="admin-status-select" data-order-id="${orderId}">${
       STATUS_OPTIONS.map(s => `<option value="${s}"${s === current ? ' selected' : ''}>${s[0].toUpperCase() + s.slice(1)}</option>`).join('')
@@ -70,19 +73,16 @@
 
   function money(n) { return 'EGP ' + (Math.round(n) || 0); }
 
-  /* ───── DASHBOARD ───── */
   function renderDashboard() {
     const orders = getOrders();
     const active = orders.filter(o => o.status !== 'cancelled');
     const revenue = active.reduce((s, o) => s + (o.total || 0), 0);
     const pending = orders.filter(o => o.status === 'pending').length;
     const prods = allProducts();
-
     $('#statTotalOrders').textContent = orders.length;
     $('#statTotalRevenue').textContent = money(revenue);
     $('#statPendingOrders').textContent = pending;
     $('#statProductsCount').textContent = prods.length;
-
     const recent = orders.slice(-5).reverse();
     const wrap = $('#adminRecentOrders');
     if (!recent.length) { wrap.innerHTML = '<p class="empty-state">No orders yet</p>'; return; }
@@ -90,12 +90,10 @@
     updateStats();
   }
 
-  /* ───── ORDERS ───── */
   function renderOrders() {
     const orders = getOrders();
     const filter = $('#adminOrderStatusFilter').value;
     const search = $('#adminOrderSearch').value.toLowerCase().trim();
-
     let list = orders;
     if (filter !== 'all') list = list.filter(o => o.status === filter);
     if (search) list = list.filter(o =>
@@ -104,7 +102,6 @@
       (o.id || '').toLowerCase().includes(search)
     );
     list = [...list].reverse();
-
     const wrap = $('#adminOrdersList');
     if (!list.length) { wrap.innerHTML = '<p class="empty-state">No orders match</p>'; return; }
     wrap.innerHTML = ordersTable(list, true);
@@ -137,12 +134,10 @@
     }).join('')}</tbody></table>`;
   }
 
-  /* ───── PRODUCTS ───── */
   function renderProducts() {
     const all = allProducts();
     const search = ($('#adminProductSearch').value || '').toLowerCase().trim();
     const cat = $('#adminProductCategoryFilter').value;
-
     let list = all;
     if (cat !== 'all') list = list.filter(p => p.category === cat);
     if (search) list = list.filter(p =>
@@ -151,13 +146,10 @@
       (p.nameAr || '').toLowerCase().includes(search) ||
       (p.tag || '').toLowerCase().includes(search)
     );
-
     const cnt = $('#adminProductsCount');
     if (cnt) cnt.textContent = `(${list.length}/${all.length})`;
-
     const wrap = $('#adminProductsList');
     if (!list.length) { wrap.innerHTML = '<p class="empty-state">No products match</p>'; return; }
-
     wrap.innerHTML = `<table class="admin-table"><thead><tr>
       <th></th><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Sizes</th><th>Frames</th><th>Actions</th>
     </tr></thead><tbody>${list.map(p => {
@@ -172,13 +164,21 @@
         <td style="font-size:0.8rem">${(p.frames || []).join(', ')}</td>
         <td>
           <button class="admin-edit-btn secondary-button" data-cmd="edit-product" data-pid="${p.id}">Edit</button>
+          <button class="secondary-button" data-cmd="clone-product" data-pid="${p.id}">Clone</button>
           <button class="admin-delete-btn secondary-button" data-cmd="delete-product" data-pid="${p.id}" style="border-color:var(--danger);color:var(--danger)">Delete</button>
         </td>
       </tr>`;
     }).join('')}</tbody></table>`;
   }
 
-  /* ───── COUPONS ───── */
+  function rebuildCategoryFilter() {
+    const sel = $('#adminProductCategoryFilter');
+    if (!sel) return;
+    const cats = getCategories();
+    const current = sel.value;
+    sel.innerHTML = '<option value="all">All categories</option>' + cats.map(c => `<option value="${c}"${c === current ? ' selected' : ''}>${c.charAt(0).toUpperCase() + c.slice(1)}</option>`).join('');
+  }
+
   function renderCoupons() {
     const list = getCoupons();
     const wrap = $('#adminCouponsList');
@@ -196,18 +196,13 @@
     </tr>`).join('')}</tbody></table>`;
   }
 
-  /* ───── ANALYTICS ───── */
   function renderAnalytics() {
     const orders = getOrders();
     const delivered = orders.filter(o => o.status === 'delivered' || o.status === 'shipped');
     const completed = orders.filter(o => o.status === 'delivered');
     const all = allProducts();
-
-    /* avg order */
     const avg = delivered.length ? delivered.reduce((s, o) => s + (o.total || 0), 0) / delivered.length : 0;
     $('#analyticsAvgOrder').textContent = money(Math.round(avg));
-
-    /* top product */
     const counts = {};
     delivered.forEach(o => (o.items || []).forEach(item => {
       const pid = item.productId || item.id;
@@ -217,17 +212,11 @@
     const topId = sorted.length ? sorted[0][0] : null;
     const topName = topId ? (all.find(p => p.id === topId)?.name || topId) : '—';
     $('#analyticsTopProduct').textContent = topName;
-
-    /* COD rate */
     const cod = orders.filter(o => o.paymentMethod && o.paymentMethod.includes('Cash')).length;
     $('#analyticsConversion').textContent = orders.length ? Math.round((cod / orders.length) * 100) + '%' : '0%';
-
-    /* repeat rate */
     const phones = [...new Set(orders.filter(o => o.customerPhone).map(o => o.customerPhone))];
     const repeat = phones.filter(ph => orders.filter(o => o.customerPhone === ph).length > 1).length;
     $('#analyticsRepeatRate').textContent = phones.length ? Math.round((repeat / phones.length) * 100) + '%' : '0%';
-
-    /* monthly chart */
     const monthly = {};
     orders.forEach(o => {
       const d = new Date(o.date);
@@ -246,8 +235,6 @@
         return `<div class="chart-bar-wrap" title="${money(val)}"><div class="chart-bar" style="height:${h}%"></div><span class="chart-label">${label}</span></div>`;
       }).join('')}</div>`;
     }
-
-    /* popular products */
     const pop = $('#analyticsPopularProducts');
     if (!sorted.length) { pop.innerHTML = '<p class="empty-state">No data yet</p>'; return; }
     pop.innerHTML = `<table class="admin-table"><thead><tr><th>#</th><th>Product</th><th>Orders</th></tr></thead><tbody>${
@@ -258,7 +245,6 @@
     }</tbody></table>`;
   }
 
-  /* ───── navigation ───── */
   function updateStats() {
     const orders = getOrders();
     const total = orders.reduce((s, o) => s + (o.total || 0), 0);
@@ -283,10 +269,10 @@
     $('#adminLogin').hidden = true;
     $('#adminDashboard').hidden = false;
     updateStats();
+    rebuildCategoryFilter();
     renderDashboard();
   }
 
-  /* ───── login / logout ───── */
   function doLogin() {
     const pwd = $('#adminPassword').value.trim();
     if (pwd === getAdminPassword()) {
@@ -305,7 +291,6 @@
     $('#adminLogin').hidden = false;
   }
 
-  /* ───── product CRUD ───── */
   function openProductForm(product) {
     const form = $('#adminProductForm');
     form.hidden = false;
@@ -315,6 +300,7 @@
     $('#apName').value = product ? product.name : '';
     $('#apNameAr').value = product ? (product.nameAr || '') : '';
     $('#apCategory').value = product ? product.category : 'cars';
+    rebuildCategoryDropdown();
     $('#apTag').value = product ? (product.tag || '') : '';
     $('#apTagAr').value = product ? (product.tagAr || '') : '';
     $('#apImage').value = product ? (product.image || '') : '';
@@ -325,17 +311,38 @@
     $('#apDescription').value = product ? (product.description || '') : '';
     $('#apDescriptionAr').value = product ? (product.descriptionAr || '') : '';
     const preview = $('#apImagePreview');
-    if (preview) preview.src = (product && product.image) ? product.image : '../assets/poster-lab-logo.png';
+    if (preview) {
+      const imgSrc = product && product.image ? product.image : '../assets/poster-lab-logo.png';
+      preview.src = (typeof productImageUrl === 'function') ? productImageUrl(imgSrc) : imgSrc;
+    }
     form.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function rebuildCategoryDropdown() {
+    const cats = getCategories();
+    const sel = $('#apCategory');
+    if (!sel) return;
+    const current = sel.value;
+    sel.innerHTML = cats.map(c => `<option value="${c}"${c === current ? ' selected' : ''}>${c.charAt(0).toUpperCase() + c.slice(1)}</option>`).join('');
+  }
+
   function hideProductForm() { $('#adminProductForm').hidden = true; }
+
+  function handleImageUpload(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      $('#apImage').value = dataUrl;
+      $('#apImagePreview').src = dataUrl;
+    };
+    reader.readAsDataURL(file);
+  }
 
   function saveProduct() {
     const id = $('#apId').value.trim();
     const name = $('#apName').value.trim();
     if (!id || !name) { alert('Product ID and Name are required.'); return; }
-
     const sizesStr = $('#apSizes').value.trim();
     let sizes = { '20x30': 50, '30x40': 60, '40x50': 70, '50x70': 90 };
     if (sizesStr) {
@@ -346,14 +353,12 @@
       });
       if (Object.keys(p).length) sizes = p;
     }
-
     const framesStr = $('#apFrames').value.trim();
     let frames = ['None', 'Black', 'White'];
     if (framesStr) {
       const pf = framesStr.split(',').map(f => f.trim()).filter(Boolean);
       if (pf.length) frames = pf;
     }
-
     const productData = {
       id, name,
       nameAr: $('#apNameAr').value.trim(),
@@ -367,19 +372,26 @@
       description: $('#apDescription').value.trim(),
       descriptionAr: $('#apDescriptionAr').value.trim(),
     };
-
     const custom = getAdminProducts();
     const idx = custom.findIndex(c => c.id === id);
     if (idx >= 0) custom[idx] = productData;
     else custom.push(productData);
     saveAdminProducts(custom);
     hideProductForm();
+    rebuildCategoryFilter();
     renderProducts();
   }
 
   function editProduct(pid) {
     const found = allProducts().find(x => x.id === pid);
     if (found) openProductForm(found);
+  }
+
+  function cloneProduct(pid) {
+    const found = allProducts().find(x => x.id === pid);
+    if (!found) return;
+    const clone = { ...found, id: found.id + '-copy' };
+    openProductForm(clone);
   }
 
   function deleteProduct(pid) {
@@ -394,17 +406,18 @@
     } else {
       saveAdminProducts(getAdminProducts().filter(x => x.id !== pid));
     }
+    rebuildCategoryFilter();
     renderProducts();
   }
 
   function clearAllProducts() {
     if (!confirm('Delete ALL custom products?')) return;
-    if (!confirm('Are you absolutely sure? This cannot be undone.')) return;
+    if (!confirm('Are you absolutely sure?')) return;
     saveAdminProducts([]);
+    rebuildCategoryFilter();
     renderProducts();
   }
 
-  /* ───── coupons CRUD ───── */
   function openCouponForm() {
     const form = $('#adminCouponForm');
     form.hidden = false;
@@ -413,7 +426,6 @@
     $('#acMinOrder').value = '0';
     $('#acMaxUses').value = '100';
   }
-
   function hideCouponForm() { $('#adminCouponForm').hidden = true; }
 
   function saveCoupon() {
@@ -437,7 +449,6 @@
     renderCoupons();
   }
 
-  /* ───── event handling ───── */
   function handleClick(e) {
     const btn = e.target.closest('[data-cmd]');
     if (!btn) return;
@@ -450,6 +461,7 @@
       case 'save-product':   saveProduct();      break;
       case 'cancel-product': hideProductForm();   break;
       case 'edit-product':   editProduct(btn.dataset.pid); break;
+      case 'clone-product':  cloneProduct(btn.dataset.pid); break;
       case 'delete-product': deleteProduct(btn.dataset.pid); break;
       case 'clear-products': clearAllProducts(); break;
       case 'add-coupon':     openCouponForm();   break;
@@ -460,7 +472,6 @@
   }
 
   function handleChange(e) {
-    /* status dropdown */
     if (e.target.matches('.admin-status-select')) {
       const id = e.target.dataset.orderId;
       const status = e.target.value;
@@ -470,15 +481,17 @@
         order.status = status;
         saveOrders(orders);
         updateStats();
-        const ordersTab = $('#adminTabOrders');
-        const dashTab = $('#adminTabDashboard');
-        if (ordersTab && !ordersTab.hidden) renderOrders();
-        if (dashTab && !dashTab.hidden) renderDashboard();
+        if ($('#adminTabOrders') && !$('#adminTabOrders').hidden) renderOrders();
+        if ($('#adminTabDashboard') && !$('#adminTabDashboard').hidden) renderDashboard();
       }
     }
-    /* filters */
     if (e.target.matches('#adminOrderStatusFilter') || e.target.matches('#adminOrderSearch')) renderOrders();
     if (e.target.matches('#adminProductSearch') || e.target.matches('#adminProductCategoryFilter')) renderProducts();
+    if (e.target.matches('#apImageUpload')) {
+      const file = e.target.files[0];
+      if (file) handleImageUpload(file);
+      e.target.value = '';
+    }
   }
 
   function handleInput(e) {
@@ -486,7 +499,6 @@
     if (e.target.matches('#adminProductSearch')) renderProducts();
   }
 
-  /* ───── tab nav click (no data-cmd) ───── */
   function handleNavClick(e) {
     const btn = e.target.closest('[data-admin-tab]');
     if (!btn) return;
@@ -494,20 +506,15 @@
     showTab(btn.dataset.adminTab);
   }
 
-  /* ───── keyboard ───── */
   function handleKeydown(e) {
     if (e.key !== 'Enter') return;
-    const login = $('#adminLogin');
-    const dash = $('#adminDashboard');
-    if (login && !login.hidden) { doLogin(); }
+    if ($('#adminLogin') && !$('#adminLogin').hidden) doLogin();
   }
 
-  /* ───── init ───── */
   function init() {
     log('init');
     try {
       if (isLoggedIn()) showDashboard();
-
       const app = $('#adminApp');
       if (app) {
         app.addEventListener('click', handleClick);
