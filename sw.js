@@ -5,7 +5,7 @@ const ASSETS = [
   './index.html',
   './product.html',
   './our-work.html',
-  './admin.html',
+  './faq.html',
   './styles.css',
   './admin.css',
   './football-products.js',

@@ -119,7 +119,7 @@ const translations = {
     ourWorkTitle: "Our Work",
     ourWorkEyebrow: "Real quality captures",
     ourWorkSubtitle: "See the print finish, frame depth, and room styling from real photos.",
-    ourWorkButton: "Watch real quality video",
+    ourWorkButton: "Watch our real quality work",
     ourWorkGalleryLabel: "Captured photos",
     ourWorkReelLabel: "Quality reel",
     clearCart: "Clear cart",
@@ -633,7 +633,12 @@ function getProduct(id) {
 
 function productImageUrl(path) {
   if (!path || path.startsWith('data:') || path.startsWith('blob:')) return path;
-  return new URL(path.replace(/#/g, '%23').replace(/ /g, '%20'), window.location.href).href;
+  const clean = path.replace(/#/g, '%23').replace(/ /g, '%20');
+  // Resolve relative to site root when on subdirectory pages (e.g., admin/)
+  const base = window.location.pathname.includes('/admin/')
+    ? window.location.href.replace(/\/admin\/.*$/, '/')
+    : window.location.href;
+  return new URL(clean, base).href;
 }
 
 function displayImageForItem(product, item = null) {
@@ -669,7 +674,7 @@ function openSizeGuide() {
     modal.innerHTML = `
       <div class="size-guide-preview">
         <button class="icon-button size-guide-close" type="button" data-size-guide-close aria-label="Close size guide">x</button>
-        <img src="assets/size-guide.png" alt="${t("sizeGuideTitle")}">
+        <img src="${productImageUrl('assets/size-guide.png')}" alt="${t("sizeGuideTitle")}">
       </div>
     `;
     document.body.appendChild(modal);
@@ -1226,7 +1231,7 @@ function renderProducts() {
       html += `    <article class="product-card" style="--delay: ${idx * 65}ms">\n`;
       html += `      <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
       html += `        <span class="frame-preview frame-preview-black"></span>\n`;
-      html += `        <img src="${productImageUrl(product.image)}" loading="${idx < 3 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 3 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">\n`;
+      html += `        <img src="${productImageUrl(product.image)}" loading="${idx < 3 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 3 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
       html += `        <span class="product-tag">${tag}</span>\n`;
       if (galleryBadge(product)) {
         html += `        <span class="product-gallery-badge">${galleryBadge(product)}</span>\n`;
@@ -1361,7 +1366,7 @@ function catCardHtml(items, startIdx, lang) {
     let card = `  <article class="product-card" style="--delay: ${idx * 20}ms">\n`;
     card += `    <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
     card += `      <span class="frame-preview frame-preview-black"></span>\n`;
-    card += `      <img src="${productImageUrl(product.image)}" loading="${idx < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 6 ? "high" : "auto"}" alt="${name} ${lang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">\n`;
+    card += `      <img src="${productImageUrl(product.image)}" loading="${idx < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 6 ? "high" : "auto"}" alt="${name} ${lang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
     card += `      <span class="product-tag">${tag}</span>\n`;
     if (galleryBadge(product)) {
       card += `      <span class="product-gallery-badge">${galleryBadge(product)}</span>\n`;
@@ -1483,7 +1488,7 @@ function renderOurWork() {
 
   ourWorkGrid.innerHTML = OUR_WORK_MEDIA.map((media, index) => `
     <button type="button" class="our-work-tile" data-work-slide="${index}" aria-label="${media.title}">
-      <img src="${media.src}" loading="lazy" decoding="async" alt="${media.title}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
+      <img src="${media.src}" loading="lazy" decoding="async" alt="${media.title}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
     </button>
   `).join("");
 
@@ -1517,7 +1522,7 @@ function renderDetail(productId) {
     productDetail.innerHTML = `
       <article class="detail product-detail-layout">
       <div class="detail-gallery">
-        <div class="detail-main-image frame-${state.detailFrame.toLowerCase()}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <img id="detailMainImage" src="${previewImage}" loading="eager" decoding="async" fetchpriority="high" alt="${name} ${currentLang === "ar" ? "معرض البوستر" : "framed poster gallery image"}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
+        <div class="detail-main-image frame-${state.detailFrame.toLowerCase()}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <img id="detailMainImage" src="${previewImage}" loading="eager" decoding="async" fetchpriority="high" alt="${name} ${currentLang === "ar" ? "معرض البوستر" : "framed poster gallery image"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
         </div>
         ${product.gallery && product.gallery.length > 1 ? `
           <div class="thumb-row">
@@ -1526,7 +1531,7 @@ function renderDetail(productId) {
               const isActive = (rawPreview === image) || (rawPreview && rawPreview.startsWith('data:') && image === rawPreview);
               return `
               <button type="button" class="${isActive ? "is-active" : ""}" data-gallery-image="${imgSrc}" aria-label="Show gallery image">
-                <img src="${imgSrc}" loading="lazy" decoding="async" alt="${name} thumbnail" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
+                <img src="${imgSrc}" loading="lazy" decoding="async" alt="${name} thumbnail" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
               </button>
             `}).join("")}
           </div>
@@ -1670,7 +1675,7 @@ function renderCart() {
     const name = getProductName(product);
     return `
       <article class="cart-item">
-        <img src="${displayImageForItem(product, item)}" alt="${name}" onerror="this.onerror=null;this.src='${POSTER_FALLBACK_IMAGE}'">
+        <img src="${displayImageForItem(product, item)}" alt="${name}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
         <div>
           <h3>${name}</h3>
           <p>${item.size} ${currentLang === "ar" ? "سم" : "cm"} / ${getFrameOptionLabel(item.frame)}</p>
@@ -2323,7 +2328,7 @@ document.addEventListener("error", (event) => {
   if (event.target.tagName === "IMG" && !event.target.hasAttribute("data-error-handled")) {
     event.target.setAttribute("data-error-handled", "");
     if (event.target.src !== productImageUrl(POSTER_FALLBACK_IMAGE)) {
-      event.target.src = POSTER_FALLBACK_IMAGE;
+      event.target.src = productImageUrl(POSTER_FALLBACK_IMAGE);
     } else {
       event.target.alt = "Image unavailable";
       event.target.style.display = "none";
@@ -2498,7 +2503,8 @@ window.addEventListener("resize", () => {
 // Register Service Worker (deferred but not blocking)
 if ('serviceWorker' in navigator) {
   setTimeout(() => {
-    navigator.serviceWorker.register('sw.js')
+    const swPath = window.location.pathname.includes('/admin/') ? '../sw.js' : 'sw.js';
+    navigator.serviceWorker.register(swPath)
       .then((reg) => console.log('Service Worker registered:', reg))
       .catch((err) => console.error('Service Worker registration failed:', err));
   }, 0);
