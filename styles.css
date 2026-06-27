@@ -1657,7 +1657,7 @@ textarea:focus {
   border-bottom: none;
 }
 .category-section .section-heading {
-  padding: 0 clamp(16px, 4vw, 42px);
+  padding: 0 clamp(8px, 1.5vw, 16px);
   animation: slide-in-left 500ms ease both;
   animation-delay: calc(var(--section-order, 0) * 140ms + 60ms);
   display: flex;
@@ -1680,18 +1680,13 @@ textarea:focus {
 .category-scroll {
   display: flex;
   gap: 10px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 clamp(16px, 4vw, 42px) 8px;
-  scrollbar-width: none;
+  overflow-x: hidden;
+  padding: 0 clamp(8px, 1.5vw, 16px) 8px;
   cursor: grab;
   animation: fade-in 500ms ease both;
   animation-delay: calc(var(--section-order, 0) * 140ms + 200ms);
   user-select: none;
-  overscroll-behavior: contain;
-  will-change: scroll-position;
+  touch-action: pan-y pinch-zoom;
 }
 .category-scroll::-webkit-scrollbar {
   display: none;
