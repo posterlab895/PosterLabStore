@@ -56,7 +56,9 @@ const ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
+      return Promise.allSettled(ASSETS.map((url) =>
+        cache.add(url).catch(() => {})
+      ));
     })
   );
   self.skipWaiting();
@@ -72,14 +74,17 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    }).then(() => self.clients.claim())
+    }).then(() => self.clients.claim()).catch(() => {})
   );
 });
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  const requestUrl = new URL(event.request.url);
+
+  let requestUrl;
+  try { requestUrl = new URL(event.request.url); } catch { return; }
   if (requestUrl.protocol !== 'http:' && requestUrl.protocol !== 'https:') return;
+
   const isLocalImage = requestUrl.origin === self.location.origin && requestUrl.pathname.includes('/assets/');
 
   if (isLocalImage) {
@@ -88,42 +93,42 @@ self.addEventListener('fetch', (event) => {
         return cache.match(event.request).then((cachedResponse) => {
           if (cachedResponse) return cachedResponse;
           return fetch(event.request).then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              cache.put(event.request, networkResponse.clone());
+            if (networkResponse && networkResponse.ok) {
+              cache.put(event.request, networkResponse.clone()).catch(() => {});
             }
             return networkResponse;
           });
         });
-      })
+      }).catch(() => fetch(event.request))
     );
     return;
   }
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        fetch(event.request).then((networkResponse) => {
-          if (networkResponse.status === 200) {
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, networkResponse);
-            }).catch(() => {});
-          }
-        }).catch(() => {});
-        return cachedResponse;
-      }
-
-      return fetch(event.request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200) {
-          return networkResponse;
+    (async () => {
+      try {
+        const cachedResponse = await caches.match(event.request).catch(() => null);
+        if (cachedResponse) {
+          fetch(event.request).then((networkResponse) => {
+            if (networkResponse && networkResponse.ok) {
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(event.request, networkResponse);
+              }).catch(() => {});
+            }
+          }).catch(() => {});
+          return cachedResponse;
         }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        }).catch(() => {});
+        const networkResponse = await fetch(event.request).catch(() => new Response('', { status: 503 }));
+        if (networkResponse && networkResponse.ok) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          }).catch(() => {});
+        }
         return networkResponse;
-      });
-    }).catch(() => {
-      return fetch(event.request);
-    })
+      } catch {
+        return new Response('', { status: 503 });
+      }
+    })().catch(() => new Response('', { status: 503 }))
   );
 });
