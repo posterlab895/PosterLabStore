@@ -1210,7 +1210,7 @@ function renderProducts() {
   });
 
   let html = "";
-  categoryOrder.forEach(cat => {
+  categoryOrder.forEach((cat, catIdx) => {
     const items = groups[cat];
     if (!items || !items.length) return;
     const meta = categoryMeta[cat] || { label: cat, icon: "" };
@@ -1220,7 +1220,7 @@ function renderProducts() {
     const showAll = items.length > 6;
     const visible = showAll ? items.slice(0, 6) : items;
 
-    html += `<section class="category-section" data-cat="${cat}">\n`;
+    html += `<section class="category-section" style="--section-order: ${catIdx}" data-cat="${cat}">\n`;
     html += `  <div class="section-heading">\n`;
     html += `    <div style="display:flex;align-items:center;gap:8px">\n`;
     html += `      <span style="font-size:1.4rem">${meta.icon}</span>\n`;
@@ -2385,12 +2385,16 @@ function buildNavMenu() {
     <a href="index.html" data-nav-close style="font-size:0.85rem;color:var(--muted)">${lang === "ar" ? "© Poster Lab Store" : "© Poster Lab Store"}</a>
   `;
 
-  // Wire nav search input
+  // Wire nav search input (debounced)
   const navSearch = body.querySelector("#navSearchInput");
   if (navSearch) {
+    let searchTimer;
     navSearch.addEventListener("input", (e) => {
       state.search = e.target.value;
-      if (window.renderProducts) renderProducts();
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        if (window.renderProducts) renderProducts();
+      }, 200);
     });
   }
 

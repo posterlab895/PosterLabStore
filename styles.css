@@ -215,14 +215,16 @@ button:disabled:hover {
   z-index: 50;
   display: none;
   justify-content: start;
-  background: rgba(0, 0, 0, 0.48);
+  background: rgba(0, 0, 0, 0);
 }
 .nav-drawer.is-open {
   display: flex;
+  animation: overlay-in 180ms ease both;
 }
 .nav-drawer .drawer-panel {
   width: min(100%, 300px);
   animation-name: drawer-in-left;
+  will-change: transform;
 }
 .nav-drawer-body {
   display: grid;
@@ -298,6 +300,9 @@ button:disabled:hover {
 [dir="rtl"] .nav-drawer-body .nav-sub {
   padding-left: 0;
   padding-right: 20px;
+}
+[dir="rtl"] .category-section .section-heading {
+  animation-name: slide-in-right;
 }
 
 .header-actions {
@@ -486,6 +491,15 @@ textarea:focus {
   padding: clamp(28px, 5vw, 62px) clamp(16px, 4vw, 42px);
   content-visibility: auto;
   contain-intrinsic-size: 600px;
+  animation: fade-in 400ms ease both;
+}
+.detail-gallery {
+  animation: slide-up 400ms ease both;
+  animation-delay: 80ms;
+}
+.detail-copy {
+  animation: slide-up 400ms ease both;
+  animation-delay: 150ms;
 }
 
 .section-heading {
@@ -910,6 +924,7 @@ textarea:focus {
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: var(--small-shadow);
+  animation: slide-up 400ms ease both;
 }
 
 .our-work-hero h1 {
@@ -989,6 +1004,8 @@ textarea:focus {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+  animation: fade-in 500ms ease both;
+  animation-delay: 150ms;
 }
 
 .our-work-tile {
@@ -999,6 +1016,12 @@ textarea:focus {
   cursor: pointer;
   overflow: hidden;
   box-shadow: var(--small-shadow);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.our-work-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
 }
 
 .our-work-tile img {
@@ -1116,11 +1139,12 @@ textarea:focus {
   z-index: 50;
   display: none;
   justify-content: end;
-  background: rgba(0, 0, 0, 0.48);
+  background: rgba(0, 0, 0, 0);
 }
 
 .cart-drawer.is-open {
   display: flex;
+  animation: overlay-in 180ms ease both;
 }
 
 .drawer-panel {
@@ -1131,6 +1155,7 @@ textarea:focus {
   padding: 22px;
   box-shadow: -22px 0 70px rgba(0, 0, 0, 0.28);
   animation: drawer-in 220ms ease both;
+  will-change: transform;
 }
 
 .drawer-header {
@@ -1525,6 +1550,76 @@ textarea:focus {
   min-height: 50px;
 }
 
+/* ── Interactive button press ── */
+.icon-button:active,
+.cart-button:active,
+.hamburger:active,
+.header-search-icon:active,
+.lang-toggle:active,
+.theme-toggle:active,
+.drawer-header .icon-button:active {
+  transform: scale(0.9);
+}
+
+/* ── Cart item entrance ── */
+.cart-item {
+  animation: slide-up 300ms ease both;
+}
+.cart-item:first-child { animation-delay: 30ms; }
+.cart-item:nth-child(2) { animation-delay: 60ms; }
+.cart-item:nth-child(3) { animation-delay: 90ms; }
+.cart-item:nth-child(4) { animation-delay: 120ms; }
+
+/* ── Single-category grid items ── */
+.full-cat-grid .product-card {
+  animation: card-in 460ms ease both;
+  animation-delay: calc(var(--idx, 0) * 30ms);
+}
+
+/* ── Single-category header ── */
+.single-cat-header {
+  animation: slide-up 400ms ease both;
+}
+
+/* ── Load-more info ── */
+.cat-load-info {
+  animation: fade-in 300ms ease both;
+}
+
+/* ── View-all tile hover ── */
+.view-all-tile a {
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.view-all-tile a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--small-shadow);
+}
+
+/* ── Product tag entrance ── */
+.product-tag {
+  animation: fade-in 300ms ease both;
+  animation-delay: calc(var(--delay, 0ms) + 200ms);
+}
+
+@keyframes overlay-in {
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.48); }
+}
+
+@keyframes section-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
@@ -1553,12 +1648,18 @@ textarea:focus {
 .category-section {
   padding: 28px 0 12px;
   border-bottom: 1px solid var(--line);
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
+  animation: section-in 500ms ease both;
+  animation-delay: calc(var(--section-order, 0) * 140ms);
 }
 .category-section:last-child {
   border-bottom: none;
 }
 .category-section .section-heading {
   padding: 0 clamp(16px, 4vw, 42px);
+  animation: slide-in-left 500ms ease both;
+  animation-delay: calc(var(--section-order, 0) * 140ms + 60ms);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1586,7 +1687,11 @@ textarea:focus {
   padding: 0 clamp(16px, 4vw, 42px) 8px;
   scrollbar-width: none;
   cursor: grab;
+  animation: fade-in 500ms ease both;
+  animation-delay: calc(var(--section-order, 0) * 140ms + 200ms);
   user-select: none;
+  overscroll-behavior: contain;
+  will-change: scroll-position;
 }
 .category-scroll::-webkit-scrollbar {
   display: none;
@@ -2167,6 +2272,7 @@ textarea:focus {
   background: var(--surface);
   box-shadow: var(--small-shadow);
   margin-bottom: 24px;
+  animation: slide-up 400ms ease both;
 }
 .faq-hero h1 {
   margin: 0;
@@ -2182,6 +2288,8 @@ textarea:focus {
   display: grid;
   gap: 12px;
   margin-bottom: 32px;
+  animation: fade-in 500ms ease both;
+  animation-delay: 100ms;
 }
 .faq-item {
   border: 1px solid var(--line);
@@ -2189,6 +2297,16 @@ textarea:focus {
   background: var(--surface);
   overflow: hidden;
 }
+.faq-item {
+  animation: slide-up 400ms ease both;
+}
+.faq-item:nth-child(1) { animation-delay: 50ms; }
+.faq-item:nth-child(2) { animation-delay: 100ms; }
+.faq-item:nth-child(3) { animation-delay: 150ms; }
+.faq-item:nth-child(4) { animation-delay: 200ms; }
+.faq-item:nth-child(5) { animation-delay: 250ms; }
+.faq-item:nth-child(6) { animation-delay: 300ms; }
+.faq-item:nth-child(7) { animation-delay: 350ms; }
 .faq-question {
   padding: 16px 20px;
   font-weight: 600;
@@ -2228,6 +2346,7 @@ textarea:focus {
   color: var(--muted);
   line-height: 1.7;
   font-size: 0.95rem;
+  animation: fade-in 200ms ease both;
 }
 
 .faq-contact {

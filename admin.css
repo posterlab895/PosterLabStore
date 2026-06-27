@@ -8,6 +8,7 @@
 .admin-login-card {
   display: grid;
   gap: 16px;
+  animation: slide-up 400ms ease both;
   width: min(100%, 400px);
   padding: 40px 30px;
   border: 1px solid var(--line);
