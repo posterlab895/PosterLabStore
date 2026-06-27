@@ -2491,8 +2491,6 @@ window.addEventListener("resize", () => {
   }
   if (ourWorkGrid) renderOurWork();
   renderCart();
-  // Hide loading screen now that main content is rendered
-  hideLoader();
   await initializeCartImages();
   // Setup coupon input real-time check
   const couponInput = document.querySelector("[data-coupon-input]");
