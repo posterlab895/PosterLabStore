@@ -240,14 +240,19 @@ button:disabled:hover {
 }
 .nav-search-input {
   width: 100%;
-  min-height: 42px;
-  padding: 0 12px;
+  min-height: 44px;
+  padding: 0 14px;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 999px;
   background: var(--field-bg);
   color: var(--text);
   font-size: 0.9rem;
   outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.nav-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 .nav-search-input::placeholder {
   color: var(--muted);
@@ -270,11 +275,17 @@ button:disabled:hover {
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  transition: background 140ms ease;
+  transition: background 200ms ease, padding 200ms ease;
 }
 .nav-drawer-body a:hover,
 .nav-drawer-body button:hover {
   background: var(--surface-2);
+  padding-left: 26px;
+}
+[dir="rtl"] .nav-drawer-body a:hover,
+[dir="rtl"] .nav-drawer-body button:hover {
+  padding-left: 20px;
+  padding-right: 26px;
 }
 .nav-drawer-body .nav-collection-toggle {
   font-weight: 700;
@@ -423,7 +434,7 @@ label span,
 .primary-link,
 .checkout-button,
 .detail-add {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   color: var(--accent-text);
   box-shadow: var(--small-shadow);
 }
@@ -1341,9 +1352,9 @@ textarea:focus {
 .confirmation-summary {
   display: grid;
   gap: 8px;
-  padding: 14px;
+  padding: 16px;
   border: 1px solid color-mix(in srgb, var(--accent) 36%, var(--line));
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   background: color-mix(in srgb, var(--accent) 9%, var(--surface));
 }
 
@@ -1361,9 +1372,9 @@ textarea:focus {
 .confirmation-methods article {
   display: grid;
   gap: 8px;
-  padding: 16px;
+  padding: 20px;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   background: var(--surface);
   text-align: center;
 }
@@ -1474,16 +1485,16 @@ textarea:focus {
 }
 
 .toast-notification .toast {
-  padding: 13px 16px;
+  padding: 14px 20px;
   border-radius: 999px;
   background: var(--text-strong);
   color: var(--bg);
-  box-shadow: var(--small-shadow);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   font-weight: 900;
   text-align: center;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 180ms ease, transform 180ms ease;
+  transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
 }
 
 .toast-notification .toast.show {

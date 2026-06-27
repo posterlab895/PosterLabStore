@@ -79,6 +79,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const requestUrl = new URL(event.request.url);
+  if (requestUrl.protocol !== 'http:' && requestUrl.protocol !== 'https:') return;
   const isLocalImage = requestUrl.origin === self.location.origin && requestUrl.pathname.includes('/assets/');
 
   if (isLocalImage) {
@@ -101,12 +102,11 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Return cached resource, update cache in background
         fetch(event.request).then((networkResponse) => {
           if (networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, networkResponse);
-            });
+            }).catch(() => {});
           }
         }).catch(() => {});
         return cachedResponse;
@@ -119,9 +119,11 @@ self.addEventListener('fetch', (event) => {
         const responseToCache = networkResponse.clone();
         caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, responseToCache);
-        });
+        }).catch(() => {});
         return networkResponse;
       });
+    }).catch(() => {
+      return fetch(event.request);
     })
   );
 });
