@@ -1739,13 +1739,18 @@ textarea:focus {
 .category-scroll {
   display: flex;
   gap: 10px;
-  overflow-x: hidden;
+  overflow-x: auto;
   padding: 0 clamp(8px, 1.5vw, 16px) 8px;
+  padding-bottom: 12px;
+  margin-bottom: -4px;
   cursor: grab;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   animation: fade-in 500ms ease both;
   animation-delay: calc(var(--section-order, 0) * 140ms + 200ms);
   user-select: none;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
 }
 .category-scroll::-webkit-scrollbar {
   display: none;
@@ -2025,18 +2030,32 @@ textarea:focus {
 
 @media (max-width: 560px) {
   .site-header {
+    gap: 6px;
+    padding-inline: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .brand {
     gap: 8px;
-    padding-inline: 10px;
+    min-width: 0;
   }
 
   .brand-mark {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
   }
 
   .brand small {
     display: none;
+  }
+
+  .brand > span:last-child {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .brand strong {
@@ -2050,9 +2069,7 @@ textarea:focus {
     gap: 6px;
   }
 
-  .header-actions>a,
-  .theme-toggle span:last-child,
-  .cart-button span {
+  .header-actions>a {
     display: none;
   }
 

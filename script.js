@@ -1313,12 +1313,7 @@ function wireDragScroll() {
     el.addEventListener("mouseleave", pointerUp);
     el.addEventListener("dragstart", e => e.preventDefault());
 
-    // Touch
-    el.addEventListener("touchstart", e => { pointerDown(e.touches[0].clientX); }, { passive: true });
-    el.addEventListener("touchmove", e => { pointerMove(e.touches[0].clientX); }, { passive: true });
-    el.addEventListener("touchend", pointerUp, { passive: true });
-
-    // Wheel: only handle horizontal scroll; vertical passes through natively
+    // Wheel: only handle horizontal scroll; vertical and touch pass through natively
     el.addEventListener("wheel", e => {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault();
