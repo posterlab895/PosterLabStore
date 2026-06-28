@@ -341,6 +341,51 @@ if (typeof carProducts !== 'undefined') {
 if (typeof clubProducts !== 'undefined') {
   products.push(...clubProducts);
 }
+if (typeof movieArtistProducts !== 'undefined') {
+  products.push(...movieArtistProducts);
+}
+if (typeof albumArtistProducts !== 'undefined') {
+  products.push(...albumArtistProducts);
+}
+if (typeof gymProducts !== 'undefined') {
+  products.push(...gymProducts);
+}
+if (typeof artProducts !== 'undefined') {
+  products.push(...artProducts);
+}
+if (typeof animeProducts !== 'undefined') {
+  products.push(...animeProducts);
+}
+if (typeof girlsProducts !== 'undefined') {
+  products.push(...girlsProducts);
+}
+if (typeof gamesProducts !== 'undefined') {
+  products.push(...gamesProducts);
+}
+if (typeof islamicProducts !== 'undefined') {
+  products.push(...islamicProducts);
+}
+if (typeof citiesProducts !== 'undefined') {
+  products.push(...citiesProducts);
+}
+if (typeof quotesProducts !== 'undefined') {
+  products.push(...quotesProducts);
+}
+if (typeof nbaProducts !== 'undefined') {
+  products.push(...nbaProducts);
+}
+if (typeof meemesProducts !== 'undefined') {
+  products.push(...meemesProducts);
+}
+if (typeof pharaonicProducts !== 'undefined') {
+  products.push(...pharaonicProducts);
+}
+if (typeof rapSceneProducts !== 'undefined') {
+  products.push(...rapSceneProducts);
+}
+if (typeof jordanProducts !== 'undefined') {
+  products.push(...jordanProducts);
+}
 
 const OUR_WORK_MEDIA = [
   {
@@ -403,7 +448,7 @@ function lsGet(key, fallback) {
   catch { return fallback; }
 }
 function lsSet(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
+  try { localStorage.setItem(key, JSON.stringify(data)); } catch {}
 }
 
 function getUsers() { return lsGet(LOCAL_STORAGE_USERS_KEY, []); }
@@ -1200,12 +1245,29 @@ function renderProducts() {
 
   if (!list.length) {
     container.innerHTML = `<div class="empty-state" style="padding:60px clamp(16px,4vw,42px)"><strong>${t("noProductsFound")}</strong><p>${t("tryDifferentSearch")}</p></div>`;
+    const pillsEl = document.querySelector("[data-cat-pills]");
+    if (pillsEl) pillsEl.innerHTML = "";
     return;
   }
 
   // Group by category preserving defined order
-  const categoryOrder = ["custom", "cars", "football", "clubs"];
+  const categoryOrder = ["custom", "anime", "art", "album", "gym", "islamic", "girls", "games", "cities", "quotes", "nba", "meemes", "pharaonic", "rap", "jordan", "movie", "cars", "football", "clubs"];
   const categoryMeta = {
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬" },
+    nba:      { label: "NBA", icon: "🏀" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬" },
     cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
     football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
     clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
@@ -1246,7 +1308,7 @@ function renderProducts() {
       const desc = currentLang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
       const sceneImage = sceneImageForIndex(idx);
 
-      html += `    <article class="product-card" style="--delay: ${idx * 65}ms">\n`;
+      html += `    <article class="product-card" style="--delay: ${idx * 30}ms">\n`;
       html += `      <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
       html += `        <span class="frame-preview frame-preview-black"></span>\n`;
       html += `        <img src="${productImageUrl(product.image)}" loading="${idx < 3 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 3 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
@@ -1279,21 +1341,148 @@ function renderProducts() {
   });
 
   container.innerHTML = html;
+  renderCatPills();
   wireDragScroll();
+}
+
+function renderCatPills() {
+  const pillsEl = document.querySelector("[data-cat-pills]");
+  if (!pillsEl) return;
+  const currentLang = state.lang || "en";
+  const list = filteredProducts();
+
+  const categoryOrder = ["custom", "anime", "art", "album", "gym", "islamic", "girls", "games", "cities", "quotes", "nba", "meemes", "pharaonic", "rap", "jordan", "movie", "cars", "football", "clubs"];
+  const categoryMeta = {
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬" },
+    nba:      { label: "NBA", icon: "🏀" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬" },
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
+    custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
+  };
+
+  const groups = {};
+  list.forEach(p => {
+    const cat = p.category || "other";
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(p);
+  });
+
+  let html = "";
+  categoryOrder.forEach((cat, idx) => {
+    const items = groups[cat];
+    if (!items || !items.length) return;
+    const meta = categoryMeta[cat] || { label: cat, icon: "" };
+    html += `<button class="cat-pill" data-cat-pill="${cat}" type="button">`;
+    html += `  <span class="cat-pill-circle">${meta.icon}</span>`;
+    html += `  <span class="cat-pill-label">${meta.label}</span>`;
+    html += `</button>`;
+  });
+
+  pillsEl.innerHTML = html;
+
+  pillsEl.querySelectorAll(".cat-pill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const cat = btn.dataset.catPill;
+      const target = document.querySelector(`[data-cat="${cat}"]`);
+      if (target) {
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    });
+  });
+
+  watchCatPills();
+  wireCatPillsDrag();
+}
+
+let _catPillsWired = false;
+
+function wireCatPillsDrag() {
+  const pillsEl = document.querySelector("[data-cat-pills]");
+  if (!pillsEl || _catPillsWired) return;
+  _catPillsWired = true;
+
+  let down = false, startX = 0, prevX = 0, dragged = false, rafId = null, pendingX = null;
+
+  function applyScroll(clientX) {
+    if (!down) return;
+    const dx = clientX - prevX;
+    prevX = clientX;
+    if (Math.abs(clientX - startX) > 3) dragged = true;
+    pillsEl.scrollLeft -= dx;
+  }
+
+  function rafFlush() {
+    rafId = null;
+    if (pendingX !== null) {
+      applyScroll(pendingX);
+      pendingX = null;
+    }
+  }
+
+  function pd(clientX) { down = true; dragged = false; startX = prevX = clientX; pendingX = null; pillsEl.classList.add("dragging"); }
+  function pm(clientX) {
+    if (!down) return;
+    pendingX = clientX;
+    if (!rafId) rafId = requestAnimationFrame(rafFlush);
+  }
+  function pu() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    if (pendingX !== null) applyScroll(pendingX);
+    down = false; pendingX = null;
+    pillsEl.classList.remove("dragging");
+  }
+  pillsEl.addEventListener("mousedown", e => { if (e.button !== 0) return; pd(e.clientX); });
+  pillsEl.addEventListener("mousemove", e => pm(e.clientX));
+  pillsEl.addEventListener("mouseup", pu);
+  pillsEl.addEventListener("mouseleave", pu);
+  pillsEl.addEventListener("dragstart", e => e.preventDefault());
+  pillsEl.addEventListener("touchstart", e => pd(e.touches[0].clientX), { passive: true });
+  pillsEl.addEventListener("touchmove", e => pm(e.touches[0].clientX), { passive: true });
+  pillsEl.addEventListener("touchend", pu, { passive: true });
+  pillsEl.addEventListener("click", e => { if (dragged) { e.stopPropagation(); e.preventDefault(); } }, true);
+}
+
+function watchCatPills() {
+  const pills = document.querySelectorAll(".cat-pill");
+  if (!pills.length) return;
+  const sections = document.querySelectorAll(".category-section");
+  if (!sections.length) return;
+
+  if (catPillsObserver) catPillsObserver.disconnect();
+
+  catPillsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const cat = entry.target.dataset.cat;
+        pills.forEach(p => p.classList.toggle("active", p.dataset.catPill === cat));
+      }
+    });
+  }, { rootMargin: "-60px 0px -60% 0px" });
+
+  sections.forEach(s => catPillsObserver.observe(s));
 }
 
 function wireDragScroll() {
   document.querySelectorAll(".category-scroll").forEach(el => {
-    let down = false, startX = 0, prevX = 0, dragged = false;
+    let down = false, startX = 0, prevX = 0, dragged = false, rafId = null, pendingX = null;
 
-    function pointerDown(clientX) {
-      down = true;
-      dragged = false;
-      startX = prevX = clientX;
-      el.classList.add("dragging");
-    }
-
-    function pointerMove(clientX) {
+    function applyScroll(clientX) {
       if (!down) return;
       const dx = clientX - prevX;
       prevX = clientX;
@@ -1301,8 +1490,26 @@ function wireDragScroll() {
       el.scrollLeft -= dx;
     }
 
+    function rafFlush() {
+      rafId = null;
+      if (pendingX !== null) { applyScroll(pendingX); pendingX = null; }
+    }
+
+    function pointerDown(clientX) {
+      down = true; dragged = false; startX = prevX = clientX; pendingX = null;
+      el.classList.add("dragging");
+    }
+
+    function pointerMove(clientX) {
+      if (!down) return;
+      pendingX = clientX;
+      if (!rafId) rafId = requestAnimationFrame(rafFlush);
+    }
+
     function pointerUp() {
-      down = false;
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      if (pendingX !== null) applyScroll(pendingX);
+      down = false; pendingX = null;
       el.classList.remove("dragging");
     }
 
@@ -1313,7 +1520,12 @@ function wireDragScroll() {
     el.addEventListener("mouseleave", pointerUp);
     el.addEventListener("dragstart", e => e.preventDefault());
 
-    // Wheel: only handle horizontal scroll; vertical and touch pass through natively
+    // Touch
+    el.addEventListener("touchstart", e => pointerDown(e.touches[0].clientX), { passive: true });
+    el.addEventListener("touchmove", e => pointerMove(e.touches[0].clientX), { passive: true });
+    el.addEventListener("touchend", pointerUp, { passive: true });
+
+    // Wheel: only handle horizontal scroll; vertical passes through natively
     el.addEventListener("wheel", e => {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault();
@@ -1334,10 +1546,15 @@ const CAT_PAGE_SIZE = 30;
 let catLoadedCount = 0;
 let catItems = [];
 let catParam = null;
+let catPillsObserver = null;
+let _scrollYLock = null;
 
 function renderSingleCategory(cat) {
   const container = document.querySelector("#categorySections");
   if (!container) return;
+  const pillsEl = document.querySelector("[data-cat-pills]");
+  if (pillsEl) pillsEl.innerHTML = "";
+  if (catPillsObserver) catPillsObserver.disconnect();
   const currentLang = state.lang || "en";
   catItems = products.filter(p => p.category === cat);
   catParam = cat;
@@ -1347,6 +1564,21 @@ function renderSingleCategory(cat) {
   }
 
   const meta = {
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬" },
+    nba:      { label: "NBA", icon: "🏀" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬" },
     cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
     football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
     clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
@@ -2359,10 +2591,25 @@ function buildNavMenu() {
   if (!body) return;
   const lang = state.lang || "en";
   const cats = [
-    { id: "custom",   label: { en: "Custom upload", ar: "تصميم خاص" } },
-    { id: "cars",     label: { en: "Cars",          ar: "سيارات" } },
-    { id: "football", label: { en: "Football",      ar: "كرة قدم" } },
-    { id: "clubs",    label: { en: "Clubs",          ar: "أندية" } }
+    { id: "custom",   label: { en: "Custom upload",    ar: "تصميم خاص" } },
+    { id: "anime",    label: { en: "Anime",           ar: "أنمي" } },
+    { id: "art",      label: { en: "Art",             ar: "فن" } },
+    { id: "album",    label: { en: "Album Artist",     ar: "ألبوم فنان" } },
+    { id: "gym",      label: { en: "Gym",              ar: "جيم" } },
+    { id: "islamic",  label: { en: "Islamic",          ar: "إسلامي" } },
+    { id: "girls",    label: { en: "Girls",            ar: "فتيات" } },
+    { id: "games",    label: { en: "Games",            ar: "ألعاب" } },
+    { id: "cities",   label: { en: "Cities",           ar: "مدن" } },
+    { id: "quotes",   label: { en: "Quotes",           ar: "اقتباسات" } },
+    { id: "nba",      label: { en: "NBA",              ar: "NBA" } },
+    { id: "meemes",   label: { en: "Memes",            ar: "ميمات" } },
+    { id: "pharaonic",label: { en: "Pharaonic",        ar: "فرعوني" } },
+    { id: "rap",      label: { en: "Rap Scene",        ar: "مشهد الراب" } },
+    { id: "jordan",   label: { en: "Jordan",            ar: "جوردان" } },
+    { id: "movie",    label: { en: "Movie & Artist",   ar: "أفلام وفن" } },
+    { id: "cars",     label: { en: "Cars",             ar: "سيارات" } },
+    { id: "football", label: { en: "Football",         ar: "كرة قدم" } },
+    { id: "clubs",    label: { en: "Clubs",             ar: "أندية" } }
   ];
 
   const placeholder = lang === "ar" ? "ابحث عن لاعبين، سيارات..." : "Search players, cars...";
@@ -2421,12 +2668,21 @@ function openNav() {
   navDrawer.setAttribute("aria-hidden", "false");
   navDrawer.classList.add("is-open");
   document.body.style.overflow = "hidden";
+  _scrollYLock = window.scrollY;
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${_scrollYLock}px`;
+  document.body.style.width = "100%";
 }
 function closeNav() {
   if (!navDrawer) return;
   navDrawer.setAttribute("aria-hidden", "true");
   navDrawer.classList.remove("is-open");
   document.body.style.overflow = "";
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.width = "";
+  if (_scrollYLock !== null) window.scrollTo(0, _scrollYLock);
+  _scrollYLock = null;
 }
 
 if (openNavBtn) openNavBtn.addEventListener("click", openNav);
@@ -2484,9 +2740,9 @@ window.addEventListener("resize", () => {
     preloadProductImages();
     if (productGrid) renderProducts();
     if (productGrid) {
-      var savedScroll = sessionStorage.getItem(SESSION_SCROLL_KEY);
+      try { var savedScroll = sessionStorage.getItem(SESSION_SCROLL_KEY); } catch {}
       if (savedScroll) {
-        sessionStorage.removeItem(SESSION_SCROLL_KEY);
+        try { sessionStorage.removeItem(SESSION_SCROLL_KEY); } catch {}
         var pos = parseInt(savedScroll);
         var doScroll = function() { window.scrollTo(0, pos); };
         setTimeout(doScroll, 200);

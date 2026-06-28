@@ -1,0 +1,2018 @@
+const animeProducts = [
+{
+  "id": "anime-001",
+  "name": "Anime #1",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-017095bf.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-002",
+  "name": "Anime #2",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-0196fbf2.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-003",
+  "name": "Anime #3",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-05d279a5.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-004",
+  "name": "Anime #4",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-07579e08.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-005",
+  "name": "Anime #5",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-095058a4.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-006",
+  "name": "Anime #6",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-096ce406.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-007",
+  "name": "Anime #7",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-0bd2e1cb.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-008",
+  "name": "Anime #8",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-10854ebe.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-009",
+  "name": "Anime #9",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-12a9b6ca.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-010",
+  "name": "Anime #10",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-184e417a.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-011",
+  "name": "Anime #11",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-1ef46839.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-012",
+  "name": "Anime #12",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-21ad71f2.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-013",
+  "name": "Anime #13",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-223cd31d.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-014",
+  "name": "Anime #14",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-244e9b35.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-015",
+  "name": "Anime #15",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-2d8f7977.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-016",
+  "name": "Anime #16",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-31576408.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-017",
+  "name": "Anime #17",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-33b2fde8.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-018",
+  "name": "Anime #18",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-37729a8d.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-019",
+  "name": "Anime #19",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-39882736.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-020",
+  "name": "Anime #20",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-3b7532c1.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-021",
+  "name": "Anime #21",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-57272a27.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-022",
+  "name": "Anime #22",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-5797dbf3.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-023",
+  "name": "Anime #23",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-5889c333.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-024",
+  "name": "Anime #24",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-588a35c6.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-025",
+  "name": "Anime #25",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-5dd649a0.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-026",
+  "name": "Anime #26",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-5e002648.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-027",
+  "name": "Anime #27",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-6204d675.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-028",
+  "name": "Anime #28",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-62c7e154.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-029",
+  "name": "Anime #29",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-6306d5d4.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-030",
+  "name": "Anime #30",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-64858930.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-031",
+  "name": "Anime #31",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-651d5a75.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-032",
+  "name": "Anime #32",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-66590e47.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-033",
+  "name": "Anime #33",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-6c1b2394.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-034",
+  "name": "Anime #34",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-74403d69.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-035",
+  "name": "Anime #35",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-76043410.jpg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-036",
+  "name": "Anime #36",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-78c78d40.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-037",
+  "name": "Anime #37",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-7af7e165.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-038",
+  "name": "Anime #38",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-7b2c9d89 (1).png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-039",
+  "name": "Anime #39",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-7b2c9d89.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-040",
+  "name": "Anime #40",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-7dfac575.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-041",
+  "name": "Anime #41",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-80bc635d.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-042",
+  "name": "Anime #42",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-80e9ddbf.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-043",
+  "name": "Anime #43",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-81b8d428.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-044",
+  "name": "Anime #44",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-8409a081.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-045",
+  "name": "Anime #45",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-8633f98b.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-046",
+  "name": "Anime #46",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-8c48d1e5.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-047",
+  "name": "Anime #47",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-8c645650.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-048",
+  "name": "Anime #48",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-8d868db1.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-049",
+  "name": "Anime #49",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-92acfb18.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-050",
+  "name": "Anime #50",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-949c6605.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-051",
+  "name": "Anime #51",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-95240cd5.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-052",
+  "name": "Anime #52",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-992203ac.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-053",
+  "name": "Anime #53",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-9b1ef456.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-054",
+  "name": "Anime #54",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-a0935308.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-055",
+  "name": "Anime #55",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-a10a5a86.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-056",
+  "name": "Anime #56",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-a6437aad.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-057",
+  "name": "Anime #57",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-b08e7370.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-058",
+  "name": "Anime #58",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-b17c6f64.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-059",
+  "name": "Anime #59",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-b44e667e.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-060",
+  "name": "Anime #60",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-b4b61ff2.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-061",
+  "name": "Anime #61",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-b5822c3e.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-062",
+  "name": "Anime #62",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-b754529b.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-063",
+  "name": "Anime #63",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-b9855922.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-064",
+  "name": "Anime #64",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-bc9a6b19.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-065",
+  "name": "Anime #65",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-bed5f718.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-066",
+  "name": "Anime #66",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-bf92d851.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-067",
+  "name": "Anime #67",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-c1fac3dd.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-068",
+  "name": "Anime #68",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-c3d1f4f6.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-069",
+  "name": "Anime #69",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-c71ac64f.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-070",
+  "name": "Anime #70",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-ca4d973c.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-071",
+  "name": "Anime #71",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-caea215b.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-072",
+  "name": "Anime #72",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-ccf3ab1a.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-073",
+  "name": "Anime #73",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-d08b6fbe.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-074",
+  "name": "Anime #74",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-d241f896.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-075",
+  "name": "Anime #75",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-d68a9314.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-076",
+  "name": "Anime #76",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-de620184.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-077",
+  "name": "Anime #77",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-e0206f6b.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-078",
+  "name": "Anime #78",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-e25fc0ee.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-079",
+  "name": "Anime #79",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-e2d0564a (1).png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-080",
+  "name": "Anime #80",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-e2d0564a.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-081",
+  "name": "Anime #81",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-e61ffe67.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-082",
+  "name": "Anime #82",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-e7706995.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-083",
+  "name": "Anime #83",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-ea3b8dc6.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-084",
+  "name": "Anime #84",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-ec06b468.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-085",
+  "name": "Anime #85",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-ed67ca9c.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-086",
+  "name": "Anime #86",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f0f329ba.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-087",
+  "name": "Anime #87",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f1249c87.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-088",
+  "name": "Anime #88",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f3925908.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-089",
+  "name": "Anime #89",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f4c9b9c7.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-090",
+  "name": "Anime #90",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f52dd10b.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-091",
+  "name": "Anime #91",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f611175a.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-092",
+  "name": "Anime #92",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f6529740.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-093",
+  "name": "Anime #93",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f6b14964.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-094",
+  "name": "Anime #94",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f7aed1cf.jpeg",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-095",
+  "name": "Anime #95",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f7e8df5f.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+},
+{
+  "id": "anime-096",
+  "name": "Anime #96",
+  "category": "anime",
+  "tag": "Anime",
+  "tagAr": "أنمي",
+  "image": "assets/animy/imgdownloader-f9208441.png",
+  "basePrice": 50,
+  "sizes": {
+    "20x30": 50,
+    "30x40": 60,
+    "40x50": 70,
+    "50x70": 90
+  },
+  "frames": [
+    "None",
+    "Black",
+    "White"
+  ],
+  "description": ""
+}
+];

@@ -48,7 +48,7 @@
   function getCategories() {
     const cats = new Set();
     allProducts().forEach(p => { if (p.category) cats.add(p.category); });
-    const order = ['football', 'cars', 'clubs', 'custom', 'abstract', 'paint'];
+    const order = ['football', 'cars', 'clubs', 'movie', 'custom', 'abstract', 'paint'];
     return [...cats].sort((a, b) => {
       const ia = order.indexOf(a), ib = order.indexOf(b);
       return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);

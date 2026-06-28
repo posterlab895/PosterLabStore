@@ -1,0 +1,110 @@
+const meemesProducts = [
+  {
+    "id": "meemes-001",
+    "name": "Memes #1",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-0025213c.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-002",
+    "name": "Memes #2",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-0310cf06.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-003",
+    "name": "Memes #3",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-4a21bc21.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-004",
+    "name": "Memes #4",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-50952b21.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-005",
+    "name": "Memes #5",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-5fe92388.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-006",
+    "name": "Memes #6",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-8dabedc1.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-007",
+    "name": "Memes #7",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-b3d4f82c.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-008",
+    "name": "Memes #8",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-cb88acf5.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  },
+  {
+    "id": "meemes-009",
+    "name": "Memes #9",
+    "category": "meemes",
+    "tag": "Memes",
+    "tagAr": "ييمات",
+    "image": "assets/meemes/imgdownloader-fef74503.png",
+    "basePrice": 50,
+    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "frames": ["None", "Black", "White"],
+    "description": ""
+  }
+];

@@ -118,9 +118,12 @@ button:disabled:hover {
   justify-content: space-between;
   gap: 14px;
   padding: 12px clamp(14px, 4vw, 42px);
+  padding-top: calc(12px + constant(safe-area-inset-top));
+  padding-top: calc(12px + env(safe-area-inset-top));
   border-bottom: 1px solid var(--line);
   background: var(--header-bg);
   color: var(--text);
+  -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
 
@@ -513,6 +516,84 @@ textarea:focus {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
+.cat-pills {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(10px, 2vw, 16px) clamp(16px, 4vw, 42px) 0;
+  display: flex;
+  gap: clamp(14px, 2.5vw, 24px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  will-change: transform;
+}
+.cat-pills::-webkit-scrollbar {
+  display: none;
+}
+.cat-pill {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--muted);
+  transition: color 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: grab;
+}
+.cat-pill:hover,
+.cat-pill:focus-visible {
+  color: var(--text);
+}
+.cat-pill.active {
+  color: var(--accent);
+}
+.cat-pill-circle {
+  width: clamp(48px, 7vw, 64px);
+  height: clamp(48px, 7vw, 64px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  will-change: transform;
+}
+.cat-pill:hover .cat-pill-circle {
+  background: var(--surface-2);
+  border-color: var(--muted);
+  transform: scale(1.05);
+}
+.cat-pill.active .cat-pill-circle {
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  border-color: var(--accent);
+}
+.cat-pill[data-cat-pill="girls"] .cat-pill-circle {
+  filter: sepia(0.5) hue-rotate(300deg) saturate(1.8);
+}
+.category-section[data-cat="girls"] .section-heading > div > span:first-child {
+  filter: sepia(0.5) hue-rotate(300deg) saturate(1.8);
+}
+.cat-pill-label {
+  font-size: clamp(0.6rem, 1.2vw, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
 .store-section,
 .detail-shell {
   max-width: 1180px;
@@ -568,6 +649,7 @@ textarea:focus {
   border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: var(--small-shadow);
+  contain: content;
   animation: card-in 460ms ease both;
   animation-delay: var(--delay);
   transition: transform 250ms var(--ease-out), box-shadow 350ms var(--ease-out), border-color 250ms var(--ease-out);
@@ -1475,6 +1557,8 @@ textarea:focus {
   position: fixed;
   left: 50%;
   bottom: 22px;
+  bottom: calc(22px + constant(safe-area-inset-bottom));
+  bottom: calc(22px + env(safe-area-inset-bottom));
   z-index: 60;
   display: grid;
   width: min(92vw, 420px);
@@ -1694,7 +1778,7 @@ textarea:focus {
   content-visibility: auto;
   contain-intrinsic-size: 420px;
   animation: section-in 500ms ease both;
-  animation-delay: calc(var(--section-order, 0) * 140ms);
+  animation-delay: calc(var(--section-order, 0) * 60ms);
 }
 .category-section:last-child {
   border-bottom: none;
@@ -1702,7 +1786,7 @@ textarea:focus {
 .category-section .section-heading {
   padding: 0 clamp(8px, 1.5vw, 16px);
   animation: slide-in-left 500ms ease both;
-  animation-delay: calc(var(--section-order, 0) * 140ms + 60ms);
+  animation-delay: calc(var(--section-order, 0) * 60ms + 30ms);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1747,13 +1831,17 @@ textarea:focus {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   animation: fade-in 500ms ease both;
-  animation-delay: calc(var(--section-order, 0) * 140ms + 200ms);
+  animation-delay: calc(var(--section-order, 0) * 60ms + 80ms);
   user-select: none;
   touch-action: pan-x pan-y;
   overscroll-behavior-x: contain;
 }
 .category-scroll::-webkit-scrollbar {
   display: none;
+}
+.cat-pills.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 .category-scroll.dragging {
   cursor: grabbing;
@@ -2282,6 +2370,8 @@ textarea:focus {
 .whatsapp-float {
   position: fixed;
   bottom: 24px;
+  bottom: calc(24px + constant(safe-area-inset-bottom));
+  bottom: calc(24px + env(safe-area-inset-bottom));
   right: 24px;
   z-index: 45;
   display: flex;

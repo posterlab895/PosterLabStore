@@ -1,7 +1,7 @@
 const clubProducts = [
   {
     "id": "club-001",
-    "name": "Club Player #1",
+    "name": "Club #1",
     "nameAr": "لاعب نادي #1",
     "category": "clubs",
     "tag": "Clubs",
@@ -23,7 +23,7 @@ const clubProducts = [
   },
   {
     "id": "club-002",
-    "name": "Club Player #2",
+    "name": "Club #2",
     "nameAr": "لاعب نادي #2",
     "category": "clubs",
     "tag": "Clubs",
@@ -45,7 +45,7 @@ const clubProducts = [
   },
   {
     "id": "club-003",
-    "name": "Club Player #3",
+    "name": "Club #3",
     "nameAr": "لاعب نادي #3",
     "category": "clubs",
     "tag": "Clubs",
@@ -67,7 +67,7 @@ const clubProducts = [
   },
   {
     "id": "club-004",
-    "name": "Club Player #4",
+    "name": "Club #4",
     "nameAr": "لاعب نادي #4",
     "category": "clubs",
     "tag": "Clubs",
@@ -89,7 +89,7 @@ const clubProducts = [
   },
   {
     "id": "club-005",
-    "name": "Club Player #5",
+    "name": "Club #5",
     "nameAr": "لاعب نادي #5",
     "category": "clubs",
     "tag": "Clubs",
@@ -111,7 +111,7 @@ const clubProducts = [
   },
   {
     "id": "club-006",
-    "name": "Club Player #6",
+    "name": "Club #6",
     "nameAr": "لاعب نادي #6",
     "category": "clubs",
     "tag": "Clubs",
@@ -133,7 +133,7 @@ const clubProducts = [
   },
   {
     "id": "club-007",
-    "name": "Club Player #7",
+    "name": "Club #7",
     "nameAr": "لاعب نادي #7",
     "category": "clubs",
     "tag": "Clubs",
@@ -155,7 +155,7 @@ const clubProducts = [
   },
   {
     "id": "club-008",
-    "name": "Club Player #8",
+    "name": "Club #8",
     "nameAr": "لاعب نادي #8",
     "category": "clubs",
     "tag": "Clubs",
@@ -177,7 +177,7 @@ const clubProducts = [
   },
   {
     "id": "club-009",
-    "name": "Club Player #9",
+    "name": "Club #9",
     "nameAr": "لاعب نادي #9",
     "category": "clubs",
     "tag": "Clubs",
@@ -199,7 +199,7 @@ const clubProducts = [
   },
   {
     "id": "club-010",
-    "name": "Club Player #10",
+    "name": "Club #10",
     "nameAr": "لاعب نادي #10",
     "category": "clubs",
     "tag": "Clubs",
@@ -221,7 +221,7 @@ const clubProducts = [
   },
   {
     "id": "club-011",
-    "name": "Club Player #11",
+    "name": "Club #11",
     "nameAr": "لاعب نادي #11",
     "category": "clubs",
     "tag": "Clubs",
@@ -243,7 +243,7 @@ const clubProducts = [
   },
   {
     "id": "club-012",
-    "name": "Club Player #12",
+    "name": "Club #12",
     "nameAr": "لاعب نادي #12",
     "category": "clubs",
     "tag": "Clubs",
@@ -265,7 +265,7 @@ const clubProducts = [
   },
   {
     "id": "club-013",
-    "name": "Club Player #13",
+    "name": "Club #13",
     "nameAr": "لاعب نادي #13",
     "category": "clubs",
     "tag": "Clubs",
@@ -287,7 +287,7 @@ const clubProducts = [
   },
   {
     "id": "club-014",
-    "name": "Club Player #14",
+    "name": "Club #14",
     "nameAr": "لاعب نادي #14",
     "category": "clubs",
     "tag": "Clubs",
@@ -309,7 +309,7 @@ const clubProducts = [
   },
   {
     "id": "club-015",
-    "name": "Club Player #15",
+    "name": "Club #15",
     "nameAr": "لاعب نادي #15",
     "category": "clubs",
     "tag": "Clubs",
@@ -331,7 +331,7 @@ const clubProducts = [
   },
   {
     "id": "club-016",
-    "name": "Club Player #16",
+    "name": "Club #16",
     "nameAr": "لاعب نادي #16",
     "category": "clubs",
     "tag": "Clubs",

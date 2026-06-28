@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Admin — Poster Lab Store</title>
   <meta name="description" content="Poster Lab Store admin panel">
   <link rel="icon" type="image/png" href="../assets/poster-lab-logo.png">
@@ -13,7 +13,7 @@
   <link rel="preload" as="style" href="../admin.css">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../admin.css">
-  <script>(function(){var t=localStorage.getItem("poster-lab-theme");if(!t)t="light";document.documentElement.dataset.theme=t;var c=document.createElement("style");c.textContent='html{color-scheme:'+(t==="dark"?"dark":"light")+'}';document.head.appendChild(c)})();setTimeout(function(){var e=document.getElementById('appLoader');if(e)e.remove()},5000);</script>
+  <script>(function(){var t="light";try{t=localStorage.getItem("poster-lab-theme")||"light"}catch(e){}document.documentElement.dataset.theme=t;try{var c=document.createElement("style");c.textContent='html{color-scheme:'+(t==="dark"?"dark":"light")+'}';document.head.appendChild(c)}catch(e){}})();try{setTimeout(function(){var e=document.getElementById('appLoader');if(e)e.remove()},5000)}catch(e){}</script>
 <style>.app-loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#fff;transition:opacity .35s ease}[data-theme="dark"] .app-loader{background:#0f0f13}.app-loader.hidden{opacity:0;pointer-events:none}.loader-ring{position:relative;width:72px;height:72px}.loader-ring img{width:40px;height:40px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover}.loader-ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:3px solid #e5e7eb;border-top-color:#2563eb;animation:lspin .7s linear infinite}[data-theme="dark"] .loader-ring::after{border-color:#1f2937;border-top-color:#3b82f6}@keyframes lspin{to{transform:rotate(360deg)}}</style>
 </head>
 
@@ -99,6 +99,7 @@
                 <option value="all">All categories</option>
                 <option value="football">Football</option>
                 <option value="cars">Cars</option>
+                <option value="movie">Movie & Artist</option>
                 <option value="custom">Custom</option>
                 <option value="abstract">Abstract</option>
                 <option value="paint">Paint art</option>
@@ -118,6 +119,7 @@
                 <select id="apCategory">
                   <option value="football">Football</option>
                   <option value="cars">Cars</option>
+                  <option value="movie">Movie & Artist</option>
                   <option value="custom">Custom</option>
                   <option value="abstract">Abstract</option>
                   <option value="paint">Paint art</option>
@@ -193,6 +195,7 @@
   <script defer src="../football-products.js"></script>
   <script defer src="../cars-products.js"></script>
   <script defer src="../clubs-products.js"></script>
+  <script defer src="../movie-artist-products.js"></script>
   <script defer src="../script.js"></script>
   <script defer src="../admin.js"></script>
 </body>
