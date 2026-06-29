@@ -616,7 +616,7 @@ const state = {
   cart: loadCart(),
   selectedProduct: null,
   detailSize: "20x30",
-  detailFrame: "None",
+  detailFrame: "Black",
   customUpload: loadCustomUpload(),
   confirmedForm: null,
   user: getSession(),
@@ -1309,7 +1309,7 @@ function renderProducts() {
       const sceneImage = sceneImageForIndex(idx);
 
       html += `    <article class="product-card" style="--delay: ${idx * 30}ms">\n`;
-      html += `      <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
+      html += `      <a class="product-media" href="product.html?id=${product.id}&size=20x30&frame=Black" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
       html += `        <span class="frame-preview frame-preview-black"></span>\n`;
       html += `        <img src="${productImageUrl(product.image)}" loading="${idx < 3 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 3 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
       html += `        <span class="product-tag">${tag}</span>\n`;
@@ -1417,36 +1417,17 @@ function wireCatPillsDrag() {
   if (!pillsEl || _catPillsWired) return;
   _catPillsWired = true;
 
-  let down = false, startX = 0, prevX = 0, dragged = false, rafId = null, pendingX = null;
+  let down = false, startX = 0, prevX = 0, dragged = false;
 
-  function applyScroll(clientX) {
+  function pd(clientX) { down = true; dragged = false; startX = prevX = clientX; pillsEl.classList.add("dragging"); }
+  function pm(clientX) {
     if (!down) return;
     const dx = clientX - prevX;
     prevX = clientX;
     if (Math.abs(clientX - startX) > 3) dragged = true;
     pillsEl.scrollLeft -= dx;
   }
-
-  function rafFlush() {
-    rafId = null;
-    if (pendingX !== null) {
-      applyScroll(pendingX);
-      pendingX = null;
-    }
-  }
-
-  function pd(clientX) { down = true; dragged = false; startX = prevX = clientX; pendingX = null; pillsEl.classList.add("dragging"); }
-  function pm(clientX) {
-    if (!down) return;
-    pendingX = clientX;
-    if (!rafId) rafId = requestAnimationFrame(rafFlush);
-  }
-  function pu() {
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-    if (pendingX !== null) applyScroll(pendingX);
-    down = false; pendingX = null;
-    pillsEl.classList.remove("dragging");
-  }
+  function pu() { down = false; pillsEl.classList.remove("dragging"); }
   pillsEl.addEventListener("mousedown", e => { if (e.button !== 0) return; pd(e.clientX); });
   pillsEl.addEventListener("mousemove", e => pm(e.clientX));
   pillsEl.addEventListener("mouseup", pu);
@@ -1480,9 +1461,14 @@ function watchCatPills() {
 
 function wireDragScroll() {
   document.querySelectorAll(".category-scroll").forEach(el => {
-    let down = false, startX = 0, prevX = 0, dragged = false, rafId = null, pendingX = null;
+    let down = false, startX = 0, prevX = 0, dragged = false;
 
-    function applyScroll(clientX) {
+    function pointerDown(clientX) {
+      down = true; dragged = false; startX = prevX = clientX;
+      el.classList.add("dragging");
+    }
+
+    function pointerMove(clientX) {
       if (!down) return;
       const dx = clientX - prevX;
       prevX = clientX;
@@ -1490,42 +1476,20 @@ function wireDragScroll() {
       el.scrollLeft -= dx;
     }
 
-    function rafFlush() {
-      rafId = null;
-      if (pendingX !== null) { applyScroll(pendingX); pendingX = null; }
-    }
-
-    function pointerDown(clientX) {
-      down = true; dragged = false; startX = prevX = clientX; pendingX = null;
-      el.classList.add("dragging");
-    }
-
-    function pointerMove(clientX) {
-      if (!down) return;
-      pendingX = clientX;
-      if (!rafId) rafId = requestAnimationFrame(rafFlush);
-    }
-
     function pointerUp() {
-      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-      if (pendingX !== null) applyScroll(pendingX);
-      down = false; pendingX = null;
+      down = false;
       el.classList.remove("dragging");
     }
 
-    // Mouse
     el.addEventListener("mousedown", e => { if (e.button !== 0) return; pointerDown(e.clientX); });
     el.addEventListener("mousemove", e => pointerMove(e.clientX));
     el.addEventListener("mouseup", pointerUp);
     el.addEventListener("mouseleave", pointerUp);
     el.addEventListener("dragstart", e => e.preventDefault());
-
-    // Touch
     el.addEventListener("touchstart", e => pointerDown(e.touches[0].clientX), { passive: true });
     el.addEventListener("touchmove", e => pointerMove(e.touches[0].clientX), { passive: true });
     el.addEventListener("touchend", pointerUp, { passive: true });
 
-    // Wheel: only handle horizontal scroll; vertical passes through natively
     el.addEventListener("wheel", e => {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault();
@@ -1534,10 +1498,7 @@ function wireDragScroll() {
     }, { passive: false });
 
     el.addEventListener("click", e => {
-      if (dragged) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
+      if (dragged) { e.stopPropagation(); e.preventDefault(); }
     }, true);
   });
 }
@@ -1617,7 +1578,7 @@ function catCardHtml(items, startIdx, lang) {
     const sceneImage = sceneImageForIndex(idx);
 
     let card = `  <article class="product-card" style="--delay: ${idx * 20}ms">\n`;
-    card += `    <a class="product-media" href="product.html?id=${product.id}" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
+    card += `    <a class="product-media" href="product.html?id=${product.id}&size=20x30&frame=Black" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
     card += `      <span class="frame-preview frame-preview-black"></span>\n`;
     card += `      <img src="${productImageUrl(product.image)}" loading="${idx < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 6 ? "high" : "auto"}" alt="${name} ${lang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
     card += `      <span class="product-tag">${tag}</span>\n`;
@@ -2782,6 +2743,9 @@ if ('serviceWorker' in navigator) {
 
 const pageProductId = getPageProductId();
 if (pageProductId) {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("size")) state.detailSize = params.get("size");
+  if (params.has("frame")) state.detailFrame = params.get("frame");
   renderDetail(pageProductId);
 } else if (!productGrid && productDetail) {
   productDetail.hidden = false;

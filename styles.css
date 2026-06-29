@@ -532,7 +532,7 @@ textarea:focus {
   will-change: transform;
 }
 .cat-pills::-webkit-scrollbar {
-  display: none;
+  height: 3px;
 }
 .cat-pill {
   flex: 0 0 auto;
@@ -1837,7 +1837,7 @@ textarea:focus {
   overscroll-behavior-x: contain;
 }
 .category-scroll::-webkit-scrollbar {
-  display: none;
+  height: 4px;
 }
 .cat-pills.dragging {
   cursor: grabbing;
