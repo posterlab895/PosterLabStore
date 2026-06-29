@@ -1245,7 +1245,7 @@ function renderProducts() {
   const isSearching = state.search && state.search.trim();
   const featuredIndices = isSearching ? null : {
     football: [7,15,22,33,79,97,110,120,127,151],
-    cars:     [2,10,22,27,44,59,76],
+    cars:     [2,8,14,31,48,63],
     album:    [3,11,14,37,45,105],
     movie:    [0,9,17,27,45,121],
     quotes:   [1,5,11,12,17,24],
