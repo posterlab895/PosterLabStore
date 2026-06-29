@@ -7,7 +7,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-06813997.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-08c7844a.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-23e26d94.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-26bd7147.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-2b92fac2.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-2fbec155.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -79,7 +79,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-4645ed1e.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -91,7 +91,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-50c59aa1.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -103,7 +103,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-519c554d.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -115,7 +115,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-57b0f5b4.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -127,7 +127,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-596260ea.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -139,7 +139,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-5d68ee9e.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -151,7 +151,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-5f20ec61.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -163,7 +163,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-68b0918c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -175,7 +175,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-80d593af.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -187,7 +187,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-86ae9008.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -199,7 +199,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-8a7fa1df.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -211,7 +211,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-8b9ad6be.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -223,7 +223,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-92e3ab77.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -235,7 +235,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-986eee22.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -247,7 +247,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-98bb1e38.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -259,7 +259,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-9caf0118.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -271,7 +271,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-9e0115be.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -283,7 +283,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-9f66a965.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -295,7 +295,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-a7dccdb7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -307,7 +307,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-aa71bdf7.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -319,7 +319,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-bd065fa2.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -331,7 +331,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-c26687d2.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -343,7 +343,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-d02f8c6f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -355,7 +355,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-d2f13e23.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -367,7 +367,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-f057bcd6.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -379,7 +379,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-f5f09c20.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -391,7 +391,7 @@ const gamesProducts = [
     "tagAr": "ألعاب",
     "image": "assets/games/imgdownloader-fde59ed7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

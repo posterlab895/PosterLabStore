@@ -9,9 +9,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -30,9 +30,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -51,9 +51,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -72,9 +72,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -93,9 +93,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -114,9 +114,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -135,9 +135,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -156,9 +156,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -177,9 +177,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -198,9 +198,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -219,9 +219,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -240,9 +240,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -261,9 +261,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -282,9 +282,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -303,9 +303,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -324,9 +324,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -345,9 +345,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -366,9 +366,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -387,9 +387,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -408,9 +408,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -429,9 +429,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -450,9 +450,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -471,9 +471,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -492,9 +492,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -513,9 +513,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -534,9 +534,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -555,9 +555,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -576,9 +576,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -597,9 +597,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -618,9 +618,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -639,9 +639,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -660,9 +660,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -681,9 +681,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -702,9 +702,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -723,9 +723,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -744,9 +744,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -765,9 +765,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -786,9 +786,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -807,9 +807,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -828,9 +828,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -849,9 +849,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -870,9 +870,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -891,9 +891,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -912,9 +912,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -933,9 +933,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -954,9 +954,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -975,9 +975,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -996,9 +996,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1017,9 +1017,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1038,9 +1038,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1059,9 +1059,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1080,9 +1080,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1101,9 +1101,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1122,9 +1122,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1143,9 +1143,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1164,9 +1164,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1185,9 +1185,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1206,9 +1206,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1227,9 +1227,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1248,9 +1248,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1269,9 +1269,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1290,9 +1290,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1311,9 +1311,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1332,9 +1332,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1353,9 +1353,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1374,9 +1374,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1395,9 +1395,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1416,9 +1416,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1437,9 +1437,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1458,9 +1458,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1479,9 +1479,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1500,9 +1500,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1521,9 +1521,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1542,9 +1542,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1563,9 +1563,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1584,9 +1584,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1605,9 +1605,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1626,9 +1626,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1647,9 +1647,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1668,9 +1668,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1689,9 +1689,9 @@ const albumArtistProducts = [
   "basePrice": 50,
   "sizes": {
     "20x30": 50,
-    "30x40": 60,
-    "40x50": 70,
-    "50x70": 90
+    "30x40": 70,
+    "40x50": 90,
+    "50x70": 110
   },
   "frames": [
     "None",
@@ -1708,7 +1708,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-024610eb.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1720,7 +1720,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-032d6cf7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1732,7 +1732,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-0ff85373.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1744,7 +1744,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-1bc91077.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1756,7 +1756,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-25dd0f1a (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1768,7 +1768,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-2a9418e8.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1780,7 +1780,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-3229335f (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1792,7 +1792,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-3604b6fe (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1804,7 +1804,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-415c0b75.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1816,7 +1816,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-43f232ad.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1828,7 +1828,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-509a7a93.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1840,7 +1840,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-5346687a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1852,7 +1852,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-6921e092.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1864,7 +1864,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-6b6c522a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1876,7 +1876,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-728de31f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1888,7 +1888,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-78190da8 (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1900,7 +1900,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-89b3cb7e (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1912,7 +1912,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-8d6a0484.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1924,7 +1924,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-99b67c6c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1936,7 +1936,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-9c3ec76d (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1948,7 +1948,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-a6f5ffff (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1960,7 +1960,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-acff123c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1972,7 +1972,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-c804ca12.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1984,7 +1984,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-cacf0046.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -1996,7 +1996,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-d80ca755.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -2008,7 +2008,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-e59e1e77.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -2020,7 +2020,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-ef12cff0.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -2032,7 +2032,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-f5046aed.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -2044,7 +2044,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-fb6f691c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -2056,7 +2056,7 @@ const albumArtistProducts = [
     "tagAr": "فنان ألبوم",
     "image": "assets/album artist/imgdownloader-fc1a05af.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

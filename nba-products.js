@@ -7,7 +7,7 @@ const nbaProducts = [
     "tagAr": "NBA",
     "image": "assets/nba/imgdownloader-02ebeb08.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const nbaProducts = [
     "tagAr": "NBA",
     "image": "assets/nba/imgdownloader-0cb9fc88.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const nbaProducts = [
     "tagAr": "NBA",
     "image": "assets/nba/imgdownloader-22c66db1.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const nbaProducts = [
     "tagAr": "NBA",
     "image": "assets/nba/imgdownloader-994d6511.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const nbaProducts = [
     "tagAr": "NBA",
     "image": "assets/nba/imgdownloader-addc5152.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const nbaProducts = [
     "tagAr": "NBA",
     "image": "assets/nba/imgdownloader-c6684389.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

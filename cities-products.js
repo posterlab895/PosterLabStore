@@ -7,7 +7,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-0a531ead.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-22628814.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-2fa9b659.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-823005b5.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-981d4188.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-99c60aaf.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -79,7 +79,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-bbadb1ad.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -91,7 +91,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-dac85049.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -103,7 +103,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-f258e80b.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -115,7 +115,7 @@ const citiesProducts = [
     "tagAr": "مدن",
     "image": "assets/cities/imgdownloader-fc1a5636.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

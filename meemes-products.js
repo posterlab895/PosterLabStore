@@ -7,7 +7,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-0025213c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-0310cf06.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-4a21bc21.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-50952b21.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-5fe92388.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-8dabedc1.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -79,7 +79,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-b3d4f82c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -91,7 +91,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-cb88acf5.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -103,7 +103,7 @@ const meemesProducts = [
     "tagAr": "ييمات",
     "image": "assets/meemes/imgdownloader-fef74503.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

@@ -7,7 +7,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-0025213c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-01128947.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-040e118a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-0b36a7e2.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-0b8b5da1.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-0bc4ea4c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -79,7 +79,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-0d5fb3a1.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -91,7 +91,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-10285c9f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -103,7 +103,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-13c23b94.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -115,7 +115,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-228ba57a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -127,7 +127,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-23245a67.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -139,7 +139,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-246465cf.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -151,7 +151,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-31175019.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -163,7 +163,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-3eac0b59.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -175,7 +175,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-40ae5142.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -187,7 +187,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-553006ec.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -199,7 +199,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-63225890.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -211,7 +211,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-6dcd417c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -223,7 +223,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-6eaccdce.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -235,7 +235,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-6f7bbf5e.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -247,7 +247,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-7dc32573.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -259,7 +259,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-83fe47af.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -271,7 +271,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-8b4181b6.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -283,7 +283,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-9786cee9.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -295,7 +295,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-9a8a654a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -307,7 +307,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-a60b0af8.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -319,7 +319,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-a747b312.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -331,7 +331,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-b08e7370.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -343,7 +343,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-b1e5f1eb.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -355,7 +355,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-b3c24b3f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -367,7 +367,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-c47e378f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -379,7 +379,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-d8ec1962.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -391,7 +391,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-d9e1c9d5.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -403,7 +403,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-e4bd3402.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -415,7 +415,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-e7706995.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -427,7 +427,7 @@ const gymProducts = [
     "tagAr": "جيم",
     "image": "assets/gym/imgdownloader-f6fbcdaa.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

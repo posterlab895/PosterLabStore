@@ -7,7 +7,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-04673cb4.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-13a83069.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-1b38ed73.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-24adddbc.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-36af4e86.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-3cb31c34.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -79,7 +79,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-40663a4a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -91,7 +91,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-41db1f7f.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -103,7 +103,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-4421c963.jpg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -115,7 +115,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-469bda10.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -127,7 +127,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-4a29138f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -139,7 +139,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-4d9e7f8f.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -151,7 +151,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-4fc78e58.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -163,7 +163,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-5288aad5.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -175,7 +175,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-52b3fc29.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -187,7 +187,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-53784bbf.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -199,7 +199,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-5f7955c6.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -211,7 +211,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-6a0173e4.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -223,7 +223,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-77f2b267.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -235,7 +235,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-7b7ca26c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -247,7 +247,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-80c22835.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -259,7 +259,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-8a93fe6b.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -271,7 +271,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-8c42f11c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -283,7 +283,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-96c2e571.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -295,7 +295,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-994bf239.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -307,7 +307,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-9b297f32.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -319,7 +319,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-9f69e61f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -331,7 +331,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-c5342a63.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -343,7 +343,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-d11bf7a2.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -355,7 +355,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-d1c08a9c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -367,7 +367,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-dfbf7305.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -379,7 +379,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-e4e2f08e.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -391,7 +391,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-e652a1d4.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -403,7 +403,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-edc686c2.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -415,7 +415,7 @@ const quotesProducts = [
     "tagAr": "اقتباسات",
     "image": "assets/quotes/imgdownloader-f560bd18.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

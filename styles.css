@@ -569,6 +569,13 @@ textarea:focus {
   border: 2px solid var(--line);
   transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
   will-change: transform;
+  overflow: hidden;
+}
+.cat-pill-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .cat-pill:hover .cat-pill-circle {
   background: var(--surface-2);
@@ -578,12 +585,6 @@ textarea:focus {
 .cat-pill.active .cat-pill-circle {
   background: color-mix(in srgb, var(--accent) 16%, var(--surface));
   border-color: var(--accent);
-}
-.cat-pill[data-cat-pill="girls"] .cat-pill-circle {
-  filter: sepia(0.5) hue-rotate(300deg) saturate(1.8);
-}
-.category-section[data-cat="girls"] .section-heading > div > span:first-child {
-  filter: sepia(0.5) hue-rotate(300deg) saturate(1.8);
 }
 .cat-pill-label {
   font-size: clamp(0.6rem, 1.2vw, 0.72rem);

@@ -7,7 +7,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-0b38f8a6.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-0e17884e.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-12f81539.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-1b9bb18b.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-1cb1c83b.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-1f5c6604.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -79,7 +79,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-264b05f2.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -91,7 +91,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-364f559e.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -103,7 +103,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-36c39238.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -115,7 +115,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-3968f871.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -127,7 +127,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-39a13d33.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -139,7 +139,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-46264481.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -151,7 +151,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-56f7b99c.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -163,7 +163,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-5723eae7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -175,7 +175,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-6121703d.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -187,7 +187,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-63046746.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -199,7 +199,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-67d32635.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -211,7 +211,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-6ee39831.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -223,7 +223,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-86df2e75.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -235,7 +235,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-8c5bc910.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -247,7 +247,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-8cf720ff.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -259,7 +259,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-8e2f3224.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -271,7 +271,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-951c3401.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -283,7 +283,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-a02f097c.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -295,7 +295,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-a7a8f196.jpg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -307,7 +307,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-aff44163.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -319,7 +319,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-b9c61671.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -331,7 +331,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-c1cd5af4.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -343,7 +343,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-d76f6f34.jpeg",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -355,7 +355,7 @@ const rapSceneProducts = [
     "tagAr": "مشهد الراب",
     "image": "assets/rap scene/imgdownloader-fc26fed1.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

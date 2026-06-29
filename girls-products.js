@@ -7,7 +7,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-09b7ca7a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -19,7 +19,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-0c1bb2bd.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -31,7 +31,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-1c9e72a7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -43,7 +43,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-220569de.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -55,7 +55,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-234d48e8.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -67,7 +67,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-2376e85b.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -79,7 +79,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-23cbc942.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -91,7 +91,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-2bb1f005.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -103,7 +103,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-33ca2428.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -115,7 +115,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-3469900f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -127,7 +127,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-38e4d65b.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -139,7 +139,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-40509578.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -151,7 +151,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-42b62229.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -163,7 +163,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-4baf610d.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -175,7 +175,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-53784bbf.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -187,7 +187,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-5548082f.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -199,7 +199,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-5b788d29.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -211,7 +211,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-5ce8650a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -223,7 +223,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-5eb88749.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -235,7 +235,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-5ef19cf6.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -247,7 +247,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-5f7955c6.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -259,7 +259,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-6072d740.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -271,7 +271,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-6377beb9.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -283,7 +283,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-69f2b762.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -295,7 +295,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-6af3a9c7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -307,7 +307,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-70fdbba0.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -319,7 +319,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-775fc32c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -331,7 +331,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-798b15ad.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -343,7 +343,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-83918b60.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -355,7 +355,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-8817a60e.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -367,7 +367,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-8c42f11c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -379,7 +379,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-8d6a0484.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -391,7 +391,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-96b4c9e4.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -403,7 +403,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-9b55ab0b.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -415,7 +415,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-a6ce8d75.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -427,7 +427,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-a9ca7cd1.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -439,7 +439,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-ab30f995.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -451,7 +451,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-b3ad684c.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -463,7 +463,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-bb5649e4.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -475,7 +475,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-bd7d5123.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -487,7 +487,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-c11ec73d.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -499,7 +499,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-cfaa988d.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -511,7 +511,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-d1040901.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -523,7 +523,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-d271aeaa.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -535,7 +535,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-d54c3713.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -547,7 +547,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-d7b2a7e8.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -559,7 +559,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-ddd5014a.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -571,7 +571,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-e8e69107.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -583,7 +583,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-ea47afec.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -595,7 +595,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-ef443eef.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -607,7 +607,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-f12e22e7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -619,7 +619,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-f3fa325d (1).png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -631,7 +631,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-f3fa325d.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -643,7 +643,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-f421daaf.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -655,7 +655,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-f8be4b69.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -667,7 +667,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-f98f0bb7.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -679,7 +679,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-f9a581fa.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   },
@@ -691,7 +691,7 @@ const girlsProducts = [
     "tagAr": "فتيات",
     "image": "assets/girls/imgdownloader-fce05015.png",
     "basePrice": 50,
-    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },
+    "sizes": { "20x30": 50, "30x40": 70, "40x50": 90, "50x70": 110 },
     "frames": ["None", "Black", "White"],
     "description": ""
   }

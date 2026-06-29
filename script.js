@@ -1,6 +1,6 @@
 ﻿const WHATSAPP_NUMBER = "201010414187";
 const DELIVERY_FEE = 35;
-const POSTER_FALLBACK_IMAGE = "assets/poster-lab-logo.png";
+const POSTER_FALLBACK_IMAGE = "assets/poster-lab-logo.webp";
 const CUSTOM_UPLOAD_ACCEPT = ".jpg,.jpeg,.png,.webp,.gif,.bmp,.avif,.heic,.heif,.tif,.tiff,image/*";
 const SESSION_SCROLL_KEY = "pls-scroll";
 const frameOptions = {
@@ -322,10 +322,10 @@ const products = [
     tag: "Custom upload",
     tagAr: "رفع خاص",
     isCustom: true,
-    image: "assets/Custom/Upload-Your-Custom-Design.png",
-    gallery: ["assets/Custom/Upload-Your-Custom-Design.png"],
-    basePrice: 70,
-    sizes: { '20x30': 50, '30x40': 60, '40x50': 70, '50x70': 90 },
+    image: "assets/Custom/Upload-Your-Custom-Design.webp",
+    gallery: ["assets/Custom/Upload-Your-Custom-Design.webp"],
+    basePrice: 50,
+    sizes: { '20x30': 50, '30x40': 70, '40x50': 90, '50x70': 110 },
     frames: ['None', 'Black', 'White'],
     description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
     descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
@@ -393,39 +393,39 @@ const OUR_WORK_MEDIA = [
     title: "Framed room capture 01"
   },
   {
-    src: "assets/our-work/our-work-02.png",
+    src: "assets/our-work/our-work-02.webp",
     title: "Framed room capture 02"
   },
   {
-    src: "assets/our-work/our-work-03.png",
+    src: "assets/our-work/our-work-03.webp",
     title: "Framed room capture 03"
   },
   {
-    src: "assets/our-work/our-work-04.png",
+    src: "assets/our-work/our-work-04.webp",
     title: "Framed room capture 04"
   },
   {
-    src: "assets/our-work/our-work-05.png",
+    src: "assets/our-work/our-work-05.webp",
     title: "Framed room capture 05"
   },
   {
-    src: "assets/our-work/our-work-06.png",
+    src: "assets/our-work/our-work-06.webp",
     title: "Framed room capture 06"
   },
   {
-    src: "assets/our-work/our-work-07.png",
+    src: "assets/our-work/our-work-07.webp",
     title: "Framed room capture 07"
   },
   {
-    src: "assets/our-work/our-work-08.png",
+    src: "assets/our-work/our-work-08.webp",
     title: "Framed room capture 08"
   },
   {
-    src: "assets/our-work/our-work-09.png",
+    src: "assets/our-work/our-work-09.webp",
     title: "Framed room capture 09"
   },
   {
-    src: "assets/our-work/our-work-10.png",
+    src: "assets/our-work/our-work-10.webp",
     title: "Framed room capture 10"
   }
 ];
@@ -737,7 +737,7 @@ function openSizeGuide() {
     modal.innerHTML = `
       <div class="size-guide-preview">
         <button class="icon-button size-guide-close" type="button" data-size-guide-close aria-label="Close size guide">x</button>
-        <img src="${productImageUrl('assets/size-guide.png')}" alt="${t("sizeGuideTitle")}">
+        <img src="${productImageUrl('assets/size-guide.webp')}" alt="${t("sizeGuideTitle")}">
       </div>
     `;
     document.body.appendChild(modal);
@@ -1240,6 +1240,20 @@ function filteredProducts() {
 function renderProducts() {
   const container = document.querySelector("#categorySections");
   if (!container) return;
+  
+  // Featured home page preview indices (only when no search is active)
+  const isSearching = state.search && state.search.trim();
+  const featuredIndices = isSearching ? null : {
+    football: [7,15,22,33,79,97,110,120,127,151],
+    cars:     [2,10,22,27,44,59,76],
+    album:    [3,11,14,37,45,105],
+    movie:    [0,9,17,27,45,121],
+    quotes:   [1,5,11,12,17,24],
+    anime:    [4,11,25,29,46,65],
+    art:      [0,10,28,34,43,63],
+    girls:    [2,3,9,17,35,53]
+  };
+
   const list = filteredProducts();
   const currentLang = state.lang || "en";
 
@@ -1251,26 +1265,26 @@ function renderProducts() {
   }
 
   // Group by category preserving defined order
-  const categoryOrder = ["custom", "anime", "art", "album", "gym", "islamic", "girls", "games", "cities", "quotes", "nba", "meemes", "pharaonic", "rap", "jordan", "movie", "cars", "football", "clubs"];
+  const categoryOrder = ["custom", "football", "cars", "clubs", "anime", "movie", "album", "quotes", "islamic", "art", "gym", "girls", "games", "cities", "nba", "meemes", "pharaonic", "rap", "jordan"];
   const categoryMeta = {
-    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️" },
-    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️" },
-    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿" },
-    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪" },
-    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌" },
-    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩" },
-    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮" },
-    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️" },
-    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬" },
-    nba:      { label: "NBA", icon: "🏀" },
-    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂" },
-    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓" },
-    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤" },
-    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟" },
-    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬" },
-    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
-    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
-    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️", image: "assets/animy/imgdownloader-017095bf.jpeg" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️", image: "assets/art/imgdownloader-07ae17e0.png" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿", image: "assets/album artist/imgdownloader-0435978d.png" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪", image: "assets/gym/imgdownloader-0025213c.png" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌", image: "assets/islamic/imgdownloader-03c8733c.jpeg" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩", image: "assets/girls/imgdownloader-09b7ca7a.png" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮", image: "assets/games/imgdownloader-06813997.png" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️", image: "assets/cities/imgdownloader-0a531ead.png" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬", image: "assets/quotes/imgdownloader-04673cb4.png" },
+    nba:      { label: "NBA", icon: "🏀", image: "assets/nba/imgdownloader-02ebeb08.jpeg" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂", image: "assets/meemes/imgdownloader-0025213c.png" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓", image: "assets/pharaonic/imgdownloader-2f388c69.png" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤", image: "assets/rap scene/imgdownloader-0b38f8a6.png" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟", image: "assets/jordan/imgdownloader-412390fa.jpg" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬", image: "assets/movie/imgdownloader-022451f8.png" },
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗", image: "assets/cars/imgdownloader-00a26443.png" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽", image: "assets/football-players/imgdownloader-00841b18.png" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆", image: "assets/clubs/imgdownloader-02a7d1b7.png" },
     custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
   };
 
@@ -1286,11 +1300,13 @@ function renderProducts() {
     const items = groups[cat];
     if (!items || !items.length) return;
     const meta = categoryMeta[cat] || { label: cat, icon: "" };
+    const featuredForCat = featuredIndices ? featuredIndices[cat] : null;
+    const visible = featuredForCat ? featuredForCat.map(i => items[i]).filter(Boolean) : items.slice(0, 6);
+    if (!visible.length) return;
     const count = currentLang === "ar"
       ? `${items.length} ${items.length === 1 ? "منتج" : "منتجات"}`
       : `${items.length} ${items.length === 1 ? "product" : "products"}`;
-    const showAll = items.length > 6;
-    const visible = showAll ? items.slice(0, 6) : items;
+    const showAll = featuredForCat ? items.length > featuredForCat.length : items.length > 6;
 
     html += `<section class="category-section" style="--section-order: ${catIdx}" data-cat="${cat}">\n`;
     html += `  <div class="section-heading">\n`;
@@ -1351,26 +1367,26 @@ function renderCatPills() {
   const currentLang = state.lang || "en";
   const list = filteredProducts();
 
-  const categoryOrder = ["custom", "anime", "art", "album", "gym", "islamic", "girls", "games", "cities", "quotes", "nba", "meemes", "pharaonic", "rap", "jordan", "movie", "cars", "football", "clubs"];
+  const categoryOrder = ["custom", "football", "cars", "clubs", "anime", "movie", "album", "quotes", "islamic", "art", "gym", "girls", "games", "cities", "nba", "meemes", "pharaonic", "rap", "jordan"];
   const categoryMeta = {
-    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️" },
-    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️" },
-    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿" },
-    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪" },
-    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌" },
-    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩" },
-    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮" },
-    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️" },
-    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬" },
-    nba:      { label: "NBA", icon: "🏀" },
-    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂" },
-    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓" },
-    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤" },
-    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟" },
-    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬" },
-    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
-    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
-    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️", image: "assets/animy/imgdownloader-017095bf.jpeg" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️", image: "assets/art/imgdownloader-07ae17e0.png" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿", image: "assets/album artist/imgdownloader-0435978d.png" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪", image: "assets/gym/imgdownloader-0025213c.png" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌", image: "assets/islamic/imgdownloader-03c8733c.jpeg" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩", image: "assets/girls/imgdownloader-09b7ca7a.png" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮", image: "assets/games/imgdownloader-06813997.png" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️", image: "assets/cities/imgdownloader-0a531ead.png" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬", image: "assets/quotes/imgdownloader-04673cb4.png" },
+    nba:      { label: "NBA", icon: "🏀", image: "assets/nba/imgdownloader-02ebeb08.jpeg" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂", image: "assets/meemes/imgdownloader-0025213c.png" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓", image: "assets/pharaonic/imgdownloader-2f388c69.png" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤", image: "assets/rap scene/imgdownloader-0b38f8a6.png" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟", image: "assets/jordan/imgdownloader-412390fa.jpg" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬", image: "assets/movie/imgdownloader-022451f8.png" },
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗", image: "assets/cars/imgdownloader-00a26443.png" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽", image: "assets/football-players/imgdownloader-00841b18.png" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆", image: "assets/clubs/imgdownloader-02a7d1b7.png" },
     custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
   };
 
@@ -1387,7 +1403,11 @@ function renderCatPills() {
     if (!items || !items.length) return;
     const meta = categoryMeta[cat] || { label: cat, icon: "" };
     html += `<button class="cat-pill" data-cat-pill="${cat}" type="button">`;
-    html += `  <span class="cat-pill-circle">${meta.icon}</span>`;
+    if (meta.image && meta.icon !== "🎨") {
+      html += `  <span class="cat-pill-circle"><img class="cat-pill-img" src="${productImageUrl(meta.image)}" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.textContent='${meta.icon}'"></span>`;
+    } else {
+      html += `  <span class="cat-pill-circle">${meta.icon}</span>`;
+    }
     html += `  <span class="cat-pill-label">${meta.label}</span>`;
     html += `</button>`;
   });
@@ -1525,24 +1545,24 @@ function renderSingleCategory(cat) {
   }
 
   const meta = {
-    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️" },
-    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️" },
-    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿" },
-    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪" },
-    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌" },
-    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩" },
-    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮" },
-    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️" },
-    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬" },
-    nba:      { label: "NBA", icon: "🏀" },
-    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂" },
-    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓" },
-    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤" },
-    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟" },
-    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬" },
-    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗" },
-    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽" },
-    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆" },
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️", image: "assets/animy/imgdownloader-017095bf.jpeg" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️", image: "assets/art/imgdownloader-07ae17e0.png" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿", image: "assets/album artist/imgdownloader-0435978d.png" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪", image: "assets/gym/imgdownloader-0025213c.png" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌", image: "assets/islamic/imgdownloader-03c8733c.jpeg" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩", image: "assets/girls/imgdownloader-09b7ca7a.png" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮", image: "assets/games/imgdownloader-06813997.png" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️", image: "assets/cities/imgdownloader-0a531ead.png" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬", image: "assets/quotes/imgdownloader-04673cb4.png" },
+    nba:      { label: "NBA", icon: "🏀", image: "assets/nba/imgdownloader-02ebeb08.jpeg" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂", image: "assets/meemes/imgdownloader-0025213c.png" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓", image: "assets/pharaonic/imgdownloader-2f388c69.png" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤", image: "assets/rap scene/imgdownloader-0b38f8a6.png" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟", image: "assets/jordan/imgdownloader-412390fa.jpg" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬", image: "assets/movie/imgdownloader-022451f8.png" },
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗", image: "assets/cars/imgdownloader-00a26443.png" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽", image: "assets/football-players/imgdownloader-00841b18.png" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆", image: "assets/clubs/imgdownloader-02a7d1b7.png" },
     custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
   }[cat] || { label: cat, icon: "" };
 
@@ -2553,24 +2573,24 @@ function buildNavMenu() {
   const lang = state.lang || "en";
   const cats = [
     { id: "custom",   label: { en: "Custom upload",    ar: "تصميم خاص" } },
+    { id: "football", label: { en: "Football",         ar: "كرة قدم" } },
+    { id: "cars",     label: { en: "Cars",             ar: "سيارات" } },
+    { id: "clubs",    label: { en: "Clubs",             ar: "أندية" } },
     { id: "anime",    label: { en: "Anime",           ar: "أنمي" } },
-    { id: "art",      label: { en: "Art",             ar: "فن" } },
+    { id: "movie",    label: { en: "Movie & Artist",   ar: "أفلام وفن" } },
     { id: "album",    label: { en: "Album Artist",     ar: "ألبوم فنان" } },
-    { id: "gym",      label: { en: "Gym",              ar: "جيم" } },
+    { id: "quotes",   label: { en: "Quotes",           ar: "اقتباسات" } },
     { id: "islamic",  label: { en: "Islamic",          ar: "إسلامي" } },
+    { id: "art",      label: { en: "Art",             ar: "فن" } },
+    { id: "gym",      label: { en: "Gym",              ar: "جيم" } },
     { id: "girls",    label: { en: "Girls",            ar: "فتيات" } },
     { id: "games",    label: { en: "Games",            ar: "ألعاب" } },
     { id: "cities",   label: { en: "Cities",           ar: "مدن" } },
-    { id: "quotes",   label: { en: "Quotes",           ar: "اقتباسات" } },
     { id: "nba",      label: { en: "NBA",              ar: "NBA" } },
     { id: "meemes",   label: { en: "Memes",            ar: "ميمات" } },
     { id: "pharaonic",label: { en: "Pharaonic",        ar: "فرعوني" } },
     { id: "rap",      label: { en: "Rap Scene",        ar: "مشهد الراب" } },
-    { id: "jordan",   label: { en: "Jordan",            ar: "جوردان" } },
-    { id: "movie",    label: { en: "Movie & Artist",   ar: "أفلام وفن" } },
-    { id: "cars",     label: { en: "Cars",             ar: "سيارات" } },
-    { id: "football", label: { en: "Football",         ar: "كرة قدم" } },
-    { id: "clubs",    label: { en: "Clubs",             ar: "أندية" } }
+    { id: "jordan",   label: { en: "Jordan",            ar: "جوردان" } }
   ];
 
   const placeholder = lang === "ar" ? "ابحث عن لاعبين، سيارات..." : "Search players, cars...";

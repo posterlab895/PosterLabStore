@@ -10,9 +10,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -32,9 +32,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -54,9 +54,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -76,9 +76,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -98,9 +98,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -120,9 +120,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -142,9 +142,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -164,9 +164,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -186,9 +186,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -208,9 +208,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -230,9 +230,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -252,9 +252,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -274,9 +274,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -296,9 +296,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -318,9 +318,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
@@ -340,9 +340,9 @@ const clubProducts = [
     "basePrice": 50,
     "sizes": {
       "20x30": 50,
-      "30x40": 60,
-      "40x50": 70,
-      "50x70": 90
+      "30x40": 70,
+      "40x50": 90,
+      "50x70": 110
     },
     "frames": [
       "None",
