@@ -1323,7 +1323,7 @@ function renderProducts() {
       html += `      <div class="product-info">\n`;
       html += `        <h3>${name}</h3>\n`;
       html += `        <div class="product-meta">\n`;
-      html += `          <span class="price-value">${money(product.basePrice)}</span>\n`;
+      html += `          <span class="price-value">${money((product.sizes["20x30"] || 50) + (frameOptions.Black?.price || 120))}</span>\n`;
       html += `          <span class="price-label">${t("from")}</span>\n`;
       html += `        </div>\n`;
       html += `      </div>\n`;
@@ -1631,7 +1631,7 @@ function catCardHtml(items, startIdx, lang) {
     card += `    <div class="product-info">\n`;
     card += `      <h3>${name}</h3>\n`;
     card += `      <div class="product-meta">\n`;
-    card += `        <span class="price-value">${money(product.basePrice)}</span>\n`;
+    card += `        <span class="price-value">${money((product.sizes["20x30"] || 50) + (frameOptions.Black?.price || 120))}</span>\n`;
     card += `        <span class="price-label">${t("from")}</span>\n`;
     card += `      </div>\n`;
     card += `    </div>\n`;
