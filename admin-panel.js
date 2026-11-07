@@ -1,10 +1,16 @@
 (function () {
   'use strict';
 
-  const SESSION_KEY = 'pls-admin-session';
+  const SESSION_KEY    = 'pls-admin-session';
+  const EMAIL_KEY      = 'pls-admin-email';
+  const REQUIRED_EMAIL = 'posterlab895@gmail.com';
 
   // Synchronous session check — runs BEFORE DOMContentLoaded
-  if (localStorage.getItem(SESSION_KEY) !== 'true') {
+  const sessionActive = localStorage.getItem(SESSION_KEY) === 'true';
+  const sessionEmail = (localStorage.getItem(EMAIL_KEY) || '').toLowerCase().trim();
+  if (!sessionActive || sessionEmail !== REQUIRED_EMAIL) {
+    localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(EMAIL_KEY);
     window.location.replace('login.html');
     return;
   }
@@ -27,72 +33,82 @@
   function getOrders() { return safeJSON(ORDERS_KEY, []); }
   function saveOrders(o) { localStorage.setItem(ORDERS_KEY, JSON.stringify(o)); }
 
-  /* ── Firestore sync ── */
-  let _syncing = false;
-
-  function syncOrdersFromFirestore() {
-    return new Promise(async (resolve) => {
-      try {
-        if (typeof initFirebase === 'function') initFirebase();
-        if (typeof getFirebaseDb !== 'function' || !getFirebaseDb()) { resolve(); return; }
-        const db = getFirebaseDb();
-        const snap = await db.collection('orders').orderBy('date', 'desc').get();
-        const local = getOrders();
-        const localMap = {};
-        local.forEach(o => { localMap[o.id] = o; });
-        let changed = false;
-        snap.forEach(doc => {
-          const data = doc.data();
-          if (!localMap[data.id]) {
-            local.push(data);
-            localMap[data.id] = data;
-            changed = true;
-          } else if (data.status && localMap[data.id].status !== data.status) {
-            localMap[data.id].status = data.status;
-            changed = true;
-          }
-        });
-        if (changed) saveOrders(local);
-        log('Orders synced:', local.length);
-      } catch (e) { err('Firestore orders sync error:', e); }
-      resolve();
-    });
-  }
-
-  function updateOrderInFirestore(orderId, updates) {
-    return new Promise(async (resolve) => {
-      try {
-        if (typeof initFirebase === 'function') initFirebase();
-        if (typeof getFirebaseDb !== 'function' || !getFirebaseDb()) { resolve(false); return; }
-        const db = getFirebaseDb();
-        await db.collection('orders').doc(orderId).update(updates);
-        resolve(true);
-      } catch (e) { err('Firestore update error:', e); resolve(false); }
-    });
-  }
-
   function getCoupons() { return safeJSON(COUPONS_KEY, []); }
   function saveCoupons(c) { localStorage.setItem(COUPONS_KEY, JSON.stringify(c)); }
 
+  let _cachedAllProducts = null;
+  function invalidateProductsCache() { _cachedAllProducts = null; }
+
   function getAdminProducts() { return safeJSON(PRODUCTS_KEY, []); }
-  function saveAdminProducts(p) { localStorage.setItem(PRODUCTS_KEY, JSON.stringify(p)); }
+  function saveAdminProducts(p) {
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(p));
+    invalidateProductsCache();
+  }
 
   function allProducts() {
-    const hard = (typeof window.products !== 'undefined' && Array.isArray(window.products)) ? window.products : [];
+    if (_cachedAllProducts) return _cachedAllProducts;
+    const hard = (typeof window.products !== 'undefined' && Array.isArray(window.products))
+      ? window.products
+      : ((typeof products !== 'undefined' && Array.isArray(products)) ? products : []);
     const custom = getAdminProducts();
-    const map = {};
-    hard.forEach(p => { map[p.id] = { ...p }; });
-    custom.forEach(cp => {
-      if (cp._deleted) { delete map[cp.id]; return; }
-      map[cp.id] = { ...cp };
+    const map = new Map();
+    for (let i = 0; i < hard.length; i++) {
+      const p = hard[i];
+      map.set(p.id, p);
+    }
+    for (let i = 0; i < custom.length; i++) {
+      const cp = custom[i];
+      if (cp._deleted) {
+        map.delete(cp.id);
+      } else {
+        map.set(cp.id, cp);
+      }
+    }
+    _cachedAllProducts = Array.from(map.values());
+    return _cachedAllProducts;
+  }
+
+  /* ── 15-Second Floating Admin Toast System ── */
+  function showAdminToast(message, type = 'success', duration = 15000) {
+    let container = document.getElementById('adminToastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'adminToastContainer';
+      container.className = 'admin-toast-container';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'admin-toast admin-toast-' + type;
+    const icon = type === 'danger' ? '⚠️' : type === 'info' ? 'ℹ️' : '✓';
+    toast.innerHTML = `
+      <span class="admin-toast-icon">${icon}</span>
+      <span class="admin-toast-text">${message}</span>
+      <button class="admin-toast-close" type="button" aria-label="Close">✕</button>
+      <span class="admin-toast-progress" style="animation-duration: ${duration}ms"></span>
+    `;
+    container.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    let timer;
+    const dismiss = () => {
+      clearTimeout(timer);
+      toast.classList.remove('show');
+      setTimeout(() => { if (toast.parentNode) toast.remove(); }, 250);
+    };
+
+    toast.querySelector('.admin-toast-close')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismiss();
     });
-    return Object.values(map);
+    toast.addEventListener('click', dismiss);
+
+    timer = setTimeout(dismiss, duration);
   }
 
   function getCategories() {
     const cats = new Set();
     allProducts().forEach(p => { if (p.category) cats.add(p.category); });
-    const order = ['football', 'cars', 'clubs', 'movie', 'custom', 'abstract', 'paint'];
+    const order = ['custom', 'football', 'cars', 'clubs', 'anime', 'movie', 'album', 'quotes', 'islamic', 'art', 'gym', 'girls', 'games', 'cities', 'nba', 'meemes', 'pharaonic', 'rap', 'jordan'];
     return [...cats].sort((a, b) => {
       const ia = order.indexOf(a), ib = order.indexOf(b);
       return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
@@ -117,27 +133,108 @@
 
   function money(n) { return 'EGP ' + (Math.round(n) || 0); }
 
+  /* ── Firestore sync ── */
+  let _syncing = false;
+
+  function syncOrdersFromFirestore() {
+    return new Promise(async (resolve) => {
+      try {
+        let db = null;
+        if (typeof ensureFirebaseReady === 'function') {
+          db = await ensureFirebaseReady(6000);
+        } else if (typeof getFirebaseDb === 'function') {
+          db = getFirebaseDb();
+        }
+        if (!db) {
+          log('Firestore db not available yet for orders sync');
+          resolve(false);
+          return;
+        }
+        let snap;
+        try {
+          snap = await db.collection('orders').orderBy('date', 'desc').get();
+        } catch (queryErr) {
+          log('orderBy date query failed, falling back to simple get:', queryErr.message);
+          snap = await db.collection('orders').get();
+        }
+        const local = getOrders();
+        const localMap = {};
+        local.forEach(o => { localMap[o.id] = o; });
+        let changed = false;
+        snap.forEach(doc => {
+          const data = doc.data();
+          if (!data || !data.id) return;
+          if (!localMap[data.id]) {
+            local.push(data);
+            localMap[data.id] = data;
+            changed = true;
+          } else if (data.status && localMap[data.id].status !== data.status) {
+            localMap[data.id].status = data.status;
+            changed = true;
+          }
+        });
+        local.sort((a, b) => new Date(b.date || b.createdAt || 0) - new Date(a.date || a.createdAt || 0));
+        if (changed) saveOrders(local);
+        log('Orders synced successfully:', local.length);
+        resolve(true);
+      } catch (e) {
+        err('Firestore orders sync error:', e);
+        resolve(false);
+      }
+    });
+  }
+
+  function updateOrderInFirestore(orderId, updates) {
+    return new Promise(async (resolve) => {
+      try {
+        let db = null;
+        if (typeof ensureFirebaseReady === 'function') {
+          db = await ensureFirebaseReady(6000);
+        } else if (typeof getFirebaseDb === 'function') {
+          db = getFirebaseDb();
+        }
+        if (!db) { resolve(false); return; }
+        await db.collection('orders').doc(orderId).update(updates);
+        resolve(true);
+      } catch (e) {
+        err('Firestore update error:', e);
+        resolve(false);
+      }
+    });
+  }
+
+  function updateStats() {
+    const orders = getOrders();
+    const total = orders.reduce((s, o) => s + (o.total || 0), 0);
+    const el = $('#adminStatsHeader');
+    if (el) el.textContent = orders.length + ' orders · ' + money(total);
+  }
+
   function renderDashboard() {
     const orders = getOrders();
     const active = orders.filter(o => o.status !== 'cancelled');
     const revenue = active.reduce((s, o) => s + (o.total || 0), 0);
     const pending = orders.filter(o => o.status === 'pending').length;
     const prods = allProducts();
-    $('#statTotalOrders').textContent = orders.length;
-    $('#statTotalRevenue').textContent = money(revenue);
-    $('#statPendingOrders').textContent = pending;
-    $('#statProductsCount').textContent = prods.length;
+    if ($('#statTotalOrders')) $('#statTotalOrders').textContent = orders.length;
+    if ($('#statTotalRevenue')) $('#statTotalRevenue').textContent = money(revenue);
+    if ($('#statPendingOrders')) $('#statPendingOrders').textContent = pending;
+    if ($('#statProductsCount')) $('#statProductsCount').textContent = prods.length;
     const recent = orders.slice(-5).reverse();
     const wrap = $('#adminRecentOrders');
-    if (!recent.length) { wrap.innerHTML = '<p class="empty-state">No orders yet</p>'; return; }
-    wrap.innerHTML = ordersTable(recent);
+    if (wrap) {
+      if (!recent.length) { wrap.innerHTML = '<p class="empty-state">No orders yet</p>'; }
+      else { wrap.innerHTML = ordersTable(recent); }
+    }
     updateStats();
   }
 
   function renderOrders() {
     const orders = getOrders();
-    const filter = $('#adminOrderStatusFilter').value;
-    const search = $('#adminOrderSearch').value.toLowerCase().trim();
+    const filterEl = $('#adminOrderStatusFilter');
+    const filter = filterEl ? filterEl.value : 'all';
+    const searchEl = $('#adminOrderSearch');
+    const search = searchEl ? searchEl.value.toLowerCase().trim() : '';
     let list = orders;
     if (filter !== 'all') list = list.filter(o => o.status === filter);
     if (search) list = list.filter(o =>
@@ -147,6 +244,7 @@
     );
     list = [...list].reverse();
     const wrap = $('#adminOrdersList');
+    if (!wrap) return;
     if (!list.length) { wrap.innerHTML = '<p class="empty-state">No orders match</p>'; return; }
     wrap.innerHTML = ordersTable(list, true);
   }
@@ -158,72 +256,71 @@
       const d = new Date(o.date);
       const dateStr = d.toLocaleDateString('en-EG', { day: '2-digit', month: 'short', year: 'numeric' });
       const itemsHtml = (detail && o.items && o.items.length)
-        ? `<div style="padding:4px 0">${o.items.map(item => {
-            const imgSrc = typeof window.productImageUrl === 'function' ? window.productImageUrl(item.image || '../assets/poster-lab-logo.png') : (item.image || '../assets/poster-lab-logo.png');
-            const size = item.size || item.selectedSize || '—';
-            const frame = item.frame || item.selectedFrame || 'None';
-            const qty = item.quantity || 1;
-            const price = item.total || item.price || 0;
-            return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)">
-              <img src="${imgSrc}" alt="" style="width:40px;height:54px;object-fit:cover;border-radius:4px" onerror="this.src='../assets/poster-lab-logo.png'" loading="lazy">
-              <div style="flex:1;min-width:0">
-                <div style="font-weight:700;font-size:0.9rem">${item.productName || item.name || 'Product'}</div>
-                <div style="display:flex;gap:12px;font-size:0.78rem;color:var(--muted);margin-top:2px">
-                  <span>Size: ${size}</span>
-                  <span>Frame: ${frame}</span>
-                  <span>Qty: ${qty}</span>
-                </div>
-              </div>
-              <span style="font-weight:700;white-space:nowrap">${money(price)}</span>
-            </div>`;
-          }).join('')}</div>`
+        ? o.items.map(item => `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line)">
+            <img src="${typeof productImageUrl === 'function' ? productImageUrl(item.image || '../assets/poster-lab-logo.webp') : (item.image || '../assets/poster-lab-logo.webp')}" alt="" style="width:32px;height:42px;object-fit:cover;border-radius:4px" onerror="this.src='../assets/poster-lab-logo.webp'">
+            <span style="flex:1">${item.productName || item.name || 'Product'}</span>
+            <span style="color:var(--muted);font-size:0.8rem">×${item.quantity || 1}</span>
+            <span style="font-weight:700">${money(item.total || item.price || 0)}</span>
+          </div>`).join('')
         : '';
-      const customerInfo = `<strong>${o.customerName || '—'}</strong><br><small style="color:var(--muted)">${o.customerPhone || ''}${o.customerAddress ? '<br>' + o.customerAddress : ''}${o.deliveryAddress ? '<br>' + o.deliveryAddress : ''}${o.orderNote ? '<br><em>Note: ' + o.orderNote + '</em>' : ''}</small>`;
       return `<tr class="admin-order-row">
         <td><strong>${o.id || '—'}</strong></td>
         <td>${dateStr}</td>
-        <td>${customerInfo}</td>
+        <td>${o.customerName || '—'}<br><small style="color:var(--muted)">${o.customerPhone || ''}</small></td>
         <td>${o.items ? o.items.length : 0}</td>
-        <td><strong>${money(o.total || 0)}</strong></td>
+        <td><strong>${money(o.total || 0)}</strong>${o.appliedCoupon ? `<div style="margin-top:3px"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:4px;background:rgba(217,76,61,0.12);color:var(--danger);font-size:0.75rem;font-weight:700">🏷️ ${typeof o.appliedCoupon === 'object' ? o.appliedCoupon.code : o.appliedCoupon} (-${money(o.discount || 0)})</span></div>` : ''}</td>
         <td style="font-size:0.85rem">${(o.paymentMethod || '').substring(0, 24)}</td>
         <td><span style="color:${STATUS_COLORS[o.status] || 'var(--muted)'};font-weight:900">${o.status || 'pending'}</span></td>
         <td>${statusSelect(o.status, o.id)}</td>
-      </tr>${itemsHtml ? `<tr class="admin-order-details"><td colspan="8">${itemsHtml}</td></tr>` : ''}`;
+      </tr>${itemsHtml ? `<tr class="admin-order-details"><td colspan="8"><div style="padding:8px 0">${itemsHtml}</div></td></tr>` : ''}`;
     }).join('')}</tbody></table>`;
   }
 
+  const productPagination = { page: 1, pageSize: 30, totalPages: 1 };
+
   function renderProducts() {
     const all = allProducts();
-    const search = ($('#adminProductSearch').value || '').toLowerCase().trim();
-    const cat = $('#adminProductCategoryFilter').value;
+    const searchEl = $('#adminProductSearch');
+    const search = searchEl ? (searchEl.value || '').toLowerCase().trim() : '';
+    const catEl = $('#adminProductCategoryFilter');
+    const cat = catEl ? catEl.value : 'all';
     let list = all;
     if (cat !== 'all') list = list.filter(p => p.category === cat);
     if (search) list = list.filter(p =>
-      (p.id || '').toLowerCase().includes(search) ||
-      (p.name || '').toLowerCase().includes(search) ||
-      (p.nameAr || '').toLowerCase().includes(search) ||
-      (p.tag || '').toLowerCase().includes(search)
+      (p.id && p.id.toLowerCase().includes(search)) ||
+      (p.name && p.name.toLowerCase().includes(search)) ||
+      (p.nameAr && p.nameAr.toLowerCase().includes(search)) ||
+      (p.tag && p.tag.toLowerCase().includes(search)) ||
+      (p.tagAr && p.tagAr.toLowerCase().includes(search))
     );
     const cnt = $('#adminProductsCount');
     if (cnt) cnt.textContent = `(${list.length}/${all.length})`;
     const wrap = $('#adminProductsList');
+    if (!wrap) return;
     if (!list.length) { wrap.innerHTML = '<p class="empty-state">No products match</p>'; return; }
-    wrap.innerHTML = `<table class="admin-table"><thead><tr>
-      <th></th><th>ID</th><th>Name</th><th>Category</th><th>Tag</th><th>Price</th><th>Qty</th><th>Sizes</th><th>Frames</th><th>Actions</th>
-    </tr></thead><tbody>${list.map(p => {
-      const img = p.image || '../assets/poster-lab-logo.png';
-      const sizesHtml = Object.entries(p.sizes || {}).map(e => `<span style="white-space:nowrap">${e[0]}: ${money(e[1])}</span>`).join(', ');
-      const qty = p.quantity != null ? p.quantity : '';
-      const qtyHtml = qty !== '' ? `<span style="${qty <= 0 ? 'color:var(--danger);font-weight:900' : ''}">${qty}</span>` : '<span style="color:var(--muted)">∞</span>';
+
+    const total = list.length;
+    productPagination.totalPages = Math.max(1, Math.ceil(total / productPagination.pageSize));
+    if (productPagination.page > productPagination.totalPages) productPagination.page = productPagination.totalPages;
+    if (productPagination.page < 1) productPagination.page = 1;
+
+    const startIdx = (productPagination.page - 1) * productPagination.pageSize;
+    const pageItems = list.slice(startIdx, startIdx + productPagination.pageSize);
+
+    let html = `<table class="admin-table"><thead><tr>
+      <th></th><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Sizes</th><th>Frames</th><th>Actions</th>
+    </tr></thead><tbody>`;
+
+    html += pageItems.map(p => {
+      const img = p.image || '../assets/poster-lab-logo.webp';
+      const imgSrc = typeof productImageUrl === 'function' ? productImageUrl(img) : img;
       return `<tr>
-        <td style="width:50px"><img src="${typeof productImageUrl === 'function' ? productImageUrl(img) : img}" alt="" style="width:40px;height:54px;object-fit:cover;border-radius:4px" onerror="this.src='../assets/poster-lab-logo.png'"></td>
+        <td style="width:50px"><img src="${imgSrc}" alt="" style="width:40px;height:54px;object-fit:cover;border-radius:6px" onerror="this.src='../assets/poster-lab-logo.webp'"></td>
         <td><code>${p.id}</code></td>
         <td><strong>${p.name || ''}</strong>${p.nameAr ? `<br><small style="color:var(--muted)">${p.nameAr}</small>` : ''}</td>
-        <td>${p.category || '—'}</td>
-        <td style="font-size:0.8rem">${p.tag || '—'}</td>
-        <td>${money(p.basePrice || 0)}</td>
-        <td style="text-align:center;font-weight:700">${qtyHtml}</td>
-        <td style="font-size:0.8rem">${sizesHtml}</td>
+        <td><span style="display:inline-block;padding:2px 8px;border-radius:999px;background:var(--surface-2);font-size:0.75rem;font-weight:700">${p.category || '—'}</span></td>
+        <td style="font-weight:700">${money(p.basePrice || 0)}</td>
+        <td style="font-size:0.8rem">${Object.keys(p.sizes || {}).join(', ')}</td>
         <td style="font-size:0.8rem">${(p.frames || []).join(', ')}</td>
         <td>
           <button class="admin-edit-btn secondary-button" data-cmd="edit-product" data-pid="${p.id}">Edit</button>
@@ -231,7 +328,24 @@
           <button class="admin-delete-btn secondary-button" data-cmd="delete-product" data-pid="${p.id}" style="border-color:var(--danger);color:var(--danger)">Delete</button>
         </td>
       </tr>`;
-    }).join('')}</tbody></table>`;
+    }).join('');
+
+    html += '</tbody></table>';
+
+    if (productPagination.totalPages > 1) {
+      html += `<div class="admin-pagination">
+        <span class="admin-pagination-info">Showing ${startIdx + 1}–${Math.min(startIdx + productPagination.pageSize, total)} of ${total} products</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button class="admin-pagination-btn" data-page-action="first" ${productPagination.page === 1 ? 'disabled' : ''}>« First</button>
+          <button class="admin-pagination-btn" data-page-action="prev" ${productPagination.page === 1 ? 'disabled' : ''}>‹ Prev</button>
+          <span style="font-size:0.85rem;font-weight:800;padding:0 8px;color:var(--text-strong)">Page ${productPagination.page} / ${productPagination.totalPages}</span>
+          <button class="admin-pagination-btn" data-page-action="next" ${productPagination.page === productPagination.totalPages ? 'disabled' : ''}>Next ›</button>
+          <button class="admin-pagination-btn" data-page-action="last" ${productPagination.page === productPagination.totalPages ? 'disabled' : ''}>Last »</button>
+        </div>
+      </div>`;
+    }
+
+    wrap.innerHTML = html;
   }
 
   function rebuildCategoryFilter() {
@@ -245,18 +359,31 @@
   function renderCoupons() {
     const list = getCoupons();
     const wrap = $('#adminCouponsList');
-    if (!list.length) { wrap.innerHTML = '<p class="empty-state">No coupons yet</p>'; return; }
+    if (!wrap) return;
+    if (!list.length) { wrap.innerHTML = '<p class="empty-state">No coupons yet. Click "+ Add Coupon" to create one.</p>'; return; }
     wrap.innerHTML = `<table class="admin-table"><thead><tr>
-      <th>Code</th><th>Type</th><th>Value</th><th>Min&nbsp;Order</th><th>Uses</th><th>Max</th><th>Actions</th>
-    </tr></thead><tbody>${list.map(c => `<tr>
-      <td><strong>${c.code}</strong></td>
-      <td>${c.type}</td>
-      <td>${c.type === 'percent' ? c.value + '%' : money(c.value)}</td>
-      <td>${money(c.minOrder || 0)}</td>
-      <td>${c.uses || 0}</td>
-      <td>${c.maxUses || '∞'}</td>
-      <td><button class="secondary-button" data-cmd="delete-coupon" data-code="${c.code}" style="border-color:var(--danger);color:var(--danger)">Delete</button></td>
-    </tr>`).join('')}</tbody></table>`;
+      <th>Code</th><th>Type</th><th>Value</th><th>Min&nbsp;Order</th><th>Used</th><th>Max</th><th>Status</th><th>Actions</th>
+    </tr></thead><tbody>${list.map(c => {
+      const uses = c.uses || 0;
+      const max = c.maxUses || 0;
+      const isMaxed = max > 0 && uses >= max;
+      const statusBadge = isMaxed
+        ? '<span style="color:var(--danger);font-weight:700">● Maxed Out</span>'
+        : '<span style="color:var(--accent);font-weight:700">● Active</span>';
+      const recentUsers = (c.usedBy && c.usedBy.length)
+        ? `<div style="font-size:0.75rem;color:var(--muted);margin-top:4px">${c.usedBy.slice(-2).map(u => (u.customerName || 'Customer') + ' (' + (u.orderId || '') + ')').join(', ')}</div>`
+        : '';
+      return `<tr>
+        <td><strong style="letter-spacing:0.04em">${c.code}</strong></td>
+        <td>${c.type === 'percent' ? 'Percentage' : 'Fixed'}</td>
+        <td><strong style="color:var(--accent)">${c.type === 'percent' ? c.value + '%' : money(c.value)}</strong></td>
+        <td>${money(c.minOrder || 0)}</td>
+        <td><strong style="color:${isMaxed ? 'var(--danger)' : 'var(--text-strong)'}">${uses}</strong>${recentUsers}</td>
+        <td>${max > 0 ? max : '∞'}</td>
+        <td>${statusBadge}</td>
+        <td><button class="secondary-button" data-cmd="delete-coupon" data-code="${c.code}" style="border-color:var(--danger);color:var(--danger)">Delete</button></td>
+      </tr>`;
+    }).join('')}</tbody></table>`;
   }
 
   function renderAnalytics() {
@@ -264,7 +391,7 @@
     const delivered = orders.filter(o => o.status === 'delivered' || o.status === 'shipped');
     const all = allProducts();
     const avg = delivered.length ? delivered.reduce((s, o) => s + (o.total || 0), 0) / delivered.length : 0;
-    $('#analyticsAvgOrder').textContent = money(Math.round(avg));
+    if ($('#analyticsAvgOrder')) $('#analyticsAvgOrder').textContent = money(Math.round(avg));
     const counts = {};
     delivered.forEach(o => (o.items || []).forEach(item => {
       const pid = item.productId || item.id;
@@ -273,12 +400,12 @@
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
     const topId = sorted.length ? sorted[0][0] : null;
     const topName = topId ? (all.find(p => p.id === topId)?.name || topId) : '—';
-    $('#analyticsTopProduct').textContent = topName;
+    if ($('#analyticsTopProduct')) $('#analyticsTopProduct').textContent = topName;
     const cod = orders.filter(o => o.paymentMethod && o.paymentMethod.includes('Cash')).length;
-    $('#analyticsConversion').textContent = orders.length ? Math.round((cod / orders.length) * 100) + '%' : '0%';
+    if ($('#analyticsConversion')) $('#analyticsConversion').textContent = orders.length ? Math.round((cod / orders.length) * 100) + '%' : '0%';
     const phones = [...new Set(orders.filter(o => o.customerPhone).map(o => o.customerPhone))];
     const repeat = phones.filter(ph => orders.filter(o => o.customerPhone === ph).length > 1).length;
-    $('#analyticsRepeatRate').textContent = phones.length ? Math.round((repeat / phones.length) * 100) + '%' : '0%';
+    if ($('#analyticsRepeatRate')) $('#analyticsRepeatRate').textContent = phones.length ? Math.round((repeat / phones.length) * 100) + '%' : '0%';
     const monthly = {};
     orders.forEach(o => {
       const d = new Date(o.date);
@@ -287,31 +414,30 @@
     });
     const months = Object.keys(monthly).sort();
     const chart = $('#analyticsChart');
-    if (!months.length) { chart.innerHTML = '<p class="empty-state">No sales data yet</p>'; }
-    else {
-      const max = Math.max(...Object.values(monthly));
-      chart.innerHTML = `<div class="chart-bars">${months.map(m => {
-        const val = monthly[m];
-        const h = max ? (val / max) * 100 : 0;
-        const label = m.split('-')[1] + '/' + m.slice(2, 4);
-        return `<div class="chart-bar-wrap" title="${money(val)}"><div class="chart-bar" style="height:${h}%"></div><span class="chart-label">${label}</span></div>`;
-      }).join('')}</div>`;
+    if (chart) {
+      if (!months.length) { chart.innerHTML = '<p class="empty-state">No sales data yet</p>'; }
+      else {
+        const max = Math.max(...Object.values(monthly));
+        chart.innerHTML = `<div class="chart-bars">${months.map(m => {
+          const val = monthly[m];
+          const h = max ? (val / max) * 100 : 0;
+          const label = m.split('-')[1] + '/' + m.slice(2, 4);
+          return `<div class="chart-bar-wrap" title="${money(val)}"><div class="chart-bar" style="height:${h}%"></div><span class="chart-label">${label}</span></div>`;
+        }).join('')}</div>`;
+      }
     }
     const pop = $('#analyticsPopularProducts');
-    if (!sorted.length) { pop.innerHTML = '<p class="empty-state">No data yet</p>'; return; }
-    pop.innerHTML = `<table class="admin-table"><thead><tr><th>#</th><th>Product</th><th>Orders</th></tr></thead><tbody>${
-      sorted.slice(0, 10).map((e, i) => {
-        const prod = all.find(p => p.id === e[0]);
-        return `<tr><td>${i + 1}</td><td><strong>${prod ? prod.name : e[0]}</strong></td><td>${e[1]}</td></tr>`;
-      }).join('')
-    }</tbody></table>`;
-  }
-
-  function updateStats() {
-    const orders = getOrders();
-    const total = orders.reduce((s, o) => s + (o.total || 0), 0);
-    const el = $('#adminStatsHeader');
-    if (el) el.textContent = orders.length + ' orders · ' + money(total);
+    if (pop) {
+      if (!sorted.length) { pop.innerHTML = '<p class="empty-state">No data yet</p>'; }
+      else {
+        pop.innerHTML = `<table class="admin-table"><thead><tr><th>#</th><th>Product</th><th>Orders</th></tr></thead><tbody>${
+          sorted.slice(0, 10).map((e, i) => {
+            const prod = all.find(p => p.id === e[0]);
+            return `<tr><td>${i + 1}</td><td><strong>${prod ? prod.name : e[0]}</strong></td><td>${e[1]}</td></tr>`;
+          }).join('')
+        }</tbody></table>`;
+      }
+    }
   }
 
   function showTab(name) {
@@ -329,6 +455,7 @@
 
   function doLogout() {
     localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(EMAIL_KEY);
     window.location.href = 'login.html';
   }
 
@@ -356,7 +483,7 @@
     $('#apDescriptionAr').value = product ? (product.descriptionAr || '') : '';
     const preview = $('#apImagePreview');
     if (preview) {
-      const imgSrc = product && product.image ? product.image : '../assets/poster-lab-logo.png';
+      const imgSrc = product && product.image ? product.image : '../assets/poster-lab-logo.webp';
       preview.src = (typeof productImageUrl === 'function') ? productImageUrl(imgSrc) : imgSrc;
     }
   }
@@ -429,10 +556,13 @@
     if (idx >= 0) custom[idx] = productData;
     else custom.push(productData);
     saveAdminProducts(custom);
-    window.saveProductToFirestore(productData);
+    if (typeof window.saveProductToFirestore === 'function') {
+      window.saveProductToFirestore(productData);
+    }
     hideProductForm();
     rebuildCategoryFilter();
     renderProducts();
+    showAdminToast('✓ Product "' + name + '" saved successfully! (15s)', 'success', 15000);
   }
 
   function editProduct(pid) {
@@ -459,9 +589,12 @@
     } else {
       saveAdminProducts(getAdminProducts().filter(x => x.id !== pid));
     }
-    window.deleteProductFromFirestore(pid);
+    if (typeof window.deleteProductFromFirestore === 'function') {
+      window.deleteProductFromFirestore(pid);
+    }
     rebuildCategoryFilter();
     renderProducts();
+    showAdminToast('✓ Product "' + pid + '" deleted successfully! (15s)', 'info', 15000);
   }
 
   function clearAllProducts() {
@@ -491,49 +624,83 @@
     if (!code || !value) { alert('Code and value required.'); return; }
     const list = getCoupons();
     if (list.find(c => c.code === code)) { alert('Coupon code already exists.'); return; }
-    const coupon = { code, type, value, minOrder, maxUses, uses: 0 };
+    const coupon = { code, type, value, minOrder, maxUses, uses: 0, usedBy: [] };
     list.push(coupon);
     saveCoupons(list);
-    window.saveCouponToFirestore(coupon);
+    if (typeof window.saveCouponToFirestore === 'function') {
+      window.saveCouponToFirestore(coupon);
+    }
     hideCouponForm();
     renderCoupons();
+    showAdminToast('✓ Coupon "' + code + '" saved successfully! (15s)', 'success', 15000);
   }
 
   function deleteCoupon(code) {
     if (!confirm('Delete coupon "' + code + '"?')) return;
     saveCoupons(getCoupons().filter(x => x.code !== code));
-    window.deleteCouponFromFirestore(code);
+    if (typeof window.deleteCouponFromFirestore === 'function') {
+      window.deleteCouponFromFirestore(code);
+    }
     renderCoupons();
   }
 
   /* ── Background auto-sync ── */
-  async function syncAllFromFirestore() {
+  async function syncAllFromFirestore(force = false) {
     if (_syncing) return;
     _syncing = true;
+    const badge = $('#adminSyncBadge');
+    if (badge) {
+      badge.innerHTML = '<span style="color:var(--warm)">↻ Syncing...</span>';
+    }
     try {
-      await Promise.all([
+      const [ordersOk] = await Promise.all([
         syncOrdersFromFirestore(),
-        window.syncProductsFromFirestore ? window.syncProductsFromFirestore() : Promise.resolve(),
-        window.syncCouponsFromFirestore ? window.syncCouponsFromFirestore() : Promise.resolve()
+        window.syncProductsFromFirestore ? window.syncProductsFromFirestore(force) : Promise.resolve(0),
+        window.syncCouponsFromFirestore ? window.syncCouponsFromFirestore(force) : Promise.resolve(0)
       ]);
-      // Re-render current tab
+      const dbReady = typeof isFirebaseReady === 'function' ? isFirebaseReady() : Boolean(typeof getFirebaseDb === 'function' && getFirebaseDb());
+      
+      // Refresh current tab
       const active = $('.admin-nav-btn.is-active');
       if (active && active.dataset.adminTab) showTab(active.dataset.adminTab);
-      const badge = $('#adminSyncBadge');
-      if (badge) { badge.textContent = 'Synced'; badge.style.color = 'var(--accent-strong)'; }
-    } catch (e) { err('Auto-sync error:', e); }
+      
+      if (badge) {
+        if (dbReady || ordersOk) {
+          const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          badge.innerHTML = `<span style="color:var(--accent);font-weight:700">● Online (${time})</span>`;
+        } else {
+          badge.innerHTML = `<span style="color:var(--warm);cursor:pointer;font-weight:600" data-cmd="sync-all" title="Using local data. Click to reconnect.">⚠ Local Mode</span>`;
+        }
+      }
+    } catch (e) {
+      err('Auto-sync error:', e);
+      if (badge) {
+        badge.innerHTML = `<span style="color:var(--danger);cursor:pointer;font-weight:600" data-cmd="sync-all" title="Sync failed. Click to retry.">⚠ Offline (Retry)</span>`;
+      }
+    }
     _syncing = false;
   }
 
   let _syncTimer = null;
   function startAutoSync() {
     stopAutoSync();
-    syncAllFromFirestore();
-    _syncTimer = setInterval(syncAllFromFirestore, 60000);
+    syncAllFromFirestore(false);
+    _syncTimer = setInterval(() => syncAllFromFirestore(false), 45000);
   }
   function stopAutoSync() { if (_syncTimer) { clearInterval(_syncTimer); _syncTimer = null; } }
 
   function handleClick(e) {
+    const pageBtn = e.target.closest('[data-page-action]');
+    if (pageBtn) {
+      const action = pageBtn.dataset.pageAction;
+      if (action === 'first') productPagination.page = 1;
+      else if (action === 'prev') productPagination.page = Math.max(1, productPagination.page - 1);
+      else if (action === 'next') productPagination.page = Math.min(productPagination.totalPages || 1, productPagination.page + 1);
+      else if (action === 'last') productPagination.page = productPagination.totalPages || 1;
+      renderProducts();
+      return;
+    }
+
     const btn = e.target.closest('[data-cmd]');
     if (!btn) return;
     const cmd = btn.dataset.cmd;
@@ -551,7 +718,7 @@
       case 'save-coupon':    saveCoupon();       break;
       case 'cancel-coupon':  hideCouponForm();   break;
       case 'delete-coupon':  deleteCoupon(btn.dataset.code); break;
-      case 'sync-all':       syncAllFromFirestore(); break;
+      case 'sync-all':       syncAllFromFirestore(true); break;
     }
   }
 
@@ -570,6 +737,7 @@
         updateStats();
         if ($('#adminTabOrders') && !$('#adminTabOrders').hidden) renderOrders();
         if ($('#adminTabDashboard') && !$('#adminTabDashboard').hidden) renderDashboard();
+        showAdminToast('✓ Order ' + id + ' status updated to "' + status + '"! (15s)', 'success', 15000);
       }
     }
     if (e.target.matches('#adminOrderStatusFilter') || e.target.matches('#adminOrderSearch')) renderOrders();
@@ -603,9 +771,19 @@
     }
   }
 
+  let _adminSearchTimer = null;
   function handleInput(e) {
-    if (e.target.matches('#adminOrderSearch')) renderOrders();
-    if (e.target.matches('#adminProductSearch')) renderProducts();
+    if (e.target.matches('#adminOrderSearch')) {
+      clearTimeout(_adminSearchTimer);
+      _adminSearchTimer = setTimeout(renderOrders, 150);
+    }
+    if (e.target.matches('#adminProductSearch')) {
+      clearTimeout(_adminSearchTimer);
+      _adminSearchTimer = setTimeout(() => {
+        productPagination.page = 1;
+        renderProducts();
+      }, 150);
+    }
   }
 
   function handleNavClick(e) {
@@ -615,18 +793,35 @@
     showTab(btn.dataset.adminTab);
   }
 
+  function updateAdminThemeUI() {
+    const theme = localStorage.getItem('poster-lab-theme') || 'light';
+    document.documentElement.dataset.theme = theme;
+    const icon = $('#adminThemeIcon');
+    if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀';
+  }
+
+  function toggleAdminTheme() {
+    const cur = localStorage.getItem('poster-lab-theme') || 'light';
+    const next = cur === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('poster-lab-theme', next);
+    updateAdminThemeUI();
+  }
+
   function init() {
     log('init');
     try {
-      Promise.all([
-        syncOrdersFromFirestore(),
-        window.syncProductsFromFirestore ? window.syncProductsFromFirestore() : Promise.resolve(),
-        window.syncCouponsFromFirestore ? window.syncCouponsFromFirestore() : Promise.resolve()
-      ]).then(() => {
-        rebuildCategoryFilter();
-        showTab('dashboard');
-        startAutoSync();
-      });
+      updateAdminThemeUI();
+      rebuildCategoryFilter();
+      showTab('dashboard');
+
+      // Wire theme toggle
+      const themeBtn = $('#adminThemeToggle');
+      if (themeBtn) themeBtn.addEventListener('click', toggleAdminTheme);
+
+      // Start sync
+      syncAllFromFirestore(true);
+      startAutoSync();
+
       const app = $('#adminApp');
       if (app) {
         app.addEventListener('click', handleClick);
@@ -638,12 +833,13 @@
       }
       const logoutBtn = $('#adminLogoutBtn');
       if (logoutBtn) logoutBtn.addEventListener('click', doLogout);
+      
       // Image path input → update preview live
       const apImage = $('#apImage');
       const apPreview = $('#apImagePreview');
       if (apImage && apPreview) {
         apImage.addEventListener('input', function() {
-          apPreview.src = this.value || '../assets/poster-lab-logo.png';
+          apPreview.src = this.value || '../assets/poster-lab-logo.webp';
         });
         apPreview.addEventListener('click', function() {
           const upload = $('#apImageUpload');

@@ -1,4 +1,6 @@
-:root {
+:root,
+:root[data-theme="dark"],
+[data-theme="dark"] {
   color-scheme: dark;
   --bg: #11100e;
   --bg-soft: #191816;
@@ -548,7 +550,7 @@ textarea:focus {
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
+  touch-action: pan-y pinch-zoom pan-x;
   scrollbar-width: none;
   cursor: grab;
   will-change: transform;
@@ -666,10 +668,11 @@ textarea:focus {
 }
 
 .product-card {
+  contain: layout style;
   display: grid;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
+  border-radius: 18px;
   background: var(--surface);
   box-shadow: var(--small-shadow);
   contain: content;
@@ -820,14 +823,40 @@ textarea:focus {
 }
 
 .detail-main-image {
+  position: relative;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: var(--surface-2);
+  padding: clamp(14px, 3.5vw, 28px);
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+  min-height: 300px;
 }
 .detail-main-image img {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 75vh;
+  max-height: 72vh;
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
   display: block;
+  border-radius: 8px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  transition: border 250ms ease, box-shadow 250ms ease;
+}
+.detail-main-image.frame-black img {
+  border: 12px solid #18181b;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+.detail-main-image.frame-white img {
+  border: 12px solid #ffffff;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+.detail-main-image.frame-none img {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
 }
 
 .thumb-row {
@@ -860,6 +889,74 @@ textarea:focus {
   display: grid;
   align-content: start;
   gap: 13px;
+}
+
+/* ── Top-Left Page Back Bar & Button (Product & Category Pages) ── */
+.page-back-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  padding: 8px 0;
+  width: 100%;
+}
+.detail-shell .page-back-bar {
+  padding: 8px 0;
+  margin-bottom: 20px;
+}
+.page-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--text-strong);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.1);
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  user-select: none;
+}
+:root[data-theme="light"] .page-back-btn,
+[data-theme="light"] .page-back-btn {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #211f1b;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.08);
+}
+.page-back-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 6px 22px var(--accent-glow, rgba(36, 198, 163, 0.28));
+  transform: translateX(-4px);
+}
+.page-back-arrow {
+  flex-shrink: 0;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.page-back-btn:hover .page-back-arrow {
+  transform: translateX(-3px);
+}
+[dir="rtl"] .page-back-bar,
+html[lang="ar"] .page-back-bar {
+  justify-content: flex-start;
+}
+[dir="rtl"] .page-back-arrow,
+html[lang="ar"] .page-back-arrow {
+  transform: rotate(180deg);
+}
+[dir="rtl"] .page-back-btn:hover,
+html[lang="ar"] .page-back-btn:hover {
+  transform: translateX(4px);
+}
+[dir="rtl"] .page-back-btn:hover .page-back-arrow,
+html[lang="ar"] .page-back-btn:hover .page-back-arrow {
+  transform: rotate(180deg) translateX(-3px);
 }
 
 .back-link {
@@ -1591,21 +1688,73 @@ textarea:focus {
 }
 
 .toast-notification .toast {
-  padding: 14px 20px;
-  border-radius: 999px;
-  background: var(--text-strong);
-  color: var(--bg);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-  font-weight: 900;
-  text-align: center;
+  position: relative;
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px 14px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--text-strong);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+  font-weight: 700;
+  font-size: 0.90rem;
   opacity: 0;
-  transform: translateY(16px);
+  overflow: hidden;
+  transform: translateY(16px) scale(0.96);
   transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+  user-select: none;
 }
 
 .toast-notification .toast.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+}
+
+.toast-text {
+  flex: 1;
+  line-height: 1.35;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 8px;
+  line-height: 1;
+  transition: all 160ms ease;
+  flex-shrink: 0;
+}
+.toast-close:hover {
+  color: var(--text-strong);
+  background: var(--surface-2);
+}
+
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  width: 100%;
+  animation: toast-countdown linear forwards;
+}
+
+@keyframes toast-countdown {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+[dir="rtl"] .toast-progress {
+  left: auto;
+  right: 0;
 }
 
 [dir="rtl"] .toast-notification .toast {
@@ -1852,13 +2001,12 @@ textarea:focus {
   margin-bottom: -4px;
   cursor: grab;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
   animation: fade-in 500ms ease both;
   animation-delay: calc(var(--section-order, 0) * 60ms + 80ms);
   user-select: none;
-  touch-action: pan-x;
-  overscroll-behavior-x: contain;
+  touch-action: pan-y pinch-zoom pan-x;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -2597,3 +2745,505 @@ textarea:focus {
 
 /* ── Cart button logged-in state ── */
 .cart-button { position: relative; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DELIGHTFUL SHOPPING ANIMATIONS & MICRO-INTERACTIONS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 3D Card Hover & Glass Sheen Reflection ── */
+.product-card {
+  transform-style: preserve-3d;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms var(--ease-out), border-color 250ms var(--ease-out);
+}
+.product-card:hover {
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.22), 0 0 0 1px var(--accent);
+}
+.product-media {
+  perspective: 800px;
+}
+.product-card .card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 220px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  border-radius: inherit;
+  transition: opacity 280ms ease;
+  z-index: 6;
+  mix-blend-mode: overlay;
+}
+[data-theme="dark"] .product-card .card-glare {
+  background: radial-gradient(circle 220px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+}
+.product-card:hover .card-glare {
+  opacity: 1;
+}
+
+/* ── "Fly to Cart" Cloned Flyer & Particle Burst ── */
+.fly-to-cart-clone {
+  position: fixed;
+  z-index: 99999;
+  pointer-events: none;
+  border-radius: var(--radius-lg, 14px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  background-size: cover;
+  background-position: center;
+  will-change: transform, opacity, border-radius;
+  transition: transform 620ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 620ms ease, border-radius 620ms ease;
+}
+
+/* ── Cart Bounce & Badge Ripple ── */
+@keyframes cartBouncePop {
+  0%   { transform: scale(1); }
+  25%  { transform: scale(1.35) rotate(-10deg); }
+  50%  { transform: scale(0.9) rotate(5deg); }
+  75%  { transform: scale(1.12) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.cart-bounce-pop {
+  animation: cartBouncePop 600ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both !important;
+}
+
+.cart-button strong[data-cart-count] {
+  transition: transform 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 250ms ease;
+}
+.cart-button.cart-bounce-pop strong[data-cart-count] {
+  transform: scale(1.4);
+  box-shadow: 0 0 14px var(--accent-glow, rgba(37, 99, 235, 0.6));
+}
+
+/* ── Wishlist Heart Burst ── */
+@keyframes heartBurstPop {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.45) rotate(-12deg); color: #ff4757; }
+  60%  { transform: scale(0.85) rotate(6deg); }
+  85%  { transform: scale(1.15) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.heart-burst-pop {
+  animation: heartBurstPop 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both !important;
+}
+
+/* ── Floating Particle Sparks & Confetti ── */
+.confetti-container {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100000;
+}
+
+/* ── Category Pills Interactive Glow & Hover ── */
+.cat-pill {
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms ease, box-shadow 250ms ease, border-color 200ms ease;
+  will-change: transform;
+}
+.cat-pill:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent);
+}
+.cat-pill:active {
+  transform: translateY(-1px) scale(0.98);
+}
+.cat-pill.is-active {
+  box-shadow: 0 6px 20px var(--accent-glow, rgba(37, 99, 235, 0.32));
+  animation: pillGlow 2.5s infinite ease-in-out;
+}
+@keyframes pillGlow {
+  0%, 100% { box-shadow: 0 4px 14px var(--accent-glow, rgba(37, 99, 235, 0.25)); }
+  50% { box-shadow: 0 6px 22px var(--accent-glow, rgba(37, 99, 235, 0.45)); }
+}
+
+/* ── Floating WhatsApp Button Radar Ripple ── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  transition: transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 300ms ease;
+}
+.whatsapp-float:hover {
+  transform: scale(1.12) rotate(-5deg);
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.5);
+}
+.whatsapp-float::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  opacity: 0.8;
+  animation: waRadarWave 2.4s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+@keyframes waRadarWave {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  50% { opacity: 0.35; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+
+/* Product detail image reverted to original natural fit */
+
+/* ── Variant Option Button Bounces ── */
+.variant-options button {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  will-change: transform;
+}
+.variant-options button:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.variant-options button:active {
+  transform: scale(0.94);
+}
+.variant-options button.is-selected {
+  animation: variantSelected 320ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  box-shadow: 0 4px 14px var(--accent-glow, rgba(37, 99, 235, 0.3));
+}
+@keyframes variantSelected {
+  0%   { transform: scale(0.92); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* ── Detail Add to Cart Button Shimmer ── */
+.detail-add {
+  position: relative;
+  overflow: hidden;
+  transition: transform 220ms cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 250ms ease;
+}
+.detail-add:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 24px var(--accent-glow, rgba(37, 99, 235, 0.4));
+}
+.detail-add:active {
+  transform: translateY(0) scale(0.97);
+}
+.detail-add::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-25deg);
+  animation: btnShimmer 3.5s infinite ease-in-out;
+}
+@keyframes btnShimmer {
+  0%, 65% { left: -120%; }
+  100%    { left: 180%; }
+}
+
+/* ── Cart Drawer Item Stagger Cascade ── */
+.cart-items .cart-item {
+  animation: cartItemCascade 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.cart-items .cart-item:nth-child(1) { animation-delay: 40ms; }
+.cart-items .cart-item:nth-child(2) { animation-delay: 80ms; }
+.cart-items .cart-item:nth-child(3) { animation-delay: 120ms; }
+.cart-items .cart-item:nth-child(4) { animation-delay: 160ms; }
+.cart-items .cart-item:nth-child(5) { animation-delay: 200ms; }
+@keyframes cartItemCascade {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Quantity Controls Tactile Tap ── */
+.cart-item-qty button,
+.cart-quantity button {
+  transition: transform 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 150ms ease;
+}
+.cart-item-qty button:active,
+.cart-quantity button:active {
+  transform: scale(0.8);
+}
+
+/* ── Toast Notification Animation ── */
+.toast-notification .toast {
+  position: relative;
+  overflow: hidden;
+  animation: toastEntrance 380ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+@keyframes toastEntrance {
+  0%   { transform: translateY(28px) scale(0.88); opacity: 0; }
+  60%  { transform: translateY(-3px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ── Brand Logo Micro-Wiggle on Hover ── */
+.brand:hover .brand-mark img {
+  transform: rotate(-6deg) scale(1.08);
+  transition: transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.brand .brand-mark img {
+  transition: transform 300ms ease;
+}
+
+/* ── Accessible reduced-motion support ── */
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .cat-pill,
+  .whatsapp-float,
+    .cart-bounce-pop,
+  .heart-burst-pop,
+  .fly-to-cart-clone {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DESKTOP CAROUSEL & INTERACTIVE CATEGORY PRODUCT COUNT BUTTON
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Interactive Category Product Count Button (Pill Design) ── */
+.result-count-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4.5px;
+  padding: 2px 8.5px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text-strong);
+  font-size: 0.70rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  user-select: none;
+  white-space: nowrap;
+}
+:root[data-theme="light"] .result-count-btn,
+[data-theme="light"] .result-count-btn {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #52525b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+.result-count-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--accent-glow, rgba(36, 198, 163, 0.22));
+}
+.result-count-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+.result-count-btn .count-btn-dot {
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+  background: #0d9488;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.2);
+}
+[data-theme="dark"] .result-count-btn .count-btn-dot {
+  background: var(--accent);
+  box-shadow: 0 0 4px var(--accent);
+}
+.result-count-btn .count-btn-text {
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.result-count-btn .count-btn-arrow {
+  font-size: 0.70rem;
+  line-height: 1;
+  color: #71717a;
+  transition: transform 180ms ease, color 180ms ease;
+  margin-inline-start: 1px;
+}
+.result-count-btn:hover .count-btn-arrow {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+[dir="rtl"] .result-count-btn:hover .count-btn-arrow {
+  transform: translateX(-2px);
+}
+
+/* ── Desktop Category Carousel & Navigation Arrows ── */
+.category-carousel-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(8px);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.92;
+  user-select: none;
+}
+.carousel-nav-btn:hover {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 28px var(--accent-glow, rgba(37, 99, 235, 0.4));
+  opacity: 1;
+}
+.carousel-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+.carousel-nav-prev {
+  left: 6px;
+}
+.carousel-nav-next {
+  right: 6px;
+}
+[dir="rtl"] .carousel-nav-prev {
+  left: auto;
+  right: 6px;
+}
+[dir="rtl"] .carousel-nav-next {
+  right: auto;
+  left: 6px;
+}
+[dir="rtl"] .carousel-nav-btn svg {
+  transform: rotate(180deg);
+}
+
+.header-admin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--accent);
+  text-decoration: none;
+  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
+}
+.header-admin-link:hover {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+/* Smooth horizontal scrollbar styling on desktop */
+@media (min-width: 769px) {
+  .category-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+  .category-scroll::-webkit-scrollbar {
+    display: block;
+    height: 6px;
+  }
+  .category-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .category-scroll::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 999px;
+  }
+  .category-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
+}
+
+@media (max-width: 640px) {
+  .carousel-nav-btn {
+    display: none;
+  }
+  .result-count-btn {
+    padding: 1.5px 7px;
+    height: 19px;
+    font-size: 0.64rem;
+    gap: 3.5px;
+  }
+  .result-count-btn .count-btn-dot {
+    width: 3.8px;
+    height: 3.8px;
+  }
+  .result-count-btn .count-btn-text {
+    font-size: 0.64rem;
+  }
+  .result-count-btn .count-btn-arrow {
+    font-size: 0.66rem;
+  }
+}
+
+/* ── Search Results Banner ── */
+.search-results-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px clamp(16px, 4vw, 32px);
+  margin-bottom: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--small-shadow);
+  flex-wrap: wrap;
+}
+.search-results-info {
+  display: grid;
+  gap: 3px;
+}
+.search-results-eyebrow {
+  font-size: 0.76rem;
+  font-weight: 900;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.search-results-info h2 {
+  margin: 0;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--text-strong);
+  letter-spacing: -0.02em;
+}
+.search-results-count {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+.clear-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text-strong);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: all 180ms ease;
+  user-select: none;
+}
+.clear-search-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.18);
+}
+
