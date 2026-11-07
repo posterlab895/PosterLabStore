@@ -1,4 +1,4 @@
-const CACHE_NAME = 'poster-lab-store-v34';
+const CACHE_NAME = 'poster-lab-store-v20';
 const IMAGE_CACHE_NAME = 'poster-lab-images-v2';
 const ASSETS = [
   './',
@@ -6,21 +6,13 @@ const ASSETS = [
   './product.html',
   './our-work.html',
   './faq.html',
-  './admin/login.html',
-  './admin/panel.html',
   './styles.min.css',
-  './admin.min.css',
-  './admin/styles.min.css',
-  './admin/admin.min.css',
+  './enhancements.css',
+  './enhancements.js',
   './products-bundle.min.js',
-  './admin/products-bundle.min.js',
   './script.min.js',
-  './admin-login.min.js',
-  './admin/admin-login.min.js',
-  './admin-panel.min.js',
-  './admin/admin-panel.min.js',
-  './firebase-config.js',
-  './admin/firebase-config.js',
+  './admin-access.js',
+  './admin/admin-extras.js',
   './assets/poster-lab-logo.webp',
   './assets/instapay-qr.webp',
   './assets/size-guide.webp',

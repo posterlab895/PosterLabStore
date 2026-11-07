@@ -10,32 +10,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="../styles.min.css" onerror="this.onerror=null;this.href='styles.min.css'">
-  <link rel="stylesheet" href="../admin.min.css" onerror="this.onerror=null;this.href='admin.min.css'">
-  <link rel="stylesheet" href="admin.min.css">
+  <link rel="stylesheet" href="../styles.min.css">
+  <link rel="stylesheet" href="../admin.min.css">
   <script>(function(){var t="light";try{t=localStorage.getItem("poster-lab-theme")||"light"}catch(e){}document.documentElement.dataset.theme=t;try{var c=document.createElement("style");c.textContent='html{color-scheme:'+(t==="dark"?"dark":"light")+'}';document.head.appendChild(c)}catch(e){}})()</script>
-  <script>if(localStorage.getItem('pls-admin-session')!=='true'||(localStorage.getItem('pls-admin-email')||'').toLowerCase().trim()!=='posterlab895@gmail.com'){localStorage.removeItem('pls-admin-session');localStorage.removeItem('pls-admin-email');window.location.replace('login.html')}</script>
+  <script>if(localStorage.getItem('pls-admin-session')!=='true'){window.location.replace('login.html')}</script>
 </head>
 <body>
   <div id="adminApp">
     <header class="admin-header">
       <div class="admin-header-left">
-        <a href="../index.html" class="admin-brand-link" title="Poster Lab Store Home" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
-          <img src="../assets/poster-lab-logo.webp" alt="PLS" class="admin-header-logo">
-          <h2 style="margin:0;font-size:1.05rem">Poster Lab Store — Admin</h2>
-        </a>
+        <img src="../assets/poster-lab-logo.webp" alt="PLS" class="admin-header-logo">
+        <h2>Poster Lab Store — Admin</h2>
       </div>
       <div class="admin-header-right">
         <span id="adminStatsHeader"></span>
-        <span id="adminSyncBadge" style="font-size:0.8rem;display:inline-flex;align-items:center;padding:4px 8px;border-radius:6px;background:var(--surface-2)"></span>
-        <button class="secondary-button" data-cmd="sync-all" title="Sync with Firestore" style="font-size:0.85rem">↻ Sync</button>
-        <button id="adminThemeToggle" class="secondary-button" type="button" aria-label="Toggle theme" title="Toggle dark/light theme" style="padding:6px 12px;font-size:1rem">
-          <span id="adminThemeIcon">☀</span>
-        </button>
-        <a href="../index.html" class="secondary-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-size:0.85rem">
-          <span>←</span> <span>Store</span>
-        </a>
-        <button id="adminLogoutBtn" class="secondary-button" style="color:var(--danger);border-color:var(--line)">Logout</button>
+        <span id="adminSyncBadge" style="font-size:0.75rem;color:var(--muted)"></span>
+        <button class="secondary-button" data-cmd="sync-all" style="font-size:0.8rem">↻ Sync</button>
+        <button id="adminLogoutBtn" class="secondary-button">Logout</button>
       </div>
     </header>
     <nav class="admin-nav" id="adminNav">
@@ -141,7 +132,7 @@
                 <label>Base price (EGP) <input id="apBasePrice" type="number" placeholder="50"></label>
                 <label>Quantity available <input id="apQuantity" type="number" placeholder="0 = unlimited"></label>
                 <label>Size prices (comma-separated: size=price)
-                  <input id="apSizes" placeholder="20x30=60, 30x40=80, 40x50=100, 50x70=120">
+                  <input id="apSizes" placeholder="20x30=50, 30x40=60, 40x50=70, 50x70=90">
                 </label>
                 <label>Frames (comma-separated)
                   <input id="apFrames" placeholder="None, Black, White">
@@ -208,5 +199,6 @@
   <script defer src="../products-bundle.min.js"></script>
   <script defer src="../script.min.js"></script>
   <script defer src="../admin-panel.min.js"></script>
+  <script defer src="admin-extras.js"></script>
 </body>
 </html>

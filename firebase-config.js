@@ -1,5 +1,8 @@
 /* ── Firebase Configuration ──
-   Poster Lab Store Firebase & Firestore configuration
+   Replace the values below with YOUR Firebase project config.
+   Steps: https://console.firebase.google.com → Project Settings → Add app → Web
+   Enable: Authentication → Sign-in method → Email/Password
+   Enable: Firestore Database → Create database (start in test mode)
 */
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyA9p-n0GgsspZgfIs1KxZuGjJDC0erjNJ4",
@@ -14,28 +17,22 @@ let firebaseApp, firebaseAuth, firebaseDb;
 let firebaseReady = false;
 
 function initFirebase() {
-  if (firebaseReady && firebaseDb) return;
+  if (firebaseReady) return;
   if (typeof firebase === 'undefined') {
     console.warn('[Firebase] SDK not loaded yet, will retry');
-    setTimeout(initFirebase, 400);
+    setTimeout(initFirebase, 500);
     return;
   }
   try {
-    if (firebase.apps && firebase.apps.length > 0) {
-      firebaseApp = firebase.apps.find(a => a.name === 'posterlab') || firebase.apps[0];
-    } else {
-      firebaseApp = firebase.initializeApp(FIREBASE_CONFIG, 'posterlab');
+    if (FIREBASE_CONFIG.apiKey === "YOUR_API_KEY") {
+      console.warn('[Firebase] Using placeholder config — set real values in firebase-config.js');
     }
-    firebaseAuth = firebaseApp.auth ? firebaseApp.auth() : (firebase.auth ? firebase.auth() : null);
-    firebaseDb = firebaseApp.firestore ? firebaseApp.firestore() : (firebase.firestore ? firebase.firestore() : null);
-    if (firebaseDb && typeof firebaseDb.settings === 'function') {
-      try { firebaseDb.settings({ merge: true }); } catch (ignore) {}
-    }
-    firebaseReady = Boolean(firebaseDb);
-    console.log('[Firebase] Initialized successfully. Ready:', firebaseReady);
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('firebase-ready', { detail: { db: firebaseDb, auth: firebaseAuth } }));
-    }
+    firebaseApp = firebase.initializeApp(FIREBASE_CONFIG, 'posterlab');
+    firebaseAuth = firebaseApp.auth();
+    firebaseDb = firebaseApp.firestore();
+    firebaseDb.settings({ merge: true });
+    firebaseReady = true;
+    console.log('[Firebase] Initialized');
   } catch (e) {
     console.error('[Firebase] Init error:', e);
   }
@@ -43,31 +40,4 @@ function initFirebase() {
 
 function getFirebaseAuth() { return firebaseAuth; }
 function getFirebaseDb() { return firebaseDb; }
-function isFirebaseReady() { return firebaseReady && Boolean(firebaseDb); }
-
-function ensureFirebaseReady(timeoutMs = 8000) {
-  return new Promise((resolve) => {
-    if (isFirebaseReady()) return resolve(firebaseDb);
-    initFirebase();
-    const start = Date.now();
-    const interval = setInterval(() => {
-      if (isFirebaseReady()) {
-        clearInterval(interval);
-        return resolve(firebaseDb);
-      }
-      if (Date.now() - start > timeoutMs) {
-        clearInterval(interval);
-        resolve(firebaseDb || null);
-      }
-    }, 100);
-  });
-}
-
-// Expose globally
-if (typeof window !== 'undefined') {
-  window.initFirebase = initFirebase;
-  window.getFirebaseAuth = getFirebaseAuth;
-  window.getFirebaseDb = getFirebaseDb;
-  window.isFirebaseReady = isFirebaseReady;
-  window.ensureFirebaseReady = ensureFirebaseReady;
-}
+function isFirebaseReady() { return firebaseReady; }

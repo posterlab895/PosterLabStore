@@ -22,8 +22,8 @@ for (const cat of cats) {
     out += '    "tag": "' + cat.label + '",\n';
     out += '    "tagAr": "' + cat.labelAr + '",\n';
     out += '    "image": "assets/' + cat.name + '/' + f + '",\n';
-    out += '    "basePrice": 60,\n';
-    out += '    "sizes": { "20x30": 60, "30x40": 80, "40x50": 100, "50x70": 120 },\n';
+    out += '    "basePrice": 50,\n';
+    out += '    "sizes": { "20x30": 50, "30x40": 60, "40x50": 70, "50x70": 90 },\n';
     out += '    "frames": ["None", "Black", "White"],\n';
     out += '    "description": ""\n';
     out += '  }';

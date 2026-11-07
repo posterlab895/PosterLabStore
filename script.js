@@ -132,7 +132,7 @@ const translations = {
     faqQ1: "How do I place an order?",
     faqA1: "Browse the shop, choose your favorite poster, select the size and frame option, then add it to your cart. When you're ready, go to the cart, enter your name, phone, address, and payment method, then click \"Place order\" to send the order via WhatsApp.",
     faqQ2: "What sizes are available?",
-    faqA2: "We offer four sizes: 20x30 cm, 30x40 cm, 40x50 cm, and 50x70 cm. Prices vary by size — larger sizes cost more. All sizes can be framed or unframed.",
+    faqA2: "We offer four sizes: 20x30 cm, 30x40 cm, 40x50 cm, and 50x70 cm. Prices vary by size � larger sizes cost more. All sizes can be framed or unframed.",
     faqQ3: "What frame options do you offer?",
     faqA3: "We offer three options: no frame (poster only), black frame, and white frame. Frames add EGP 120 to the price. All frames are high-quality and ready to hang.",
     faqQ4: "Can I upload my own design?",
@@ -140,7 +140,7 @@ const translations = {
     faqQ5: "What payment methods do you accept?",
     faqA5: "We accept VF-Cash and Instapay. Payment is made before we start printing your order. You'll receive the payment details after placing your order.",
     faqQ6: "How long does delivery take?",
-    faqA6: "Delivery typically takes 3–7 business days depending on your location. We deliver anywhere in Egypt. A delivery fee of EGP 35 is added to each order.",
+    faqA6: "Delivery typically takes 3�7 business days depending on your location. We deliver anywhere in Egypt. A delivery fee of EGP 35 is added to each order.",
     faqQ7: "Can I cancel or change my order?",
     faqA7: "You can cancel or modify your order within 2 hours of placing it. After that, production may have already started. Contact us on WhatsApp to make changes.",
     faqQ8: "Do you offer refunds or exchanges?",
@@ -148,7 +148,7 @@ const translations = {
     faqQ9: "How do I contact you?",
     faqA9: "You can reach us directly on WhatsApp by clicking the WhatsApp icon button at the bottom of any page. We typically respond within a few hours during business days.",
     faqContactTitle: "Still have questions?",
-    faqContactText: "Chat with us on WhatsApp — we're happy to help!",
+    faqContactText: "Chat with us on WhatsApp � we're happy to help!",
     faqWhatsappBtn: "Chat on WhatsApp",
     couponLabel: "Coupon code",
     couponPlaceholder: "Enter coupon code",
@@ -495,17 +495,7 @@ function updatePendingOrdersBadge() {
   el.textContent = count;
   el.hidden = count === 0;
 }
-function getCouponsData() {
-  const coupons = lsGet(LOCAL_STORAGE_COUPONS_KEY, []);
-  if (!coupons || !coupons.length) {
-    const defaults = [
-      { code: "POSTER10", type: "percent", value: 10, minOrder: 100, maxUses: 100, uses: 0, usedBy: [] }
-    ];
-    lsSet(LOCAL_STORAGE_COUPONS_KEY, defaults);
-    return defaults;
-  }
-  return coupons;
-}
+function getCouponsData() { return lsGet(LOCAL_STORAGE_COUPONS_KEY, []); }
 function saveCouponsData(c) { lsSet(LOCAL_STORAGE_COUPONS_KEY, c); }
 function getWishlistData() { return lsGet(LOCAL_STORAGE_WISHLIST_KEY, []); }
 function saveWishlistData(w) { lsSet(LOCAL_STORAGE_WISHLIST_KEY, w); }
@@ -719,17 +709,9 @@ function loadCartFromFirestore() {
 }
 
 /* ── Firestore Product Sync ── */
-function syncProductsFromFirestore(force = false) {
+function syncProductsFromFirestore() {
   return new Promise(async (resolve) => {
-    try {
-      const lastSync = parseInt(localStorage.getItem('pls_last_fs_sync') || '0', 10);
-      if (!force && Date.now() - lastSync < 300000 && lsGet(LOCAL_STORAGE_PRODUCTS_KEY, []).length > 0) {
-        resolve(0);
-        return;
-      }
-    } catch {}
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
-    else initFirebase();
+    initFirebase();
     if (!isFirebaseReady()) { resolve(0); return; }
     try {
       const db = getFirebaseDb();
@@ -755,7 +737,6 @@ function syncProductsFromFirestore(force = false) {
           else merged.push(cp);
         });
         lsSet(LOCAL_STORAGE_PRODUCTS_KEY, merged);
-      try { localStorage.setItem("pls_last_fs_sync", String(Date.now())); } catch {}
       }
       resolve(custom.length);
     } catch (e) {
@@ -767,8 +748,7 @@ function syncProductsFromFirestore(force = false) {
 
 function saveProductToFirestore(product) {
   return new Promise(async (resolve) => {
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
-    else initFirebase();
+    initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
     try {
       const db = getFirebaseDb();
@@ -804,10 +784,9 @@ function deleteProductFromFirestore(productId) {
 }
 
 /* ── Firestore Coupon Sync ── */
-function syncCouponsFromFirestore(force = false) {
+function syncCouponsFromFirestore() {
   return new Promise(async (resolve) => {
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
-    else initFirebase();
+    initFirebase();
     if (!isFirebaseReady()) { resolve(0); return; }
     try {
       const db = getFirebaseDb();
@@ -820,24 +799,10 @@ function syncCouponsFromFirestore(force = false) {
       if (coupons.length) {
         const existing = lsGet(LOCAL_STORAGE_COUPONS_KEY, []);
         const merged = [...existing];
-                coupons.forEach(c => {
+        coupons.forEach(c => {
           const idx = merged.findIndex(m => m.code === c.code);
-          if (idx >= 0) {
-            const maxUses = Math.max(merged[idx].uses || 0, c.uses || 0);
-            const combinedUsedBy = [...(merged[idx].usedBy || []), ...(c.usedBy || [])];
-            const uniqueUsedBy = [];
-            const seen = new Set();
-            combinedUsedBy.forEach(u => {
-              const key = u.orderId || (u.date + '_' + u.customerPhone);
-              if (!seen.has(key)) { seen.add(key); uniqueUsedBy.push(u); }
-            });
-            merged[idx] = { ...merged[idx], ...c, uses: maxUses, usedBy: uniqueUsedBy };
-            if (merged[idx].uses > (c.uses || 0)) {
-              saveCouponToFirestore(merged[idx]);
-            }
-          } else {
-            merged.push(c);
-          }
+          if (idx >= 0) merged[idx] = { ...merged[idx], ...c };
+          else merged.push(c);
         });
         lsSet(LOCAL_STORAGE_COUPONS_KEY, merged);
       }
@@ -851,8 +816,7 @@ function syncCouponsFromFirestore(force = false) {
 
 function saveCouponToFirestore(coupon) {
   return new Promise(async (resolve) => {
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
-    else initFirebase();
+    initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
     try {
       const db = getFirebaseDb();
@@ -934,32 +898,17 @@ function flashCartBubble() {
   window.setTimeout(() => cartCount.classList.remove("bump"), 320);
 }
 
-function showToast(message, duration = 15000) {
+function showToast(message) {
   if (!toastContainer) return;
   const toast = document.createElement("div");
   toast.className = "toast";
-  toast.innerHTML = `
-    <span class="toast-text">${message}</span>
-    <button class="toast-close" type="button" aria-label="Close">✕</button>
-    <span class="toast-progress" style="animation-duration: ${duration}ms"></span>
-  `;
+  toast.textContent = message;
   toastContainer.appendChild(toast);
   requestAnimationFrame(() => toast.classList.add("show"));
-
-  let timer;
-  const dismiss = () => {
-    clearTimeout(timer);
+  window.setTimeout(() => {
     toast.classList.remove("show");
-    setTimeout(() => { if (toast.parentNode) toast.remove(); }, 250);
-  };
-
-  toast.querySelector(".toast-close")?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    dismiss();
-  });
-  toast.addEventListener("click", dismiss);
-
-  timer = window.setTimeout(dismiss, duration);
+    toast.addEventListener("transitionend", () => toast.remove(), { once: true });
+  }, 2400);
 }
 
 function money(amount) {
@@ -1136,19 +1085,6 @@ function registerUser(name, email, phone, password) {
 
 function loginUser(email, password) {
   return new Promise(async (resolve) => {
-    const cleanEmail = (email || '').trim().toLowerCase();
-    const cleanPwd = (password || '').trim();
-    if (cleanEmail === "posterlab895@gmail.com" && (cleanPwd === "Poster895Lab$" || cleanPwd === "Poster895Lab")) {
-      state.user = { id: "admin-posterlab", name: "Poster Lab Admin", email: "posterlab895@gmail.com", phone: "01010414187", deliveryAddress: "", addresses: [] };
-      saveSession(state.user);
-      localStorage.setItem("pls-admin-session", "true");
-      localStorage.setItem("pls-admin-email", "posterlab895@gmail.com");
-      saveCart();
-      renderCart();
-      updateUserUI();
-      resolve({ success: true, user: state.user });
-      return;
-    }
     try {
       initFirebase();
       const auth = getFirebaseAuth();
@@ -1214,8 +1150,6 @@ function logoutUser() {
     await saveCartToFirestore();
     state.user = null;
     saveSession(null);
-    localStorage.removeItem("pls-admin-session");
-    localStorage.removeItem("pls-admin-email");
     state.cart = [];
     localStorage.removeItem(LOCAL_STORAGE_CART_KEY);
     saveCart();
@@ -1225,41 +1159,7 @@ function logoutUser() {
   });
 }
 
-function isPosterLabAdmin() {
-  const ADMIN_EMAIL = "posterlab895@gmail.com";
-  const userEmail = (state.user && state.user.email ? state.user.email : "").toLowerCase().trim();
-  const hasAdminSession = localStorage.getItem("pls-admin-session") === "true";
-  const adminEmail = (localStorage.getItem("pls-admin-email") || "").toLowerCase().trim();
-
-  if (userEmail === ADMIN_EMAIL) return true;
-  if (hasAdminSession && adminEmail === ADMIN_EMAIL) return true;
-  return false;
-}
-
-function updateHeaderAdminButton() {
-  const isAdmin = isPosterLabAdmin();
-  const headerActions = document.querySelector('.header-actions');
-  if (!headerActions) return;
-  let adminBtn = headerActions.querySelector('.header-admin-link');
-  if (isAdmin) {
-    if (!adminBtn) {
-      adminBtn = document.createElement('a');
-      adminBtn.className = 'header-admin-link';
-      adminBtn.href = 'admin/panel.html';
-      adminBtn.title = (state && state.lang === 'ar') ? 'لوحة التحكم' : 'Admin Panel';
-      adminBtn.setAttribute('aria-label', 'Admin Panel');
-      adminBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>';
-      const accountBtn = headerActions.querySelector('[data-account-btn]');
-      if (accountBtn) headerActions.insertBefore(adminBtn, accountBtn);
-      else headerActions.appendChild(adminBtn);
-    }
-  } else if (adminBtn) {
-    adminBtn.remove();
-  }
-}
-
 function updateUserUI() {
-  updateHeaderAdminButton();
   document.querySelectorAll("[data-account-link]").forEach(el => {
     if (state.user) {
       el.innerHTML = `<span data-account-name>${state.user.name}</span>`;
@@ -1304,11 +1204,6 @@ function showAccountPanel() {
         <p style="color:var(--muted);font-size:0.85rem">${state.user.email}</p>
       </div>
       <div style="display:grid;gap:8px">
-        ${isPosterLabAdmin() ? `
-        <a href="admin/panel.html" class="secondary-link" style="justify-content:flex-start;padding:12px 16px;min-height:48px;text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:700;border-color:var(--accent);color:var(--accent)">
-          <span>⚙️</span> <span>${isAr ? "لوحة التحكم (الإدارة)" : "Admin Panel"}</span>
-        </a>
-      ` : ''}
         <button class="secondary-link" type="button" data-view-orders style="justify-content:flex-start;padding:12px 16px;min-height:48px">${isAr ? "طلباتي" : "My Orders"}</button>
         <button class="secondary-link" type="button" data-view-wishlist style="justify-content:flex-start;padding:12px 16px;min-height:48px">${isAr ? "المفضلة" : "Wishlist"} (${state.wishlist.length})</button>
         <button class="secondary-link" type="button" data-view-settings style="justify-content:flex-start;padding:12px 16px;min-height:48px">${isAr ? "الإعدادات" : "Settings"}</button>
@@ -1337,7 +1232,6 @@ function showAccountPanel() {
             <a href="#" id="showLoginToggle" style="color:var(--accent);font-weight:800">${isAr ? "لديك حساب؟ تسجيل الدخول" : "Have an account? Login"}</a>
           </p>
         </div>
-        
         <p id="accountMsg" style="text-align:center;font-weight:800;font-size:0.85rem;color:var(--danger);margin:0"></p>
       </form>
     `}</div>`;
@@ -1621,41 +1515,14 @@ function isInWishlist(productId) {
 }
 
 function validateCoupon(code, subtotal) {
-  const isAr = state.lang === "ar";
-  if (!code) return { valid: false, msg: isAr ? "أدخل كود الخصم" : "Enter coupon code" };
   const coupons = getCouponsData();
-  const coupon = coupons.find(c => c.code && c.code.trim().toUpperCase() === code.trim().toUpperCase());
-  if (!coupon) return { valid: false, msg: isAr ? "كود الخصم غير صحيح" : "Invalid coupon code" };
-  if (coupon.maxUses && (coupon.uses || 0) >= coupon.maxUses) {
-    return { valid: false, msg: isAr ? "تم استنفاد هذا الكوبون بالكامل" : "Coupon has reached maximum uses" };
-  }
-  if (subtotal < (coupon.minOrder || 0)) {
-    return { valid: false, msg: isAr ? `الحد الأدنى للطلب ${coupon.minOrder} ج.م` : `Minimum order EGP ${coupon.minOrder} required` };
-  }
+  const coupon = coupons.find(c => c.code === code.toUpperCase());
+  if (!coupon) return { valid: false, msg: "Invalid coupon code" };
+  if (coupon.maxUses && coupon.uses >= coupon.maxUses) return { valid: false, msg: "Coupon has expired" };
+  if (subtotal < (coupon.minOrder || 0)) return { valid: false, msg: `Minimum order EGP ${coupon.minOrder} required` };
   let discount = coupon.type === 'percent' ? subtotal * (coupon.value / 100) : coupon.value;
   if (discount > subtotal) discount = subtotal;
   return { valid: true, discount, coupon };
-}
-
-function recordCouponUsage(couponCode, order) {
-  if (!couponCode) return;
-  const coupons = getCouponsData();
-  const coup = coupons.find(c => c.code && c.code.trim().toUpperCase() === couponCode.trim().toUpperCase());
-  if (coup) {
-    coup.uses = (coup.uses || 0) + 1;
-    if (!Array.isArray(coup.usedBy)) coup.usedBy = [];
-    coup.usedBy.push({
-      orderId: order ? order.id : null,
-      date: order ? order.date : new Date().toISOString(),
-      customerName: order ? order.customerName : null,
-      customerPhone: order ? order.customerPhone : null,
-      discount: order ? order.discount : null
-    });
-    saveCouponsData(coupons);
-    if (typeof saveCouponToFirestore === 'function') {
-      saveCouponToFirestore(coup);
-    }
-  }
 }
 
 function applyCoupon(code) {
@@ -1758,8 +1625,10 @@ function createOrder(formData) {
   // Save to Firestore if user is logged in
   saveOrderToFirestore(order);
 
-    if (state.appliedCoupon) {
-    recordCouponUsage(state.appliedCoupon.code, order);
+  if (state.appliedCoupon) {
+    const coupons = getCouponsData();
+    const coup = coupons.find(c => c.code === state.appliedCoupon.code);
+    if (coup) { coup.uses = (coup.uses || 0) + 1; saveCouponsData(coupons); }
   }
 
   return order;
@@ -1954,62 +1823,42 @@ function toggleLanguage() {
 }
 
 function preloadProductImages(list) {
-  const targets = (list || filteredProducts()).slice(0, 2);
-  targets.forEach((product) => {
+  const targets = list || filteredProducts().slice(0, PER_PAGE);
+  targets.forEach((product, i) => {
     const src = product.gallery?.length ? product.gallery[0] : product.image;
     if (!src) return;
     const url = productImageUrl(src);
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = url;
-    link.fetchPriority = "high";
-    document.head.appendChild(link);
+    if (i < 6) {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = url;
+      link.fetchPriority = "high";
+      document.head.appendChild(link);
+    } else {
+      const img = new Image();
+      img.decoding = "async";
+      img.fetchPriority = "low";
+      img.src = url;
+    }
   });
-}
-
-function normalizeSearchText(str) {
-  if (!str) return "";
-  return str
-    .toLowerCase()
-    .replace(/[إأآا]/g, "ا")
-    .replace(/ة/g, "ه")
-    .replace(/ى/g, "ي")
-    .replace(/[\u064B-\u065F]/g, "")
-    .replace(/[#\-_/]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
 }
 
 let _lastFilterSearch = null;
 let _lastFilterResult = null;
 
 function filteredProducts() {
-  const rawSearch = (state.search || "").trim();
-  const search = normalizeSearchText(rawSearch);
+  const search = state.search.trim().toLowerCase();
   if (_lastFilterSearch === search && _lastFilterResult) return _lastFilterResult;
   _lastFilterSearch = search;
-
-  if (!search) {
-    _lastFilterResult = getMergedProducts();
-    return _lastFilterResult;
-  }
-
-  const terms = search.split(/\s+/).filter(Boolean);
-
   _lastFilterResult = getMergedProducts().filter((product) => {
-    const haystack = product._searchCache || (product._searchCache = normalizeSearchText([
+    if (!search) return true;
+    const haystack = product._searchCache || (product._searchCache = [
       product.name, product.nameAr,
       product.tag, product.tagAr,
-      product.category,
-      product.player, product.playerAr,
-      product.team, product.teamAr,
-      product.tags ? (Array.isArray(product.tags) ? product.tags.join(" ") : product.tags) : "",
-      product.keywords ? (Array.isArray(product.keywords) ? product.keywords.join(" ") : product.keywords) : "",
       product.description, product.descriptionAr
-    ].filter(Boolean).join(" ")));
-    
-    return terms.every((term) => haystack.includes(term));
+    ].filter(Boolean).join(" ").toLowerCase());
+    return haystack.includes(search);
   });
   return _lastFilterResult;
 }
@@ -2021,86 +1870,13 @@ function catSectionIcon(meta) {
   return meta.icon;
 }
 
-
-function getCategoryMeta(currentLang) {
-  return {
-    anime:     { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️", image: "assets/animy/imgdownloader-017095bf.webp" },
-    art:       { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️", image: "assets/art/imgdownloader-07ae17e0.webp" },
-    album:     { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿", image: "assets/album artist/imgdownloader-0435978d.webp" },
-    gym:       { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪", image: "assets/gym/imgdownloader-83fe47af.webp" },
-    islamic:   { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌", image: "assets/islamic/imgdownloader-03c8733c.webp" },
-    girls:     { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩", image: "assets/girls/imgdownloader-09b7ca7a.webp" },
-    games:     { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮", image: "assets/games/imgdownloader-06813997.webp" },
-    cities:    { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️", image: "assets/cities/imgdownloader-0a531ead.webp" },
-    quotes:    { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬", image: "assets/quotes/imgdownloader-04673cb4.webp" },
-    nba:       { label: "NBA", icon: "🏀", image: "assets/nba/imgdownloader-02ebeb08.webp" },
-    meemes:    { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂", image: "assets/meemes/imgdownloader-0025213c.webp" },
-    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓", image: "assets/pharaonic/imgdownloader-2f388c69.webp" },
-    rap:       { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤", image: "assets/rap scene/imgdownloader-0b38f8a6.webp" },
-    jordan:    { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟", image: "assets/jordan/imgdownloader-412390fa.webp" },
-    movie:     { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬", image: "assets/movie/imgdownloader-022451f8.webp" },
-    cars:      { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗", image: "assets/cars/imgdownloader-00a26443.webp" },
-    football:  { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽", image: "assets/football-players/imgdownloader-00841b18.webp" },
-    clubs:     { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆", image: "assets/clubs/imgdownloader-02a7d1b7.webp" },
-    custom:    { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
-  };
-}
-
 function renderProducts() {
   const container = document.querySelector("#categorySections");
   if (!container) return;
-
-  const currentCat = new URLSearchParams(window.location.search).get("cat") || catParam;
-  if (currentCat) {
-    renderSingleCategory(currentCat);
-    return;
-  }
-  catParam = null;
   
-  // If search is active, show dedicated search results grid with all matching items
-  const isSearching = state.search && state.search.trim();
-  const currentLang = state.lang || "en";
-
-  if (isSearching) {
-    const results = filteredProducts();
-    const resultCountText = currentLang === "ar"
-      ? `${results.length} ${results.length === 1 ? "منتج" : "منتجات"}`
-      : `${results.length} ${results.length === 1 ? "product" : "products"}`;
-
-    let searchHtml = `
-      <div class="search-results-banner">
-        <div class="search-results-info">
-          <span class="search-results-eyebrow">${currentLang === "ar" ? "نتائج البحث" : "Search Results"}</span>
-          <h2>"${state.search.trim()}"</h2>
-          <span class="search-results-count">${resultCountText}</span>
-        </div>
-        <button class="clear-search-btn" type="button" data-clear-search aria-label="${currentLang === "ar" ? "إلغاء البحث" : "Clear search"}">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          <span>${currentLang === "ar" ? "مسح البحث" : "Clear"}</span>
-        </button>
-      </div>
-    `;
-
-    if (!results.length) {
-      searchHtml += `<div class="empty-state" style="padding:60px clamp(16px,4vw,42px)"><strong>${t("noProductsFound")}</strong><p>${t("tryDifferentSearch")}</p></div>`;
-      container.innerHTML = searchHtml;
-      const pillsEl = document.querySelector("[data-cat-pills]");
-      if (pillsEl) pillsEl.innerHTML = "";
-      return;
-    }
-
-    searchHtml += `<div class="full-cat-grid" id="fullCatGrid">\n`;
-    searchHtml += catCardHtml(results, 0, currentLang);
-    searchHtml += `</div>\n`;
-
-    container.innerHTML = searchHtml;
-    const pillsEl = document.querySelector("[data-cat-pills]");
-    if (pillsEl) pillsEl.innerHTML = "";
-    return;
-  }
-
   // Featured home page preview indices (only when no search is active)
-  const featuredIndices = {
+  const isSearching = state.search && state.search.trim();
+  const featuredIndices = isSearching ? null : {
     football: [7,15,22,33,79,97,110,120,127,151],
     cars:     [2,8,14,31,48,63],
     album:    [3,11,14,37,45,105],
@@ -2112,6 +1888,7 @@ function renderProducts() {
   };
 
   const list = filteredProducts();
+  const currentLang = state.lang || "en";
 
   if (!list.length) {
     container.innerHTML = `<div class="empty-state" style="padding:60px clamp(16px,4vw,42px)"><strong>${t("noProductsFound")}</strong><p>${t("tryDifferentSearch")}</p></div>`;
@@ -2122,7 +1899,27 @@ function renderProducts() {
 
   // Group by category preserving defined order
   const categoryOrder = ["custom", "football", "cars", "clubs", "anime", "movie", "album", "quotes", "islamic", "art", "gym", "girls", "games", "cities", "nba", "meemes", "pharaonic", "rap", "jordan"];
-  const categoryMeta = getCategoryMeta(currentLang);
+  const categoryMeta = {
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️", image: "assets/animy/imgdownloader-017095bf.jpeg" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️", image: "assets/art/imgdownloader-07ae17e0.png" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿", image: "assets/album artist/imgdownloader-0435978d.png" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪", image: "assets/gym/imgdownloader-83fe47af.webp" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌", image: "assets/islamic/imgdownloader-03c8733c.jpeg" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩", image: "assets/girls/imgdownloader-09b7ca7a.png" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮", image: "assets/games/imgdownloader-06813997.png" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️", image: "assets/cities/imgdownloader-0a531ead.png" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬", image: "assets/quotes/imgdownloader-04673cb4.png" },
+    nba:      { label: "NBA", icon: "🏀", image: "assets/nba/imgdownloader-02ebeb08.jpeg" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂", image: "assets/meemes/imgdownloader-0025213c.png" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓", image: "assets/pharaonic/imgdownloader-2f388c69.png" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤", image: "assets/rap scene/imgdownloader-0b38f8a6.png" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟", image: "assets/jordan/imgdownloader-412390fa.jpg" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬", image: "assets/movie/imgdownloader-022451f8.png" },
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗", image: "assets/cars/imgdownloader-00a26443.png" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽", image: "assets/football-players/imgdownloader-00841b18.png" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆", image: "assets/clubs/imgdownloader-02a7d1b7.png" },
+    custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
+  };
 
   const groups = {};
   list.forEach(p => {
@@ -2131,11 +1928,8 @@ function renderProducts() {
     groups[cat].push(p);
   });
 
-  const extraCats = Object.keys(groups).filter(c => !categoryOrder.includes(c));
-  const allDisplayCats = [...categoryOrder, ...extraCats];
-
   let html = "";
-  allDisplayCats.forEach((cat, catIdx) => {
+  categoryOrder.forEach((cat, catIdx) => {
     const items = groups[cat];
     if (!items || !items.length) return;
     const meta = categoryMeta[cat] || { label: cat, icon: "" };
@@ -2153,17 +1947,9 @@ function renderProducts() {
 html += `      <span style="font-size:1.4rem">${catSectionIcon(meta)}</span>\n`;
       html += `      <h2>${meta.label}</h2>\n`;
     html += `    </div>\n`;
-    html += `    <a href="?cat=${cat}" class="result-count-btn" data-open-category="${cat}" role="button" aria-label="${currentLang === "ar" ? "تصفح " + meta.label : "Browse " + meta.label}">\n`;
-    html += `      <span class="count-btn-dot" aria-hidden="true"></span>\n`;
-    html += `      <span class="count-btn-text">${count}</span>\n`;
-    html += `      <span class="count-btn-arrow" aria-hidden="true">${currentLang === "ar" ? "←" : "→"}</span>\n`;
-    html += `    </a>\n`;
+    html += `    <a class="result-count result-count-link" href="?cat=${cat}" aria-label="${currentLang === "ar" ? "عرض كل المنتجات في هذا القسم" : `View all ${count} in this category`}">${count}</a>\n`;
     html += `  </div>\n`;
-    html += `  <div class="category-carousel-wrap">\n`;
-    html += `    <button class="carousel-nav-btn carousel-nav-prev" type="button" aria-label="${currentLang === "ar" ? "السابق" : "Previous"}" data-carousel-prev="${cat}">\n`;
-    html += `      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>\n`;
-    html += `    </button>\n`;
-    html += `    <div class="category-scroll" data-scroll="${cat}">\n`;
+    html += `  <div class="category-scroll" data-scroll="${cat}">\n`;
 
     visible.forEach((product, idx) => {
       const name = getProductName(product);
@@ -2173,8 +1959,8 @@ html += `      <span style="font-size:1.4rem">${catSectionIcon(meta)}</span>\n`;
 
       html += `    <article class="product-card" style="--delay: ${idx * 30}ms">\n`;
       html += `      <a class="product-media" href="product.html?id=${product.id}&size=20x30&frame=Black" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
-      html += `        <span class="frame-preview frame-preview-black"></span>\n        <span class="card-glare"></span>\n`;
-      html += `        <img src="${productImageUrl(product.image)}" loading="${catIdx < 2 && idx < 2 ? "eager" : "lazy"}" decoding="async" fetchpriority="${catIdx === 0 && idx < 2 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
+      html += `        <span class="frame-preview frame-preview-black"></span>\n`;
+      html += `        <img src="${productImageUrl(product.image)}" loading="${idx < 3 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 3 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
       html += `        <span class="product-tag">${tag}</span>\n`;
       if (galleryBadge(product)) {
         html += `        <span class="product-gallery-badge">${galleryBadge(product)}</span>\n`;
@@ -2199,10 +1985,6 @@ html += `      <span style="font-size:1.4rem">${catSectionIcon(meta)}</span>\n`;
       html += `    </div>\n`;
     }
 
-    html += `    </div>\n`;
-    html += `    <button class="carousel-nav-btn carousel-nav-next" type="button" aria-label="${currentLang === "ar" ? "التالي" : "Next"}" data-carousel-next="${cat}">\n`;
-    html += `      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>\n`;
-    html += `    </button>\n`;
     html += `  </div>\n`;
     html += `</section>\n`;
   });
@@ -2219,7 +2001,27 @@ function renderCatPills() {
   const list = filteredProducts();
 
   const categoryOrder = ["custom", "football", "cars", "clubs", "anime", "movie", "album", "quotes", "islamic", "art", "gym", "girls", "games", "cities", "nba", "meemes", "pharaonic", "rap", "jordan"];
-  const categoryMeta = getCategoryMeta(currentLang);
+  const categoryMeta = {
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️", image: "assets/animy/imgdownloader-017095bf.jpeg" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️", image: "assets/art/imgdownloader-07ae17e0.png" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿", image: "assets/album artist/imgdownloader-0435978d.png" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪", image: "assets/gym/imgdownloader-83fe47af.webp" },
+      islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌", image: "assets/islamic/imgdownloader-03c8733c.jpeg" },
+      girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩", image: "assets/girls/imgdownloader-09b7ca7a.png" },
+      games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮", image: "assets/games/imgdownloader-06813997.png" },
+      cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️", image: "assets/cities/imgdownloader-0a531ead.png" },
+      quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬", image: "assets/quotes/imgdownloader-04673cb4.png" },
+      nba:      { label: "NBA", icon: "🏀", image: "assets/nba/imgdownloader-02ebeb08.jpeg" },
+      meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂", image: "assets/meemes/imgdownloader-0025213c.png" },
+      pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓", image: "assets/pharaonic/imgdownloader-2f388c69.png" },
+      rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤", image: "assets/rap scene/imgdownloader-0b38f8a6.png" },
+      jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟", image: "assets/jordan/imgdownloader-412390fa.jpg" },
+      movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬", image: "assets/movie/imgdownloader-022451f8.png" },
+      cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗", image: "assets/cars/imgdownloader-00a26443.png" },
+      football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽", image: "assets/football-players/imgdownloader-00841b18.png" },
+      clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆", image: "assets/clubs/imgdownloader-02a7d1b7.png" },
+      custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
+    };
 
   const groups = {};
   list.forEach(p => {
@@ -2246,45 +2048,13 @@ function renderCatPills() {
   pillsEl.innerHTML = html;
 
   pillsEl.querySelectorAll(".cat-pill").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
+    btn.addEventListener("click", () => {
       const cat = btn.dataset.catPill;
-
-      function performScroll(elem) {
-        if (!elem) return;
-        const header = document.querySelector(".site-header");
-        const headerH = header ? (header.getBoundingClientRect().height || header.offsetHeight) : 60;
-        const rect = elem.getBoundingClientRect();
-        const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-        const targetTop = rect.top + currentScroll - headerH - 6;
-        window.scrollTo({ top: Math.max(0, Math.round(targetTop)), behavior: "smooth" });
-
-        pillsEl.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
-        btn.classList.add("active");
-        btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      }
-
       const target = document.querySelector(`[data-cat="${cat}"]`);
       if (target) {
-        performScroll(target);
-      } else {
-        // If on single category view or search view, reset to home grid then scroll
-        state.selectedProduct = null;
-        state.search = "";
-        try {
-          const url = new URL(window.location.href);
-          url.searchParams.delete("cat");
-          url.searchParams.delete("id");
-          url.searchParams.delete("search");
-          url.searchParams.delete("q");
-          window.history.pushState({}, "", url.pathname);
-        } catch (_) {}
-        renderProducts();
-        renderCatPills();
-        setTimeout(() => {
-          const freshTarget = document.querySelector(`[data-cat="${cat}"]`);
-          if (freshTarget) performScroll(freshTarget);
-        }, 80);
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: "smooth" });
       }
     });
   });
@@ -2307,7 +2077,7 @@ function wireCatPillsDrag() {
     if (!down) return;
     const dx = clientX - prevX;
     prevX = clientX;
-    if (Math.abs(clientX - startX) > 9) dragged = true;
+    if (Math.abs(clientX - startX) > 3) dragged = true;
     pillsEl.scrollLeft -= dx;
   }
   function pu() { down = false; pillsEl.classList.remove("dragging"); }
@@ -2316,8 +2086,9 @@ function wireCatPillsDrag() {
   pillsEl.addEventListener("mouseup", pu);
   pillsEl.addEventListener("mouseleave", pu);
   pillsEl.addEventListener("dragstart", e => e.preventDefault());
-  // Note: touch devices use browser-native hardware accelerated touch scrolling.
-  // Custom drag is strictly kept for desktop mouse interactions.
+  pillsEl.addEventListener("touchstart", e => pd(e.touches[0].clientX), { passive: true });
+  pillsEl.addEventListener("touchmove", e => pm(e.touches[0].clientX), { passive: true });
+  pillsEl.addEventListener("touchend", pu, { passive: true });
   pillsEl.addEventListener("click", e => { if (dragged) { e.stopPropagation(); e.preventDefault(); } }, true);
 }
 
@@ -2341,139 +2112,51 @@ function watchCatPills() {
   sections.forEach(s => catPillsObserver.observe(s));
 }
 
-function updateCarouselNavArrows(scrollEl) {
-  const wrap = scrollEl.closest('.category-carousel-wrap');
-  if (!wrap) return;
-  const prevBtn = wrap.querySelector('.carousel-nav-prev');
-  const nextBtn = wrap.querySelector('.carousel-nav-next');
-  if (!prevBtn || !nextBtn) return;
-
-  const maxScroll = Math.max(0, scrollEl.scrollWidth - scrollEl.clientWidth - 8);
-  if (maxScroll <= 5) {
-    prevBtn.style.opacity = '0';
-    prevBtn.style.pointerEvents = 'none';
-    nextBtn.style.opacity = '0';
-    nextBtn.style.pointerEvents = 'none';
-    return;
-  }
-
-  const sl = Math.abs(scrollEl.scrollLeft);
-  const atStart = sl <= 8;
-  const atEnd = sl >= maxScroll;
-
-  prevBtn.style.opacity = atStart ? '0' : '0.92';
-  prevBtn.style.pointerEvents = atStart ? 'none' : 'auto';
-  nextBtn.style.opacity = atEnd ? '0' : '0.92';
-  nextBtn.style.pointerEvents = atEnd ? 'none' : 'auto';
-}
-
 function wireDragScroll() {
   document.querySelectorAll(".category-scroll:not([data-drag-wired])").forEach(el => {
     el.dataset.dragWired = "true";
     let down = false, startX = 0, prevX = 0, dragged = false;
 
-    function onPointerDown(e) {
-      // ONLY intercept mouse drags on desktop!
-      // Touch devices must use native browser touch scrolling so vertical scrolling never gets blocked!
-      if (e.pointerType !== "mouse") return;
-      if (e.button !== 0) return;
-      down = true;
-      dragged = false;
-      startX = prevX = e.clientX;
+    function pointerDown(clientX) {
+      down = true; dragged = false; startX = prevX = clientX;
+      el.classList.add("dragging");
     }
 
-    function onPointerMove(e) {
+    function pointerMove(clientX) {
       if (!down) return;
-      const clientX = e.clientX;
-      const isRtl = document.documentElement.dir === "rtl";
-      const dx = isRtl ? (clientX - prevX) : (prevX - clientX);
+      const dx = prevX - clientX;
       prevX = clientX;
-      if (Math.abs(clientX - startX) > 4) {
-        dragged = true;
-        el.classList.add("dragging");
-      }
-      if (dragged) {
-        el.scrollLeft += dx;
-      }
+      if (Math.abs(clientX - startX) > 3) dragged = true;
+      el.scrollLeft += dx;
     }
 
-    function onPointerUp() {
+    function pointerUp() {
       if (!down) return;
       down = false;
-      setTimeout(() => {
-        el.classList.remove("dragging");
-        dragged = false;
-      }, 50);
+      el.classList.remove("dragging");
     }
 
-    el.addEventListener("pointerdown", onPointerDown, { passive: true });
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    window.addEventListener("pointerup", onPointerUp, { passive: true });
-    window.addEventListener("pointercancel", onPointerUp, { passive: true });
+    el.addEventListener("mousedown", e => { if (e.button !== 0) return; pointerDown(e.clientX); }, { passive: true });
+    el.addEventListener("mousemove", e => pointerMove(e.clientX), { passive: true });
+    el.addEventListener("mouseup", pointerUp, { passive: true });
+    el.addEventListener("mouseleave", pointerUp, { passive: true });
+    el.addEventListener("dragstart", e => e.preventDefault());
+    el.addEventListener("touchstart", e => pointerDown(e.touches[0].clientX), { passive: true });
+    el.addEventListener("touchmove", e => pointerMove(e.touches[0].clientX), { passive: true });
+    el.addEventListener("touchend", pointerUp, { passive: true });
 
-    // Prevent default drag of images and links inside the carousel
-    el.querySelectorAll("img, a").forEach(node => {
-      node.setAttribute("draggable", "false");
-      node.addEventListener("dragstart", e => e.preventDefault());
-    });
-
-    // Suppress click on card if user was dragging
-    el.addEventListener("click", e => {
-      if (dragged) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
-    }, true);
-
-    // Mouse wheel scrolling
     el.addEventListener("wheel", e => {
-      const isRtl = document.documentElement.dir === "rtl";
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault();
-        el.scrollLeft += isRtl ? -e.deltaX : e.deltaX;
-      } else if (e.shiftKey && Math.abs(e.deltaY) > 0) {
-        e.preventDefault();
-        el.scrollLeft += isRtl ? -e.deltaY : e.deltaY;
+        el.scrollLeft += e.deltaX;
       }
     }, { passive: false });
 
-    el.addEventListener("scroll", () => updateCarouselNavArrows(el), { passive: true });
-    setTimeout(() => updateCarouselNavArrows(el), 120);
-    setTimeout(() => updateCarouselNavArrows(el), 450);
+    el.addEventListener("click", e => {
+      if (dragged) { e.stopPropagation(); e.preventDefault(); }
+    }, true);
   });
 }
-
-// Carousel navigation arrows click handler (smooth scroll left / right on desktop & tablet)
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".carousel-nav-btn");
-  if (!btn) return;
-  e.preventDefault();
-  e.stopPropagation();
-
-  const wrap = btn.closest(".category-carousel-wrap");
-  if (!wrap) return;
-  const scrollEl = wrap.querySelector(".category-scroll");
-  if (!scrollEl) return;
-
-  const isNext = btn.classList.contains("carousel-nav-next") || btn.hasAttribute("data-carousel-next");
-  const isRtl = document.documentElement.dir === "rtl" || (state && state.lang === "ar");
-
-  const card = scrollEl.querySelector(".product-card");
-  const cardWidth = card ? (card.getBoundingClientRect().width + 10) : 250;
-  // Scroll roughly 2 full cards or 80% container width
-  const step = Math.max(220, Math.min(cardWidth * 2, scrollEl.clientWidth * 0.85));
-
-  const delta = isRtl ? (isNext ? -step : step) : (isNext ? step : -step);
-
-  scrollEl.scrollBy({ left: delta, behavior: "smooth" });
-
-  setTimeout(() => updateCarouselNavArrows(scrollEl), 160);
-  setTimeout(() => updateCarouselNavArrows(scrollEl), 360);
-});
-
-window.addEventListener("resize", () => {
-  document.querySelectorAll(".category-scroll").forEach(updateCarouselNavArrows);
-}, { passive: true });
 
 const CAT_PAGE_SIZE = 30;
 let catLoadedCount = 0;
@@ -2489,42 +2172,34 @@ function renderSingleCategory(cat) {
   if (pillsEl) pillsEl.innerHTML = "";
   if (catPillsObserver) catPillsObserver.disconnect();
   const currentLang = state.lang || "en";
-
-  const isSearching = state.search && state.search.trim();
-  if (isSearching) {
-    const searchTerms = normalizeSearchText(state.search).split(/\s+/).filter(Boolean);
-    catItems = getMergedProducts().filter(p => {
-      if (p.category !== cat) return false;
-      const haystack = p._searchCache || (p._searchCache = normalizeSearchText([
-        p.name, p.nameAr, p.tag, p.tagAr,
-        p.player, p.playerAr, p.team, p.teamAr,
-        p.tags ? (Array.isArray(p.tags) ? p.tags.join(" ") : p.tags) : "",
-        p.keywords ? (Array.isArray(p.keywords) ? p.keywords.join(" ") : p.keywords) : "",
-        p.description, p.descriptionAr
-      ].filter(Boolean).join(" ")));
-      return searchTerms.every(term => haystack.includes(term));
-    });
-  } else {
-    catItems = getMergedProducts().filter(p => p.category === cat);
-  }
+  catItems = getMergedProducts().filter(p => p.category === cat);
   catParam = cat;
-
   if (!catItems.length) {
-    const emptyMsg = isSearching
-      ? (currentLang === "ar" ? `لم يتم العثور على بوسترات مطابقة لـ "${state.search}" في هذا القسم` : `No posters found matching "${state.search}" in this category`)
-      : t("noProductsFound");
-    container.innerHTML = `
-      <div class="page-back-bar">
-        <a class="page-back-btn" href="index.html" aria-label="${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}">
-          <svg class="page-back-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          <span>${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}</span>
-        </a>
-      </div>
-      <div class="empty-state" style="padding:60px clamp(16px,4vw,42px)"><strong>${emptyMsg}</strong></div>`;
+    container.innerHTML = `<div class="empty-state" style="padding:60px clamp(16px,4vw,42px)"><strong>${t("noProductsFound")}</strong></div>`;
     return;
   }
 
-  const meta = getCategoryMeta(currentLang)[cat] || { label: cat, icon: "" };
+  const meta = {
+    anime:    { label: currentLang === "ar" ? "أنمي" : "Anime", icon: "⛩️", image: "assets/animy/imgdownloader-017095bf.jpeg" },
+    art:      { label: currentLang === "ar" ? "فن" : "Art", icon: "🖼️", image: "assets/art/imgdownloader-07ae17e0.png" },
+    album:    { label: currentLang === "ar" ? "ألبوم فنان" : "Album Artist", icon: "💿", image: "assets/album artist/imgdownloader-0435978d.png" },
+    gym:      { label: currentLang === "ar" ? "جيم" : "Gym", icon: "💪", image: "assets/gym/imgdownloader-83fe47af.webp" },
+    islamic:  { label: currentLang === "ar" ? "إسلامي" : "Islamic", icon: "🕌", image: "assets/islamic/imgdownloader-03c8733c.jpeg" },
+    girls:    { label: currentLang === "ar" ? "فتيات" : "Girls", icon: "👩", image: "assets/girls/imgdownloader-09b7ca7a.png" },
+    games:    { label: currentLang === "ar" ? "ألعاب" : "Games", icon: "🎮", image: "assets/games/imgdownloader-06813997.png" },
+    cities:   { label: currentLang === "ar" ? "مدن" : "Cities", icon: "🏙️", image: "assets/cities/imgdownloader-0a531ead.png" },
+    quotes:   { label: currentLang === "ar" ? "اقتباسات" : "Quotes", icon: "💬", image: "assets/quotes/imgdownloader-04673cb4.png" },
+    nba:      { label: "NBA", icon: "🏀", image: "assets/nba/imgdownloader-02ebeb08.jpeg" },
+    meemes:   { label: currentLang === "ar" ? "ميمات" : "Memes", icon: "😂", image: "assets/meemes/imgdownloader-0025213c.png" },
+    pharaonic: { label: currentLang === "ar" ? "فرعوني" : "Pharaonic", icon: "𓅓", image: "assets/pharaonic/imgdownloader-2f388c69.png" },
+    rap:      { label: currentLang === "ar" ? "مشهد الراب" : "Rap Scene", icon: "🎤", image: "assets/rap scene/imgdownloader-0b38f8a6.png" },
+    jordan:   { label: currentLang === "ar" ? "جوردان" : "Jordan", icon: "👟", image: "assets/jordan/imgdownloader-412390fa.jpg" },
+    movie:    { label: currentLang === "ar" ? "أفلام وفن" : "Movie & Artist", icon: "🎬", image: "assets/movie/imgdownloader-022451f8.png" },
+    cars:     { label: currentLang === "ar" ? "سيارات" : "Cars",     icon: "🚗", image: "assets/cars/imgdownloader-00a26443.png" },
+    football: { label: currentLang === "ar" ? "كرة قدم" : "Football", icon: "⚽", image: "assets/football-players/imgdownloader-00841b18.png" },
+    clubs:    { label: currentLang === "ar" ? "أندية"   : "Clubs",    icon: "🏆", image: "assets/clubs/imgdownloader-02a7d1b7.png" },
+    custom:   { label: currentLang === "ar" ? "تصميم خاص" : "Custom upload", icon: "🎨" }
+  }[cat] || { label: cat, icon: "" };
 
   const total = catItems.length;
   const count = currentLang === "ar"
@@ -2533,18 +2208,13 @@ function renderSingleCategory(cat) {
 
   catLoadedCount = Math.min(CAT_PAGE_SIZE, total);
 
-  let html = `<div class="page-back-bar">\n`;
-  html += `  <a class="page-back-btn" href="index.html" aria-label="${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}">\n`;
-  html += `    <svg class="page-back-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>\n`;
-  html += `    <span>${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}</span>\n`;
-  html += `  </a>\n`;
-  html += `</div>\n`;
-  html += `<div class="single-cat-header">\n`;
+  let html = `<div class="single-cat-header">\n`;
   html += `  <div style="display:flex;align-items:center;gap:8px">\n`;
 html += `    <span style="font-size:1.4rem">${catSectionIcon(meta)}</span>\n`;
     html += `    <h2>${meta.label}</h2>\n`;
   html += `  </div>\n`;
   html += `  <span class="result-count">${count}</span>\n`;
+  html += `  <a class="back-link" href="index.html">${currentLang === "ar" ? "← العودة للرئيسية" : "← Back to home"}</a>\n`;
   html += `</div>\n`;
   html += `<div class="full-cat-grid" id="fullCatGrid">\n`;
   html += catCardHtml(catItems.slice(0, catLoadedCount), 0, currentLang);
@@ -2564,7 +2234,7 @@ function catCardHtml(items, startIdx, lang) {
 
     let card = `  <article class="product-card" style="--delay: ${idx * 20}ms">\n`;
     card += `    <a class="product-media" href="product.html?id=${product.id}&size=20x30&frame=Black" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
-    card += `      <span class="frame-preview frame-preview-black"></span>\n      <span class="card-glare"></span>\n`;
+    card += `      <span class="frame-preview frame-preview-black"></span>\n`;
     card += `      <img src="${productImageUrl(product.image)}" loading="${idx < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 6 ? "high" : "auto"}" alt="${name} ${lang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
     card += `      <span class="product-tag">${tag}</span>\n`;
     if (galleryBadge(product)) {
@@ -2688,20 +2358,7 @@ function renderOurWork() {
 function renderDetail(productId) {
   const product = getProduct(productId);
   if (!product) {
-    if (productDetail) {
-      productDetail.hidden = false;
-      const currentLang = state.lang || "en";
-      productDetail.innerHTML = `
-        <div class="page-back-bar">
-          <a class="page-back-btn" href="index.html" aria-label="${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}">
-            <svg class="page-back-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-            <span>${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}</span>
-          </a>
-        </div>
-        <div class="empty-state"><strong>${t("noProductsFound")}</strong><p><a href="index.html">${t("heroActionShop")}</a></p></div>`;
-    }
+    productDetail.hidden = true;
     return;
   }
 
@@ -2715,20 +2372,12 @@ function renderDetail(productId) {
   if (!product.frames.includes(state.detailFrame)) state.detailFrame = product.frames[0];
 
   if (productDetail) {
-    document.title = `${name} — ${t("brandTitle")}`;
+    document.title = `${name} � ${t("brandTitle")}`;
     productDetail.hidden = false;
     const rawPreview = product.image;
     const previewImage = rawPreview && rawPreview.startsWith('data:') ? rawPreview : productImageUrl(rawPreview);
     const sceneImage = sceneImageForIndex(getMergedProducts().findIndex((item) => item.id === product.id));
     productDetail.innerHTML = `
-      <div class="page-back-bar">
-        <a class="page-back-btn" href="index.html" aria-label="${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}">
-          <svg class="page-back-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          <span>${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}</span>
-        </a>
-      </div>
       <article class="detail product-detail-layout">
       <div class="detail-gallery">
         <div class="detail-main-image frame-${state.detailFrame.toLowerCase()}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <img id="detailMainImage" src="${previewImage}" loading="eager" decoding="async" fetchpriority="high" alt="${name} ${currentLang === "ar" ? "معرض البوستر" : "framed poster gallery image"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
@@ -2748,6 +2397,7 @@ function renderDetail(productId) {
         <a class="watch-quality-link detail-work-link" href="our-work.html" data-t="ourWorkButton">${t("ourWorkButton")}</a>
       </div>
       <div class="detail-copy product-order-panel">
+        <a class="back-link" href="index.html">${t("backToShop")}</a>
         <p class="eyebrow">${tag}</p>
         <h1 class="${product.isCustom ? "custom-product-title" : ""}">${name}</h1>
         <div class="price-line">
@@ -2808,122 +2458,7 @@ function renderDetail(productId) {
   }
 }
 
-
-/* ── Shopping Animations & Micro-Interactions ── */
-function spawnConfetti(originX, originY) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const count = 16;
-  const colors = ['#2563eb', '#38bdf8', '#f59e0b', '#ec4899', '#10b981', '#8b5cf6'];
-  const container = document.createElement('div');
-  container.className = 'confetti-container';
-  container.style.cssText = `position:fixed;top:${originY}px;left:${originX}px;width:0;height:0;pointer-events:none;z-index:100000;`;
-  document.body.appendChild(container);
-
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('div');
-    const color = colors[i % colors.length];
-    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
-    const distance = 35 + Math.random() * 55;
-    const tx = Math.cos(angle) * distance;
-    const ty = Math.sin(angle) * distance - 20;
-    const size = 5 + Math.random() * 5;
-    const rotate = Math.random() * 360;
-
-    p.style.cssText = `position:absolute;top:0;left:0;width:${size}px;height:${size * (i % 2 === 0 ? 1 : 1.5)}px;background:${color};border-radius:${i % 3 === 0 ? '50%' : '2px'};transform:translate(0,0) rotate(0deg);opacity:1;transition:transform 600ms cubic-bezier(0.1, 0.9, 0.2, 1), opacity 600ms ease;`;
-    container.appendChild(p);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        p.style.transform = `translate(${tx}px, ${ty}px) rotate(${rotate + 180}deg)`;
-        p.style.opacity = '0';
-      });
-    });
-  }
-  setTimeout(() => container.remove(), 700);
-}
-
-function animateFlyToCart(originEl, imgUrl) {
-  const cartBtn = document.querySelector(".cart-button") || document.querySelector("[data-open-cart]");
-  if (!cartBtn) return;
-  
-  let startRect;
-  if (originEl) {
-    const card = originEl.closest('.product-card');
-    const img = card?.querySelector('.product-media img') || document.querySelector('#detailMainImage') || originEl;
-    startRect = img.getBoundingClientRect();
-  } else {
-    const mainImg = document.querySelector('#detailMainImage');
-    startRect = mainImg ? mainImg.getBoundingClientRect() : cartBtn.getBoundingClientRect();
-  }
-  
-  if (!startRect || startRect.width === 0 || startRect.height === 0) {
-    cartBtn.classList.add('cart-bounce-pop');
-    setTimeout(() => cartBtn.classList.remove('cart-bounce-pop'), 600);
-    return;
-  }
-
-  const targetRect = cartBtn.getBoundingClientRect();
-  const flyer = document.createElement('div');
-  flyer.className = 'fly-to-cart-clone';
-  flyer.style.cssText = `position:fixed;z-index:99999;top:${startRect.top}px;left:${startRect.left}px;width:${startRect.width}px;height:${startRect.height}px;background-image:url('${imgUrl}');background-size:cover;background-position:center;border-radius:12px;box-shadow:0 12px 35px rgba(0,0,0,0.35);pointer-events:none;transition:transform 600ms cubic-bezier(0.2,0.85,0.2,1), opacity 600ms ease, border-radius 600ms ease;will-change:transform,opacity;`;
-  document.body.appendChild(flyer);
-
-  const deltaX = (targetRect.left + targetRect.width / 2) - (startRect.left + startRect.width / 2);
-  const deltaY = (targetRect.top + targetRect.height / 2) - (startRect.top + startRect.height / 2);
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      flyer.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.18) rotate(12deg)`;
-      flyer.style.opacity = '0.35';
-      flyer.style.borderRadius = '50%';
-    });
-  });
-
-  setTimeout(() => {
-    flyer.remove();
-    cartBtn.classList.add('cart-bounce-pop');
-    setTimeout(() => cartBtn.classList.remove('cart-bounce-pop'), 600);
-    spawnConfetti(targetRect.left + targetRect.width / 2, targetRect.top + targetRect.height / 2);
-  }, 620);
-}
-
-function initCardTiltEffects() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if ('ontouchstart' in window && !window.matchMedia('(pointer: fine)').matches) return;
-  
-  let rafPending = false;
-  let lastEvent = null;
-
-  document.addEventListener('pointermove', (e) => {
-    lastEvent = e;
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      rafPending = false;
-      if (!lastEvent) return;
-      const card = lastEvent.target.closest('.product-card');
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      const x = (lastEvent.clientX - rect.left) / rect.width;
-      const y = (lastEvent.clientY - rect.top) / rect.height;
-      const tiltX = (0.5 - y) * 8;
-      const tiltY = (x - 0.5) * 8;
-      card.style.setProperty('--glare-x', `${(x * 100).toFixed(1)}%`);
-      card.style.setProperty('--glare-y', `${(y * 100).toFixed(1)}%`);
-      card.style.transform = `perspective(800px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-6px) scale3d(1.015, 1.015, 1.015)`;
-    });
-  }, { passive: true });
-
-  document.addEventListener('pointerout', (e) => {
-    const card = e.target.closest('.product-card');
-    if (!card) return;
-    if (!card.contains(e.relatedTarget)) {
-      card.style.transform = '';
-    }
-  }, { passive: true });
-}
-
-async function addToCart(productId, size = "30x40", frame = "Black", originEl = null) {
+async function addToCart(productId, size = "30x40", frame = "Black") {
   const product = getProduct(productId);
   if (!product) return;
   if (product.isCustom && !state.customUpload) {
@@ -3497,7 +3032,7 @@ document.addEventListener("click", (event) => {
     if (product?.isCustom) {
       window.location.href = `product.html?id=${product.id}`;
     } else {
-      addToCart(quickAdd.dataset.quickAdd, undefined, undefined, quickAdd);
+      addToCart(quickAdd.dataset.quickAdd);
     }
   }
 
@@ -3531,8 +3066,6 @@ document.addEventListener("click", (event) => {
   if (wishlistToggle) {
     event.preventDefault();
     event.stopPropagation();
-    wishlistToggle.classList.add("heart-burst-pop");
-    setTimeout(() => wishlistToggle.classList.remove("heart-burst-pop"), 500);
     toggleWishlist(wishlistToggle.dataset.wishlistToggle);
     showToast(isInWishlist(wishlistToggle.dataset.wishlistToggle)
       ? (state.lang === "ar" ? "أضيف للمفضلة" : "Added to wishlist")
@@ -3576,7 +3109,7 @@ document.addEventListener("click", (event) => {
   }
 
   const detailAdd = event.target.closest("[data-detail-add]");
-  if (detailAdd) addToCart(state.selectedProduct, state.detailSize, state.detailFrame, detailAdd);
+  if (detailAdd) addToCart(state.selectedProduct, state.detailSize, state.detailFrame);
 
   const workSlide = event.target.closest("[data-work-slide]");
   if (workSlide) {
@@ -3691,30 +3224,9 @@ document.addEventListener("error", (event) => {
 
 if (checkoutForm) checkoutForm.addEventListener("submit", handleCheckout);
 
-// Brand click: navigate to clean home page or scroll to top & reset filters
+// Brand click: scroll to top when already on home page
 document.querySelectorAll(".brand").forEach(el => {
-  el.addEventListener("click", (e) => {
-    const isHome = window.location.pathname.endsWith("index.html") || 
-                   window.location.pathname.endsWith("/") || 
-                   window.location.pathname === "";
-    if (isHome) {
-      if (state.activeCategory || state.search || state.selectedProduct) {
-        e.preventDefault();
-        state.activeCategory = null;
-        state.search = "";
-        state.selectedProduct = null;
-        try {
-          const url = new URL(window.location.href);
-          url.search = "";
-          url.hash = "";
-          window.history.pushState({}, "", url.pathname);
-        } catch (_) {}
-        if (typeof renderProducts === "function") renderProducts();
-        if (typeof renderCatPills === "function") renderCatPills();
-      }
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  });
+  el.addEventListener("click", () => window.scrollTo(0, 0));
 });
 
 // ── Nav drawer ──
@@ -3762,12 +3274,7 @@ function buildNavMenu() {
     <a href="our-work.html" data-nav-close>${lang === "ar" ? "📸 أعمالنا" : "📸 Our Work"}</a>
     <a href="faq.html" data-nav-close>${lang === "ar" ? "❓ الأسئلة الشائعة" : "❓ FAQ"}</a>
     <a href="https://wa.me/201010414187" target="_blank" rel="noopener" data-nav-close>${lang === "ar" ? "💬 واتساب" : "💬 Contact Us"}</a>
-    ${isPosterLabAdmin() ? `
     <div class="nav-divider"></div>
-    <a href="admin/panel.html" data-nav-close style="font-size:0.92rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;padding:8px 0;color:var(--text-strong)">
-      <span>⚙️</span> <span>${lang === "ar" ? "لوحة التحكم" : "Admin Panel"}</span>
-      <span style="font-size:0.75rem;padding:2px 6px;border-radius:4px;background:var(--accent-soft, rgba(37,99,235,0.15));color:var(--accent);margin-inline-start:auto">${lang === "ar" ? "مفتوح" : "Active"}</span>
-    </a>` : ''}
     <a href="index.html" data-nav-close style="font-size:0.85rem;color:var(--muted)">${lang === "ar" ? "© Poster Lab Store" : "© Poster Lab Store"}</a>
   `;
 
@@ -3781,34 +3288,6 @@ function buildNavMenu() {
       searchTimer = setTimeout(() => {
         if (window.renderProducts) renderProducts();
       }, 200);
-    });
-    navSearch.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        state.search = e.target.value.trim();
-        closeNav();
-        const isHome = window.location.pathname.endsWith("index.html") || window.location.pathname.endsWith("/") || !window.location.pathname.includes(".html");
-        if (isHome) {
-          catParam = null;
-          try {
-            const url = new URL(window.location.href);
-            url.searchParams.delete("cat");
-            if (state.search) {
-              url.searchParams.set("search", state.search);
-            } else {
-              url.searchParams.delete("search");
-            }
-            window.history.pushState({}, "", url.toString());
-          } catch(err) {}
-          renderProducts();
-          const target = document.querySelector("#categorySections");
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        } else {
-          window.location.href = "index.html?search=" + encodeURIComponent(state.search);
-        }
-      }
     });
   }
 
@@ -3883,7 +3362,6 @@ window.addEventListener("resize", () => {
 // Run initial configurations
 (async function init() {
   detectDevice();
-  initCardTiltEffects();
   state.user = getSession();
   state.wishlist = getWishlistData();
   updateLanguageUI();
@@ -3915,18 +3393,17 @@ window.addEventListener("resize", () => {
       }
     } catch (e) { /* firebase not loaded yet */ }
   })();
-  // Sync products and coupons from Firestore (non-blocking)
+  // Sync products and coupons from Firestore (non-blocking).
+  // When the page is showing a single category (?cat=...), re-render that
+  // category instead of the homepage, otherwise a slow Firestore response
+  // would replace the category view with the full shop a few seconds later.
   syncProductsFromFirestore().then(count => {
-    if (count && productGrid) {
-      _lastFilterSearch = null;
-      _lastFilterResult = null;
-      const currentCat = new URLSearchParams(window.location.search).get("cat") || catParam;
-      if (currentCat) {
-        renderSingleCategory(currentCat);
-      } else {
-        renderProducts();
-      }
-    }
+    if (!count || !productGrid) return;
+    _lastFilterSearch = null;
+    _lastFilterResult = null;
+    const activeCat = new URLSearchParams(window.location.search).get("cat");
+    if (activeCat) renderSingleCategory(activeCat);
+    else renderProducts();
   });
   syncCouponsFromFirestore();
   // FAQ accordion: close others when one opens
@@ -3941,17 +3418,12 @@ window.addEventListener("resize", () => {
     });
   });
 
-  const searchParam = new URLSearchParams(window.location.search).get("search") || new URLSearchParams(window.location.search).get("q");
-  if (searchParam) {
-    state.search = searchParam;
-  }
   const catParam = new URLSearchParams(window.location.search).get("cat");
   if (catParam) {
     renderSingleCategory(catParam);
   } else {
     preloadProductImages();
     if (productGrid) renderProducts();
-    hideLoader();
     if (productGrid) {
       try { var savedScroll = sessionStorage.getItem(SESSION_SCROLL_KEY); } catch {}
       if (savedScroll) {
@@ -4030,12 +3502,3 @@ window.syncCouponsFromFirestore = syncCouponsFromFirestore;
 hideLoader();
 
 
-
-window.addEventListener("popstate", () => {
-  const cat = new URLSearchParams(window.location.search).get("cat");
-  if (cat) {
-    renderSingleCategory(cat);
-  } else if (productGrid) {
-    renderProducts();
-  }
-});

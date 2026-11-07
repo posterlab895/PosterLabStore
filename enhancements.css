@@ -1,0 +1,373 @@
+/* ============================================================
+   Poster Lab Store — desktop rails, count links & motion layer
+   Loaded after styles.min.css so it can safely extend the theme.
+   ============================================================ */
+
+/* ── Admin gear (store owner only) ── */
+/* The base stylesheet hides every direct <a> in the header bar, so the
+   gear link needs to opt back in before it can be seen. */
+.header-actions > a.admin-gear-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-strong);
+  border-color: var(--accent);
+  padding: 0 10px;
+  min-width: 38px;
+  min-height: 38px;
+}
+.header-actions > a.admin-gear-button svg {
+  display: block;
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.header-actions > a.admin-gear-button:hover {
+  background: var(--surface-2);
+  color: var(--accent);
+  border-color: var(--accent-strong);
+}
+.header-actions > a.admin-gear-button:hover svg {
+  transform: rotate(60deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-actions > a.admin-gear-button svg { transition: none; }
+  .header-actions > a.admin-gear-button:hover svg { transform: none; }
+}
+
+/* ── Category rail (horizontal poster row + desktop arrows) ── */
+.category-rail {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Let desktop users scroll the row with a real scrollbar too,
+   kept deliberately faint so it does not compete with the posters. */
+.category-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 22%, transparent) transparent;
+}
+.category-scroll::-webkit-scrollbar {
+  display: block;
+  height: 6px;
+  background: transparent;
+}
+.category-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.category-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  transition: background 200ms ease;
+}
+.category-scroll::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* Arrows */
+.cat-rail-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 6;
+  display: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--text-strong);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--small-shadow);
+  transform: translateY(-50%);
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease,
+    box-shadow 220ms ease, transform 180ms var(--ease-out), opacity 180ms ease;
+  opacity: 0;
+}
+.cat-rail-btn svg {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.cat-rail-prev {
+  left: 2px;
+}
+.cat-rail-next {
+  right: 2px;
+}
+.category-rail.is-scrollable .cat-rail-btn {
+  display: grid;
+  /* Visible enough to discover without hovering, stronger on hover. */
+  opacity: 0.62;
+}
+.category-rail.is-scrollable:hover .cat-rail-btn:not(:disabled),
+.cat-rail-btn:focus-visible {
+  opacity: 1;
+}
+.cat-rail-btn:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--accent) 45%, transparent);
+  transform: translateY(-50%) scale(1.1);
+}
+.cat-rail-btn:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.94);
+}
+.cat-rail-btn:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+.category-rail.is-scrollable:hover .cat-rail-btn:not(:disabled) {
+  animation: rail-nudge 2.6s ease-in-out infinite;
+}
+.category-rail .cat-rail-next:not(:disabled) {
+  animation-delay: 0.4s;
+}
+
+/* Soft fade at the row edges so arrows read as “more over there”. */
+@media (min-width: 700px) {
+  .category-rail.is-scrollable .category-scroll {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22px, #000 calc(100% - 22px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 22px, #000 calc(100% - 22px), transparent 100%);
+  }
+}
+@media (max-width: 699px) {
+  .cat-rail-btn {
+    display: none !important;
+  }
+}
+
+/* ── “N products” now behaves like View all ── */
+.result-count-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease,
+    transform 180ms var(--ease-out), box-shadow 220ms ease;
+}
+.result-count-link::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  animation: count-pulse 2.4s ease-out infinite;
+}
+.result-count-link::after {
+  content: '→';
+  font-size: 0.95rem;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 200ms var(--ease-out);
+}
+.result-count-link:hover,
+.result-count-link:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+.result-count-link:hover::after,
+.result-count-link:focus-visible::after {
+  transform: translateX(4px);
+}
+[dir="rtl"] .result-count-link::after {
+  content: '←';
+}
+[dir="rtl"] .result-count-link:hover::after,
+[dir="rtl"] .result-count-link:focus-visible::after {
+  transform: translateX(-4px);
+}
+
+/* The base sheet targets .category-section .section-heading .result-count,
+   so match that specificity to keep the button colours/size. */
+.category-section .section-heading .result-count-link {
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+.category-section .section-heading .result-count-link:hover,
+.category-section .section-heading .result-count-link:focus-visible {
+  color: var(--accent-text);
+}
+
+/* ── richer card motion (only when the pointer is precise) ── */
+@media (hover: hover) and (pointer: fine) {
+  .enh .category-scroll .product-card {
+    transform-style: preserve-3d;
+    /* Let the finished entrance animation release the transform so hover/tilt works. */
+    animation-fill-mode: backwards;
+    transition: transform 180ms var(--ease-out), box-shadow 300ms var(--ease-out),
+      border-color 200ms ease;
+  }
+  .enh .category-scroll .product-card:hover {
+    transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-8px) scale(1.02);
+  }
+  .enh .category-scroll .product-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.08) 28%,
+      transparent 60%);
+    transition: opacity 220ms ease;
+    mix-blend-mode: screen;
+  }
+  .enh .category-scroll .product-card:hover .product-media::after {
+    opacity: 1;
+  }
+  /* quick-add button springs in */
+  .enh .category-scroll .media-actions {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+    transition: opacity 200ms ease, transform 260ms var(--ease-out);
+  }
+  .enh .category-scroll .product-card:hover .media-actions,
+  .enh .category-scroll .product-card:focus-within .media-actions {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Card entrance when a section scrolls into view */
+.enh .category-section.in-view .product-card {
+  /* backwards (not both) so the final keyframe does not lock the transform. */
+  animation: enh-card-in 560ms var(--ease-out) backwards;
+  animation-delay: calc(var(--delay, 0ms) + 80ms);
+}
+.enh .category-section.in-view .view-all-tile {
+  animation: tile-in 520ms var(--ease-out) both;
+  animation-delay: 260ms;
+}
+
+/* ── View-all tile: animated sheen + arrow ── */
+.view-all-tile a {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
+    var(--surface);
+}
+.view-all-tile a::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -70%;
+  background: conic-gradient(from 0deg, transparent 0deg,
+    color-mix(in srgb, var(--accent) 34%, transparent) 45deg,
+    transparent 110deg);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+.view-all-tile a:hover::before {
+  opacity: 0.55;
+  animation: tile-spin 5s linear infinite;
+}
+.view-all-tile a::after {
+  content: '→';
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--accent);
+  transition: transform 220ms var(--ease-out);
+}
+.view-all-tile a:hover::after {
+  transform: translateX(4px);
+}
+[dir="rtl"] .view-all-tile a::after {
+  content: '←';
+  right: auto;
+  left: 14px;
+}
+
+/* ── Category pills: livelier feedback ── */
+.cat-pill .cat-pill-circle {
+  transition: background 250ms ease, border-color 250ms ease,
+    transform 260ms var(--ease-out), box-shadow 260ms ease;
+}
+.cat-pill:hover .cat-pill-circle {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.cat-pill.active .cat-pill-circle {
+  animation: pill-glow 2.8s ease-in-out infinite;
+}
+.cat-pill:active .cat-pill-circle {
+  transform: scale(0.94);
+}
+
+/* tiny sparkle on the section icon when the row appears */
+.enh .category-section.in-view .section-heading > div > span:first-child {
+  animation: icon-pop 620ms var(--ease-out) both;
+  animation-delay: 60ms;
+}
+
+/* ── Keyframes ── */
+@keyframes enh-card-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes tile-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes rail-nudge {
+  0%, 100% { box-shadow: var(--small-shadow); }
+  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 14%, transparent); }
+}
+@keyframes count-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70% { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes tile-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pill-glow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+  50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 13%, transparent); }
+}
+@keyframes icon-pop {
+  0% { transform: scale(0.6) rotate(-16deg); opacity: 0; }
+  60% { transform: scale(1.14) rotate(4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Keep the effects calm for users who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  .cat-rail-btn,
+  .result-count-link::before,
+  .category-section.in-view .product-card,
+  .category-section.in-view .view-all-tile,
+  .view-all-tile a::before,
+  .cat-pill.active .cat-pill-circle,
+  .enh .category-section.in-view .section-heading > div > span:first-child {
+    animation: none !important;
+  }
+  .enh .category-scroll .product-card,
+  .enh .category-scroll .product-card:hover {
+    transform: none !important;
+  }
+}
