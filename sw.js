@@ -1,21 +1,24 @@
-const CACHE_NAME = 'poster-lab-store-v15';
-const IMAGE_CACHE_NAME = 'poster-lab-images-v1';
+const CACHE_NAME = 'poster-lab-store-v33';
+const IMAGE_CACHE_NAME = 'poster-lab-images-v2';
 const ASSETS = [
   './',
   './index.html',
   './product.html',
   './our-work.html',
   './faq.html',
+  './admin/login.html',
+  './admin/panel.html',
   './styles.min.css',
   './admin.min.css',
   './products-bundle.min.js',
   './script.min.js',
-  './admin.min.js',
-  './admin/index.html',
+  './admin-login.min.js',
+  './admin-panel.min.js',
+  './firebase-config.js',
   './assets/poster-lab-logo.webp',
-  './assets/instapay-qr.jpeg',
+  './assets/instapay-qr.webp',
   './assets/size-guide.webp',
-  './assets/custom-upload.jpg',
+  './assets/custom-upload.webp',
   './assets/atelier-splash.webp',
   './assets/classic-redline.webp',
   './assets/color-riot.webp',
@@ -40,7 +43,7 @@ const ASSETS = [
   './assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_02.webp',
   './assets/Yellow Porsche 3/upscalemedia-transformed yellow 3_03.webp',
   './assets/Yellow Cadillac Landscape.webp',
-  './assets/our-work/our-work-01.jpg',
+  './assets/our-work/our-work-01.webp',
   './assets/our-work/our-work-02.webp',
   './assets/our-work/our-work-03.webp',
   './assets/our-work/our-work-04.webp',
@@ -49,7 +52,7 @@ const ASSETS = [
   './assets/our-work/our-work-07.webp',
   './assets/our-work/our-work-08.webp',
   './assets/our-work/our-work-09.webp',
-  './assets/our-work/our-work-10.png'
+  './assets/our-work/our-work-10.webp'
 ];
 
 self.addEventListener('install', (event) => {

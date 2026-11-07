@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Admin Panel — Poster Lab Store</title>
+  <meta name="description" content="Poster Lab Store admin panel">
+  <link rel="icon" type="image/webp" href="../assets/poster-lab-logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="../styles.min.css">
+  <link rel="stylesheet" href="../admin.min.css">
+  <script>(function(){var t="light";try{t=localStorage.getItem("poster-lab-theme")||"light"}catch(e){}document.documentElement.dataset.theme=t;try{var c=document.createElement("style");c.textContent='html{color-scheme:'+(t==="dark"?"dark":"light")+'}';document.head.appendChild(c)}catch(e){}})()</script>
+  <script>if(localStorage.getItem('pls-admin-session')!=='true'||(localStorage.getItem('pls-admin-email')||'').toLowerCase().trim()!=='posterlab895@gmail.com'){localStorage.removeItem('pls-admin-session');localStorage.removeItem('pls-admin-email');window.location.replace('login.html')}</script>
+</head>
+<body>
+  <div id="adminApp">
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <img src="../assets/poster-lab-logo.webp" alt="PLS" class="admin-header-logo">
+        <h2>Poster Lab Store — Admin</h2>
+      </div>
+      <div class="admin-header-right">
+        <span id="adminStatsHeader"></span>
+        <span id="adminSyncBadge" style="font-size:0.8rem;display:inline-flex;align-items:center;padding:4px 8px;border-radius:6px;background:var(--surface-2)"></span>
+        <button class="secondary-button" data-cmd="sync-all" title="Sync with Firestore" style="font-size:0.85rem">↻ Sync</button>
+        <button id="adminThemeToggle" class="secondary-button" type="button" aria-label="Toggle theme" title="Toggle dark/light theme" style="padding:6px 12px;font-size:1rem">
+          <span id="adminThemeIcon">☀</span>
+        </button>
+        <a href="../index.html" class="secondary-button" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-size:0.85rem">
+          <span>←</span> <span>Store</span>
+        </a>
+        <button id="adminLogoutBtn" class="secondary-button" style="color:var(--danger);border-color:var(--line)">Logout</button>
+      </div>
+    </header>
+    <nav class="admin-nav" id="adminNav">
+      <button class="admin-nav-btn is-active" data-admin-tab="dashboard">Dashboard</button>
+      <button class="admin-nav-btn" data-admin-tab="orders">Orders</button>
+      <button class="admin-nav-btn" data-admin-tab="products">Products</button>
+      <button class="admin-nav-btn" data-admin-tab="coupons">Coupons</button>
+      <button class="admin-nav-btn" data-admin-tab="analytics">Analytics</button>
+    </nav>
+    <main class="admin-main">
+      <section id="adminTabDashboard" class="admin-tab">
+        <div class="admin-stats-grid">
+          <article class="admin-stat-card"><strong id="statTotalOrders">0</strong><span>Total Orders</span></article>
+          <article class="admin-stat-card"><strong id="statTotalRevenue">EGP 0</strong><span>Total Revenue</span></article>
+          <article class="admin-stat-card"><strong id="statPendingOrders">0</strong><span>Pending</span></article>
+          <article class="admin-stat-card"><strong id="statProductsCount">0</strong><span>Products</span></article>
+        </div>
+        <div class="admin-section">
+          <h3>Recent Orders</h3>
+          <div id="adminRecentOrders" class="admin-table-wrap"></div>
+        </div>
+        <div class="admin-section">
+          <h3>Quick Actions</h3>
+          <div class="admin-quick-actions">
+            <button class="primary-link" data-admin-tab="orders">View all orders</button>
+            <button class="secondary-link" data-admin-tab="products">Manage products</button>
+            <button class="secondary-link" data-admin-tab="coupons">Create coupon</button>
+          </div>
+        </div>
+      </section>
+      <section id="adminTabOrders" class="admin-tab" hidden>
+        <div class="admin-section-header">
+          <h3>All Orders</h3>
+          <div class="admin-order-filters">
+            <select id="adminOrderStatusFilter">
+              <option value="all">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <input type="search" id="adminOrderSearch" placeholder="Search by name, phone, ID...">
+          </div>
+        </div>
+        <div id="adminOrdersList" class="admin-table-wrap"></div>
+      </section>
+      <section id="adminTabProducts" class="admin-tab" hidden>
+        <div class="admin-section-header">
+          <h3>Products <span id="adminProductsCount"></span></h3>
+          <div class="admin-order-filters">
+            <input type="search" id="adminProductSearch" placeholder="Search products...">
+            <select id="adminProductCategoryFilter">
+              <option value="all">All categories</option>
+            </select>
+          </div>
+          <button id="adminAddProductBtn" class="primary-link" data-cmd="add-product">+ Add Product</button>
+          <button id="adminClearProductsBtn" class="secondary-button" data-cmd="clear-products" style="border-color:var(--danger);color:var(--danger)">Clear All</button>
+        </div>
+        <div id="adminProductsList" class="admin-table-wrap"></div>
+        <div id="adminProductModal" class="admin-modal-overlay" hidden>
+          <div class="admin-modal">
+            <div class="admin-modal-header">
+              <h4 id="adminProductFormTitle">Add Product</h4>
+              <button class="admin-modal-close" data-cmd="cancel-product" aria-label="Close">&times;</button>
+            </div>
+            <div class="admin-modal-body">
+              <div class="admin-form-grid">
+                <label>Product ID <input id="apId" placeholder="e.g. my-poster"></label>
+                <label>Name (EN) <input id="apName" placeholder="English name"></label>
+                <label>Name (AR) <input id="apNameAr" placeholder="Arabic name"></label>
+                <label>Category
+                  <select id="apCategory">
+                    <option value="football">Football</option>
+                    <option value="cars">Cars</option>
+                    <option value="clubs">Clubs</option>
+                    <option value="album">Album Artist</option>
+                    <option value="movie">Movie & Artist</option>
+                    <option value="anime">Anime</option>
+                    <option value="quotes">Quotes</option>
+                    <option value="islamic">Islamic</option>
+                    <option value="art">Art</option>
+                    <option value="gym">Gym</option>
+                    <option value="girls">Girls</option>
+                    <option value="games">Games</option>
+                    <option value="cities">Cities</option>
+                    <option value="nba">NBA</option>
+                    <option value="meemes">Memes</option>
+                    <option value="pharaonic">Pharaonic</option>
+                    <option value="rap">Rap Scene</option>
+                    <option value="jordan">Jordan</option>
+                    <option value="custom">Custom upload</option>
+                  </select>
+                </label>
+                <label>Tag (EN) <input id="apTag" placeholder="e.g. Car poster"></label>
+                <label>Tag (AR) <input id="apTagAr" placeholder="e.g. بوستر سيارة"></label>
+                <label>Image path <input id="apImage" placeholder="assets/my-poster.webp"></label>
+                <label>Upload image <input id="apImageUpload" type="file" accept="image/png,image/jpeg,image/webp"></label>
+                <div class="admin-form-preview">
+                  <img id="apImagePreview" src="../assets/poster-lab-logo.webp" alt="Preview">
+                </div>
+                <label>Base price (EGP) <input id="apBasePrice" type="number" placeholder="50"></label>
+                <label>Quantity available <input id="apQuantity" type="number" placeholder="0 = unlimited"></label>
+                <label>Size prices (comma-separated: size=price)
+                  <input id="apSizes" placeholder="20x30=60, 30x40=80, 40x50=100, 50x70=120">
+                </label>
+                <label>Frames (comma-separated)
+                  <input id="apFrames" placeholder="None, Black, White">
+                </label>
+                <label class="full-width">Description (EN) <textarea id="apDescription" placeholder="English description" rows="2"></textarea></label>
+                <label class="full-width">Description (AR) <textarea id="apDescriptionAr" placeholder="Arabic description" rows="2"></textarea></label>
+              </div>
+            </div>
+            <div class="admin-modal-footer">
+              <button class="primary-link" data-cmd="save-product">Save Product</button>
+              <button class="secondary-button" data-cmd="cancel-product">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="adminTabCoupons" class="admin-tab" hidden>
+        <div class="admin-section-header">
+          <h3>Coupons</h3>
+          <button id="adminAddCouponBtn" class="primary-link" data-cmd="add-coupon">+ Add Coupon</button>
+        </div>
+        <div id="adminCouponForm" class="admin-product-form" hidden>
+          <h4>New Coupon</h4>
+          <div class="admin-form-grid two-col">
+            <label>Code <input id="acCode" placeholder="e.g. SAVE10"></label>
+            <label>Discount %
+              <select id="acType">
+                <option value="percent">Percentage</option>
+                <option value="fixed">Fixed (EGP)</option>
+              </select>
+            </label>
+            <label>Value <input id="acValue" type="number" placeholder="10"></label>
+            <label>Min order <input id="acMinOrder" type="number" placeholder="0"></label>
+            <label>Max uses <input id="acMaxUses" type="number" placeholder="100"></label>
+          </div>
+          <div class="admin-form-actions">
+            <button id="adminSaveCoupon" class="primary-link" data-cmd="save-coupon">Save Coupon</button>
+            <button id="adminCancelCoupon" class="secondary-button" data-cmd="cancel-coupon">Cancel</button>
+          </div>
+        </div>
+        <div id="adminCouponsList" class="admin-table-wrap"></div>
+      </section>
+      <section id="adminTabAnalytics" class="admin-tab" hidden>
+        <div class="admin-stats-grid">
+          <article class="admin-stat-card"><strong id="analyticsAvgOrder">EGP 0</strong><span>Avg Order</span></article>
+          <article class="admin-stat-card"><strong id="analyticsTopProduct">-</strong><span>Top Product</span></article>
+          <article class="admin-stat-card"><strong id="analyticsConversion">0%</strong><span>COD Rate</span></article>
+          <article class="admin-stat-card"><strong id="analyticsRepeatRate">0%</strong><span>Repeat Rate</span></article>
+        </div>
+        <div class="admin-section">
+          <h3>Sales by Month</h3>
+          <div id="analyticsChart" class="admin-chart"></div>
+        </div>
+        <div class="admin-section">
+          <h3>Popular Products</h3>
+          <div id="analyticsPopularProducts" class="admin-table-wrap"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script defer src="../firebase-config.js"></script>
+  <script defer src="../products-bundle.min.js"></script>
+  <script defer src="../script.min.js"></script>
+  <script defer src="../admin-panel.min.js"></script>
+</body>
+</html>

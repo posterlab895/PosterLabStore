@@ -1,0 +1,48 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "hosting": {
+    "site": "posterlabstore",
+    "public": ".",
+    "redirects": [
+      { "source": "/admin", "destination": "/admin/login.html", "type": 302 },
+      { "source": "/admin/", "destination": "/admin/login.html", "type": 302 }
+    ],
+    "ignore": [
+      "firebase.json",
+      "firebase-setup-guide.txt",
+      ".git/**",
+      ".agents/**",
+      ".github/**",
+      "**/node_modules/**",
+      "**/*.md",
+      "_gen-three.mjs",
+      "build-products.js",
+      "album-artist-new.json",
+      "scratchpad*",
+      "script.js",
+      "styles.css",
+      "admin.js",
+      "admin-login.js",
+      "admin-panel.js",
+      "admin.css",
+      "products-bundle.js",
+      "package*.json"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(webp|png|jpg|jpeg|gif|svg)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=86400" }
+        ]
+      }
+    ]
+  }
+}

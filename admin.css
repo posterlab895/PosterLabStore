@@ -88,10 +88,21 @@
 .admin-header-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-size: 0.85rem;
   color: var(--muted);
   font-weight: 700;
+  flex-wrap: wrap;
+}
+#adminThemeToggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+}
+#themeToggleBtn {
+  cursor: pointer;
 }
 .admin-nav {
   display: flex;
@@ -225,19 +236,80 @@
   gap: 10px;
   flex-wrap: wrap;
 }
-.admin-product-form {
-  display: grid;
-  gap: 16px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+/* ── Modal overlay ── */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 16px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  overflow-y: auto;
 }
-.admin-product-form h4 {
+.admin-modal-overlay[hidden] {
+  display: none;
+}
+.admin-modal {
+  width: min(100%, 640px);
+  margin-top: 5vh;
+  margin-bottom: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: modal-in 200ms ease both;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(-20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.admin-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.admin-modal-header h4 {
   margin: 0;
   color: var(--text-strong);
   font-family: "Space Grotesk", Inter, sans-serif;
+  font-size: 1.05rem;
 }
+.admin-modal-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: 160ms;
+}
+.admin-modal-close:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+.admin-modal-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+.admin-modal-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+}
+/* ── Product form grid inside modal ── */
 .admin-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -252,6 +324,9 @@
   font-size: 0.82rem;
   font-weight: 800;
   color: var(--muted);
+}
+.admin-form-grid label.full-width {
+  grid-column: 1 / -1;
 }
 .admin-form-grid input,
 .admin-form-grid select,
@@ -269,9 +344,19 @@
   padding: 10px 12px;
   resize: vertical;
 }
-.admin-form-actions {
+.admin-form-preview {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.admin-form-preview img {
+  width: 80px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+  border: 1px solid var(--line);
+  cursor: pointer;
 }
 .admin-edit-btn {
   font-size: 0.78rem !important;
@@ -350,4 +435,146 @@
     padding: 6px 10px;
     font-size: 0.78rem;
   }
+}
+
+/* ── Modern Curved Border Refinements ── */
+.admin-card, .admin-stat-card {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+.admin-modal-panel {
+  border-radius: 20px !important;
+}
+.admin-search-input, .admin-filter-select, input[type="text"], input[type="email"], input[type="number"], select, textarea {
+  border-radius: 10px !important;
+}
+.admin-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ── Admin Fast Pagination Controls ── */
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 4px 6px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+}
+.admin-pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 160ms ease;
+  user-select: none;
+}
+.admin-pagination-btn:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.admin-pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.admin-pagination-info {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ── 15-Second Admin Toast Notifications ── */
+.admin-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  display: grid;
+  gap: 10px;
+  width: min(92vw, 400px);
+  pointer-events: none;
+}
+.admin-toast {
+  position: relative;
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--text-strong);
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+.admin-toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.admin-toast-success {
+  border-color: var(--accent);
+}
+.admin-toast-danger {
+  border-color: var(--danger);
+}
+.admin-toast-info {
+  border-color: #3b82f6;
+}
+.admin-toast-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.admin-toast-text {
+  flex: 1;
+  line-height: 1.35;
+}
+.admin-toast-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 160ms ease;
+  flex-shrink: 0;
+}
+.admin-toast-close:hover {
+  color: var(--text-strong);
+  background: var(--surface-2);
+}
+.admin-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  width: 100%;
+  animation: admin-toast-drain linear forwards;
+}
+@keyframes admin-toast-drain {
+  from { width: 100%; }
+  to { width: 0%; }
 }

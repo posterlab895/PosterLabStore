@@ -1,0 +1,76 @@
+FIREBASE SETUP GUIDE — Poster Lab Store
+===========================================
+
+To enable user sign-in and cloud order storage, you need a Firebase project.
+
+STEP 1: CREATE A FIREBASE PROJECT
+  1. Go to https://console.firebase.google.com
+  2. Click "Create a project" (or "Add project")
+  3. Enter project name (e.g., "poster-lab-store")
+  4. Disable Google Analytics (optional)
+  5. Click "Create project"
+
+STEP 2: ENABLE AUTHENTICATION
+  1. In Firebase Console, go to "Authentication" → "Sign-in method"
+  2. Click "Email/Password" → Enable it → Save
+
+STEP 3: CREATE FIRESTORE DATABASE
+  1. Go to "Firestore Database"
+  2. Click "Create database"
+  3. Choose "Start in test mode" (for development)
+  4. Choose a location (e.g., "eur3" - europe-west)
+  5. Click "Create"
+
+  IMPORTANT: After setup, update Firestore Security Rules:
+  Go to Firestore → Rules → paste these:
+
+    rules_version = '2';
+    service cloud.firestore {
+      match /databases/{database}/documents {
+        // Orders: authenticated users can read/write their own; admins can read all
+        match /orders/{orderId} {
+          allow read: if request.auth != null && (
+            request.auth.uid == resource.data.userId ||
+            request.auth.token.email == 'YOUR_ADMIN_EMAIL'
+          );
+          allow create: if request.auth != null;
+          allow update: if request.auth != null && (
+            request.auth.uid == resource.data.userId ||
+            request.auth.token.email == 'YOUR_ADMIN_EMAIL'
+          );
+          allow delete: if request.auth != null && (
+            request.auth.token.email == 'YOUR_ADMIN_EMAIL'
+          );
+        }
+      }
+    }
+
+  Replace YOUR_ADMIN_EMAIL with your email.
+
+STEP 4: GET YOUR WEB APP CONFIG
+  1. In Project Overview → Click the web icon (</>) to add a web app
+  2. Register app (nickname: "Poster Lab Store Web")
+  3. Copy the config object (looks like):
+     const firebaseConfig = {
+       apiKey: "AIza...",
+       authDomain: "...",
+       projectId: "...",
+       ...
+     };
+
+STEP 5: UPDATE firebase-config.js
+  Open "firebase-config.js" in the project root
+  Replace the placeholder values with your real config from Step 4
+
+STEP 6: DEPLOY
+  Push to GitHub — the site will now use Firebase Auth + Firestore.
+
+────────────────────────────────────────
+HOW IT WORKS:
+• Users sign up/in with email/password
+• Orders are saved to Firestore AND localStorage (as backup)
+• Users can view & cancel their pending orders
+• Admin panel syncs orders from Firestore automatically
+• Falls back to localStorage if Firebase is unavailable
+• Existing localStorage accounts still work as fallback
+────────────────────────────────────────
