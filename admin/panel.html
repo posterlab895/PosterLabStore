@@ -10,8 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="../styles.min.css">
-  <link rel="stylesheet" href="../admin.min.css">
+  <link rel="stylesheet" href="../styles.min.css" onerror="this.onerror=null;this.href='styles.min.css'">
+  <link rel="stylesheet" href="../admin.min.css" onerror="this.onerror=null;this.href='admin.min.css'">
+  <link rel="stylesheet" href="admin.min.css">
   <script>(function(){var t="light";try{t=localStorage.getItem("poster-lab-theme")||"light"}catch(e){}document.documentElement.dataset.theme=t;try{var c=document.createElement("style");c.textContent='html{color-scheme:'+(t==="dark"?"dark":"light")+'}';document.head.appendChild(c)}catch(e){}})()</script>
   <script>if(localStorage.getItem('pls-admin-session')!=='true'||(localStorage.getItem('pls-admin-email')||'').toLowerCase().trim()!=='posterlab895@gmail.com'){localStorage.removeItem('pls-admin-session');localStorage.removeItem('pls-admin-email');window.location.replace('login.html')}</script>
 </head>
@@ -19,8 +20,10 @@
   <div id="adminApp">
     <header class="admin-header">
       <div class="admin-header-left">
-        <img src="../assets/poster-lab-logo.webp" alt="PLS" class="admin-header-logo">
-        <h2>Poster Lab Store — Admin</h2>
+        <a href="../index.html" class="admin-brand-link" title="Poster Lab Store Home" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+          <img src="../assets/poster-lab-logo.webp" alt="PLS" class="admin-header-logo">
+          <h2 style="margin:0;font-size:1.05rem">Poster Lab Store — Admin</h2>
+        </a>
       </div>
       <div class="admin-header-right">
         <span id="adminStatsHeader"></span>

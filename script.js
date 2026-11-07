@@ -2316,9 +2316,8 @@ function wireCatPillsDrag() {
   pillsEl.addEventListener("mouseup", pu);
   pillsEl.addEventListener("mouseleave", pu);
   pillsEl.addEventListener("dragstart", e => e.preventDefault());
-  pillsEl.addEventListener("touchstart", e => pd(e.touches[0].clientX), { passive: true });
-  pillsEl.addEventListener("touchmove", e => pm(e.touches[0].clientX), { passive: true });
-  pillsEl.addEventListener("touchend", pu, { passive: true });
+  // Note: touch devices use browser-native hardware accelerated touch scrolling.
+  // Custom drag is strictly kept for desktop mouse interactions.
   pillsEl.addEventListener("click", e => { if (dragged) { e.stopPropagation(); e.preventDefault(); } }, true);
 }
 
@@ -2374,7 +2373,10 @@ function wireDragScroll() {
     let down = false, startX = 0, prevX = 0, dragged = false;
 
     function onPointerDown(e) {
-      if (e.pointerType === "mouse" && e.button !== 0) return;
+      // ONLY intercept mouse drags on desktop!
+      // Touch devices must use native browser touch scrolling so vertical scrolling never gets blocked!
+      if (e.pointerType !== "mouse") return;
+      if (e.button !== 0) return;
       down = true;
       dragged = false;
       startX = prevX = e.clientX;
@@ -3689,9 +3691,30 @@ document.addEventListener("error", (event) => {
 
 if (checkoutForm) checkoutForm.addEventListener("submit", handleCheckout);
 
-// Brand click: scroll to top when already on home page
+// Brand click: navigate to clean home page or scroll to top & reset filters
 document.querySelectorAll(".brand").forEach(el => {
-  el.addEventListener("click", () => window.scrollTo(0, 0));
+  el.addEventListener("click", (e) => {
+    const isHome = window.location.pathname.endsWith("index.html") || 
+                   window.location.pathname.endsWith("/") || 
+                   window.location.pathname === "";
+    if (isHome) {
+      if (state.activeCategory || state.search || state.selectedProduct) {
+        e.preventDefault();
+        state.activeCategory = null;
+        state.search = "";
+        state.selectedProduct = null;
+        try {
+          const url = new URL(window.location.href);
+          url.search = "";
+          url.hash = "";
+          window.history.pushState({}, "", url.pathname);
+        } catch (_) {}
+        if (typeof renderProducts === "function") renderProducts();
+        if (typeof renderCatPills === "function") renderCatPills();
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
 });
 
 // ── Nav drawer ──

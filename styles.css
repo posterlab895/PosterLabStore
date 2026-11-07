@@ -550,7 +550,7 @@ textarea:focus {
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
+  touch-action: pan-y pinch-zoom pan-x;
   scrollbar-width: none;
   cursor: grab;
   will-change: transform;
@@ -2001,13 +2001,12 @@ html[lang="ar"] .page-back-btn:hover .page-back-arrow {
   margin-bottom: -4px;
   cursor: grab;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
   animation: fade-in 500ms ease both;
   animation-delay: calc(var(--section-order, 0) * 60ms + 80ms);
   user-select: none;
-  touch-action: pan-x;
-  overscroll-behavior-x: contain;
+  touch-action: pan-y pinch-zoom pan-x;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
