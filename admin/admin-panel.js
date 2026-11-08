@@ -36,6 +36,20 @@
   function getCoupons() { return safeJSON(COUPONS_KEY, []); }
   function saveCoupons(c) { localStorage.setItem(COUPONS_KEY, JSON.stringify(c)); }
 
+  function productImageUrl(p) {
+    if (!p) return '../assets/poster-lab-logo.webp';
+    if (p.startsWith('data:') || p.startsWith('blob:') || p.startsWith('http://') || p.startsWith('https://')) return p;
+    let clean = p.replace(/#/g, '%23').replace(/ /g, '%20');
+    if ((window.location.pathname.includes('/admin/') || window.location.pathname.endsWith('/admin')) && !clean.startsWith('../') && !clean.startsWith('/')) {
+      clean = '../' + clean;
+    }
+    return clean;
+  }
+  window.productImageUrl = productImageUrl;
+  window.syncProductsFromFirestore = syncProductsFromFirestore;
+  window.syncCouponsFromFirestore = syncCouponsFromFirestore;
+
+
   let _cachedAllProducts = null;
   function invalidateProductsCache() { _cachedAllProducts = null; }
 
@@ -45,11 +59,48 @@
     invalidateProductsCache();
   }
 
+  
+  function getHardcodedProducts() {
+    if (typeof window !== 'undefined' && Array.isArray(window.products) && window.products.length > 0) {
+      return window.products;
+    }
+    if (typeof products !== 'undefined' && Array.isArray(products) && products.length > 0) {
+      return products;
+    }
+    const catArrays = [
+      typeof footballProducts !== 'undefined' ? footballProducts : [],
+      typeof carProducts !== 'undefined' ? carProducts : [],
+      typeof clubProducts !== 'undefined' ? clubProducts : [],
+      typeof movieArtistProducts !== 'undefined' ? movieArtistProducts : [],
+      typeof albumArtistProducts !== 'undefined' ? albumArtistProducts : [],
+      typeof gymProducts !== 'undefined' ? gymProducts : [],
+      typeof artProducts !== 'undefined' ? artProducts : [],
+      typeof animeProducts !== 'undefined' ? animeProducts : [],
+      typeof girlsProducts !== 'undefined' ? girlsProducts : [],
+      typeof gamesProducts !== 'undefined' ? gamesProducts : [],
+      typeof islamicProducts !== 'undefined' ? islamicProducts : [],
+      typeof citiesProducts !== 'undefined' ? citiesProducts : [],
+      typeof quotesProducts !== 'undefined' ? quotesProducts : [],
+      typeof nbaProducts !== 'undefined' ? nbaProducts : [],
+      typeof meemesProducts !== 'undefined' ? meemesProducts : [],
+      typeof pharaonicProducts !== 'undefined' ? pharaonicProducts : [],
+      typeof rapSceneProducts !== 'undefined' ? rapSceneProducts : [],
+      typeof jordanProducts !== 'undefined' ? jordanProducts : []
+    ];
+    const combined = [];
+    for (let i = 0; i < catArrays.length; i++) {
+      if (catArrays[i].length) combined.push(...catArrays[i]);
+    }
+    if (combined.length) {
+      if (typeof window !== 'undefined') window.products = combined;
+      return combined;
+    }
+    return [];
+  }
+
   function allProducts() {
     if (_cachedAllProducts) return _cachedAllProducts;
-    const hard = (typeof window.products !== 'undefined' && Array.isArray(window.products))
-      ? window.products
-      : ((typeof products !== 'undefined' && Array.isArray(products)) ? products : []);
+    const hard = getHardcodedProducts();
     const custom = getAdminProducts();
     const map = new Map();
     for (let i = 0; i < hard.length; i++) {
@@ -67,6 +118,7 @@
     _cachedAllProducts = Array.from(map.values());
     return _cachedAllProducts;
   }
+
 
   /* ── 15-Second Floating Admin Toast System ── */
   function showAdminToast(message, type = 'success', duration = 15000) {
@@ -191,6 +243,9 @@
       if (changed) {
         saveAdminProducts(Array.from(localMap.values()));
         log('Products synced from Firestore:', remote.length);
+        invalidateProductsCache();
+        rebuildCategoryFilter();
+        renderProducts();
       }
       return remote.length;
     } catch (e) {
@@ -452,7 +507,7 @@
       const img = p.image || '../assets/poster-lab-logo.webp';
       const imgSrc = typeof productImageUrl === 'function' ? productImageUrl(img) : img;
       return `<tr>
-        <td style="width:50px"><img src="${imgSrc}" alt="" style="width:40px;height:54px;object-fit:cover;border-radius:6px" onerror="this.src='../assets/poster-lab-logo.webp'"></td>
+        <td style="width:50px"><img src="${imgSrc}" alt="" loading="lazy" decoding="async" style="width:40px;height:54px;object-fit:cover;border-radius:6px;background:var(--surface-2)" onerror="this.src='../assets/poster-lab-logo.webp'"></td>
         <td><code>${p.id}</code></td>
         <td><strong>${p.name || ''}</strong>${p.nameAr ? `<br><small style="color:var(--muted)">${p.nameAr}</small>` : ''}</td>
         <td><span style="display:inline-block;padding:2px 8px;border-radius:999px;background:var(--surface-2);font-size:0.75rem;font-weight:700">${p.category || '—'}</span></td>
@@ -485,12 +540,16 @@
     wrap.innerHTML = html;
   }
 
-  function rebuildCategoryFilter() {
+    function rebuildCategoryFilter() {
     const sel = $('#adminProductCategoryFilter');
     if (!sel) return;
     const cats = getCategories();
     const current = sel.value;
-    sel.innerHTML = '<option value="all">All categories</option>' + cats.map(c => `<option value="${c}"${c === current ? ' selected' : ''}>${c.charAt(0).toUpperCase() + c.slice(1)}</option>`).join('');
+    const prods = allProducts();
+    sel.innerHTML = `<option value="all">All categories (${prods.length})</option>` + cats.map(c => {
+      const count = prods.filter(p => p.category === c).length;
+      return `<option value="${c}"${c === current ? ' selected' : ''}>${c.charAt(0).toUpperCase() + c.slice(1)} (${count})</option>`;
+    }).join('');
   }
 
   function renderCoupons() {
@@ -798,8 +857,8 @@
     try {
       const [ordersOk] = await Promise.all([
         syncOrdersFromFirestore(),
-        window.syncProductsFromFirestore ? window.syncProductsFromFirestore(force) : Promise.resolve(0),
-        window.syncCouponsFromFirestore ? window.syncCouponsFromFirestore(force) : Promise.resolve(0)
+        syncProductsFromFirestore(force),
+        syncCouponsFromFirestore(force)
       ]);
       const dbReady = typeof isFirebaseReady === 'function' ? isFirebaseReady() : Boolean(typeof getFirebaseDb === 'function' && getFirebaseDb());
       

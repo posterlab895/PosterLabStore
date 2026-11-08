@@ -550,7 +550,9 @@ textarea:focus {
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y pinch-zoom;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
   scrollbar-width: none;
   cursor: grab;
   will-change: transform;
@@ -2016,7 +2018,9 @@ html[lang="ar"] .page-back-btn:hover .page-back-arrow {
   animation: fade-in 500ms ease both;
   animation-delay: calc(var(--section-order, 0) * 60ms + 80ms);
   user-select: none;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y pinch-zoom;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -2032,7 +2036,7 @@ html[lang="ar"] .page-back-btn:hover .page-back-arrow {
 .category-scroll .product-card {
   flex: 0 0 240px;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
 }
 .view-all-tile {
   flex: 0 0 160px;

@@ -1,5 +1,5 @@
 // Poster Lab Store — Products Bundle
-// Generated 2026-11-08T00:23:26.108Z
+// Generated 2026-11-08T11:38:16.344Z
 
 const footballProducts = [
   {"id":"football-001","name":"Cristiano Ronaldo - The G.O.A.T","nameAr":"كريستيانو رونالدو - الهداف التاريخي","player":"Cristiano Ronaldo","playerAr":"كريستيانو رونالدو","team":"Manchester United / Portugal","teamAr":"مانشستر يونايتد / البرتغال","category":"football","tag":"Cristiano Ronaldo","tagAr":"كريستيانو رونالدو","image":"assets/football-players/imgdownloader-00841b18.webp","basePrice":60,"sizes":{"20x30":60,"30x40":80,"40x50": 250,"50x70": 300},"frames":["None","Black","White"],"description":"Cristiano Ronaldo - The G.O.A.T - Manchester United / Portugal","tags":["Cristiano Ronaldo","CR7","Manchester United","GOAT","Champions League","Portugal","كريستيانو رونالدو","رونالدو","مانشستر يونايتد","الدون","Manchester United / Portugal","مانشستر يونايتد / البرتغال","football","كرة قدم"]},
@@ -15333,4 +15333,75 @@ const jordanProducts = [
   {"id":"jordan-007","name":"Jordan #7","category":"jordan","tag":"Jordan","tagAr":"الأردن","image":"assets/jordan/imgdownloader-cc2803c4.webp","basePrice":60,"sizes":{"20x30":60,"30x40":80,"40x50": 250,"50x70": 300},"frames":["None","Black","White"],"description":""},
   {"id":"jordan-008","name":"Jordan #8","category":"jordan","tag":"Jordan","tagAr":"الأردن","image":"assets/jordan/imgdownloader-e8876f6d.webp","basePrice":60,"sizes":{"20x30":60,"30x40":80,"40x50": 250,"50x70": 300},"frames":["None","Black","White"],"description":""}
 ];
+
+
+
+// Assemble all categories into window.products for store & admin panel
+(function() {
+  function productImageUrl(p) {
+    if (!p) return '../assets/poster-lab-logo.webp';
+    if (p.startsWith('data:') || p.startsWith('blob:') || p.startsWith('http://') || p.startsWith('https://')) return p;
+    var clean = p.replace(/#/g, '%23').replace(/ /g, '%20');
+    if (typeof window !== 'undefined' && window.location && window.location.pathname.includes('/admin/')) {
+      if (!clean.startsWith('../') && !clean.startsWith('/')) clean = '../' + clean;
+    }
+    return clean;
+  }
+  if (typeof window !== 'undefined') {
+    window.productImageUrl = productImageUrl;
+  }
+
+  var allCats = [
+    typeof footballProducts !== 'undefined' ? footballProducts : [],
+    typeof carProducts !== 'undefined' ? carProducts : [],
+    typeof clubProducts !== 'undefined' ? clubProducts : [],
+    typeof movieArtistProducts !== 'undefined' ? movieArtistProducts : [],
+    typeof albumArtistProducts !== 'undefined' ? albumArtistProducts : [],
+    typeof gymProducts !== 'undefined' ? gymProducts : [],
+    typeof artProducts !== 'undefined' ? artProducts : [],
+    typeof animeProducts !== 'undefined' ? animeProducts : [],
+    typeof girlsProducts !== 'undefined' ? girlsProducts : [],
+    typeof gamesProducts !== 'undefined' ? gamesProducts : [],
+    typeof islamicProducts !== 'undefined' ? islamicProducts : [],
+    typeof citiesProducts !== 'undefined' ? citiesProducts : [],
+    typeof quotesProducts !== 'undefined' ? quotesProducts : [],
+    typeof nbaProducts !== 'undefined' ? nbaProducts : [],
+    typeof meemesProducts !== 'undefined' ? meemesProducts : [],
+    typeof pharaonicProducts !== 'undefined' ? pharaonicProducts : [],
+    typeof rapSceneProducts !== 'undefined' ? rapSceneProducts : [],
+    typeof jordanProducts !== 'undefined' ? jordanProducts : []
+  ];
+
+  var list = [
+    {
+      id: "custom-design",
+      name: "Upload Your Custom Design",
+      nameAr: "ارفع تصميمك الخاص",
+      category: "custom",
+      tag: "Custom upload",
+      tagAr: "رفع خاص",
+      isCustom: true,
+      image: "assets/Custom/Upload-Your-Custom-Design.webp",
+      gallery: ["assets/Custom/Upload-Your-Custom-Design.webp"],
+      basePrice: 60,
+      sizes: { '20x30': 60, '30x40': 80, '40x50': 250, '50x70': 300 },
+      frames: ['None', 'Black', 'White'],
+      description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
+      descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
+    }
+  ];
+
+  for (var i = 0; i < allCats.length; i++) {
+    for (var j = 0; j < allCats[i].length; j++) {
+      list.push(allCats[i][j]);
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.products = list;
+  }
+  if (typeof globalThis !== 'undefined') {
+    globalThis.products = list;
+  }
+})();
 
