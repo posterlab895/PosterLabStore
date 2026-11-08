@@ -1,3 +1,30 @@
+
+function safeStorageGet(key, fallback = null) {
+  try {
+    const val = localStorage.getItem(key);
+    return val !== null ? val : fallback;
+  } catch (_) {
+    return fallback;
+  }
+}
+function safeStorageSet(key, value) {
+  try {
+    localStorage.setItem(key, typeof value === "string" ? value : JSON.stringify(value));
+  } catch (_) {}
+}
+function safeStorageRemove(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch (_) {}
+}
+function updateDeviceType() {
+  const w = window.innerWidth;
+  const dev = w < 380 ? "phone-small" : w < 600 ? "phone" : w < 768 ? "tablet-small" : w < 1024 ? "tablet" : w < 1440 ? "desktop" : "desktop-large";
+  document.documentElement.dataset.device = dev;
+}
+window.addEventListener("resize", updateDeviceType, { passive: true });
+updateDeviceType();
+
 ﻿const WHATSAPP_NUMBER = "201010414187";
 const DELIVERY_FEE = 35;
 const POSTER_FALLBACK_IMAGE = "assets/poster-lab-logo.webp";
@@ -353,7 +380,7 @@ const products = [
     image: "assets/Custom/Upload-Your-Custom-Design.webp",
     gallery: ["assets/Custom/Upload-Your-Custom-Design.webp"],
     basePrice: 60,
-    sizes: { '20x30': 60, '30x40': 80, '40x50': 100, '50x70': 120 },
+    sizes: { '20x30': 60, '30x40': 80, '40x50': 240, '50x70': 300 },
     frames: ['None', 'Black', 'White'],
     description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
     descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
@@ -1214,6 +1241,7 @@ function logoutUser() {
     await saveCartToFirestore();
     state.user = null;
     saveSession(null);
+    localStorage.removeItem("pls-session");
     localStorage.removeItem("pls-admin-session");
     localStorage.removeItem("pls-admin-email");
     state.cart = [];
@@ -1221,6 +1249,7 @@ function logoutUser() {
     saveCart();
     renderCart();
     updateUserUI();
+    if (typeof updateAdminAccessUI === "function") updateAdminAccessUI();
     resolve();
   });
 }
@@ -3691,30 +3720,81 @@ document.addEventListener("error", (event) => {
 
 if (checkoutForm) checkoutForm.addEventListener("submit", handleCheckout);
 
-// Brand click: navigate to clean home page or scroll to top & reset filters
-document.querySelectorAll(".brand").forEach(el => {
-  el.addEventListener("click", (e) => {
-    const isHome = window.location.pathname.endsWith("index.html") || 
-                   window.location.pathname.endsWith("/") || 
-                   window.location.pathname === "";
-    if (isHome) {
-      if (state.activeCategory || state.search || state.selectedProduct) {
-        e.preventDefault();
-        state.activeCategory = null;
-        state.search = "";
-        state.selectedProduct = null;
-        try {
-          const url = new URL(window.location.href);
-          url.search = "";
-          url.hash = "";
-          window.history.pushState({}, "", url.pathname);
-        } catch (_) {}
-        if (typeof renderProducts === "function") renderProducts();
-        if (typeof renderCatPills === "function") renderCatPills();
-      }
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+// Store home URL resolver that works seamlessly on GitHub Pages subpaths, custom domains, and local file servers
+function getStoreHomeUrl() {
+  const origin = window.location.origin;
+  const p = window.location.pathname;
+  if (window.location.hostname.includes('github.io')) {
+    const parts = p.split('/').filter(Boolean);
+    const repo = (parts.length > 0 && parts[0].toLowerCase() === 'posterlabstore') ? parts[0] : 'PosterLabStore';
+    return origin + '/' + repo + '/index.html';
+  }
+  if (p.includes('/admin/')) {
+    const prefix = p.substring(0, p.indexOf('/admin/'));
+    return (prefix || '') + '/index.html';
+  }
+  return 'index.html';
+}
+
+// Brand / Logo click handler
+document.addEventListener("click", (e) => {
+  const brandEl = e.target.closest(".brand");
+  if (!brandEl) return;
+
+  const p = window.location.pathname.replace(/\/+$/, "");
+  const isHome = p === "" || 
+                 p.endsWith("/index.html") || 
+                 p.endsWith("index.html") || 
+                 p.toLowerCase().endsWith("/posterlabstore") || 
+                 p.toLowerCase() === "/posterlabstore";
+
+  if (isHome) {
+    e.preventDefault();
+    state.activeCategory = null;
+    state.search = "";
+    state.selectedProduct = null;
+
+    const searchInputs = document.querySelectorAll("#headerSearchInput, [data-search-input], #navSearchInput");
+    searchInputs.forEach(inp => { if (inp) inp.value = ""; });
+
+    if (typeof closeNav === "function") closeNav();
+    if (typeof closeCart === "function") closeCart();
+    const searchOverlay = document.querySelector("[data-search-overlay]");
+    if (searchOverlay) searchOverlay.classList.remove("open");
+
+    try {
+      const cleanPath = window.location.pathname.endsWith("/") ? window.location.pathname : window.location.pathname + "/";
+      window.history.pushState({}, "", cleanPath);
+    } catch (_) {}
+
+    if (typeof renderCatPills === "function") renderCatPills();
+    if (typeof renderProducts === "function") renderProducts();
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    e.preventDefault();
+    window.location.href = getStoreHomeUrl();
+  }
+});
+
+// Update brand and back buttons href on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const url = getStoreHomeUrl();
+  document.querySelectorAll('.brand, .page-back-btn').forEach(el => {
+    if (el.tagName === 'A') el.href = url;
   });
+});
+
+// Back to store button handler
+document.addEventListener("click", (e) => {
+  const backBtn = e.target.closest(".page-back-btn");
+  if (!backBtn) return;
+  e.preventDefault();
+  if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.hostname)) {
+    window.history.back();
+  } else {
+    window.location.href = getStoreHomeUrl();
+  }
 });
 
 // ── Nav drawer ──

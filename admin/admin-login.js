@@ -84,12 +84,26 @@
   }
 
   function init() {
-    // Already logged in with correct email? Go straight to panel
-    const hasSession = localStorage.getItem(SESSION_KEY) === 'true';
-    const sessionEmail = (localStorage.getItem(EMAIL_KEY) || '').toLowerCase().trim();
-    if (hasSession && sessionEmail === REQUIRED_EMAIL) {
-      window.location.href = 'panel.html';
-      return;
+    // If coming from an explicit logout action, clear all tokens and NEVER auto-redirect!
+    if (window.location.search.includes('logout')) {
+      setSession(false);
+      try {
+        localStorage.removeItem('pls-session');
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+          firebase.auth().signOut().catch(() => {});
+        }
+      } catch (_) {}
+      try {
+        window.history.replaceState({}, '', window.location.pathname);
+      } catch (_) {}
+    } else {
+      // Only auto-redirect if an active valid session exists and NOT logging out
+      const hasSession = localStorage.getItem(SESSION_KEY) === 'true';
+      const sessionEmail = (localStorage.getItem(EMAIL_KEY) || '').toLowerCase().trim();
+      if (hasSession && sessionEmail === REQUIRED_EMAIL) {
+        window.location.href = 'panel.html';
+        return;
+      }
     }
 
     updateThemeUI();
@@ -112,3 +126,22 @@
     init();
   }
 })();
+
+document.addEventListener('click', function(e) {
+  var backLink = e.target.closest('.admin-back-link, .admin-brand-link, [data-store-link]');
+  if (backLink) {
+    e.preventDefault();
+    if (typeof getStoreHomeUrl === 'function') {
+      window.location.href = getStoreHomeUrl();
+    } else {
+      var p = window.location.pathname;
+      if (window.location.hostname.includes('github.io')) {
+        var parts = p.split('/').filter(Boolean);
+        var repo = (parts.length > 0 && parts[0].toLowerCase() === 'posterlabstore') ? parts[0] : 'PosterLabStore';
+        window.location.href = window.location.origin + '/' + repo + '/index.html';
+      } else {
+        window.location.href = '../index.html';
+      }
+    }
+  }
+});

@@ -10,34 +10,33 @@ const FIREBASE_CONFIG = {
   appId: "1:195015526495:web:a30b672feb24f9166e73ea"
 };
 
-let firebaseApp, firebaseAuth, firebaseDb;
+let firebaseApp = null;
+let firebaseAuth = null;
+let firebaseDb = null;
 let firebaseReady = false;
 
 function initFirebase() {
-  if (firebaseReady && firebaseDb) return;
+  if (firebaseReady && firebaseDb) return firebaseDb;
   if (typeof firebase === 'undefined') {
-    console.warn('[Firebase] SDK not loaded yet, will retry');
-    setTimeout(initFirebase, 400);
-    return;
+    return null;
   }
   try {
-    if (firebase.apps && firebase.apps.length > 0) {
-      firebaseApp = firebase.apps.find(a => a.name === 'posterlab') || firebase.apps[0];
+    if (!firebase.apps || firebase.apps.length === 0) {
+      firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
     } else {
-      firebaseApp = firebase.initializeApp(FIREBASE_CONFIG, 'posterlab');
+      firebaseApp = firebase.apps[0];
     }
-    firebaseAuth = firebaseApp.auth ? firebaseApp.auth() : (firebase.auth ? firebase.auth() : null);
-    firebaseDb = firebaseApp.firestore ? firebaseApp.firestore() : (firebase.firestore ? firebase.firestore() : null);
-    if (firebaseDb && typeof firebaseDb.settings === 'function') {
-      try { firebaseDb.settings({ merge: true }); } catch (ignore) {}
-    }
+    firebaseAuth = typeof firebase.auth === 'function' ? firebase.auth(firebaseApp) : null;
+    firebaseDb = typeof firebase.firestore === 'function' ? firebase.firestore(firebaseApp) : null;
     firebaseReady = Boolean(firebaseDb);
     console.log('[Firebase] Initialized successfully. Ready:', firebaseReady);
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('firebase-ready', { detail: { db: firebaseDb, auth: firebaseAuth } }));
     }
+    return firebaseDb;
   } catch (e) {
-    console.error('[Firebase] Init error:', e);
+    console.warn('[Firebase] Init notice (will fallback to local):', e.message || e);
+    return null;
   }
 }
 
@@ -45,7 +44,7 @@ function getFirebaseAuth() { return firebaseAuth; }
 function getFirebaseDb() { return firebaseDb; }
 function isFirebaseReady() { return firebaseReady && Boolean(firebaseDb); }
 
-function ensureFirebaseReady(timeoutMs = 8000) {
+function ensureFirebaseReady(timeoutMs = 5000) {
   return new Promise((resolve) => {
     if (isFirebaseReady()) return resolve(firebaseDb);
     initFirebase();
@@ -63,8 +62,12 @@ function ensureFirebaseReady(timeoutMs = 8000) {
   });
 }
 
+// Auto-init on script load
+try { initFirebase(); } catch (_) {}
+
 // Expose globally
 if (typeof window !== 'undefined') {
+  window.FIREBASE_CONFIG = FIREBASE_CONFIG;
   window.initFirebase = initFirebase;
   window.getFirebaseAuth = getFirebaseAuth;
   window.getFirebaseDb = getFirebaseDb;

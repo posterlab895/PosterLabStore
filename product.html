@@ -4,6 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    (function(){
+      var p = window.location.pathname;
+      if (p && !p.endsWith('/') && !p.split('/').pop().includes('.')) {
+        window.location.replace(window.location.origin + p + '/' + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+
   <title>Poster Lab Store — Product Detail</title>
   <meta name="description" content="Poster Lab Store product detail page for framed posters and custom uploads.">
   <link rel="icon" type="image/webp" href="assets/poster-lab-logo.webp">
@@ -66,6 +75,15 @@
   </aside>
 
   <main>
+    <div class="page-back-bar" style="padding:16px clamp(16px, 4vw, 42px) 0 8px;">
+      <a class="page-back-btn" href="index.html" aria-label="Back to store">
+        <svg class="page-back-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span data-t="backToStore">Back to store</span>
+      </a>
+    </div>
+
     <!-- We removed the redundant store-section list-header to keep the details clean -->
     <section class="detail-shell" id="productDetail" hidden></section>
   </main>
@@ -169,6 +187,7 @@
   <script defer src="firebase-config.js"></script>
   <script defer src="products-bundle.min.js"></script>
   <script defer src="script.min.js"></script>
+  <script defer src="admin-access.js"></script>
 </body>
 
 </html>

@@ -133,6 +133,143 @@
 
   function money(n) { return 'EGP ' + (Math.round(n) || 0); }
 
+  
+  /* ── Self-Contained Admin Firestore Database Integration ── */
+  async function saveProductToFirestore(product) {
+    try {
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
+      if (!db) return false;
+      const clean = { ...product };
+      delete clean._searchCache;
+      await db.collection('products').doc(product.id).set(clean, { merge: true });
+      log('Product saved to Firestore:', product.id);
+      return true;
+    } catch (e) {
+      err('Firestore save product error:', e);
+      return false;
+    }
+  }
+
+  async function deleteProductFromFirestore(pid) {
+    try {
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
+      if (!db) return false;
+      await db.collection('products').doc(pid).delete();
+      log('Product deleted from Firestore:', pid);
+      return true;
+    } catch (e) {
+      err('Firestore delete product error:', e);
+      return false;
+    }
+  }
+
+  async function syncProductsFromFirestore(force = false) {
+    try {
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(4000) : null;
+      if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
+      if (!db) return 0;
+      const snap = await db.collection('products').get();
+      if (snap.empty) return 0;
+      const remote = [];
+      snap.forEach(doc => {
+        const d = doc.data();
+        if (d && d.id) remote.push(d);
+      });
+      const local = getAdminProducts();
+      const localMap = new Map();
+      local.forEach(p => localMap.set(p.id, p));
+      let changed = false;
+      remote.forEach(rp => {
+        const lp = localMap.get(rp.id);
+        if (!lp || JSON.stringify(lp) !== JSON.stringify(rp)) {
+          localMap.set(rp.id, rp);
+          changed = true;
+        }
+      });
+      if (changed) {
+        saveAdminProducts(Array.from(localMap.values()));
+        log('Products synced from Firestore:', remote.length);
+      }
+      return remote.length;
+    } catch (e) {
+      err('Firestore sync products error:', e);
+      return 0;
+    }
+  }
+
+  async function saveCouponToFirestore(coupon) {
+    try {
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
+      if (!db) return false;
+      await db.collection('coupons').doc(coupon.code.toUpperCase()).set(coupon, { merge: true });
+      log('Coupon saved to Firestore:', coupon.code);
+      return true;
+    } catch (e) {
+      err('Firestore save coupon error:', e);
+      return false;
+    }
+  }
+
+  async function deleteCouponFromFirestore(code) {
+    try {
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
+      if (!db) return false;
+      await db.collection('coupons').doc(code.toUpperCase()).delete();
+      log('Coupon deleted from Firestore:', code);
+      return true;
+    } catch (e) {
+      err('Firestore delete coupon error:', e);
+      return false;
+    }
+  }
+
+  async function syncCouponsFromFirestore(force = false) {
+    try {
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(4000) : null;
+      if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
+      if (!db) return 0;
+      const snap = await db.collection('coupons').get();
+      if (snap.empty) return 0;
+      const remote = [];
+      snap.forEach(doc => {
+        const d = doc.data();
+        if (d && d.code) remote.push(d);
+      });
+      const local = getCoupons();
+      const localMap = new Map();
+      local.forEach(c => localMap.set(c.code.toUpperCase(), c));
+      let changed = false;
+      remote.forEach(rc => {
+        const code = rc.code.toUpperCase();
+        const lc = localMap.get(code);
+        if (!lc || JSON.stringify(lc) !== JSON.stringify(rc)) {
+          localMap.set(code, rc);
+          changed = true;
+        }
+      });
+      if (changed) {
+        saveCoupons(Array.from(localMap.values()));
+        log('Coupons synced from Firestore:', remote.length);
+      }
+      return remote.length;
+    } catch (e) {
+      err('Firestore sync coupons error:', e);
+      return 0;
+    }
+  }
+
+  // Expose to window for admin panel actions
+  window.saveProductToFirestore = saveProductToFirestore;
+  window.deleteProductFromFirestore = deleteProductFromFirestore;
+  window.syncProductsFromFirestore = syncProductsFromFirestore;
+  window.saveCouponToFirestore = saveCouponToFirestore;
+  window.deleteCouponFromFirestore = deleteCouponFromFirestore;
+  window.syncCouponsFromFirestore = syncCouponsFromFirestore;
+
   /* ── Firestore sync ── */
   let _syncing = false;
 
@@ -453,10 +590,16 @@
     }
   }
 
-  function doLogout() {
-    localStorage.removeItem(SESSION_KEY);
-    localStorage.removeItem(EMAIL_KEY);
-    window.location.href = 'login.html';
+    function doLogout() {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(EMAIL_KEY);
+      localStorage.removeItem('pls-session');
+      if (typeof firebase !== 'undefined' && firebase.auth) {
+        firebase.auth().signOut().catch(() => {});
+      }
+    } catch (_) {}
+    window.location.replace('login.html?logout=1');
   }
 
   function openProductForm(product) {
@@ -476,7 +619,7 @@
     $('#apImage').value = product ? (product.image || '') : '';
     $('#apBasePrice').value = product ? (product.basePrice || '') : '';
     $('#apQuantity').value = product && product.quantity != null ? product.quantity : '';
-    const sizes = product && product.sizes ? Object.entries(product.sizes).map(e => e[0] + '=' + e[1]).join(', ') : '20x30=60, 30x40=80, 40x50=100, 50x70=120';
+    const sizes = product && product.sizes ? Object.entries(product.sizes).map(e => e[0] + '=' + e[1]).join(', ') : '20x30=60, 30x40=80, 40x50=240, 50x70=300';
     $('#apSizes').value = sizes;
     $('#apFrames').value = product && product.frames ? product.frames.join(', ') : 'None, Black, White';
     $('#apDescription').value = product ? (product.description || '') : '';
@@ -521,7 +664,7 @@
     const name = $('#apName').value.trim();
     if (!id || !name) { alert('Product ID and Name are required.'); return; }
     const sizesStr = $('#apSizes').value.trim();
-    let sizes = { '20x30': 60, '30x40': 80, '40x50': 100, '50x70': 120 };
+    let sizes = { '20x30': 60, '30x40': 80, '40x50': 240, '50x70': 300 };
     if (sizesStr) {
       const p = {};
       sizesStr.split(',').forEach(part => {
@@ -856,3 +999,27 @@
     init();
   }
 })();
+
+
+
+// Store home navigation from admin panel with absolute canonical resolution
+document.addEventListener('click', (e) => {
+  const storeLink = e.target.closest('a[href*="index.html"], .admin-brand-link, .admin-back-link, [data-store-link]');
+  if (storeLink) {
+    e.preventDefault();
+    if (typeof getStoreHomeUrl === 'function') {
+      window.location.href = getStoreHomeUrl();
+    } else {
+      const p = window.location.pathname;
+      if (window.location.hostname.includes('github.io')) {
+        const parts = p.split('/').filter(Boolean);
+        const repo = (parts.length > 0 && parts[0].toLowerCase() === 'posterlabstore') ? parts[0] : 'PosterLabStore';
+        window.location.href = window.location.origin + '/' + repo + '/index.html';
+      } else if (p.includes('/admin/')) {
+        window.location.href = p.substring(0, p.indexOf('/admin/')) + '/index.html';
+      } else {
+        window.location.href = '../index.html';
+      }
+    }
+  }
+});

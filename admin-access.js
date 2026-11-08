@@ -1,184 +1,199 @@
-/* ============================================================
-   Store-side admin access
-   - recognises the store owner account (posterlab895@gmail.com)
-   - adds a settings-gear button next to the account icon
-   - adds an "Admin panel" entry inside the slide-out menu
-   - lets the owner sign in with the admin credentials on the
-     normal account form and unlocks the admin panel
-   Loaded AFTER script.min.js so it can decorate / wrap the app.
-   ============================================================ */
+/* ── Admin Access Controller ──
+   Poster Lab Store: Gear Icon, Nav Menu Entry & Session Management
+   Authorized for: posterlab895@gmail.com
+*/
 (function () {
   'use strict';
 
-  var ADMIN_EMAIL = 'posterlab895@gmail.com';
-  var ADMIN_PASSWORD = 'Poster895Lab$';
-  var SESSION_KEY = 'pls-session';
-  var ADMIN_SESSION_KEY = 'pls-admin-session';
-  var PANEL_URL = 'admin/panel.html';
+  var REQUIRED_EMAIL = 'posterlab895@gmail.com';
+  var SESSION_KEY = 'pls-admin-session';
+  var EMAIL_KEY = 'pls-admin-email';
 
-  var GEAR_SVG =
-    '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-    '<circle cx="12" cy="12" r="3"/>' +
-    '<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>' +
-    '</svg>';
+  function getAdminPanelUrl() {
+    var origin = window.location.origin;
+    var p = window.location.pathname;
+    if (window.location.hostname.includes('github.io')) {
+      var parts = p.split('/').filter(Boolean);
+      var repo = (parts.length > 0 && parts[0].toLowerCase() === 'posterlabstore') ? parts[0] : 'PosterLabStore';
+      return origin + '/' + repo + '/admin/panel.html';
+    }
+    if (p.includes('/admin/')) return 'panel.html';
+    return 'admin/panel.html';
+  }
 
-  function readSession() {
+    function isAdminUser() {
     try {
-      var raw = localStorage.getItem(SESSION_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function isAdminEmail(email) {
-    return String(email || '').toLowerCase().trim() === ADMIN_EMAIL;
-  }
-
-  function isAdminSession() {
-    var session = readSession();
-    return !!(session && isAdminEmail(session.email));
-  }
-
-  function rememberAdminAccess() {
-    if (!isAdminSession()) return;
-    try { localStorage.setItem(ADMIN_SESSION_KEY, 'true'); } catch (e) { /* ignore */ }
-  }
-
-  /* ── Header gear button (next to the account icon) ── */
-  function syncHeaderGear() {
-    var admin = isAdminSession();
-    var actions = document.querySelectorAll('.header-actions');
-    for (var i = 0; i < actions.length; i++) {
-      var bar = actions[i];
-      var gear = bar.querySelector('[data-admin-gear]');
-      if (admin && !gear) {
-        gear = document.createElement('a');
-        gear.className = 'account-button is-logged-in admin-gear-button';
-        gear.href = PANEL_URL;
-        gear.setAttribute('data-admin-gear', '');
-        gear.setAttribute('aria-label', 'Open admin panel');
-        gear.setAttribute('title', 'Admin panel');
-        gear.innerHTML = GEAR_SVG;
-        var account = bar.querySelector('[data-account-btn]');
-        if (account) bar.insertBefore(gear, account);
-        else bar.appendChild(gear);
-      } else if (!admin && gear) {
-        gear.parentNode.removeChild(gear);
-      }
-    }
-  }
-
-  /* ── "Admin panel" entry inside the slide-out menu ── */
-  function addNavAdminLink() {
-    if (!isAdminSession()) return;
-    var body = document.querySelector('[data-nav-body]');
-    if (!body || body.querySelector('[data-admin-nav]')) return;
-    var link = document.createElement('a');
-    link.href = PANEL_URL;
-    link.setAttribute('data-admin-nav', '');
-    link.setAttribute('data-nav-close', '');
-    link.textContent = '⚙️ Admin panel';
-    link.style.color = 'var(--accent-strong)';
-    link.style.fontWeight = '900';
-    var divider = body.querySelector('.nav-divider');
-    if (divider) body.insertBefore(link, divider);
-    else body.appendChild(link);
-  }
-
-  function syncAdminUI() {
-    rememberAdminAccess();
-    syncHeaderGear();
-    addNavAdminLink();
-  }
-
-  /* ── Admin credentials on the normal store login form ── */
-  document.addEventListener('click', function (e) {
-    var target = e.target;
-    if (!target || !target.closest) return;
-    var btn = target.closest('#accountLoginBtn');
-    if (!btn) return;
-
-    var emailEl = document.getElementById('accountEmail');
-    var pwdEl = document.getElementById('accountPassword');
-    if (!emailEl || !pwdEl) return;
-
-    var email = String(emailEl.value || '').trim().toLowerCase();
-    var password = String(pwdEl.value || '').trim();
-
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      /* Handle it here so the admin account works even if it was
-         never created inside Firebase Authentication. */
-      e.preventDefault();
-      e.stopPropagation();
-      try {
-        localStorage.setItem(SESSION_KEY, JSON.stringify({
-          id: 'pls-admin',
-          name: 'Poster Lab Admin',
-          email: ADMIN_EMAIL,
-          phone: '',
-          deliveryAddress: '',
-          addresses: []
-        }));
-        localStorage.setItem(ADMIN_SESSION_KEY, 'true');
-      } catch (err) { /* private mode */ }
-      var panel = document.querySelector('[data-account-panel]');
-      if (panel) panel.remove();
-      window.location.reload();
-    }
-  }, true);
-
-  /* ── Keep the UI in sync when the app updates the account ── */
-  function wrapAppFunctions() {
-    var updateUserUI = window.updateUserUI;
-    if (typeof updateUserUI === 'function' && !updateUserUI.__plsAdminWrapped) {
-      var wrappedUpdate = function () {
-        var result = updateUserUI.apply(this, arguments);
-        try { syncAdminUI(); } catch (e) { /* ignore */ }
-        return result;
-      };
-      wrappedUpdate.__plsAdminWrapped = true;
-      window.updateUserUI = wrappedUpdate;
-    }
-
-    var logoutUser = window.logoutUser;
-    if (typeof logoutUser === 'function' && !logoutUser.__plsAdminWrapped) {
-      var wrappedLogout = function () {
-        var session = readSession();
-        if (session && isAdminEmail(session.email)) {
-          try { localStorage.removeItem(ADMIN_SESSION_KEY); } catch (e) { /* ignore */ }
+      // 1. Check pls-session in localStorage (active user in store)
+      var rawSession = localStorage.getItem('pls-session');
+      if (rawSession) {
+        var user = JSON.parse(rawSession);
+        if (user && user.email && user.email.toLowerCase().trim() === REQUIRED_EMAIL) {
+          return true;
         }
-        return logoutUser.apply(this, arguments);
-      };
-      wrappedLogout.__plsAdminWrapped = true;
-      window.logoutUser = wrappedLogout;
+      }
+      // 2. Check window.state.user
+      if (typeof window !== 'undefined' && window.state && window.state.user && window.state.user.email) {
+        if (window.state.user.email.toLowerCase().trim() === REQUIRED_EMAIL) {
+          return true;
+        }
+      }
+      // 3. Check Firebase Auth if available
+      if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser) {
+        var cur = firebase.auth().currentUser;
+        if (cur.email && cur.email.toLowerCase().trim() === REQUIRED_EMAIL) {
+          return true;
+        }
+      }
+      // Note: We do NOT use pls-admin-session alone as the source of truth,
+      // so logging out can never be prevented by a circular re-activation!
+    } catch (_) {}
+    return false;
+  }
+
+  function syncAdminSession(isAdmin) {
+    try {
+      if (isAdmin) {
+        localStorage.setItem(SESSION_KEY, 'true');
+        localStorage.setItem(EMAIL_KEY, REQUIRED_EMAIL);
+      } else {
+        // If not actively authenticated as admin, clear admin tokens
+        var rawSession = localStorage.getItem('pls-session');
+        if (!rawSession) {
+          localStorage.removeItem(SESSION_KEY);
+          localStorage.removeItem(EMAIL_KEY);
+        } else {
+          var user = JSON.parse(rawSession);
+          if (!user || !user.email || user.email.toLowerCase().trim() !== REQUIRED_EMAIL) {
+            localStorage.removeItem(SESSION_KEY);
+            localStorage.removeItem(EMAIL_KEY);
+          }
+        }
+      }
+    } catch (_) {}
+  }
+
+  function renderGearButton(isAdmin) {
+    var gearBtn = document.getElementById('adminGearBtn');
+    if (!isAdmin) {
+      if (gearBtn) gearBtn.remove();
+      return;
+    }
+
+    var targetContainer = document.querySelector('.header-actions');
+    if (!targetContainer) return;
+
+    var adminUrl = getAdminPanelUrl();
+
+    if (!gearBtn) {
+      gearBtn = document.createElement('a');
+      gearBtn.id = 'adminGearBtn';
+      gearBtn.className = 'header-admin-gear';
+      gearBtn.href = adminUrl;
+      gearBtn.setAttribute('aria-label', 'Admin panel');
+      gearBtn.setAttribute('title', 'Admin panel');
+      // Inline styles ensure the gear renders cleanly even without enhancements.css
+      gearBtn.style.display = 'inline-flex';
+      gearBtn.style.alignItems = 'center';
+      gearBtn.style.justifyContent = 'center';
+      gearBtn.style.width = '38px';
+      gearBtn.style.height = '38px';
+      gearBtn.style.borderRadius = '50%';
+      gearBtn.style.background = 'var(--surface, #ffffff)';
+      gearBtn.style.border = '1px solid var(--line, rgba(0,0,0,0.12))';
+      gearBtn.style.color = 'var(--text-strong, #12110f)';
+      gearBtn.style.fontSize = '1.15rem';
+      gearBtn.style.textDecoration = 'none';
+      gearBtn.style.cursor = 'pointer';
+      gearBtn.style.transition = 'transform 180ms ease, background 180ms ease, border-color 180ms ease';
+      gearBtn.style.flexShrink = '0';
+      gearBtn.style.boxShadow = '0 2px 6px rgba(0,0,0,0.06)';
+      gearBtn.innerHTML = '<span style="transform:translateY(-1px);display:inline-block">⚙️</span>';
+
+      gearBtn.addEventListener('mouseenter', function () {
+        gearBtn.style.transform = 'scale(1.08) rotate(30deg)';
+        gearBtn.style.borderColor = 'var(--accent, #0f9f85)';
+      });
+      gearBtn.addEventListener('mouseleave', function () {
+        gearBtn.style.transform = 'scale(1) rotate(0deg)';
+        gearBtn.style.borderColor = 'var(--line, rgba(0,0,0,0.12))';
+      });
+
+      var accountBtn = targetContainer.querySelector('[data-account-btn]');
+      if (accountBtn) {
+        targetContainer.insertBefore(gearBtn, accountBtn);
+      } else {
+        targetContainer.appendChild(gearBtn);
+      }
+    } else {
+      gearBtn.href = adminUrl;
     }
   }
 
-  function watchNavBody() {
-    var body = document.querySelector('[data-nav-body]');
-    if (!body || !('MutationObserver' in window)) return;
-    new MutationObserver(function () {
-      try { addNavAdminLink(); } catch (e) { /* ignore */ }
-    }).observe(body, { childList: true });
+  function renderMenuEntry(isAdmin) {
+    var navBody = document.querySelector('[data-nav-body]');
+    var existingLink = document.querySelector('.nav-admin-entry');
+
+    if (!isAdmin) {
+      if (existingLink) existingLink.remove();
+      return;
+    }
+
+    if (!navBody) return;
+
+    var adminUrl = getAdminPanelUrl();
+
+    if (!existingLink) {
+      existingLink = document.createElement('a');
+      existingLink.className = 'nav-admin-entry';
+      existingLink.href = adminUrl;
+      existingLink.setAttribute('data-nav-close', '');
+      existingLink.style.display = 'flex';
+      existingLink.style.alignItems = 'center';
+      existingLink.style.gap = '10px';
+      existingLink.style.padding = '10px 14px';
+      existingLink.style.margin = '8px 0';
+      existingLink.style.borderRadius = '10px';
+      existingLink.style.background = 'var(--surface-2, rgba(37,99,235,0.08))';
+      existingLink.style.border = '1px solid var(--accent, #0f9f85)';
+      existingLink.style.color = 'var(--text-strong, #12110f)';
+      existingLink.style.fontWeight = '700';
+      existingLink.style.fontSize = '0.92rem';
+      existingLink.style.textDecoration = 'none';
+      existingLink.innerHTML = '<span>⚙️</span> <span>Admin panel</span> <span style="margin-inline-start:auto;font-size:0.75rem;padding:2px 8px;border-radius:999px;background:var(--accent,#0f9f85);color:#fff">Active</span>';
+
+      // Insert before copyright or near bottom
+      var lastLink = navBody.querySelector('a:last-of-type');
+      if (lastLink) {
+        navBody.insertBefore(existingLink, lastLink);
+      } else {
+        navBody.appendChild(existingLink);
+      }
+    } else {
+      existingLink.href = adminUrl;
+    }
   }
 
-  function init() {
-    wrapAppFunctions();
-    syncAdminUI();
-    watchNavBody();
+  function updateAdminUI() {
+    var isAdmin = isAdminUser();
+    syncAdminSession(isAdmin);
+    renderGearButton(isAdmin);
+    renderMenuEntry(isAdmin);
   }
 
+  // Run on load and periodically
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', updateAdminUI);
   } else {
-    init();
+    updateAdminUI();
   }
 
-  window.addEventListener('load', function () {
-    try { syncAdminUI(); } catch (e) { /* ignore */ }
-  });
-  window.addEventListener('storage', function () {
-    try { syncAdminUI(); } catch (e) { /* ignore */ }
-  });
+  window.addEventListener('storage', updateAdminUI);
+  window.addEventListener('load', updateAdminUI);
+  window.addEventListener('firebase-ready', updateAdminUI);
+
+  // Poll lightly in case login modal completes without page reload
+  setInterval(updateAdminUI, 1500);
+
+  // Expose
+  window.updateAdminAccessUI = updateAdminUI;
 })();

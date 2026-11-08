@@ -4,6 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    (function(){
+      var p = window.location.pathname;
+      if (p && !p.endsWith('/') && !p.split('/').pop().includes('.')) {
+        window.location.replace(window.location.origin + p + '/' + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+
   <title>Poster Lab Store</title>
   <meta name="description"
     content="Poster Lab Store sells modern framed car posters and art prints for home decor fans.">
@@ -178,6 +187,7 @@
   <script defer src="firebase-config.js"></script>
   <script defer src="products-bundle.min.js"></script>
   <script defer src="script.min.js"></script>
+  <script defer src="admin-access.js"></script>
 </body>
 
 </html>

@@ -4,6 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    (function(){
+      var p = window.location.pathname;
+      if (p && !p.endsWith('/') && !p.split('/').pop().includes('.')) {
+        window.location.replace(window.location.origin + p + '/' + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+
   <title>FAQ — Poster Lab Store</title>
   <meta name="description" content="Frequently asked questions about Poster Lab Store ordering, framing, sizes, payment, and delivery.">
   <link rel="icon" type="image/webp" href="assets/poster-lab-logo.webp">
@@ -214,6 +223,7 @@
   <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script defer src="firebase-config.js"></script>
   <script defer src="script.min.js"></script>
+  <script defer src="admin-access.js"></script>
 </body>
 
 </html>

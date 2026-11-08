@@ -1,3 +1,48 @@
+/* ── Self-Contained Design Variables for Admin Panel ── */
+:root,
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #11100e;
+  --bg-soft: #191816;
+  --surface: #23211e;
+  --surface-2: #2f2b26;
+  --text: #fffaf1;
+  --text-strong: #ffffff;
+  --muted: #d8cfc0;
+  --line: rgba(255, 250, 241, 0.16);
+  --accent: #24c6a3;
+  --accent-strong: #64f2d2;
+  --danger: #ff6f61;
+  --warm: #f5b35a;
+  --shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+  --small-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+  --radius: 8px;
+  --radius-lg: 14px;
+  --field-bg: #171613;
+}
+:root[data-theme="light"],
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fbf7ef;
+  --bg-soft: #efe7da;
+  --surface: #ffffff;
+  --surface-2: #f4ecdf;
+  --text: #211f1b;
+  --text-strong: #12110f;
+  --muted: #6b6257;
+  --line: rgba(33, 31, 27, 0.14);
+  --accent: #0f9f85;
+  --accent-strong: #08715f;
+  --danger: #d94c3d;
+  --warm: #d97c2b;
+  --shadow: 0 20px 55px rgba(54, 42, 25, 0.14);
+  --small-shadow: 0 9px 22px rgba(54, 42, 25, 0.1);
+  --radius: 8px;
+  --radius-lg: 14px;
+  --field-bg: #ffffff;
+}
+
 .admin-login-screen {
   display: grid;
   min-height: 100vh;

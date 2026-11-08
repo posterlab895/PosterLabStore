@@ -11,8 +11,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -53,8 +53,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -102,8 +102,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -147,8 +147,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -193,8 +193,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -239,8 +239,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -284,8 +284,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -330,8 +330,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -378,8 +378,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -423,8 +423,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -469,8 +469,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -514,8 +514,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -562,8 +562,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -609,8 +609,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -661,8 +661,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -708,8 +708,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -758,8 +758,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -806,8 +806,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -853,8 +853,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -900,8 +900,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -946,8 +946,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -995,8 +995,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1043,8 +1043,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1090,8 +1090,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1139,8 +1139,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1190,8 +1190,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1239,8 +1239,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1289,8 +1289,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1339,8 +1339,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1385,8 +1385,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1433,8 +1433,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1478,8 +1478,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1529,8 +1529,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1577,8 +1577,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1629,8 +1629,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1678,8 +1678,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1730,8 +1730,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1780,8 +1780,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1828,8 +1828,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1879,8 +1879,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1927,8 +1927,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -1974,8 +1974,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2025,8 +2025,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2076,8 +2076,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2125,8 +2125,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2175,8 +2175,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2226,8 +2226,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2278,8 +2278,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2329,8 +2329,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2379,8 +2379,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2430,8 +2430,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2481,8 +2481,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2533,8 +2533,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2580,8 +2580,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2631,8 +2631,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2684,8 +2684,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2735,8 +2735,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2787,8 +2787,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2840,8 +2840,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2893,8 +2893,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -2948,8 +2948,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3008,8 +3008,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3059,8 +3059,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3108,8 +3108,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3157,8 +3157,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3204,8 +3204,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3253,8 +3253,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3307,8 +3307,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3352,8 +3352,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3398,8 +3398,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3448,8 +3448,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3493,8 +3493,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3540,8 +3540,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3587,8 +3587,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3632,8 +3632,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3680,8 +3680,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3728,8 +3728,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3775,8 +3775,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3824,8 +3824,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3869,8 +3869,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3918,8 +3918,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -3963,8 +3963,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4012,8 +4012,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4059,8 +4059,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4106,8 +4106,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4153,8 +4153,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4198,8 +4198,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4245,8 +4245,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4293,8 +4293,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4342,8 +4342,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4392,8 +4392,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4441,8 +4441,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4486,8 +4486,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4531,8 +4531,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4579,8 +4579,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4629,8 +4629,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4680,8 +4680,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4726,8 +4726,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4771,8 +4771,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4818,8 +4818,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4869,8 +4869,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4920,8 +4920,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -4971,8 +4971,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5020,8 +5020,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5069,8 +5069,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5117,8 +5117,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5165,8 +5165,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5213,8 +5213,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5262,8 +5262,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5311,8 +5311,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5360,8 +5360,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5408,8 +5408,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5459,8 +5459,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5504,8 +5504,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5554,8 +5554,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5606,8 +5606,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5651,8 +5651,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5699,8 +5699,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5748,8 +5748,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5796,8 +5796,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5841,8 +5841,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5891,8 +5891,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5938,8 +5938,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -5985,8 +5985,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6033,8 +6033,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6084,8 +6084,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6133,8 +6133,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6181,8 +6181,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6229,8 +6229,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6278,8 +6278,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6327,8 +6327,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6373,8 +6373,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6423,8 +6423,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6472,8 +6472,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6521,8 +6521,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6570,8 +6570,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6618,8 +6618,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6667,8 +6667,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6717,8 +6717,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6766,8 +6766,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6816,8 +6816,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6864,8 +6864,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6911,8 +6911,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -6960,8 +6960,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7011,8 +7011,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7058,8 +7058,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7107,8 +7107,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7159,8 +7159,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7208,8 +7208,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7255,8 +7255,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7303,8 +7303,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7353,8 +7353,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7401,8 +7401,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7450,8 +7450,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7500,8 +7500,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7547,8 +7547,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7596,8 +7596,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7643,8 +7643,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7690,8 +7690,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7739,8 +7739,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7787,8 +7787,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7837,8 +7837,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7883,8 +7883,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7931,8 +7931,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -7981,8 +7981,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8027,8 +8027,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8075,8 +8075,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8123,8 +8123,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8170,8 +8170,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8217,8 +8217,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8265,8 +8265,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8314,8 +8314,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8362,8 +8362,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8408,8 +8408,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8457,8 +8457,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8506,8 +8506,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8554,8 +8554,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8601,8 +8601,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8646,8 +8646,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8695,8 +8695,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8745,8 +8745,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8791,8 +8791,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8839,8 +8839,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8886,8 +8886,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",
@@ -8935,8 +8935,8 @@ const movieArtistProducts = [
     "sizes": {
       "20x30": 60,
       "30x40": 80,
-      "40x50": 100,
-      "50x70": 120
+      "40x50": 240,
+      "50x70": 300
     },
     "frames": [
       "None",

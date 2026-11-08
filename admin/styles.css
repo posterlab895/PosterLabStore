@@ -550,7 +550,7 @@ textarea:focus {
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y pinch-zoom pan-x;
+  touch-action: pan-y pinch-zoom;
   scrollbar-width: none;
   cursor: grab;
   will-change: transform;
@@ -2006,7 +2006,7 @@ html[lang="ar"] .page-back-btn:hover .page-back-arrow {
   animation: fade-in 500ms ease both;
   animation-delay: calc(var(--section-order, 0) * 60ms + 80ms);
   user-select: none;
-  touch-action: pan-y pinch-zoom pan-x;
+  touch-action: pan-y pinch-zoom;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -3002,71 +3002,71 @@ html[lang="ar"] .page-back-btn:hover .page-back-arrow {
 .result-count-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4.5px;
-  padding: 2px 8.5px;
-  height: 22px;
+  gap: 6px;
+  padding: 3px 12px;
+  height: 26px;
   border-radius: 9999px;
   background: var(--surface);
   border: 1px solid var(--line);
   color: var(--text-strong);
-  font-size: 0.70rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
   transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   user-select: none;
   white-space: nowrap;
 }
 :root[data-theme="light"] .result-count-btn,
 [data-theme="light"] .result-count-btn {
   background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.1);
-  color: #52525b;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #3f3f46;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 .result-count-btn:hover {
   background: var(--surface-2);
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px var(--accent-glow, rgba(36, 198, 163, 0.22));
+  box-shadow: 0 3px 10px var(--accent-glow, rgba(36, 198, 163, 0.25));
 }
 .result-count-btn:active {
   transform: translateY(0) scale(0.97);
 }
 .result-count-btn .count-btn-dot {
-  width: 4.5px;
-  height: 4.5px;
+  width: 6.5px;
+  height: 6.5px;
   border-radius: 50%;
   background: #0d9488;
   flex-shrink: 0;
-  box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.2);
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.22);
 }
 [data-theme="dark"] .result-count-btn .count-btn-dot {
-  background: var(--accent);
-  box-shadow: 0 0 4px var(--accent);
+  background: #24c6a3;
+  box-shadow: 0 0 6px rgba(36, 198, 163, 0.6);
 }
 .result-count-btn .count-btn-text {
-  font-size: 0.70rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1;
 }
 .result-count-btn .count-btn-arrow {
-  font-size: 0.70rem;
+  font-size: 0.82rem;
   line-height: 1;
   color: #71717a;
   transition: transform 180ms ease, color 180ms ease;
-  margin-inline-start: 1px;
+  margin-inline-start: 2px;
 }
 .result-count-btn:hover .count-btn-arrow {
   color: var(--accent);
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 [dir="rtl"] .result-count-btn:hover .count-btn-arrow {
-  transform: translateX(-2px);
+  transform: translateX(-3px);
 }
 
 /* ── Desktop Category Carousel & Navigation Arrows ── */
@@ -3171,21 +3171,21 @@ html[lang="ar"] .page-back-btn:hover .page-back-arrow {
   .carousel-nav-btn {
     display: none;
   }
-  .result-count-btn {
-    padding: 1.5px 7px;
-    height: 19px;
-    font-size: 0.64rem;
-    gap: 3.5px;
+    .result-count-btn {
+    padding: 2.5px 9px;
+    height: 22px;
+    font-size: 0.70rem;
+    gap: 5px;
   }
   .result-count-btn .count-btn-dot {
-    width: 3.8px;
-    height: 3.8px;
+    width: 5px;
+    height: 5px;
   }
   .result-count-btn .count-btn-text {
-    font-size: 0.64rem;
+    font-size: 0.70rem;
   }
   .result-count-btn .count-btn-arrow {
-    font-size: 0.66rem;
+    font-size: 0.74rem;
   }
 }
 

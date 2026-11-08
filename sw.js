@@ -1,4 +1,4 @@
-const CACHE_NAME = 'poster-lab-store-v34';
+const CACHE_NAME = 'poster-lab-store-v37';
 const IMAGE_CACHE_NAME = 'poster-lab-images-v2';
 const ASSETS = [
   './',
@@ -8,6 +8,8 @@ const ASSETS = [
   './faq.html',
   './admin/login.html',
   './admin/panel.html',
+  './admin-access.js',
+  './admin/admin-extras.js',
   './styles.min.css',
   './admin.min.css',
   './admin/styles.min.css',
@@ -95,6 +97,20 @@ self.addEventListener('fetch', (event) => {
 
   const isLocalImage = requestUrl.origin === self.location.origin && requestUrl.pathname.includes('/assets/');
 
+  
+  // Admin pages always network-first to avoid stale caches
+  if (requestUrl.pathname.includes('/admin/')) {
+    event.respondWith(
+      fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.ok) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone)).catch(() => {});
+        }
+        return networkResponse;
+      }).catch(() => caches.match(event.request))
+    );
+    return;
+  }
   if (isLocalImage) {
     event.respondWith(
       caches.open(IMAGE_CACHE_NAME).then((cache) => {
