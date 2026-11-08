@@ -380,7 +380,7 @@ const products = [
     image: "assets/Custom/Upload-Your-Custom-Design.webp",
     gallery: ["assets/Custom/Upload-Your-Custom-Design.webp"],
     basePrice: 60,
-    sizes: { '20x30': 60, '30x40': 80, '40x50': 240, '50x70': 300 },
+    sizes: { '20x30': 60, '30x40': 80, '40x50': 250, '50x70': 300 },
     frames: ['None', 'Black', 'White'],
     description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
     descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
@@ -2746,7 +2746,7 @@ function renderDetail(productId) {
   if (productDetail) {
     document.title = `${name} — ${t("brandTitle")}`;
     productDetail.hidden = false;
-    const rawPreview = product.image;
+    const rawPreview = (product.isCustom && state.customUpload && state.customUpload.url && !state.customUpload.previewError) ? state.customUpload.url : product.image;
     const previewImage = rawPreview && rawPreview.startsWith('data:') ? rawPreview : productImageUrl(rawPreview);
     const sceneImage = sceneImageForIndex(getMergedProducts().findIndex((item) => item.id === product.id));
     productDetail.innerHTML = `

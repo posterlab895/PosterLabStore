@@ -619,7 +619,7 @@
     $('#apImage').value = product ? (product.image || '') : '';
     $('#apBasePrice').value = product ? (product.basePrice || '') : '';
     $('#apQuantity').value = product && product.quantity != null ? product.quantity : '';
-    const sizes = product && product.sizes ? Object.entries(product.sizes).map(e => e[0] + '=' + e[1]).join(', ') : '20x30=60, 30x40=80, 40x50=240, 50x70=300';
+    const sizes = product && product.sizes ? Object.entries(product.sizes).map(e => e[0] + '=' + e[1]).join(', ') : '20x30=60, 30x40=80, 40x50=250, 50x70=300';
     $('#apSizes').value = sizes;
     $('#apFrames').value = product && product.frames ? product.frames.join(', ') : 'None, Black, White';
     $('#apDescription').value = product ? (product.description || '') : '';
@@ -664,7 +664,7 @@
     const name = $('#apName').value.trim();
     if (!id || !name) { alert('Product ID and Name are required.'); return; }
     const sizesStr = $('#apSizes').value.trim();
-    let sizes = { '20x30': 60, '30x40': 80, '40x50': 240, '50x70': 300 };
+    let sizes = { '20x30': 60, '30x40': 80, '40x50': 250, '50x70': 300 };
     if (sizesStr) {
       const p = {};
       sizesStr.split(',').forEach(part => {

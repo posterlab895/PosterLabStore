@@ -1,4 +1,4 @@
-const CACHE_NAME = 'poster-lab-store-v37';
+const CACHE_NAME = 'poster-lab-store-v38';
 const IMAGE_CACHE_NAME = 'poster-lab-images-v2';
 const ASSETS = [
   './',
