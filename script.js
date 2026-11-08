@@ -25,7 +25,7 @@ function updateDeviceType() {
 window.addEventListener("resize", updateDeviceType, { passive: true });
 updateDeviceType();
 
-﻿const WHATSAPP_NUMBER = "201010414187";
+const WHATSAPP_NUMBER = "201010414187";
 const DELIVERY_FEE = 35;
 const POSTER_FALLBACK_IMAGE = "assets/poster-lab-logo.webp";
 const CUSTOM_UPLOAD_ACCEPT = ".jpg,.jpeg,.png,.webp,.gif,.bmp,.avif,.heic,.heif,.tif,.tiff,image/*";
@@ -745,46 +745,120 @@ function loadCartFromFirestore() {
   });
 }
 
-/* ── Firestore Product Sync ── */
+/* ── Firestore Product & Coupon Sync (with Live Real-time Listeners) ── */
+let _storeProductsUnsub = null;
+let _storeCouponsUnsub = null;
+
+function applyRemoteProducts(remoteProducts) {
+  if (!Array.isArray(remoteProducts) || !remoteProducts.length) return false;
+  const existing = lsGet(LOCAL_STORAGE_PRODUCTS_KEY, []);
+  const map = new Map();
+  existing.forEach(p => map.set(p.id, p));
+
+  let changed = false;
+  remoteProducts.forEach(rp => {
+    if (!rp || !rp.id) return;
+    const cur = map.get(rp.id);
+    if (rp._deleted) {
+      if (!cur || !cur._deleted) {
+        map.set(rp.id, { id: rp.id, _deleted: true, _updatedAt: rp._updatedAt || new Date().toISOString() });
+        changed = true;
+      }
+    } else {
+      if (!cur || JSON.stringify(cur) !== JSON.stringify(rp)) {
+        map.set(rp.id, rp);
+        changed = true;
+      }
+    }
+  });
+
+  if (changed) {
+    lsSet(LOCAL_STORAGE_PRODUCTS_KEY, Array.from(map.values()));
+    try { localStorage.setItem("pls_last_fs_sync", String(Date.now())); } catch {}
+    _lastFilterSearch = null;
+    _lastFilterResult = null;
+
+    // Refresh catalog view if present
+    if (productGrid) {
+      const currentCat = new URLSearchParams(window.location.search).get("cat");
+      if (currentCat) renderSingleCategory(currentCat);
+      else renderProducts();
+    }
+
+    // Refresh product detail view if present
+    const pid = getPageProductId();
+    if (pid) {
+      renderDetail(pid);
+    }
+  }
+  return changed;
+}
+
+function initStoreRealtimeListeners() {
+  if (_storeProductsUnsub && _storeCouponsUnsub) return;
+  const db = typeof getFirebaseDb === 'function' ? getFirebaseDb() : null;
+  if (!db) return;
+
+  // Real-time products listener
+  if (!_storeProductsUnsub) {
+    try {
+      _storeProductsUnsub = db.collection('products').onSnapshot((snap) => {
+        const remote = [];
+        snap.forEach(doc => {
+          const d = doc.data();
+          if (d && d.id) remote.push(d);
+        });
+        applyRemoteProducts(remote);
+      }, (err) => {
+        console.warn('[Firestore] Store products listener notice:', err);
+      });
+    } catch (_) {}
+  }
+
+  // Real-time coupons listener
+  if (!_storeCouponsUnsub) {
+    try {
+      _storeCouponsUnsub = db.collection('coupons').onSnapshot((snap) => {
+        const coupons = [];
+        snap.forEach(doc => {
+          const d = doc.data();
+          if (d && d.code && !d._deleted) coupons.push(d);
+        });
+        if (coupons.length) {
+          const existing = lsGet(LOCAL_STORAGE_COUPONS_KEY, []);
+          const map = new Map();
+          existing.forEach(c => map.set(c.code.toUpperCase(), c));
+          coupons.forEach(c => {
+            const code = c.code.toUpperCase();
+            map.set(code, { ...(map.get(code) || {}), ...c });
+          });
+          lsSet(LOCAL_STORAGE_COUPONS_KEY, Array.from(map.values()));
+        }
+      }, (err) => {
+        console.warn('[Firestore] Store coupons listener notice:', err);
+      });
+    } catch (_) {}
+  }
+}
+
 function syncProductsFromFirestore(force = false) {
   return new Promise(async (resolve) => {
-    try {
-      const lastSync = parseInt(localStorage.getItem('pls_last_fs_sync') || '0', 10);
-      if (!force && Date.now() - lastSync < 300000 && lsGet(LOCAL_STORAGE_PRODUCTS_KEY, []).length > 0) {
-        resolve(0);
-        return;
-      }
-    } catch {}
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
     else initFirebase();
     if (!isFirebaseReady()) { resolve(0); return; }
     try {
+      initStoreRealtimeListeners();
       const db = getFirebaseDb();
       const snap = await db.collection('products').get();
-      const custom = [];
+      const remote = [];
       snap.forEach(doc => {
         const data = doc.data();
-        if (data._deleted) {
-          const idx = custom.findIndex(c => c.id === data.id);
-          if (idx >= 0) custom.splice(idx, 1);
-          return;
-        }
-        const existing = custom.findIndex(c => c.id === data.id);
-        if (existing >= 0) custom[existing] = { ...custom[existing], ...data };
-        else custom.push(data);
+        if (data && data.id) remote.push(data);
       });
-      if (custom.length) {
-        const existing = lsGet(LOCAL_STORAGE_PRODUCTS_KEY, []);
-        const merged = [...existing];
-        custom.forEach(cp => {
-          const idx = merged.findIndex(m => m.id === cp.id);
-          if (idx >= 0) merged[idx] = { ...merged[idx], ...cp };
-          else merged.push(cp);
-        });
-        lsSet(LOCAL_STORAGE_PRODUCTS_KEY, merged);
-      try { localStorage.setItem("pls_last_fs_sync", String(Date.now())); } catch {}
+      if (remote.length) {
+        applyRemoteProducts(remote);
       }
-      resolve(custom.length);
+      resolve(remote.length);
     } catch (e) {
       console.error('[Firestore] sync products error:', e);
       resolve(0);
@@ -794,15 +868,19 @@ function syncProductsFromFirestore(force = false) {
 
 function saveProductToFirestore(product) {
   return new Promise(async (resolve) => {
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
     else initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
     try {
       const db = getFirebaseDb();
-      await db.collection('products').doc(product.id).set({
-        ...product,
-        _updatedAt: new Date().toISOString()
+      const clean = { ...product };
+      delete clean._searchCache;
+      Object.keys(clean).forEach(k => {
+        if (clean[k] === undefined) delete clean[k];
       });
+      clean._updatedAt = new Date().toISOString();
+      clean._deleted = false;
+      await db.collection('products').doc(product.id).set(clean, { merge: true });
       resolve(true);
     } catch (e) {
       console.error('[Firestore] save product error:', e);
@@ -813,7 +891,8 @@ function saveProductToFirestore(product) {
 
 function deleteProductFromFirestore(productId) {
   return new Promise(async (resolve) => {
-    initFirebase();
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
+    else initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
     try {
       const db = getFirebaseDb();
@@ -821,7 +900,7 @@ function deleteProductFromFirestore(productId) {
         id: productId,
         _deleted: true,
         _updatedAt: new Date().toISOString()
-      });
+      }, { merge: true });
       resolve(true);
     } catch (e) {
       console.error('[Firestore] delete product error:', e);
@@ -833,10 +912,11 @@ function deleteProductFromFirestore(productId) {
 /* ── Firestore Coupon Sync ── */
 function syncCouponsFromFirestore(force = false) {
   return new Promise(async (resolve) => {
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
     else initFirebase();
     if (!isFirebaseReady()) { resolve(0); return; }
     try {
+      initStoreRealtimeListeners();
       const db = getFirebaseDb();
       const snap = await db.collection('coupons').get();
       const coupons = [];
@@ -847,7 +927,7 @@ function syncCouponsFromFirestore(force = false) {
       if (coupons.length) {
         const existing = lsGet(LOCAL_STORAGE_COUPONS_KEY, []);
         const merged = [...existing];
-                coupons.forEach(c => {
+        coupons.forEach(c => {
           const idx = merged.findIndex(m => m.code === c.code);
           if (idx >= 0) {
             const maxUses = Math.max(merged[idx].uses || 0, c.uses || 0);
@@ -878,15 +958,18 @@ function syncCouponsFromFirestore(force = false) {
 
 function saveCouponToFirestore(coupon) {
   return new Promise(async (resolve) => {
-    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady();
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
     else initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
     try {
       const db = getFirebaseDb();
-      await db.collection('coupons').doc(coupon.code).set({
-        ...coupon,
-        _updatedAt: new Date().toISOString()
+      const clean = { ...coupon };
+      Object.keys(clean).forEach(k => {
+        if (clean[k] === undefined) delete clean[k];
       });
+      clean._updatedAt = new Date().toISOString();
+      clean._deleted = false;
+      await db.collection('coupons').doc(coupon.code.toUpperCase()).set(clean, { merge: true });
       resolve(true);
     } catch (e) {
       console.error('[Firestore] save coupon error:', e);
@@ -897,15 +980,18 @@ function saveCouponToFirestore(coupon) {
 
 function deleteCouponFromFirestore(code) {
   return new Promise(async (resolve) => {
-    initFirebase();
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
+    else initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
     try {
       const db = getFirebaseDb();
-      await db.collection('coupons').doc(code).set({
-        code,
+      const cUpper = code.toUpperCase();
+      await db.collection('coupons').doc(cUpper).set({
+        code: cUpper,
         _deleted: true,
         _updatedAt: new Date().toISOString()
-      });
+      }, { merge: true });
+      await db.collection('coupons').doc(cUpper).delete().catch(() => {});
       resolve(true);
     } catch (e) {
       console.error('[Firestore] delete coupon error:', e);
@@ -1008,6 +1094,7 @@ function supportsWebp() {
 
 function productImageUrl(path) {
   if (!path || path.startsWith('data:') || path.startsWith('blob:')) return path;
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
   if (supportsWebp()) {
     path = path.replace(/\.(png|jpe?g)$/i, '.webp');
   }
@@ -1797,11 +1884,23 @@ function createOrder(formData) {
 /* ── Firestore Helpers ── */
 function saveOrderToFirestore(order) {
   return new Promise(async (resolve) => {
-    initFirebase();
-    if (!isFirebaseReady()) { resolve(false); return; }
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
+    else initFirebase();
+    if (!isFirebaseReady()) {
+      console.warn('[Firestore] Not ready to save order, kept in local storage');
+      resolve(false);
+      return;
+    }
     try {
       const db = getFirebaseDb();
-      await db.collection('orders').doc(order.id).set(order);
+      const clean = { ...order };
+      Object.keys(clean).forEach(k => {
+        if (clean[k] === undefined) delete clean[k];
+      });
+      await db.collection('orders').doc(order.id).set(clean, { merge: true });
+      if (clean.customerEmail) {
+        await db.collection('users').doc(clean.customerEmail.toLowerCase().trim()).collection('orders').doc(order.id).set(clean, { merge: true }).catch(() => {});
+      }
       resolve(true);
     } catch (e) {
       console.error('[Firestore] save order error:', e);
@@ -1812,11 +1911,16 @@ function saveOrderToFirestore(order) {
 
 function updateOrderInFirestore(orderId, updates) {
   return new Promise(async (resolve) => {
-    initFirebase();
+    if (typeof ensureFirebaseReady === 'function') await ensureFirebaseReady(5000);
+    else initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
     try {
       const db = getFirebaseDb();
-      await db.collection('orders').doc(orderId).update(updates);
+      const clean = { ...updates };
+      Object.keys(clean).forEach(k => {
+        if (clean[k] === undefined) delete clean[k];
+      });
+      await db.collection('orders').doc(orderId).update(clean);
       resolve(true);
     } catch (e) {
       console.error('[Firestore] update order error:', e);
@@ -3995,20 +4099,33 @@ window.addEventListener("resize", () => {
       }
     } catch (e) { /* firebase not loaded yet */ }
   })();
-  // Sync products and coupons from Firestore (non-blocking)
+  const searchParam = new URLSearchParams(window.location.search).get("search") || new URLSearchParams(window.location.search).get("q");
+  if (searchParam) {
+    state.search = searchParam;
+  }
+  const catParam = new URLSearchParams(window.location.search).get("cat");
+
+  // Sync products and coupons from Firestore (non-blocking, with realtime listeners)
   syncProductsFromFirestore().then(count => {
-    if (count && productGrid) {
+    if (count) {
       _lastFilterSearch = null;
       _lastFilterResult = null;
-      const currentCat = new URLSearchParams(window.location.search).get("cat") || catParam;
-      if (currentCat) {
-        renderSingleCategory(currentCat);
-      } else {
-        renderProducts();
+      if (productGrid) {
+        const currentCat = new URLSearchParams(window.location.search).get("cat") || catParam;
+        if (currentCat) {
+          renderSingleCategory(currentCat);
+        } else {
+          renderProducts();
+        }
+      }
+      const pagePid = typeof getPageProductId === 'function' ? getPageProductId() : null;
+      if (pagePid) {
+        renderDetail(pagePid);
       }
     }
   });
   syncCouponsFromFirestore();
+
   // FAQ accordion: close others when one opens
   const faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach((item) => {
@@ -4021,11 +4138,6 @@ window.addEventListener("resize", () => {
     });
   });
 
-  const searchParam = new URLSearchParams(window.location.search).get("search") || new URLSearchParams(window.location.search).get("q");
-  if (searchParam) {
-    state.search = searchParam;
-  }
-  const catParam = new URLSearchParams(window.location.search).get("cat");
   if (catParam) {
     renderSingleCategory(catParam);
   } else {

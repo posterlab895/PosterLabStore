@@ -1,5 +1,5 @@
 // Poster Lab Store — Products Bundle
-// Generated 2026-11-08T11:38:16.344Z
+// Generated 2026-11-08T18:53:56.789Z
 
 const footballProducts = [
   {"id":"football-001","name":"Cristiano Ronaldo - The G.O.A.T","nameAr":"كريستيانو رونالدو - الهداف التاريخي","player":"Cristiano Ronaldo","playerAr":"كريستيانو رونالدو","team":"Manchester United / Portugal","teamAr":"مانشستر يونايتد / البرتغال","category":"football","tag":"Cristiano Ronaldo","tagAr":"كريستيانو رونالدو","image":"assets/football-players/imgdownloader-00841b18.webp","basePrice":60,"sizes":{"20x30":60,"30x40":80,"40x50": 250,"50x70": 300},"frames":["None","Black","White"],"description":"Cristiano Ronaldo - The G.O.A.T - Manchester United / Portugal","tags":["Cristiano Ronaldo","CR7","Manchester United","GOAT","Champions League","Portugal","كريستيانو رونالدو","رونالدو","مانشستر يونايتد","الدون","Manchester United / Portugal","مانشستر يونايتد / البرتغال","football","كرة قدم"]},

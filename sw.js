@@ -1,4 +1,4 @@
-const CACHE_NAME = 'poster-lab-store-v39';
+const CACHE_NAME = 'poster-lab-store-v40';
 const IMAGE_CACHE_NAME = 'poster-lab-images-v2';
 const ASSETS = [
   './',
@@ -98,8 +98,8 @@ self.addEventListener('fetch', (event) => {
   const isLocalImage = requestUrl.origin === self.location.origin && requestUrl.pathname.includes('/assets/');
 
   
-  // Admin pages always network-first to avoid stale caches
-  if (requestUrl.pathname.includes('/admin/')) {
+  // Admin pages, critical configs, and access controls always network-first to avoid stale caches
+  if (requestUrl.pathname.includes('/admin/') || requestUrl.pathname.endsWith('firebase-config.js') || requestUrl.pathname.endsWith('admin-access.js')) {
     event.respondWith(
       fetch(event.request).then((networkResponse) => {
         if (networkResponse && networkResponse.ok) {

@@ -189,11 +189,20 @@
   /* ── Self-Contained Admin Firestore Database Integration ── */
   async function saveProductToFirestore(product) {
     try {
-      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(5000) : null;
       if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
-      if (!db) return false;
+      if (!db) {
+        err('Firestore db not available for saveProduct');
+        return false;
+      }
       const clean = { ...product };
       delete clean._searchCache;
+      // Strip undefined keys to prevent Firestore write rejection
+      Object.keys(clean).forEach(k => {
+        if (clean[k] === undefined) delete clean[k];
+      });
+      clean._updatedAt = new Date().toISOString();
+      clean._deleted = false;
       await db.collection('products').doc(product.id).set(clean, { merge: true });
       log('Product saved to Firestore:', product.id);
       return true;
@@ -205,11 +214,16 @@
 
   async function deleteProductFromFirestore(pid) {
     try {
-      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(5000) : null;
       if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
       if (!db) return false;
-      await db.collection('products').doc(pid).delete();
-      log('Product deleted from Firestore:', pid);
+      // Mark as _deleted in Firestore so all store clients know to remove it
+      await db.collection('products').doc(pid).set({
+        id: pid,
+        _deleted: true,
+        _updatedAt: new Date().toISOString()
+      }, { merge: true });
+      log('Product marked deleted in Firestore:', pid);
       return true;
     } catch (e) {
       err('Firestore delete product error:', e);
@@ -256,10 +270,16 @@
 
   async function saveCouponToFirestore(coupon) {
     try {
-      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(5000) : null;
       if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
       if (!db) return false;
-      await db.collection('coupons').doc(coupon.code.toUpperCase()).set(coupon, { merge: true });
+      const clean = { ...coupon };
+      Object.keys(clean).forEach(k => {
+        if (clean[k] === undefined) delete clean[k];
+      });
+      clean._updatedAt = new Date().toISOString();
+      clean._deleted = false;
+      await db.collection('coupons').doc(coupon.code.toUpperCase()).set(clean, { merge: true });
       log('Coupon saved to Firestore:', coupon.code);
       return true;
     } catch (e) {
@@ -270,10 +290,16 @@
 
   async function deleteCouponFromFirestore(code) {
     try {
-      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(3000) : null;
+      let db = typeof ensureFirebaseReady === 'function' ? await ensureFirebaseReady(5000) : null;
       if (!db && typeof getFirebaseDb === 'function') db = getFirebaseDb();
       if (!db) return false;
-      await db.collection('coupons').doc(code.toUpperCase()).delete();
+      const cUpper = code.toUpperCase();
+      await db.collection('coupons').doc(cUpper).set({
+        code: cUpper,
+        _deleted: true,
+        _updatedAt: new Date().toISOString()
+      }, { merge: true });
+      await db.collection('coupons').doc(cUpper).delete().catch(() => {});
       log('Coupon deleted from Firestore:', code);
       return true;
     } catch (e) {
@@ -718,7 +744,7 @@
     reader.readAsDataURL(file);
   }
 
-  function saveProduct() {
+  async function saveProduct() {
     const id = $('#apId').value.trim();
     const name = $('#apName').value.trim();
     if (!id || !name) { alert('Product ID and Name are required.'); return; }
@@ -747,24 +773,35 @@
       tagAr: $('#apTagAr').value.trim(),
       image: $('#apImage').value.trim(),
       basePrice: parseFloat($('#apBasePrice').value) || 0,
-      quantity: qtyVal !== '' ? parseInt(qtyVal, 10) : undefined,
       gallery: [$('#apImage').value.trim()],
       sizes, frames,
       description: $('#apDescription').value.trim(),
       descriptionAr: $('#apDescriptionAr').value.trim(),
+      _updatedAt: new Date().toISOString(),
+      _deleted: false
     };
+    if (qtyVal !== '') {
+      productData.quantity = parseInt(qtyVal, 10);
+    }
     const custom = getAdminProducts();
     const idx = custom.findIndex(c => c.id === id);
     if (idx >= 0) custom[idx] = productData;
     else custom.push(productData);
     saveAdminProducts(custom);
-    if (typeof window.saveProductToFirestore === 'function') {
-      window.saveProductToFirestore(productData);
-    }
     hideProductForm();
     rebuildCategoryFilter();
     renderProducts();
-    showAdminToast('✓ Product "' + name + '" saved successfully! (15s)', 'success', 15000);
+
+    showAdminToast('⏳ Saving product "' + name + '" to database...', 'info', 2000);
+    let fsOk = false;
+    if (typeof window.saveProductToFirestore === 'function') {
+      fsOk = await window.saveProductToFirestore(productData);
+    }
+    if (fsOk) {
+      showAdminToast('✓ Product "' + name + '" saved & live across website! (15s)', 'success', 15000);
+    } else {
+      showAdminToast('✓ Product "' + name + '" saved locally (database syncing...) (15s)', 'info', 15000);
+    }
   }
 
   function editProduct(pid) {
@@ -779,24 +816,25 @@
     openProductForm(clone);
   }
 
-  function deleteProduct(pid) {
-    if (!confirm('Delete "' + pid + '"? This cannot be undone.')) return;
-    const hard = (typeof window.products !== 'undefined' && Array.isArray(window.products)) ? window.products : [];
-    const isHard = hard.some(h => h.id === pid);
-    if (isHard) {
-      const c = getAdminProducts();
-      const without = c.filter(x => x.id !== pid);
-      without.push({ id: pid, _deleted: true });
-      saveAdminProducts(without);
-    } else {
-      saveAdminProducts(getAdminProducts().filter(x => x.id !== pid));
-    }
-    if (typeof window.deleteProductFromFirestore === 'function') {
-      window.deleteProductFromFirestore(pid);
-    }
+  async function deleteProduct(pid) {
+    if (!confirm('Delete "' + pid + '"? This will remove it from the website.')) return;
+    const c = getAdminProducts();
+    const without = c.filter(x => x.id !== pid);
+    without.push({ id: pid, _deleted: true, _updatedAt: new Date().toISOString() });
+    saveAdminProducts(without);
     rebuildCategoryFilter();
     renderProducts();
-    showAdminToast('✓ Product "' + pid + '" deleted successfully! (15s)', 'info', 15000);
+
+    showAdminToast('⏳ Deleting product "' + pid + '"...', 'info', 2000);
+    let fsOk = false;
+    if (typeof window.deleteProductFromFirestore === 'function') {
+      fsOk = await window.deleteProductFromFirestore(pid);
+    }
+    if (fsOk) {
+      showAdminToast('✓ Product "' + pid + '" deleted from website & database! (15s)', 'info', 15000);
+    } else {
+      showAdminToast('✓ Product "' + pid + '" marked deleted locally (15s)', 'info', 15000);
+    }
   }
 
   function clearAllProducts() {
@@ -817,33 +855,48 @@
   }
   function hideCouponForm() { $('#adminCouponForm').hidden = true; }
 
-  function saveCoupon() {
+  async function saveCoupon() {
     const code = $('#acCode').value.trim().toUpperCase();
     const type = $('#acType').value;
     const value = parseFloat($('#acValue').value) || 0;
     const minOrder = parseFloat($('#acMinOrder').value) || 0;
-    const maxUses = parseInt($('#acMaxUses').value) || 100;
+    const maxUses = parseInt($('#acMaxUses').value, 10) || 100;
     if (!code || !value) { alert('Code and value required.'); return; }
     const list = getCoupons();
-    if (list.find(c => c.code === code)) { alert('Coupon code already exists.'); return; }
-    const coupon = { code, type, value, minOrder, maxUses, uses: 0, usedBy: [] };
-    list.push(coupon);
+    const existingIdx = list.findIndex(c => c.code.toUpperCase() === code);
+    const coupon = {
+      code, type, value, minOrder, maxUses,
+      uses: existingIdx >= 0 ? (list[existingIdx].uses || 0) : 0,
+      usedBy: existingIdx >= 0 ? (list[existingIdx].usedBy || []) : [],
+      _updatedAt: new Date().toISOString(),
+      _deleted: false
+    };
+    if (existingIdx >= 0) list[existingIdx] = coupon;
+    else list.push(coupon);
     saveCoupons(list);
-    if (typeof window.saveCouponToFirestore === 'function') {
-      window.saveCouponToFirestore(coupon);
-    }
     hideCouponForm();
     renderCoupons();
-    showAdminToast('✓ Coupon "' + code + '" saved successfully! (15s)', 'success', 15000);
+
+    showAdminToast('⏳ Saving coupon "' + code + '"...', 'info', 2000);
+    let fsOk = false;
+    if (typeof window.saveCouponToFirestore === 'function') {
+      fsOk = await window.saveCouponToFirestore(coupon);
+    }
+    if (fsOk) {
+      showAdminToast('✓ Coupon "' + code + '" saved & live across store! (15s)', 'success', 15000);
+    } else {
+      showAdminToast('✓ Coupon "' + code + '" saved locally! (15s)', 'info', 15000);
+    }
   }
 
-  function deleteCoupon(code) {
+  async function deleteCoupon(code) {
     if (!confirm('Delete coupon "' + code + '"?')) return;
-    saveCoupons(getCoupons().filter(x => x.code !== code));
-    if (typeof window.deleteCouponFromFirestore === 'function') {
-      window.deleteCouponFromFirestore(code);
-    }
+    saveCoupons(getCoupons().filter(x => x.code.toUpperCase() !== code.toUpperCase()));
     renderCoupons();
+    if (typeof window.deleteCouponFromFirestore === 'function') {
+      await window.deleteCouponFromFirestore(code);
+    }
+    showAdminToast('✓ Coupon "' + code + '" deleted! (15s)', 'info', 15000);
   }
 
   /* ── Background auto-sync ── */
@@ -890,6 +943,110 @@
     _syncTimer = setInterval(() => syncAllFromFirestore(false), 45000);
   }
   function stopAutoSync() { if (_syncTimer) { clearInterval(_syncTimer); _syncTimer = null; } }
+
+  let _ordersUnsub = null;
+  let _productsUnsub = null;
+  let _couponsUnsub = null;
+
+  async function initRealtimeListeners() {
+    let db = null;
+    if (typeof ensureFirebaseReady === 'function') {
+      db = await ensureFirebaseReady(4000);
+    } else if (typeof getFirebaseDb === 'function') {
+      db = getFirebaseDb();
+    }
+    if (!db) return;
+
+    // 1. Orders realtime listener
+    if (!_ordersUnsub) {
+      try {
+        _ordersUnsub = db.collection('orders').onSnapshot((snap) => {
+          const list = [];
+          snap.forEach(doc => {
+            const d = doc.data();
+            if (d && d.id) list.push(d);
+          });
+          if (list.length > 0) {
+            list.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            saveOrders(list);
+            updateStats();
+            if ($('#adminTabOrders') && !$('#adminTabOrders').hidden) renderOrders();
+            if ($('#adminTabDashboard') && !$('#adminTabDashboard').hidden) renderDashboard();
+            if ($('#adminTabAnalytics') && !$('#adminTabAnalytics').hidden) renderAnalytics();
+          }
+        }, (err) => {
+          log('Orders listener notice:', err.message || err);
+        });
+      } catch (_) {}
+    }
+
+    // 2. Products realtime listener
+    if (!_productsUnsub) {
+      try {
+        _productsUnsub = db.collection('products').onSnapshot((snap) => {
+          const remote = [];
+          snap.forEach(doc => {
+            const d = doc.data();
+            if (d && d.id) remote.push(d);
+          });
+          if (remote.length > 0) {
+            const local = getAdminProducts();
+            const localMap = new Map();
+            local.forEach(p => localMap.set(p.id, p));
+            let changed = false;
+            remote.forEach(rp => {
+              const lp = localMap.get(rp.id);
+              if (!lp || JSON.stringify(lp) !== JSON.stringify(rp)) {
+                localMap.set(rp.id, rp);
+                changed = true;
+              }
+            });
+            if (changed) {
+              saveAdminProducts(Array.from(localMap.values()));
+              invalidateProductsCache();
+              rebuildCategoryFilter();
+              renderProducts();
+            }
+          }
+        }, (err) => {
+          log('Products listener notice:', err.message || err);
+        });
+      } catch (_) {}
+    }
+
+    // 3. Coupons realtime listener
+    if (!_couponsUnsub) {
+      try {
+        _couponsUnsub = db.collection('coupons').onSnapshot((snap) => {
+          const remote = [];
+          snap.forEach(doc => {
+            const d = doc.data();
+            if (d && d.code) remote.push(d);
+          });
+          if (remote.length > 0) {
+            const local = getCoupons();
+            const localMap = new Map();
+            local.forEach(c => localMap.set(c.code.toUpperCase(), c));
+            let changed = false;
+            remote.forEach(rc => {
+              const code = rc.code.toUpperCase();
+              const lc = localMap.get(code);
+              if (!lc || JSON.stringify(lc) !== JSON.stringify(rc)) {
+                localMap.set(code, rc);
+                changed = true;
+              }
+            });
+            if (changed) {
+              saveCoupons(Array.from(localMap.values()));
+              renderCoupons();
+            }
+          }
+        }, (err) => {
+          log('Coupons listener notice:', err.message || err);
+        });
+      } catch (_) {}
+    }
+  }
 
   function handleClick(e) {
     const pageBtn = e.target.closest('[data-page-action]');
@@ -1023,6 +1180,8 @@
       // Start sync
       syncAllFromFirestore(true);
       startAutoSync();
+      initRealtimeListeners();
+      window.addEventListener('firebase-ready', initRealtimeListeners);
 
       const app = $('#adminApp');
       if (app) {

@@ -21,9 +21,15 @@
     return 'admin/panel.html';
   }
 
-    function isAdminUser() {
+  function isAdminUser() {
     try {
-      // 1. Check pls-session in localStorage (active user in store)
+      // 1. Direct admin session in localStorage
+      var adminSession = localStorage.getItem(SESSION_KEY);
+      var adminEmail = (localStorage.getItem(EMAIL_KEY) || '').toLowerCase().trim();
+      if (adminSession === 'true' && adminEmail === REQUIRED_EMAIL) {
+        return true;
+      }
+      // 2. Check pls-session in localStorage (active user in store)
       var rawSession = localStorage.getItem('pls-session');
       if (rawSession) {
         var user = JSON.parse(rawSession);
@@ -31,21 +37,19 @@
           return true;
         }
       }
-      // 2. Check window.state.user
+      // 3. Check window.state.user
       if (typeof window !== 'undefined' && window.state && window.state.user && window.state.user.email) {
         if (window.state.user.email.toLowerCase().trim() === REQUIRED_EMAIL) {
           return true;
         }
       }
-      // 3. Check Firebase Auth if available
+      // 4. Check Firebase Auth if available
       if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser) {
         var cur = firebase.auth().currentUser;
         if (cur.email && cur.email.toLowerCase().trim() === REQUIRED_EMAIL) {
           return true;
         }
       }
-      // Note: We do NOT use pls-admin-session alone as the source of truth,
-      // so logging out can never be prevented by a circular re-activation!
     } catch (_) {}
     return false;
   }
@@ -55,20 +59,9 @@
       if (isAdmin) {
         localStorage.setItem(SESSION_KEY, 'true');
         localStorage.setItem(EMAIL_KEY, REQUIRED_EMAIL);
-      } else {
-        // If not actively authenticated as admin, clear admin tokens
-        var rawSession = localStorage.getItem('pls-session');
-        if (!rawSession) {
-          localStorage.removeItem(SESSION_KEY);
-          localStorage.removeItem(EMAIL_KEY);
-        } else {
-          var user = JSON.parse(rawSession);
-          if (!user || !user.email || user.email.toLowerCase().trim() !== REQUIRED_EMAIL) {
-            localStorage.removeItem(SESSION_KEY);
-            localStorage.removeItem(EMAIL_KEY);
-          }
-        }
       }
+      // Note: We DO NOT remove admin credentials automatically if the user is merely browsing the store!
+      // Admin session is only cleared when the user explicitly clicks Logout in the admin panel or user menu.
     } catch (_) {}
   }
 
@@ -91,7 +84,6 @@
       gearBtn.href = adminUrl;
       gearBtn.setAttribute('aria-label', 'Admin panel');
       gearBtn.setAttribute('title', 'Admin panel');
-      // Inline styles ensure the gear renders cleanly even without enhancements.css
       gearBtn.style.display = 'inline-flex';
       gearBtn.style.alignItems = 'center';
       gearBtn.style.justifyContent = 'center';
@@ -161,7 +153,6 @@
       existingLink.style.textDecoration = 'none';
       existingLink.innerHTML = '<span>⚙️</span> <span>Admin panel</span> <span style="margin-inline-start:auto;font-size:0.75rem;padding:2px 8px;border-radius:999px;background:var(--accent,#0f9f85);color:#fff">Active</span>';
 
-      // Insert before copyright or near bottom
       var lastLink = navBody.querySelector('a:last-of-type');
       if (lastLink) {
         navBody.insertBefore(existingLink, lastLink);
@@ -180,7 +171,6 @@
     renderMenuEntry(isAdmin);
   }
 
-  // Run on load and periodically
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateAdminUI);
   } else {
@@ -190,10 +180,8 @@
   window.addEventListener('storage', updateAdminUI);
   window.addEventListener('load', updateAdminUI);
   window.addEventListener('firebase-ready', updateAdminUI);
-
-  // Poll lightly in case login modal completes without page reload
   setInterval(updateAdminUI, 1500);
 
-  // Expose
   window.updateAdminAccessUI = updateAdminUI;
+  window.isAdminUser = isAdminUser;
 })();
