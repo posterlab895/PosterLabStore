@@ -38,8 +38,7 @@ function initFirebase() {
       try {
         firebaseDb.settings({
           experimentalAutoDetectLongPolling: true,
-          ignoreUndefinedProperties: true,
-          merge: true
+          ignoreUndefinedProperties: true
         });
       } catch (_) {
         // Settings can only be applied once before any other Firestore operations

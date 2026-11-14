@@ -1,4 +1,4 @@
-const CACHE_NAME = 'poster-lab-store-v40';
+const CACHE_NAME = 'poster-lab-store-v43';
 const IMAGE_CACHE_NAME = 'poster-lab-images-v2';
 const ASSETS = [
   './',
@@ -95,7 +95,10 @@ self.addEventListener('fetch', (event) => {
   try { requestUrl = new URL(event.request.url); } catch { return; }
   if (requestUrl.protocol !== 'http:' && requestUrl.protocol !== 'https:') return;
 
-  const isLocalImage = requestUrl.origin === self.location.origin && requestUrl.pathname.includes('/assets/');
+  // Early return for cross-origin requests (Firestore streaming, Google Fonts, CDNs)
+  if (requestUrl.origin !== self.location.origin) return;
+
+  const isLocalImage = requestUrl.pathname.includes('/assets/');
 
   
   // Admin pages, critical configs, and access controls always network-first to avoid stale caches

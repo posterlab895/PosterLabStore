@@ -7,13 +7,7 @@ const carProducts = [
     "tag": "#ferrari",
     "tagAr": "#فيراري",
     "image": "assets/cars/imgdownl99oader-03861d39.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -45,13 +39,7 @@ const carProducts = [
     "tag": "#pagani",
     "tagAr": "#باجاني",
     "image": "assets/cars/imgdownlo777ader-03861d39.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -83,13 +71,7 @@ const carProducts = [
     "tag": "#mclaren",
     "tagAr": "#ماكلارين",
     "image": "assets/cars/imgdownlo99ader-03861d39.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -121,13 +103,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownload00er-03861d39.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -161,13 +137,7 @@ const carProducts = [
     "tag": "#bugatti",
     "tagAr": "#بوغاتي",
     "image": "assets/cars/imgdownloader-00a26443.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -200,13 +170,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-02b30c2a.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -240,13 +204,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-03861d39.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -278,13 +236,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-04a3e8b2.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -316,13 +268,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-0e8e3a94.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -356,13 +302,7 @@ const carProducts = [
     "tag": "#nissan",
     "tagAr": "#نيسان",
     "image": "assets/cars/imgdownloader-0fac194f.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -397,13 +337,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-120ff965.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -437,13 +371,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-180679e3.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -477,13 +405,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-1f373c9c.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -517,13 +439,7 @@ const carProducts = [
     "tag": "#audi",
     "tagAr": "#أودي",
     "image": "assets/cars/imgdownloader-2124d201.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -556,13 +472,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-2444bb93.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -596,13 +506,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-2872515f.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -636,13 +540,7 @@ const carProducts = [
     "tag": "#ferrari",
     "tagAr": "#فيراري",
     "image": "assets/cars/imgdownloader-28dc3431.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -675,13 +573,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-29ecf886.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -715,13 +607,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-2b9f6a8c.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -755,13 +641,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-2d0319b3.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -795,13 +675,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-2e0c7150.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -835,13 +709,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-3096d7a3.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -874,13 +742,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-31983472.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -914,13 +776,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-388c0898.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -953,13 +809,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-3a8b6a9e.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -993,13 +843,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-3c7130b0.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1032,13 +876,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-3f372033.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1072,13 +910,7 @@ const carProducts = [
     "tag": "#supra",
     "tagAr": "#سوبرا",
     "image": "assets/cars/imgdownloader-3f644e36.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1113,13 +945,7 @@ const carProducts = [
     "tag": "#mclaren",
     "tagAr": "#ماكلارين",
     "image": "assets/cars/imgdownloader-417d0432.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1152,13 +978,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-42c81674.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1192,13 +1012,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-43b10d0d.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1232,13 +1046,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-482f05af.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1272,13 +1080,7 @@ const carProducts = [
     "tag": "#dodge",
     "tagAr": "#دوج",
     "image": "assets/cars/imgdownloader-4f78165f.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1312,13 +1114,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-4fec070d.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1352,13 +1148,7 @@ const carProducts = [
     "tag": "#ferrari",
     "tagAr": "#فيراري",
     "image": "assets/cars/imgdownloader-5110d081.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1391,13 +1181,7 @@ const carProducts = [
     "tag": "#rangerover",
     "tagAr": "#رينج_روفر",
     "image": "assets/cars/imgdownloader-56153479.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1430,13 +1214,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-5641992d.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1470,13 +1248,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-59416041.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1510,13 +1282,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-5e332dba.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1550,13 +1316,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-6021d6b1.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1590,13 +1350,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-6126862d.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1631,13 +1385,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-62950e71.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1671,13 +1419,7 @@ const carProducts = [
     "tag": "#mustang",
     "tagAr": "#موستنج",
     "image": "assets/cars/imgdownloader-62f9b76f.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1714,13 +1456,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-644d9646.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1754,13 +1490,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-6ce90b1c.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1794,13 +1524,7 @@ const carProducts = [
     "tag": "#nissan",
     "tagAr": "#نيسان",
     "image": "assets/cars/imgdownloader-6ec1dfdc.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1835,13 +1559,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-723d565c.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1875,13 +1593,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-73c009ae.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1916,13 +1628,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-7a408312.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1956,13 +1662,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-7ca8c173.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -1997,13 +1697,7 @@ const carProducts = [
     "tag": "#mustang",
     "tagAr": "#موستنج",
     "image": "assets/cars/imgdownloader-809bc158.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2040,13 +1734,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-80d95f66.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2081,13 +1769,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-82f379f1.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2120,13 +1802,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-86d97def.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2160,13 +1836,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-8b8d26df.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2200,13 +1870,7 @@ const carProducts = [
     "tag": "#supra",
     "tagAr": "#سوبرا",
     "image": "assets/cars/imgdownloader-8c80e815.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2242,13 +1906,7 @@ const carProducts = [
     "tag": "#ferrari",
     "tagAr": "#فيراري",
     "image": "assets/cars/imgdownloader-90a55bb5.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2280,13 +1938,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-92bcfa9a.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2320,13 +1972,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-9745d507.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2360,13 +2006,7 @@ const carProducts = [
     "tag": "#mustang",
     "tagAr": "#موستنج",
     "image": "assets/cars/imgdownloader-a10c9638.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2403,13 +2043,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-a1df8158.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2444,13 +2078,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-a9eca4e3.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2483,13 +2111,7 @@ const carProducts = [
     "tag": "#mustang",
     "tagAr": "#موستنج",
     "image": "assets/cars/imgdownloader-ae739424.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2524,13 +2146,7 @@ const carProducts = [
     "tag": "#bugatti",
     "tagAr": "#بوغاتي",
     "image": "assets/cars/imgdownloader-b2781299.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2564,13 +2180,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-b3fe27d7.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2603,13 +2213,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-b5bc0c21.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2643,13 +2247,7 @@ const carProducts = [
     "tag": "#f1",
     "tagAr": "#فورمولا1",
     "image": "assets/cars/imgdownloader-ba5c93bc.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2684,13 +2282,7 @@ const carProducts = [
     "tag": "#f1",
     "tagAr": "#فورمولا1",
     "image": "assets/cars/imgdownloader-bc02bbcb.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2725,13 +2317,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-bd008e51.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2765,13 +2351,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-bd9dca40.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2805,13 +2385,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-c0746a6c.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2845,13 +2419,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-c2015e38.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2885,13 +2453,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-c60afcfa.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2924,13 +2486,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-c643c598.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -2963,13 +2519,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-c6c750bf.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3002,13 +2552,7 @@ const carProducts = [
     "tag": "#f1",
     "tagAr": "#فورمولا1",
     "image": "assets/cars/imgdownloader-cc38320f.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3043,13 +2587,7 @@ const carProducts = [
     "tag": "#f1",
     "tagAr": "#فورمولا1",
     "image": "assets/cars/imgdownloader-ced048c9.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3085,13 +2623,7 @@ const carProducts = [
     "tag": "#mustang",
     "tagAr": "#موستنج",
     "image": "assets/cars/imgdownloader-d179791d.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3127,13 +2659,7 @@ const carProducts = [
     "tag": "#shelby",
     "tagAr": "#شيلبي",
     "image": "assets/cars/imgdownloader-d23c2118.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3166,13 +2692,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-d45b5c3f.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3206,13 +2726,7 @@ const carProducts = [
     "tag": "#lamborghini",
     "tagAr": "#لامبورجيني",
     "image": "assets/cars/imgdownloader-d6cd0464.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3247,13 +2761,7 @@ const carProducts = [
     "tag": "#ferrari",
     "tagAr": "#فيراري",
     "image": "assets/cars/imgdownloader-da678565.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3286,13 +2794,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-da8c4476.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3325,13 +2827,7 @@ const carProducts = [
     "tag": "#audi",
     "tagAr": "#أودي",
     "image": "assets/cars/imgdownloader-de656109.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3365,13 +2861,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-e1a46487.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3405,13 +2895,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-e5886ca0.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3446,13 +2930,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-ee24c3f2.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3489,13 +2967,7 @@ const carProducts = [
     "tag": "#mclaren",
     "tagAr": "#ماكلارين",
     "image": "assets/cars/imgdownloader-efdaaa25.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3530,13 +3002,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-f14e5a2b.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3570,13 +3036,7 @@ const carProducts = [
     "tag": "#audi",
     "tagAr": "#أودي",
     "image": "assets/cars/imgdownloader-f38b463e.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3610,13 +3070,7 @@ const carProducts = [
     "tag": "#mercedes",
     "tagAr": "#مرسيدس",
     "image": "assets/cars/imgdownloader-f5f49ee8.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3649,13 +3103,7 @@ const carProducts = [
     "tag": "#mustang",
     "tagAr": "#موستنج",
     "image": "assets/cars/imgdownloader-f6d0f514.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3691,13 +3139,7 @@ const carProducts = [
     "tag": "#ferrari",
     "tagAr": "#فيراري",
     "image": "assets/cars/imgdownloader-f7a2a04d.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3732,13 +3174,7 @@ const carProducts = [
     "tag": "#ferrari",
     "tagAr": "#فيراري",
     "image": "assets/cars/imgdownloader-f96ea3b8.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3773,13 +3209,7 @@ const carProducts = [
     "tag": "#bmw",
     "tagAr": "#بي_ام_دبليو",
     "image": "assets/cars/imgdownloader-f9e331da.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3813,13 +3243,7 @@ const carProducts = [
     "tag": "#porsche",
     "tagAr": "#بورشه",
     "image": "assets/cars/imgdownloader-fddc06f0.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -3853,13 +3277,7 @@ const carProducts = [
     "tag": "#astonmartin",
     "tagAr": "#أستون_مارتن",
     "image": "assets/cars/impgdownloader-03861d39.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",

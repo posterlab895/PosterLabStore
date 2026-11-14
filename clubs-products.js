@@ -7,13 +7,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-02a7d1b7.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -38,13 +32,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-1b87b733.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -70,13 +58,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-1f715f83.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -101,13 +83,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-2614f9f9.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -132,13 +108,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-35e4b56e.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -169,13 +139,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-3d748702.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -201,13 +165,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-3dcd0180.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -234,13 +192,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-675b7989.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -266,13 +218,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-6c64dcc3.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -297,13 +243,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-844cddd4.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -333,13 +273,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-a54daa83.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -363,13 +297,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-b0a30724.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -395,13 +323,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-beaf3675.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -430,13 +352,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-d600a39e.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -461,13 +377,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-d649e4e1.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",
@@ -492,13 +402,7 @@ const clubProducts = [
     "tag": "Clubs",
     "tagAr": "أندية",
     "image": "assets/clubs/imgdownloader-e8a264fe.webp",
-    "basePrice": 60,
-    "sizes": {
-      "20x30": 60,
-      "30x40": 80,
-      "40x50": 250,
-      "50x70": 300
-    },
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": [
       "None",
       "Black",

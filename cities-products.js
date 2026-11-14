@@ -11,8 +11,7 @@ const citiesProducts = [
     "tag": "#london",
     "tagAr": "#لندن",
     "image": "assets/cities/imgdownloader-0a531ead.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "London England travel poster featuring Big Ben clocktower, Westminster Palace and classic red double decker bus",
     "tags": ["London", "England", "UK", "United Kingdom", "Big Ben", "Westminster", "Red Bus", "Travel", "لندن", "إنجلترا", "بريطانيا", "بيج بن", "#london", "#لندن"]
@@ -29,8 +28,7 @@ const citiesProducts = [
     "tag": "#lasvegas",
     "tagAr": "#لاس_فيغاس",
     "image": "assets/cities/imgdownloader-22628814.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Las Vegas Nevada retro travel poster with the iconic Strip, Paris hotel Eiffel Tower replica and hot air balloon",
     "tags": ["Las Vegas", "Nevada", "USA", "America", "The Strip", "Eiffel Tower", "Casino", "Travel", "لاس فيغاس", "نيفادا", "أمريكا", "#lasvegas", "#لاس_فيغاس"]
@@ -47,8 +45,7 @@ const citiesProducts = [
     "tag": "#cairo",
     "tagAr": "#القاهرة",
     "image": "assets/cities/imgdownloader-2fa9b659.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Egypt Cairo travel art poster featuring the Great Pyramids of Giza, the Nile River, felucca sailboats and palm trees",
     "tags": ["Egypt", "Cairo", "Pyramids", "Giza", "Nile", "Pharaohs", "Travel", "مصر", "القاهرة", "الأهرامات", "الجيزة", "النيل", "#cairo", "#القاهرة"]
@@ -65,8 +62,7 @@ const citiesProducts = [
     "tag": "#venice",
     "tagAr": "#فينيسيا",
     "image": "assets/cities/imgdownloader-823005b5.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Venice Italy vintage art poster showing the Grand Canal, Santa Maria della Salute dome and gondolas floating at sunset",
     "tags": ["Venice", "Italy", "Grand Canal", "Gondola", "Sunset", "Basilica", "Travel", "البندقية", "فينيسيا", "إيطاليا", "القناة الكبرى", "#venice", "#فينيسيا"]
@@ -83,8 +79,7 @@ const citiesProducts = [
     "tag": "#istanbul",
     "tagAr": "#إسطنبول",
     "image": "assets/cities/imgdownloader-981d4188.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Istanbul Turkey sunset art poster featuring Hagia Sophia grand dome, historical minarets and glowing golden sun",
     "tags": ["Istanbul", "Turkey", "Hagia Sophia", "Mosque", "Minarets", "Sunset", "Travel", "إسطنبول", "تركيا", "آيا صوفيا", "#istanbul", "#إسطنبول"]
@@ -101,8 +96,7 @@ const citiesProducts = [
     "tag": "#florence",
     "tagAr": "#فلورنسا",
     "image": "assets/cities/imgdownloader-99c60aaf.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Florence Italy travel poster showing the terracotta dome of Santa Maria del Fiore cathedral, Giotto campanile and terracotta roofs",
     "tags": ["Florence", "Italy", "Duomo", "Firenze", "Tuscany", "Architecture", "Travel", "فلورنسا", "إيطاليا", "دومو", "توسكانا", "#florence", "#فلورنسا"]
@@ -119,8 +113,7 @@ const citiesProducts = [
     "tag": "#cairo",
     "tagAr": "#القاهرة",
     "image": "assets/cities/imgdownloader-bbadb1ad.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Cairo Egypt watercolor art poster depicting the Great Sphinx of Giza with the Pyramid and lush palm trees",
     "tags": ["Cairo", "Egypt", "Sphinx", "Pyramids", "Giza", "Watercolor", "Travel", "القاهرة", "مصر", "أبو الهول", "الأهرامات", "الجيزة", "#cairo", "#القاهرة"]
@@ -137,8 +130,7 @@ const citiesProducts = [
     "tag": "#berlin",
     "tagAr": "#برلين",
     "image": "assets/cities/imgdownloader-dac85049.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Berlin Germany architectural poster showing the historical Brandenburg Gate and Quadriga statue against a giant sunset sun",
     "tags": ["Berlin", "Germany", "Brandenburg Gate", "Sunset", "Architecture", "Travel", "برلين", "ألمانيا", "بوابة براندنبورغ", "#berlin", "#برلين"]
@@ -155,8 +147,7 @@ const citiesProducts = [
     "tag": "#amsterdam",
     "tagAr": "#أمستردام",
     "image": "assets/cities/imgdownloader-f258e80b.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Amsterdam Netherlands vintage canal poster with tour boat cruising through waterways, canal houses and church tower at golden sunset",
     "tags": ["Amsterdam", "Netherlands", "Holland", "Canals", "Sunset", "Boat", "Travel", "أمستردام", "هولندا", "قنوات مائية", "#amsterdam", "#أمستردام"]
@@ -173,8 +164,7 @@ const citiesProducts = [
     "tag": "#tokyo",
     "tagAr": "#طوكيو",
     "image": "assets/cities/imgdownloader-fc1a5636.webp",
-    "basePrice": 60,
-    "sizes": {"20x30": 60, "30x40": 80, "40x50": 250, "50x70": 300},
+    "basePrice":180,"sizes":{"20x30":180,"30x40":200,"40x50":250,"50x70":300},
     "frames": ["None", "Black", "White"],
     "description": "Tokyo Japan travel art poster blending traditional tiered pagodas, autumn leaves, modern skyscraper towers and Mount Fuji",
     "tags": ["Tokyo", "Japan", "Pagoda", "Mount Fuji", "Skyline", "Japanese", "Travel", "طوكيو", "اليابان", "معبد", "جبل فوجي", "#tokyo", "#طوكيو"]

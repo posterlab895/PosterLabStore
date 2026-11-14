@@ -18,6 +18,81 @@
   const ORDERS_KEY   = 'pls-orders';
   const COUPONS_KEY  = 'pls-coupons';
   const PRODUCTS_KEY = 'pls-products';
+  const SYNC_CHANNEL_NAME = 'poster-lab-sync';
+  const SYNC_SIGNAL_KEY   = 'pls-sync-signal';
+  const CLIENT_ID = 'admin_' + Math.random().toString(36).slice(2, 9) + '_' + Date.now();
+
+  const MIN_PRICE_FLOOR = 180;
+  const STANDARD_SIZES = {
+    '20x30': 180,
+    '30x40': 200,
+    '40x50': 250,
+    '50x70': 300
+  };
+
+  function sanitizeRemoteProduct(rp) {
+    if (!rp || typeof rp !== 'object' || rp._deleted) return rp;
+    if (!rp.sizes || typeof rp.sizes !== 'object' || Array.isArray(rp.sizes)) {
+      rp.sizes = { ...STANDARD_SIZES };
+    } else {
+      Object.keys(STANDARD_SIZES).forEach(sizeKey => {
+        const minForTier = STANDARD_SIZES[sizeKey];
+        const currentPrice = Number(rp.sizes[sizeKey]);
+        if (isNaN(currentPrice) || currentPrice < minForTier) {
+          rp.sizes[sizeKey] = minForTier;
+        }
+      });
+      Object.keys(rp.sizes).forEach(key => {
+        const p = Number(rp.sizes[key]);
+        if (isNaN(p) || p < MIN_PRICE_FLOOR) {
+          rp.sizes[key] = MIN_PRICE_FLOOR;
+        }
+      });
+    }
+    const base = Number(rp.basePrice);
+    if (isNaN(base) || base < MIN_PRICE_FLOOR) {
+      rp.basePrice = Number(rp.sizes['20x30']) || MIN_PRICE_FLOOR;
+    }
+    return rp;
+  }
+
+  let syncChannel = null;
+  try {
+    if (typeof BroadcastChannel !== 'undefined') {
+      syncChannel = new BroadcastChannel(SYNC_CHANNEL_NAME);
+    }
+  } catch (bcErr) {
+    if (console) console.warn('[Admin] BroadcastChannel not supported, using storage fallback:', bcErr);
+  }
+
+  const _processedSyncEvents = new Map();
+  function recordSyncEvent(eventId) {
+    _processedSyncEvents.set(eventId, Date.now());
+    if (_processedSyncEvents.size > 100) {
+      const oldestKey = _processedSyncEvents.keys().next().value;
+      _processedSyncEvents.delete(oldestKey);
+    }
+  }
+
+  function broadcastLiveSync(type, payload) {
+    const event = {
+      type,
+      payload,
+      senderId: CLIENT_ID,
+      eventId: 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+      timestamp: Date.now()
+    };
+    recordSyncEvent(event.eventId);
+    if (syncChannel) {
+      try { syncChannel.postMessage(event); }
+      catch (e) { err('BroadcastChannel postMessage error:', e); }
+    }
+    try {
+      localStorage.setItem(SYNC_SIGNAL_KEY, JSON.stringify(event));
+    } catch (_) {}
+  }
+
+  let _editingProduct = null;
 
   const $ = (s, p) => (p || document).querySelector(s);
   const $$ = (s, p) => (p || document).querySelectorAll(s);
@@ -241,7 +316,7 @@
       const remote = [];
       snap.forEach(doc => {
         const d = doc.data();
-        if (d && d.id) remote.push(d);
+        if (d && d.id) remote.push(sanitizeRemoteProduct(d));
       });
       const local = getAdminProducts();
       const localMap = new Map();
@@ -526,18 +601,25 @@
     const pageItems = list.slice(startIdx, startIdx + productPagination.pageSize);
 
     let html = `<table class="admin-table"><thead><tr>
-      <th></th><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Sizes</th><th>Frames</th><th>Actions</th>
+      <th></th><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Sizes</th><th>Frames</th><th>Actions</th>
     </tr></thead><tbody>`;
 
     html += pageItems.map(p => {
       const img = p.image || '../assets/poster-lab-logo.webp';
       const imgSrc = typeof productImageUrl === 'function' ? productImageUrl(img) : img;
+      const stockDisplay = (p.quantity === undefined || p.quantity === null)
+        ? `<span style="color:var(--muted);font-size:0.8rem">Unlimited (∞)</span>`
+        : p.quantity <= 0
+          ? `<span class="badge out-of-stock admin-stock-badge" style="background:var(--danger);color:#fff;padding:2px 8px;border-radius:999px;font-size:0.75rem;font-weight:800">Out of Stock (0)</span>`
+          : `<span style="font-weight:800;color:var(--text-strong)">${p.quantity}</span>`;
+
       return `<tr>
         <td style="width:50px"><img src="${imgSrc}" alt="" loading="lazy" decoding="async" style="width:40px;height:54px;object-fit:cover;border-radius:6px;background:var(--surface-2)" onerror="this.src='../assets/poster-lab-logo.webp'"></td>
         <td><code>${p.id}</code></td>
         <td><strong>${p.name || ''}</strong>${p.nameAr ? `<br><small style="color:var(--muted)">${p.nameAr}</small>` : ''}</td>
         <td><span style="display:inline-block;padding:2px 8px;border-radius:999px;background:var(--surface-2);font-size:0.75rem;font-weight:700">${p.category || '—'}</span></td>
         <td style="font-weight:700">${money(p.basePrice || 0)}</td>
+        <td style="font-size:0.85rem">${stockDisplay}</td>
         <td style="font-size:0.8rem">${Object.keys(p.sizes || {}).join(', ')}</td>
         <td style="font-size:0.8rem">${(p.frames || []).join(', ')}</td>
         <td>
@@ -688,6 +770,7 @@
   }
 
   function openProductForm(product) {
+    _editingProduct = product ? { ...product } : null;
     const modal = $('#adminProductModal');
     if (!modal) return;
     modal.hidden = false;
@@ -704,7 +787,7 @@
     $('#apImage').value = product ? (product.image || '') : '';
     $('#apBasePrice').value = product ? (product.basePrice || '') : '';
     $('#apQuantity').value = product && product.quantity != null ? product.quantity : '';
-    const sizes = product && product.sizes ? Object.entries(product.sizes).map(e => e[0] + '=' + e[1]).join(', ') : '20x30=60, 30x40=80, 40x50=250, 50x70=300';
+    const sizes = product && product.sizes ? Object.entries(product.sizes).map(e => e[0] + '=' + e[1]).join(', ') : '20x30=180, 30x40=200, 40x50=250, 50x70=300';
     $('#apSizes').value = sizes;
     $('#apFrames').value = product && product.frames ? product.frames.join(', ') : 'None, Black, White';
     $('#apDescription').value = product ? (product.description || '') : '';
@@ -728,6 +811,7 @@
   }
 
   function hideProductForm() {
+    _editingProduct = null;
     const modal = $('#adminProductModal');
     if (modal) modal.hidden = true;
     document.body.style.overflow = '';
@@ -748,8 +832,11 @@
     const id = $('#apId').value.trim();
     const name = $('#apName').value.trim();
     if (!id || !name) { alert('Product ID and Name are required.'); return; }
+
+    const existing = _editingProduct || allProducts().find(p => p.id === id) || {};
+
     const sizesStr = $('#apSizes').value.trim();
-    let sizes = { '20x30': 60, '30x40': 80, '40x50': 250, '50x70': 300 };
+    let sizes = { '20x30': 180, '30x40': 200, '40x50': 250, '50x70': 300 };
     if (sizesStr) {
       const p = {};
       sizesStr.split(',').forEach(part => {
@@ -764,30 +851,72 @@
       const pf = framesStr.split(',').map(f => f.trim()).filter(Boolean);
       if (pf.length) frames = pf;
     }
+
+    const newImg = $('#apImage').value.trim();
+    let gallery = [newImg];
+    if (Array.isArray(existing.gallery) && existing.gallery.length > 0) {
+      if (existing.image && newImg !== existing.image) {
+        gallery = [newImg, ...existing.gallery.filter(g => g !== newImg && g !== existing.image)];
+      } else {
+        gallery = [...existing.gallery];
+        if (!gallery.includes(newImg)) gallery.unshift(newImg);
+      }
+    }
+
+    const tagVal = $('#apTag').value.trim();
+    const tagArVal = $('#apTagAr').value.trim();
+    let tags = Array.isArray(existing.tags) ? [...existing.tags] : [];
+    if (tagVal && !tags.includes(tagVal)) tags.push(tagVal);
+    if (tagArVal && !tags.includes(tagArVal)) tags.push(tagArVal);
+    if (!tags.length) {
+      tags = [tagVal, tagArVal].filter(Boolean);
+    }
+
     const qtyVal = $('#apQuantity').value.trim();
+    let sanitizedQuantity = undefined;
+    if (qtyVal !== '') {
+      const parsed = parseInt(qtyVal, 10);
+      sanitizedQuantity = isNaN(parsed) || parsed < 0 ? 0 : parsed;
+    }
+
     const productData = {
-      id, name,
+      ...existing,
+      id,
+      name,
       nameAr: $('#apNameAr').value.trim(),
       category: $('#apCategory').value,
-      tag: $('#apTag').value.trim(),
-      tagAr: $('#apTagAr').value.trim(),
-      image: $('#apImage').value.trim(),
-      basePrice: parseFloat($('#apBasePrice').value) || 0,
-      gallery: [$('#apImage').value.trim()],
-      sizes, frames,
+      tag: tagVal,
+      tagAr: tagArVal,
+      image: newImg,
+      basePrice: parseFloat($('#apBasePrice').value) || (sizes['20x30'] || 180),
+      gallery,
+      tags,
+      sizes,
+      frames,
       description: $('#apDescription').value.trim(),
       descriptionAr: $('#apDescriptionAr').value.trim(),
       _updatedAt: new Date().toISOString(),
       _deleted: false
     };
-    if (qtyVal !== '') {
-      productData.quantity = parseInt(qtyVal, 10);
+
+    if (sanitizedQuantity !== undefined) {
+      productData.quantity = sanitizedQuantity;
+    } else {
+      delete productData.quantity;
     }
+
     const custom = getAdminProducts();
     const idx = custom.findIndex(c => c.id === id);
     if (idx >= 0) custom[idx] = productData;
     else custom.push(productData);
     saveAdminProducts(custom);
+
+    // Live broadcast to storefront and other admin tabs
+    broadcastLiveSync('PRODUCT_UPDATE', productData);
+    if (productData.quantity !== undefined) {
+      broadcastLiveSync('STOCK_UPDATE', { id: productData.id, quantity: productData.quantity, _updatedAt: productData._updatedAt });
+    }
+
     hideProductForm();
     rebuildCategoryFilter();
     renderProducts();
@@ -818,10 +947,15 @@
 
   async function deleteProduct(pid) {
     if (!confirm('Delete "' + pid + '"? This will remove it from the website.')) return;
+    const updatedAt = new Date().toISOString();
     const c = getAdminProducts();
     const without = c.filter(x => x.id !== pid);
-    without.push({ id: pid, _deleted: true, _updatedAt: new Date().toISOString() });
+    without.push({ id: pid, _deleted: true, _updatedAt: updatedAt });
     saveAdminProducts(without);
+
+    // Live broadcast product deletion
+    broadcastLiveSync('PRODUCT_DELETE', { id: pid, _deleted: true, _updatedAt: updatedAt });
+
     rebuildCategoryFilter();
     renderProducts();
 
@@ -874,6 +1008,10 @@
     if (existingIdx >= 0) list[existingIdx] = coupon;
     else list.push(coupon);
     saveCoupons(list);
+
+    // Live broadcast coupon update
+    broadcastLiveSync('COUPON_UPDATE', coupon);
+
     hideCouponForm();
     renderCoupons();
 
@@ -891,7 +1029,12 @@
 
   async function deleteCoupon(code) {
     if (!confirm('Delete coupon "' + code + '"?')) return;
-    saveCoupons(getCoupons().filter(x => x.code.toUpperCase() !== code.toUpperCase()));
+    const cUpper = code.toUpperCase();
+    saveCoupons(getCoupons().filter(x => x.code.toUpperCase() !== cUpper));
+
+    // Live broadcast coupon deletion
+    broadcastLiveSync('COUPON_UPDATE', { code: cUpper, _deleted: true, _updatedAt: new Date().toISOString() });
+
     renderCoupons();
     if (typeof window.deleteCouponFromFirestore === 'function') {
       await window.deleteCouponFromFirestore(code);
@@ -976,6 +1119,7 @@
           }
         }, (err) => {
           log('Orders listener notice:', err.message || err);
+          _ordersUnsub = null;
         });
       } catch (_) {}
     }
@@ -987,7 +1131,7 @@
           const remote = [];
           snap.forEach(doc => {
             const d = doc.data();
-            if (d && d.id) remote.push(d);
+            if (d && d.id) remote.push(sanitizeRemoteProduct(d));
           });
           if (remote.length > 0) {
             const local = getAdminProducts();
@@ -1010,6 +1154,7 @@
           }
         }, (err) => {
           log('Products listener notice:', err.message || err);
+          _productsUnsub = null;
         });
       } catch (_) {}
     }
@@ -1043,6 +1188,7 @@
           }
         }, (err) => {
           log('Coupons listener notice:', err.message || err);
+          _couponsUnsub = null;
         });
       } catch (_) {}
     }
@@ -1181,7 +1327,50 @@
       syncAllFromFirestore(true);
       startAutoSync();
       initRealtimeListeners();
-      window.addEventListener('firebase-ready', initRealtimeListeners);
+      window.addEventListener('firebase-ready', () => {
+        initRealtimeListeners();
+        syncAllFromFirestore(true);
+      });
+
+      // Listen for broadcasts from other admin tabs or storefront
+      function handleAdminIncomingSync(evt) {
+        if (!evt || !evt.type || evt.senderId === CLIENT_ID) return;
+        if (_processedSyncEvents.has(evt.eventId)) return;
+        recordSyncEvent(evt.eventId);
+
+        if (evt.type === 'PRODUCT_UPDATE' || evt.type === 'PRODUCT_DELETE' || evt.type === 'STOCK_UPDATE') {
+          invalidateProductsCache();
+          rebuildCategoryFilter();
+          const activeTab = $('.admin-nav-btn.is-active');
+          if (activeTab && activeTab.dataset.adminTab === 'products') renderProducts();
+          if (activeTab && activeTab.dataset.adminTab === 'dashboard') renderDashboard();
+        } else if (evt.type === 'COUPON_UPDATE') {
+          const activeTab = $('.admin-nav-btn.is-active');
+          if (activeTab && activeTab.dataset.adminTab === 'coupons') renderCoupons();
+        }
+      }
+
+      if (syncChannel) {
+        syncChannel.onmessage = (e) => handleAdminIncomingSync(e.data);
+      }
+      window.addEventListener('storage', (e) => {
+        if (e.key === SYNC_SIGNAL_KEY && e.newValue) {
+          try { handleAdminIncomingSync(JSON.parse(e.newValue)); } catch (_) {}
+        }
+      });
+
+      window.addEventListener('online', () => {
+        log('Network online — re-attaching listeners & syncing');
+        initRealtimeListeners();
+        syncAllFromFirestore(true);
+      });
+      window.addEventListener('offline', () => {
+        log('Network offline');
+        const badge = $('#adminSyncBadge');
+        if (badge) {
+          badge.innerHTML = '<span style="color:var(--warm);font-weight:600">● Offline Mode</span>';
+        }
+      });
 
       const app = $('#adminApp');
       if (app) {

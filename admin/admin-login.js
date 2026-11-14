@@ -20,9 +20,22 @@
     if (y) {
       localStorage.setItem(SESSION_KEY, 'true');
       localStorage.setItem(EMAIL_KEY, REQUIRED_EMAIL);
+      try {
+        const adminUser = { id: "admin-posterlab", name: "Poster Lab Admin", email: REQUIRED_EMAIL, phone: "01010414187", deliveryAddress: "", addresses: [] };
+        localStorage.setItem('pls-session', JSON.stringify(adminUser));
+      } catch (_) {}
     } else {
       localStorage.removeItem(SESSION_KEY);
       localStorage.removeItem(EMAIL_KEY);
+      try {
+        const raw = localStorage.getItem('pls-session');
+        if (raw) {
+          const u = JSON.parse(raw);
+          if (u && u.email && u.email.toLowerCase().trim() === REQUIRED_EMAIL) {
+            localStorage.removeItem('pls-session');
+          }
+        }
+      } catch (_) {}
     }
   }
 

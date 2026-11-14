@@ -31,10 +31,10 @@ const POSTER_FALLBACK_IMAGE = "assets/poster-lab-logo.webp";
 const CUSTOM_UPLOAD_ACCEPT = ".jpg,.jpeg,.png,.webp,.gif,.bmp,.avif,.heic,.heif,.tif,.tiff,image/*";
 const SESSION_SCROLL_KEY = "pls-scroll";
 const frameOptions = {
-  None: { label: "Poster only", price: 0, hint: "Poster only, no frame" },
-  Black: { label: "Black frame", price: 120 },
-  White: { label: "White frame", price: 120 },
-
+  Black: { label: "Black frame", price: 0, class: "frame-black" },
+  White: { label: "White frame", price: 0, class: "frame-white" },
+  Transparent: { label: "Frameless", price: 0, class: "frame-transparent" },
+  None: { label: "Frameless", price: 0, class: "frame-transparent", hint: "Poster only, no frame" }
 };
 
 const translations = {
@@ -125,6 +125,7 @@ const translations = {
     cartCheckoutBtn: "Review order",
     productLink: "Product page link",
     backToShop: "Back to shop",
+    backToStore: "Back to store",
 
     confEyebrow: "Final confirmation",
     confTitle: "Check details, then send order",
@@ -143,6 +144,9 @@ const translations = {
     sizeGuideTitle: "Size guide",
     sizeGuideHint: "Choose the size that fits your wall.",
     addToCartSimple: "Add to cart",
+    outOfStock: "Out of Stock",
+    itemOutOfStock: "This item is currently out of stock",
+    outOfStockToast: "Item is out of stock",
     ourWorkTitle: "Our Work",
     ourWorkEyebrow: "Real quality captures",
     ourWorkSubtitle: "See the print finish, frame depth, and room styling from real photos.",
@@ -161,7 +165,7 @@ const translations = {
     faqQ2: "What sizes are available?",
     faqA2: "We offer four sizes: 20x30 cm, 30x40 cm, 40x50 cm, and 50x70 cm. Prices vary by size — larger sizes cost more. All sizes can be framed or unframed.",
     faqQ3: "What frame options do you offer?",
-    faqA3: "We offer three options: no frame (poster only), black frame, and white frame. Frames add EGP 120 to the price. All frames are high-quality and ready to hang.",
+    faqA3: "We offer three options: black frame, white frame, and frameless. Frames are included in the price at no extra charge. All frames are high-quality and ready to hang.",
     faqQ4: "Can I upload my own design?",
     faqA4: "Yes! Use the \"Upload Your Custom Design\" product to upload any photo or design. We'll print it as a high-quality framed poster. You can upload JPG, PNG, or any common image format.",
     faqQ5: "What payment methods do you accept?",
@@ -283,6 +287,7 @@ const translations = {
     cartCheckoutBtn: "مراجعة الطلب",
     productLink: "رابط المنتج",
     backToShop: "العودة للتسوق",
+    backToStore: "العودة للمتجر",
     confEyebrow: "التأكيد",
     confTitle: "راجع الطلب ثم أرسله",
     confHint: "ستحتوي رسالتك على الواتساب على كل بوستر، والإطار، والمقاس، والإجمالي، وبيانات العميل، وروابط المنتجات.",
@@ -300,6 +305,9 @@ const translations = {
     sizeGuideTitle: "دليل المقاسات",
     sizeGuideHint: "اختر المقاس المناسب لحائطك.",
     addToCartSimple: "أضف للسلة",
+    outOfStock: "نفد من المخزن",
+    itemOutOfStock: "هذا المنتج غير متوفر حالياً",
+    outOfStockToast: "هذا المنتج غير متوفر حالياً",
     navAccount: "حسابي",
     navWishlist: "المفضلة",
     navFaq: "الأسئلة",
@@ -328,7 +336,7 @@ const translations = {
     faqQ2: "ما المقاسات المتاحة؟",
     faqA2: "نوفر أربع مقاسات: 20x30 سم، 30x40 سم، 40x50 سم، و50x70 سم. الأسعار تختلف حسب المقاس — المقاسات الأكبر أغلى. كل المقاسات تنفع مع أو بدون إطار.",
     faqQ3: "ما خيارات الإطارات؟",
-    faqA3: "نوفر ثلاثة خيارات: بدون إطار (بوستر فقط)، إطار أسود، وإطار أبيض. الإطارات تضيف 120 جنيهاً للسعر. كل الإطارات عالية الجودة وجاهزة للتعليق.",
+    faqA3: "نوفر ثلاثة خيارات: إطار أسود، إطار أبيض، وبدون إطار. الإطارات مشمولة في السعر بدون أي تكلفة إضافية. كل الإطارات عالية الجودة وجاهزة للتعليق.",
     faqQ4: "هل أقدر أرفع تصميمي الخاص؟",
     faqA4: "نعم! استخدم منتج \"ارفع تصميمك الخاص\" لرفع أي صورة أو تصميم. سنطبعه كبوستر مؤطر عالي الجودة. تقدر ترفع JPG أو PNG أو أي صيغة صور شائعة.",
     faqQ5: "ما طرق الدفع المتاحة؟",
@@ -379,8 +387,8 @@ const products = [
     isCustom: true,
     image: "assets/Custom/Upload-Your-Custom-Design.webp",
     gallery: ["assets/Custom/Upload-Your-Custom-Design.webp"],
-    basePrice: 60,
-    sizes: { '20x30': 60, '30x40': 80, '40x50': 250, '50x70': 300 },
+    basePrice: 180,
+    sizes: { '20x30': 180, '30x40': 200, '40x50': 250, '50x70': 300 },
     frames: ['None', 'Black', 'White'],
     description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
     descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
@@ -497,6 +505,65 @@ const LOCAL_STORAGE_COUPONS_KEY = "pls-coupons";
 const LOCAL_STORAGE_WISHLIST_KEY = "pls-wishlist";
 const LOCAL_STORAGE_REVIEWS_KEY = "pls-reviews";
 const LOCAL_STORAGE_PRODUCTS_KEY = "pls-products";
+const SYNC_CHANNEL_NAME = "poster-lab-sync";
+const SYNC_SIGNAL_KEY = "pls-sync-signal";
+const STORE_CLIENT_ID = "store_" + Math.random().toString(36).slice(2, 9) + "_" + Date.now();
+
+const _processedSyncEvents = new Map();
+function recordStoreSyncEvent(eventId) {
+  _processedSyncEvents.set(eventId, Date.now());
+  if (_processedSyncEvents.size > 100) {
+    const oldestKey = _processedSyncEvents.keys().next().value;
+    _processedSyncEvents.delete(oldestKey);
+  }
+}
+
+function isProductOutOfStock(product) {
+  if (!product) return false;
+  return product.quantity !== undefined && product.quantity !== null && Number(product.quantity) <= 0;
+}
+
+function getProductStock(product) {
+  if (!product || product.quantity === undefined || product.quantity === null) {
+    return Infinity;
+  }
+  const val = parseInt(product.quantity, 10);
+  return isNaN(val) || val <= 0 ? 0 : val;
+}
+
+const MIN_PRICE_FLOOR = 180;
+const STANDARD_SIZES = {
+  '20x30': 180,
+  '30x40': 200,
+  '40x50': 250,
+  '50x70': 300
+};
+
+function sanitizeRemoteProduct(rp) {
+  if (!rp || typeof rp !== 'object' || rp._deleted) return rp;
+  if (!rp.sizes || typeof rp.sizes !== 'object' || Array.isArray(rp.sizes)) {
+    rp.sizes = { ...STANDARD_SIZES };
+  } else {
+    Object.keys(STANDARD_SIZES).forEach(sizeKey => {
+      const minForTier = STANDARD_SIZES[sizeKey];
+      const currentPrice = Number(rp.sizes[sizeKey]);
+      if (isNaN(currentPrice) || currentPrice < minForTier) {
+        rp.sizes[sizeKey] = minForTier;
+      }
+    });
+    Object.keys(rp.sizes).forEach(key => {
+      const p = Number(rp.sizes[key]);
+      if (isNaN(p) || p < MIN_PRICE_FLOOR) {
+        rp.sizes[key] = MIN_PRICE_FLOOR;
+      }
+    });
+  }
+  const base = Number(rp.basePrice);
+  if (isNaN(base) || base < MIN_PRICE_FLOOR) {
+    rp.basePrice = Number(rp.sizes['20x30']) || MIN_PRICE_FLOOR;
+  }
+  return rp;
+}
 
 function lsGet(key, fallback) {
   try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
@@ -749,6 +816,157 @@ function loadCartFromFirestore() {
 let _storeProductsUnsub = null;
 let _storeCouponsUnsub = null;
 
+function triggerLiveUIReRender(affectedProductId) {
+  _lastFilterSearch = null;
+  _lastFilterResult = null;
+
+  // 1. Catalog Grid & Search View
+  if (typeof productGrid !== 'undefined' && productGrid) {
+    const currentCat = new URLSearchParams(window.location.search).get("cat");
+    if (currentCat) renderSingleCategory(currentCat);
+    else renderProducts();
+  }
+
+  // 2. Open Product Detail Page
+  const pid = typeof getPageProductId === 'function' ? getPageProductId() : null;
+  if (pid && (!affectedProductId || pid === affectedProductId)) {
+    renderDetail(pid);
+  }
+
+  // 3. Cart Drawer Total & Stock Verification
+  if (typeof renderCart === 'function') {
+    renderCart();
+  }
+}
+
+function applyLiveProductUpdate(payload, isDelete = false) {
+  if (!payload || !payload.id) return;
+  const id = payload.id;
+  const existingCustom = lsGet(LOCAL_STORAGE_PRODUCTS_KEY, []);
+  const map = new Map();
+  existingCustom.forEach(p => map.set(p.id, p));
+
+  const baseProduct = products.find(p => p.id === id);
+  const curInMap = map.get(id);
+  const currentMerged = curInMap || baseProduct || {};
+
+  if (isDelete || payload._deleted) {
+    map.set(id, { id, _deleted: true, _updatedAt: payload._updatedAt || new Date().toISOString() });
+    const inMemIdx = products.findIndex(p => p.id === id);
+    if (inMemIdx >= 0) products[inMemIdx]._deleted = true;
+  } else {
+    const sanitized = sanitizeRemoteProduct(payload);
+    const updated = {
+      ...currentMerged,
+      ...sanitized,
+      _deleted: false,
+      _updatedAt: sanitized._updatedAt || new Date().toISOString()
+    };
+    map.set(id, updated);
+    const inMemIdx = products.findIndex(p => p.id === id);
+    if (inMemIdx >= 0) {
+      products[inMemIdx] = { ...products[inMemIdx], ...updated };
+    } else {
+      products.push(updated);
+    }
+  }
+
+  lsSet(LOCAL_STORAGE_PRODUCTS_KEY, Array.from(map.values()));
+  triggerLiveUIReRender(id);
+}
+
+function applyLiveStockUpdate(payload) {
+  if (!payload || !payload.id || payload.quantity === undefined) return;
+  const sanitizedQty = Math.max(0, parseInt(payload.quantity, 10));
+  applyLiveProductUpdate({ id: payload.id, quantity: sanitizedQty, _updatedAt: payload._updatedAt });
+}
+
+function applyLiveCouponUpdate(coupon) {
+  if (!coupon || !coupon.code) return;
+  const code = coupon.code.toUpperCase();
+  const existing = getCouponsData();
+  const map = new Map();
+  existing.forEach(c => map.set(c.code.toUpperCase(), c));
+
+  if (coupon._deleted) {
+    map.delete(code);
+    if (state.appliedCoupon && state.appliedCoupon.code.toUpperCase() === code) {
+      state.appliedCoupon = null;
+      renderCart();
+      const currentLang = state.lang || "en";
+      showToast(currentLang === 'ar' ? 'تم إلغاء كود الخصم من قِبل الإدارة' : 'Coupon has been removed by admin');
+    }
+  } else {
+    const current = map.get(code) || {};
+    const updated = { ...current, ...coupon, code };
+    map.set(code, updated);
+    if (state.appliedCoupon && state.appliedCoupon.code.toUpperCase() === code) {
+      state.appliedCoupon = updated;
+      renderCart();
+    }
+  }
+  saveCouponsData(Array.from(map.values()));
+}
+
+function initLiveSyncChannel() {
+  let bc = null;
+  try {
+    if (typeof BroadcastChannel !== 'undefined') {
+      bc = new BroadcastChannel(SYNC_CHANNEL_NAME);
+    }
+  } catch (err) {
+    console.warn('[Sync] BroadcastChannel init error, falling back to storage:', err);
+  }
+
+  function handleIncomingEnvelope(envelope) {
+    if (!envelope || !envelope.type || envelope.senderId === STORE_CLIENT_ID) return;
+    if (_processedSyncEvents.has(envelope.eventId)) return;
+    recordStoreSyncEvent(envelope.eventId);
+
+    switch (envelope.type) {
+      case 'PRODUCT_UPDATE':
+        applyLiveProductUpdate(envelope.payload, false);
+        break;
+      case 'PRODUCT_DELETE':
+        applyLiveProductUpdate(envelope.payload, true);
+        break;
+      case 'STOCK_UPDATE':
+        applyLiveStockUpdate(envelope.payload);
+        break;
+      case 'COUPON_UPDATE':
+        applyLiveCouponUpdate(envelope.payload);
+        break;
+    }
+  }
+
+  if (bc) {
+    bc.onmessage = (e) => handleIncomingEnvelope(e.data);
+  }
+
+  // Fallback / Cross-Tab Storage Event
+  window.addEventListener('storage', (e) => {
+    if (e.key === SYNC_SIGNAL_KEY && e.newValue) {
+      try { handleIncomingEnvelope(JSON.parse(e.newValue)); } catch (_) {}
+    } else if (e.key === LOCAL_STORAGE_PRODUCTS_KEY) {
+      triggerLiveUIReRender();
+    } else if (e.key === LOCAL_STORAGE_COUPONS_KEY) {
+      if (typeof renderCart === 'function') renderCart();
+    }
+  });
+
+  // Reconnection resilience hooks
+  window.addEventListener('firebase-ready', () => {
+    initStoreRealtimeListeners();
+    syncProductsFromFirestore(true);
+    syncCouponsFromFirestore(true);
+  });
+  window.addEventListener('online', () => {
+    initStoreRealtimeListeners();
+    syncProductsFromFirestore(true);
+    syncCouponsFromFirestore(true);
+  });
+}
+
 function applyRemoteProducts(remoteProducts) {
   if (!Array.isArray(remoteProducts) || !remoteProducts.length) return false;
   const existing = lsGet(LOCAL_STORAGE_PRODUCTS_KEY, []);
@@ -756,8 +974,9 @@ function applyRemoteProducts(remoteProducts) {
   existing.forEach(p => map.set(p.id, p));
 
   let changed = false;
-  remoteProducts.forEach(rp => {
-    if (!rp || !rp.id) return;
+  remoteProducts.forEach(rawRp => {
+    if (!rawRp || !rawRp.id) return;
+    const rp = sanitizeRemoteProduct(rawRp);
     const cur = map.get(rp.id);
     if (rp._deleted) {
       if (!cur || !cur._deleted) {
@@ -775,21 +994,7 @@ function applyRemoteProducts(remoteProducts) {
   if (changed) {
     lsSet(LOCAL_STORAGE_PRODUCTS_KEY, Array.from(map.values()));
     try { localStorage.setItem("pls_last_fs_sync", String(Date.now())); } catch {}
-    _lastFilterSearch = null;
-    _lastFilterResult = null;
-
-    // Refresh catalog view if present
-    if (productGrid) {
-      const currentCat = new URLSearchParams(window.location.search).get("cat");
-      if (currentCat) renderSingleCategory(currentCat);
-      else renderProducts();
-    }
-
-    // Refresh product detail view if present
-    const pid = getPageProductId();
-    if (pid) {
-      renderDetail(pid);
-    }
+    triggerLiveUIReRender();
   }
   return changed;
 }
@@ -806,11 +1011,12 @@ function initStoreRealtimeListeners() {
         const remote = [];
         snap.forEach(doc => {
           const d = doc.data();
-          if (d && d.id) remote.push(d);
+          if (d && d.id) remote.push(sanitizeRemoteProduct(d));
         });
         applyRemoteProducts(remote);
       }, (err) => {
         console.warn('[Firestore] Store products listener notice:', err);
+        _storeProductsUnsub = null;
       });
     } catch (_) {}
   }
@@ -836,6 +1042,7 @@ function initStoreRealtimeListeners() {
         }
       }, (err) => {
         console.warn('[Firestore] Store coupons listener notice:', err);
+        _storeCouponsUnsub = null;
       });
     } catch (_) {}
   }
@@ -1119,7 +1326,14 @@ function displayImageForItem(product, item = null) {
 }
 
 function itemUnitPrice(product, size, frame) {
-  return product.sizes[size] + frameOptions[frame].price;
+  if (!product) return 180;
+  const sizePrice = (product.sizes && product.sizes[size] != null)
+    ? product.sizes[size]
+    : ((product.sizes && product.sizes["20x30"] != null) ? product.sizes["20x30"] : (product.basePrice || 180));
+  const framePrice = (frame && frameOptions[frame]?.price != null)
+    ? frameOptions[frame].price
+    : 0;
+  return sizePrice + framePrice;
 }
 
 function orderDeliveryFee() {
@@ -1190,7 +1404,7 @@ function sceneImageForIndex(index = 0) {
 function getFrameOptionLabel(frameKey) {
   const currentLang = state.lang || "en";
   if (currentLang === "ar") {
-    if (frameKey === "None") return "بوستر فقط";
+    if (frameKey === "None" || frameKey === "Transparent") return "بدون إطار";
     if (frameKey === "Black") return "إطار أسود";
     if (frameKey === "White") return "إطار أبيض";
     if (frameKey === "Wood") return "إطار خشبي";
@@ -1201,7 +1415,7 @@ function getFrameOptionLabel(frameKey) {
 function getFrameOptionHint(frameKey) {
   const currentLang = state.lang || "en";
   if (currentLang === "ar") {
-    if (frameKey === "None") return "بوستر فقط بدون إطار";
+    if (frameKey === "None" || frameKey === "Transparent") return "بوستر فقط بدون إطار";
   }
   return frameOptions[frameKey]?.hint || "";
 }
@@ -1343,12 +1557,30 @@ function logoutUser() {
 
 function isPosterLabAdmin() {
   const ADMIN_EMAIL = "posterlab895@gmail.com";
-  const userEmail = (state.user && state.user.email ? state.user.email : "").toLowerCase().trim();
-  const hasAdminSession = localStorage.getItem("pls-admin-session") === "true";
-  const adminEmail = (localStorage.getItem("pls-admin-email") || "").toLowerCase().trim();
-
-  if (userEmail === ADMIN_EMAIL) return true;
-  if (hasAdminSession && adminEmail === ADMIN_EMAIL) return true;
+  // 1. Check active user in state
+  if (typeof state !== "undefined" && state && state.user && state.user.email) {
+    return state.user.email.toLowerCase().trim() === ADMIN_EMAIL;
+  }
+  // 2. Check localStorage store session
+  try {
+    const raw = localStorage.getItem("pls-session");
+    if (raw) {
+      const u = JSON.parse(raw);
+      if (u && u.email && u.email.toLowerCase().trim() === ADMIN_EMAIL) {
+        return true;
+      }
+    }
+  } catch (_) {}
+  // 3. Check Firebase Auth user
+  try {
+    if (typeof firebase !== "undefined" && firebase.auth && firebase.auth().currentUser) {
+      const cur = firebase.auth().currentUser;
+      if (cur.email && cur.email.toLowerCase().trim() === ADMIN_EMAIL) {
+        return true;
+      }
+    }
+  } catch (_) {}
+  // Guest accounts or non-admin customers must never see the admin icon
   return false;
 }
 
@@ -1364,13 +1596,22 @@ function updateHeaderAdminButton() {
       adminBtn.href = 'admin/panel.html';
       adminBtn.title = (state && state.lang === 'ar') ? 'لوحة التحكم' : 'Admin Panel';
       adminBtn.setAttribute('aria-label', 'Admin Panel');
-      adminBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>';
+      adminBtn.innerHTML = '<span class="admin-gear-colored" style="transform:translateY(-1px);display:inline-block;font-size:1.15rem;line-height:1" aria-hidden="true">⚙️</span>';
       const accountBtn = headerActions.querySelector('[data-account-btn]');
       if (accountBtn) headerActions.insertBefore(adminBtn, accountBtn);
       else headerActions.appendChild(adminBtn);
+    } else {
+      // Ensure it displays the single colored gear icon
+      adminBtn.innerHTML = '<span class="admin-gear-colored" style="transform:translateY(-1px);display:inline-block;font-size:1.15rem;line-height:1" aria-hidden="true">⚙️</span>';
     }
   } else if (adminBtn) {
     adminBtn.remove();
+  }
+  // Purge any duplicate or legacy gear button elements so only one colored gear can ever exist
+  document.querySelectorAll('#adminGearBtn, .header-admin-gear').forEach(el => el.remove());
+  const allAdminLinks = headerActions.querySelectorAll('.header-admin-link');
+  for (let i = 1; i < allAdminLinks.length; i++) {
+    allAdminLinks[i].remove();
   }
 }
 
@@ -2183,7 +2424,7 @@ function renderProducts() {
   const container = document.querySelector("#categorySections");
   if (!container) return;
 
-  const currentCat = new URLSearchParams(window.location.search).get("cat") || catParam;
+  const currentCat = new URLSearchParams(window.location.search).get("cat");
   if (currentCat) {
     renderSingleCategory(currentCat);
     return;
@@ -2303,8 +2544,10 @@ html += `      <span style="font-size:1.4rem">${catSectionIcon(meta)}</span>\n`;
       const tag = currentLang === "ar" && product.tagAr ? product.tagAr : product.tag;
       const desc = currentLang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
       const sceneImage = sceneImageForIndex(idx);
+      const outOfStock = isProductOutOfStock(product);
+      const oosText = t("outOfStock") || (currentLang === "ar" ? "نفد من المخزن" : "Out of Stock");
 
-      html += `    <article class="product-card" style="--delay: ${idx * 30}ms">\n`;
+      html += `    <article class="product-card${outOfStock ? " is-out-of-stock" : ""}" style="--delay: ${idx * 30}ms">\n`;
       html += `      <a class="product-media" href="product.html?id=${product.id}&size=20x30&frame=Black" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
       html += `        <span class="frame-preview frame-preview-black"></span>\n        <span class="card-glare"></span>\n`;
       html += `        <img src="${productImageUrl(product.image)}" loading="${catIdx < 2 && idx < 2 ? "eager" : "lazy"}" decoding="async" fetchpriority="${catIdx === 0 && idx < 2 ? "high" : "auto"}" alt="${name} ${currentLang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
@@ -2312,14 +2555,21 @@ html += `      <span style="font-size:1.4rem">${catSectionIcon(meta)}</span>\n`;
       if (galleryBadge(product)) {
         html += `        <span class="product-gallery-badge">${galleryBadge(product)}</span>\n`;
       }
+      if (outOfStock) {
+        html += `        <span class="badge out-of-stock">${oosText}</span>\n`;
+      }
       html += `        <div class="media-actions">\n`;
-      html += `          <button class="icon-button cart-icon-btn" type="button" data-quick-add="${product.id}" aria-label="${currentLang === "ar" ? "أضف للسلة" : "Add to cart"}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+      if (!outOfStock) {
+        html += `          <button class="icon-button cart-icon-btn" type="button" data-quick-add="${product.id}" aria-label="${currentLang === "ar" ? "أضف للسلة" : "Add to cart"}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+      } else {
+        html += `          <button class="icon-button cart-icon-btn is-disabled" type="button" disabled aria-disabled="true" title="${oosText}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+      }
       html += `        </div>\n`;
       html += `      </a>\n`;
       html += `      <div class="product-info">\n`;
       html += `        <h3>${name}</h3>\n`;
       html += `        <div class="product-meta">\n`;
-      html += `          <span class="price-value">${money((product.sizes["20x30"] || 60) + (frameOptions.Black?.price || 120))}</span>\n`;
+      html += `          <span class="price-value">${money(product.sizes?.["20x30"] || product.basePrice || 180)}</span>\n`;
       html += `          <span class="price-label">${t("from")}</span>\n`;
       html += `        </div>\n`;
       html += `      </div>\n`;
@@ -2694,8 +2944,10 @@ function catCardHtml(items, startIdx, lang) {
     const tag = lang === "ar" && product.tagAr ? product.tagAr : product.tag;
     const desc = lang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
     const sceneImage = sceneImageForIndex(idx);
+    const outOfStock = isProductOutOfStock(product);
+    const oosText = t("outOfStock") || (lang === "ar" ? "نفد من المخزن" : "Out of Stock");
 
-    let card = `  <article class="product-card" style="--delay: ${idx * 20}ms">\n`;
+    let card = `  <article class="product-card${outOfStock ? " is-out-of-stock" : ""}" style="--delay: ${idx * 20}ms">\n`;
     card += `    <a class="product-media" href="product.html?id=${product.id}&size=20x30&frame=Black" aria-label="View ${name}"${sceneImage ? ` style="--scene-image: url('${sceneImage}')"` : ""}>\n`;
     card += `      <span class="frame-preview frame-preview-black"></span>\n      <span class="card-glare"></span>\n`;
     card += `      <img src="${productImageUrl(product.image)}" loading="${idx < 6 ? "eager" : "lazy"}" decoding="async" fetchpriority="${idx < 6 ? "high" : "auto"}" alt="${name} ${lang === "ar" ? "بوستر مؤطر" : "framed poster"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">\n`;
@@ -2703,14 +2955,21 @@ function catCardHtml(items, startIdx, lang) {
     if (galleryBadge(product)) {
       card += `      <span class="product-gallery-badge">${galleryBadge(product)}</span>\n`;
     }
+    if (outOfStock) {
+      card += `      <span class="badge out-of-stock">${oosText}</span>\n`;
+    }
     card += `      <div class="media-actions">\n`;
-    card += `        <button class="icon-button cart-icon-btn" type="button" data-quick-add="${product.id}" aria-label="${lang === "ar" ? "أضف للسلة" : "Add to cart"}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+    if (!outOfStock) {
+      card += `        <button class="icon-button cart-icon-btn" type="button" data-quick-add="${product.id}" aria-label="${lang === "ar" ? "أضف للسلة" : "Add to cart"}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+    } else {
+      card += `        <button class="icon-button cart-icon-btn is-disabled" type="button" disabled aria-disabled="true" title="${oosText}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>\n`;
+    }
     card += `      </div>\n`;
     card += `    </a>\n`;
     card += `    <div class="product-info">\n`;
     card += `      <h3>${name}</h3>\n`;
     card += `      <div class="product-meta">\n`;
-    card += `        <span class="price-value">${money((product.sizes["20x30"] || 60) + (frameOptions.Black?.price || 120))}</span>\n`;
+    card += `        <span class="price-value">${money(product.sizes?.["20x30"] || product.basePrice || 180)}</span>\n`;
     card += `        <span class="price-label">${t("from")}</span>\n`;
     card += `      </div>\n`;
     card += `    </div>\n`;
@@ -2818,13 +3077,51 @@ function renderOurWork() {
   updateOurWorkReelToggleLabel();
 }
 
+function switchDetailFrame(newFrame) {
+  if (!newFrame || newFrame === state.detailFrame) return;
+  state.detailFrame = newFrame;
+
+  const container = document.querySelector(".detail-main-image");
+  if (container) {
+    container.classList.remove("frame-black", "frame-white", "frame-transparent", "frame-none");
+    const normalized = newFrame.toLowerCase();
+    container.classList.add(`frame-${normalized}`);
+    if (normalized === "transparent") container.classList.add("frame-none");
+    if (normalized === "none") container.classList.add("frame-transparent");
+  }
+
+  const buttons = document.querySelectorAll(".frame-options [data-frame]");
+  buttons.forEach((btn) => {
+    const isMatch = btn.dataset.frame === newFrame ||
+      ((btn.dataset.frame === "None" || btn.dataset.frame === "Transparent") && (newFrame === "None" || newFrame === "Transparent"));
+    btn.classList.toggle("is-selected", isMatch);
+  });
+
+  // Update price line small label if present
+  const frameLabel = document.querySelector(".price-line small");
+  if (frameLabel) {
+    const currentLang = state.lang || "en";
+    frameLabel.textContent = `${state.detailSize} ${currentLang === "ar" ? "سم مع" : "cm with"} ${getFrameOptionLabel(newFrame)}`;
+  }
+
+  // Update URL history without page reload
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set("frame", newFrame);
+    window.history.replaceState({}, "", url.toString());
+  } catch (_) {}
+}
+
 function renderDetail(productId) {
   const product = getProduct(productId);
   if (!product) {
     if (productDetail) {
       productDetail.hidden = false;
       const currentLang = state.lang || "en";
+      const existingBackBar = document.querySelector(".page-back-bar");
+      const hasExternalBackBar = Boolean(existingBackBar && (typeof productDetail.contains === "function" ? !productDetail.contains(existingBackBar) : existingBackBar !== productDetail));
       productDetail.innerHTML = `
+        ${hasExternalBackBar ? "" : `
         <div class="page-back-bar">
           <a class="page-back-btn" href="index.html" aria-label="${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}">
             <svg class="page-back-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2832,7 +3129,7 @@ function renderDetail(productId) {
             </svg>
             <span>${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}</span>
           </a>
-        </div>
+        </div>`}
         <div class="empty-state"><strong>${t("noProductsFound")}</strong><p><a href="index.html">${t("heroActionShop")}</a></p></div>`;
     }
     return;
@@ -2842,10 +3139,15 @@ function renderDetail(productId) {
   const name = getProductName(product);
   const tag = currentLang === "ar" && product.tagAr ? product.tagAr : product.tag;
   const desc = currentLang === "ar" && product.descriptionAr ? product.descriptionAr : product.description;
+  const outOfStock = isProductOutOfStock(product);
+  const oosLabel = t("outOfStock") || (currentLang === "ar" ? "نفد من المخزن" : "Out of Stock");
 
   state.selectedProduct = product.id;
   if (!product.sizes[state.detailSize]) state.detailSize = Object.keys(product.sizes)[0];
-  if (!product.frames.includes(state.detailFrame)) state.detailFrame = product.frames[0];
+  const supportsFrame = (f) => product.frames.includes(f) || ((f === "Transparent" || f === "None") && (product.frames.includes("None") || product.frames.includes("Transparent")));
+  if (!state.detailFrame || !supportsFrame(state.detailFrame)) {
+    state.detailFrame = product.frames.includes("Black") ? "Black" : (product.frames[0] || "Black");
+  }
 
   if (productDetail) {
     document.title = `${name} — ${t("brandTitle")}`;
@@ -2853,7 +3155,12 @@ function renderDetail(productId) {
     const rawPreview = (product.isCustom && state.customUpload && state.customUpload.url && !state.customUpload.previewError) ? state.customUpload.url : product.image;
     const previewImage = rawPreview && rawPreview.startsWith('data:') ? rawPreview : productImageUrl(rawPreview);
     const sceneImage = sceneImageForIndex(getMergedProducts().findIndex((item) => item.id === product.id));
+    const existingBackBar = document.querySelector(".page-back-bar");
+    const hasExternalBackBar = Boolean(existingBackBar && (typeof productDetail.contains === "function" ? !productDetail.contains(existingBackBar) : existingBackBar !== productDetail));
+    const frameClass = state.detailFrame.toLowerCase();
+    const extraFrameClass = frameClass === "transparent" ? " frame-none" : (frameClass === "none" ? " frame-transparent" : "");
     productDetail.innerHTML = `
+      ${hasExternalBackBar ? "" : `
       <div class="page-back-bar">
         <a class="page-back-btn" href="index.html" aria-label="${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}">
           <svg class="page-back-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2861,10 +3168,10 @@ function renderDetail(productId) {
           </svg>
           <span>${currentLang === "ar" ? "العودة للمتجر" : "Back to store"}</span>
         </a>
-      </div>
+      </div>`}
       <article class="detail product-detail-layout">
       <div class="detail-gallery">
-        <div class="detail-main-image frame-${state.detailFrame.toLowerCase()}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <img id="detailMainImage" src="${previewImage}" loading="eager" decoding="async" fetchpriority="high" alt="${name} ${currentLang === "ar" ? "معرض البوستر" : "framed poster gallery image"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
+        <div class="detail-main-image frame-${frameClass}${extraFrameClass}" style="${sceneImage ? `--scene-image: url('${sceneImage}')` : ""}">\n          <img id="detailMainImage" src="${previewImage}" loading="eager" decoding="async" fetchpriority="high" alt="${name} ${currentLang === "ar" ? "معرض البوستر" : "framed poster gallery image"}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
         </div>
         ${product.gallery && product.gallery.length > 1 ? `
           <div class="thumb-row">
@@ -2886,6 +3193,7 @@ function renderDetail(productId) {
         <div class="price-line">
           <span>${money(itemUnitPrice(product, state.detailSize, state.detailFrame))}</span>
           <small>${state.detailSize} ${currentLang === "ar" ? "سم مع" : "cm with"} ${getFrameOptionLabel(state.detailFrame)}</small>
+          ${outOfStock ? `<span class="badge out-of-stock detail-stock-badge">${oosLabel}</span>` : ""}
         </div>
         <p class="detail-short-desc">${desc}</p>
         ${sizeGuideMarkup()}
@@ -2923,13 +3231,13 @@ function renderDetail(productId) {
               <input type="file" accept="${CUSTOM_UPLOAD_ACCEPT}" data-upload-design>
             </label>
             ${state.customUpload ? `
-              <button class="detail-add" type="button" data-detail-add>${t("detailAddBtn")}</button>
+              <button class="detail-add${outOfStock ? " is-disabled" : ""}" type="button" data-detail-add id="addToCartBtn" ${outOfStock ? 'disabled aria-disabled="true"' : ""}>${outOfStock ? oosLabel : t("detailAddBtn")}</button>
               <button class="remove-upload-btn" type="button" data-remove-upload>${state.lang === "ar" ? "إزالة التصميم" : "Remove design"}</button>
             ` : ""}
           </div>
           <p class="custom-upload-note">${currentLang === "ar" ? "ارفع التصميم، ثم أضف البوستر إلى السلة." : "Upload your design, then add the poster to the cart."}</p>
         ` : `
-          <button class="detail-add" type="button" data-detail-add>${t("addToCartSimple")}</button>
+          <button class="detail-add${outOfStock ? " is-disabled" : ""}" type="button" data-detail-add id="addToCartBtn" ${outOfStock ? 'disabled aria-disabled="true"' : ""}>${outOfStock ? oosLabel : t("addToCartSimple")}</button>
         `}
       </div>
     </article>
@@ -2942,130 +3250,40 @@ function renderDetail(productId) {
 }
 
 
-/* ── Shopping Animations & Micro-Interactions ── */
-function spawnConfetti(originX, originY) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const count = 16;
-  const colors = ['#2563eb', '#38bdf8', '#f59e0b', '#ec4899', '#10b981', '#8b5cf6'];
-  const container = document.createElement('div');
-  container.className = 'confetti-container';
-  container.style.cssText = `position:fixed;top:${originY}px;left:${originX}px;width:0;height:0;pointer-events:none;z-index:100000;`;
-  document.body.appendChild(container);
+async function addToCart(productId, size = "20x30", frame = "Black", originEl = null) {
+  const product = getProduct(productId);
+  if (!product) return;
 
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('div');
-    const color = colors[i % colors.length];
-    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
-    const distance = 35 + Math.random() * 55;
-    const tx = Math.cos(angle) * distance;
-    const ty = Math.sin(angle) * distance - 20;
-    const size = 5 + Math.random() * 5;
-    const rotate = Math.random() * 360;
-
-    p.style.cssText = `position:absolute;top:0;left:0;width:${size}px;height:${size * (i % 2 === 0 ? 1 : 1.5)}px;background:${color};border-radius:${i % 3 === 0 ? '50%' : '2px'};transform:translate(0,0) rotate(0deg);opacity:1;transition:transform 600ms cubic-bezier(0.1, 0.9, 0.2, 1), opacity 600ms ease;`;
-    container.appendChild(p);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        p.style.transform = `translate(${tx}px, ${ty}px) rotate(${rotate + 180}deg)`;
-        p.style.opacity = '0';
-      });
-    });
-  }
-  setTimeout(() => container.remove(), 700);
-}
-
-function animateFlyToCart(originEl, imgUrl) {
-  const cartBtn = document.querySelector(".cart-button") || document.querySelector("[data-open-cart]");
-  if (!cartBtn) return;
-  
-  let startRect;
-  if (originEl) {
-    const card = originEl.closest('.product-card');
-    const img = card?.querySelector('.product-media img') || document.querySelector('#detailMainImage') || originEl;
-    startRect = img.getBoundingClientRect();
-  } else {
-    const mainImg = document.querySelector('#detailMainImage');
-    startRect = mainImg ? mainImg.getBoundingClientRect() : cartBtn.getBoundingClientRect();
-  }
-  
-  if (!startRect || startRect.width === 0 || startRect.height === 0) {
-    cartBtn.classList.add('cart-bounce-pop');
-    setTimeout(() => cartBtn.classList.remove('cart-bounce-pop'), 600);
+  if (isProductOutOfStock(product)) {
+    showToast(t("itemOutOfStock") || (state.lang === "ar" ? "هذا المنتج غير متوفر حالياً" : "This item is currently out of stock"));
     return;
   }
 
-  const targetRect = cartBtn.getBoundingClientRect();
-  const flyer = document.createElement('div');
-  flyer.className = 'fly-to-cart-clone';
-  flyer.style.cssText = `position:fixed;z-index:99999;top:${startRect.top}px;left:${startRect.left}px;width:${startRect.width}px;height:${startRect.height}px;background-image:url('${imgUrl}');background-size:cover;background-position:center;border-radius:12px;box-shadow:0 12px 35px rgba(0,0,0,0.35);pointer-events:none;transition:transform 600ms cubic-bezier(0.2,0.85,0.2,1), opacity 600ms ease, border-radius 600ms ease;will-change:transform,opacity;`;
-  document.body.appendChild(flyer);
-
-  const deltaX = (targetRect.left + targetRect.width / 2) - (startRect.left + startRect.width / 2);
-  const deltaY = (targetRect.top + targetRect.height / 2) - (startRect.top + startRect.height / 2);
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      flyer.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.18) rotate(12deg)`;
-      flyer.style.opacity = '0.35';
-      flyer.style.borderRadius = '50%';
-    });
-  });
-
-  setTimeout(() => {
-    flyer.remove();
-    cartBtn.classList.add('cart-bounce-pop');
-    setTimeout(() => cartBtn.classList.remove('cart-bounce-pop'), 600);
-    spawnConfetti(targetRect.left + targetRect.width / 2, targetRect.top + targetRect.height / 2);
-  }, 620);
-}
-
-function initCardTiltEffects() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if ('ontouchstart' in window && !window.matchMedia('(pointer: fine)').matches) return;
-  
-  let rafPending = false;
-  let lastEvent = null;
-
-  document.addEventListener('pointermove', (e) => {
-    lastEvent = e;
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      rafPending = false;
-      if (!lastEvent) return;
-      const card = lastEvent.target.closest('.product-card');
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      const x = (lastEvent.clientX - rect.left) / rect.width;
-      const y = (lastEvent.clientY - rect.top) / rect.height;
-      const tiltX = (0.5 - y) * 8;
-      const tiltY = (x - 0.5) * 8;
-      card.style.setProperty('--glare-x', `${(x * 100).toFixed(1)}%`);
-      card.style.setProperty('--glare-y', `${(y * 100).toFixed(1)}%`);
-      card.style.transform = `perspective(800px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-6px) scale3d(1.015, 1.015, 1.015)`;
-    });
-  }, { passive: true });
-
-  document.addEventListener('pointerout', (e) => {
-    const card = e.target.closest('.product-card');
-    if (!card) return;
-    if (!card.contains(e.relatedTarget)) {
-      card.style.transform = '';
+  const maxStock = getProductStock(product);
+  if (maxStock !== Infinity) {
+    const inCartQty = state.cart
+      .filter((item) => item.productId === product.id)
+      .reduce((sum, item) => sum + item.quantity, 0);
+    if (inCartQty >= maxStock) {
+      showToast(state.lang === "ar"
+        ? `عذراً، أقصى كمية متوفرة في المخزن هي ${maxStock}`
+        : `Sorry, only ${maxStock} items available in stock`);
+      return;
     }
-  }, { passive: true });
-}
+  }
 
-async function addToCart(productId, size = "30x40", frame = "Black", originEl = null) {
-  const product = getProduct(productId);
-  if (!product) return;
   if (product.isCustom && !state.customUpload) {
     renderDetail(product.id);
     showToast(t("pleaseUploadAlert"));
     return;
   }
   const resolvedSize = product.sizes[size] ? size : Object.keys(product.sizes)[0];
-  const resolvedFrame = product.frames.includes(frame) ? frame : product.frames[0];
+  let targetFrame = frame || state.detailFrame || "Black";
+  let resolvedFrame = product.frames.includes(targetFrame)
+    ? targetFrame
+    : ((targetFrame === "Transparent" || targetFrame === "None") && (product.frames.includes("None") || product.frames.includes("Transparent")))
+      ? targetFrame
+      : (product.frames.includes("Black") ? "Black" : product.frames[0] || "Black");
   const upload = product.isCustom && state.customUpload ? {
     name: state.customUpload.name,
     size: state.customUpload.size,
@@ -3129,19 +3347,33 @@ function renderCart() {
     const product = getProduct(item.productId);
     if (!product) return "";
     const name = getProductName(product);
+    const isOutOfStock = isProductOutOfStock(product);
+    const maxStock = getProductStock(product);
+    const isExceeded = maxStock !== Infinity && item.quantity > maxStock;
+    const disablePlus = isOutOfStock || (maxStock !== Infinity && item.quantity >= maxStock);
+
     return `
-      <article class="cart-item">
+      <article class="cart-item${isOutOfStock ? " is-out-of-stock" : ""}">
         <img src="${displayImageForItem(product, item)}" alt="${name}" onerror="this.onerror=null;this.src='${productImageUrl(POSTER_FALLBACK_IMAGE)}'">
         <div>
           <h3>${name}</h3>
           <p>${item.size} ${currentLang === "ar" ? "سم" : "cm"} / ${getFrameOptionLabel(item.frame)}</p>
           ${item.upload ? `<p>${currentLang === "ar" ? "الملف المرفوع:" : "Uploaded:"} ${item.upload.name}</p>` : ""}
           <p>${money(itemUnitPrice(product, item.size, item.frame))} ${t("cartEach")}</p>
+          ${isOutOfStock ? `
+            <p class="cart-stock-warning out-of-stock-text" style="color:var(--danger);font-weight:700;font-size:0.8rem;margin:4px 0">
+              ⚠️ ${currentLang === "ar" ? "هذا المنتج نفد من المخزن" : "This item is out of stock"}
+            </p>
+          ` : isExceeded ? `
+            <p class="cart-stock-warning" style="color:var(--warm);font-weight:700;font-size:0.8rem;margin:4px 0">
+              ⚠️ ${currentLang === "ar" ? `المتوفر في المخزن ${maxStock} فقط` : `Only ${maxStock} available in stock`}
+            </p>
+          ` : ""}
         </div>
         <div class="quantity-controls" aria-label="Quantity controls">
           <button type="button" data-qty-minus="${item.key}">-</button>
           <strong>${item.quantity}</strong>
-          <button type="button" data-qty-plus="${item.key}">+</button>
+          <button type="button" data-qty-plus="${item.key}" ${disablePlus ? 'disabled aria-disabled="true"' : ""}>+</button>
         </div>
       </article>
     `;
@@ -3178,6 +3410,24 @@ function closeCart() {
 async function updateQuantity(key, delta) {
   const item = state.cart.find((cartItem) => cartItem.key === key);
   if (!item) return;
+
+  if (delta > 0) {
+    const product = getProduct(item.productId);
+    if (product) {
+      if (isProductOutOfStock(product)) {
+        showToast(t("itemOutOfStock") || (state.lang === "ar" ? "هذا المنتج غير متوفر حالياً" : "This item is currently out of stock"));
+        return;
+      }
+      const maxStock = getProductStock(product);
+      if (maxStock !== Infinity && item.quantity + delta > maxStock) {
+        showToast(state.lang === "ar"
+          ? `الكمية المتاحة في المخزن هي ${maxStock} فقط`
+          : `Only ${maxStock} available in stock`);
+        return;
+      }
+    }
+  }
+
   item.quantity += delta;
   if (item.quantity <= 0) {
     state.cart = state.cart.filter((cartItem) => cartItem.key !== key);
@@ -3427,6 +3677,27 @@ function handleCheckout(event) {
     showToast(t("confAddFirstAlert"));
     return;
   }
+
+  // Pre-checkout stock verification
+  for (const item of state.cart) {
+    const product = getProduct(item.productId);
+    if (product) {
+      if (isProductOutOfStock(product)) {
+        showToast(state.lang === "ar"
+          ? `المنتج "${getProductName(product)}" نفد من المخزن، يرجى حذفه من السلة للمتابعة`
+          : `"${getProductName(product)}" is out of stock. Please remove it from cart to continue.`);
+        return;
+      }
+      const maxStock = getProductStock(product);
+      if (maxStock !== Infinity && item.quantity > maxStock) {
+        showToast(state.lang === "ar"
+          ? `الكمية المطلوبة من "${getProductName(product)}" (${item.quantity}) تتجاوز المخزون (${maxStock})`
+          : `Quantity for "${getProductName(product)}" (${item.quantity}) exceeds available stock (${maxStock})`);
+        return;
+      }
+    }
+  }
+
   const couponInput = document.querySelector("[data-coupon-input]");
   if (couponInput && couponInput.value.trim() && !state.appliedCoupon) {
     applyCoupon(couponInput.value.trim());
@@ -3471,72 +3742,66 @@ async function sendWhatsAppOrder() {
   }
 
   setSendButtonLoading(true);
-  showToast(isAr ? "جاري رفع صور المنتجات إلى الخادم الآمن..." : "Uploading product images to secure server...");
-  setUploadProgress(8, true);
+
+  const customItems = state.cart.filter((item) => item.upload);
+  const uploadTotal = customItems.length;
+  let uploadDone = 0;
+
+  if (uploadTotal > 0) {
+    showToast(isAr ? "جاري رفع التصميم المرفوع..." : "Uploading custom design...");
+    setUploadProgress(8, true);
+  }
 
   let message = buildWhatsAppMessage(order);
   const uploadPromises = [];
-  const uploadTotal = state.cart.reduce((total, item) => {
-    const product = getProduct(item.productId);
-    if (!product) return total;
-    if (item.upload) return total + 1;
-    return total + ((product.gallery && product.gallery.length) ? product.gallery.length : 1);
-  }, 0);
-  let uploadDone = 0;
 
-  const uploadWithProgress = async (imgUrl, fileName) => {
-    const url = await fetchAndUploadImage(imgUrl, fileName);
-    uploadDone += 1;
-    setUploadProgress(8 + (uploadDone / Math.max(uploadTotal, 1)) * 82, true);
-    return url;
-  };
-
-  // Gather all items and their images (including full galleries for series)
   state.cart.forEach((item, index) => {
     const product = getProduct(item.productId);
     if (!product) return;
     if (item.upload) {
-      // Custom upload
+      // Custom upload strictly uploaded remotely
       uploadPromises.push((async () => {
         const blob = await getUploadBlobForItem(item);
         const url = blob ? await uploadImageToTemporaryServer(blob, item.upload.name) : null;
         uploadDone += 1;
         setUploadProgress(8 + (uploadDone / Math.max(uploadTotal, 1)) * 82, true);
-        return { index, label: isAr ? "التصميم المرفوع" : "Uploaded Design", urls: url ? [url] : [] };
+        return { index, label: isAr ? "التصميم المرفوع" : "Uploaded Design", urls: url ? [url] : [], isCustom: true };
       })());
     } else {
-      // Standard product or Series
-      const imagesToUpload = (product.gallery && product.gallery.length) ? product.gallery : [product.image];
-      uploadPromises.push((async () => {
-        const urls = [];
-        for (let i = 0; i < imagesToUpload.length; i++) {
-          const imgUrl = productImageUrl(imagesToUpload[i]);
-          const fileName = `${product.name.replace(/\s+/g, "_")}_${i + 1}.png`;
-          const url = await uploadWithProgress(imgUrl, fileName);
-          if (url) urls.push(url);
-        }
-        return { index, label: getProductName(product), urls };
-      })());
+      // Standard catalog product: use direct asset link without remote upload latency
+      const imagesToLink = (product.gallery && product.gallery.length) ? product.gallery : [product.image];
+      const urls = imagesToLink.map((img) => productImageUrl(img));
+      uploadPromises.push(Promise.resolve({
+        index,
+        label: getProductName(product),
+        urls,
+        isCustom: false
+      }));
     }
   });
 
   let uploadedImageUrls = [];
   try {
     const results = await Promise.all(uploadPromises);
-    let linkSection = isAr ? "\\n\\n*روابط تنزيل صور المنتجات:*" : "\n\n*Product Image Download Links:*";
-    results.forEach((res) => {
-      linkSection += `\n- *${res.label}:*`;
-      res.urls.forEach((url, i) => {
-        linkSection += `\n  [${i + 1}] ${url}`;
-        uploadedImageUrls.push(url);
+    const customResults = results.filter((res) => res.isCustom && res.urls.length > 0);
+    if (customResults.length > 0) {
+      let linkSection = isAr ? "\n\n*روابط تنزيل التصاميم المرفوعة:*" : "\n\n*Uploaded Design Download Links:*";
+      customResults.forEach((res) => {
+        linkSection += `\n- *${res.label}:*`;
+        res.urls.forEach((url, i) => {
+          linkSection += `\n  [${i + 1}] ${url}`;
+        });
       });
-    });
-    message += linkSection;
-    setUploadProgress(100, true);
-    showToast(isAr ? "تم الرفع بنجاح!" : "Upload successful!");
+      message += linkSection;
+    }
+    results.forEach((res) => uploadedImageUrls.push(...res.urls));
+    if (uploadTotal > 0) {
+      setUploadProgress(100, true);
+      showToast(isAr ? "تم الرفع بنجاح!" : "Upload successful!");
+    }
   } catch (err) {
-    console.error("Failed to upload some product images:", err);
-    showToast(isAr ? "حدث خطأ أثناء رفع بعض الصور" : "Error uploading some images");
+    console.error("Failed to process order images:", err);
+    if (uploadTotal > 0) showToast(isAr ? "حدث خطأ أثناء رفع التصميم" : "Error uploading custom design");
     setSendButtonLoading(false);
   }
 
@@ -3585,6 +3850,33 @@ document.addEventListener("click", (event) => {
     var card = (productLink || event.target.closest("[data-quick-add]")).closest(".product-card");
     var top = card ? card.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2 - card.offsetHeight / 2) : window.scrollY;
     sessionStorage.setItem(SESSION_SCROLL_KEY, Math.max(0, Math.round(top)));
+  }
+
+  const navSub = event.target.closest("a.nav-sub");
+  if (navSub) {
+    const isHome = window.location.pathname.endsWith("index.html") || 
+                   window.location.pathname.endsWith("/") || 
+                   !window.location.pathname.includes(".html");
+    if (isHome) {
+      const href = navSub.getAttribute("href") || "";
+      const match = href.match(/[?&]cat=([^&]+)/);
+      if (match) {
+        event.preventDefault();
+        closeNav();
+        const cat = decodeURIComponent(match[1]);
+        state.search = "";
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set("cat", cat);
+          url.searchParams.delete("search");
+          window.history.pushState({}, "", url.toString());
+        } catch (_) {}
+        renderSingleCategory(cat);
+        const target = document.querySelector("#categorySections");
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+    }
   }
 
   const themeToggle = event.target.closest("[data-theme-toggle]");
@@ -3704,8 +3996,7 @@ document.addEventListener("click", (event) => {
 
   const frameButton = event.target.closest("[data-frame]");
   if (frameButton) {
-    state.detailFrame = frameButton.dataset.frame;
-    renderDetail(state.selectedProduct);
+    switchDetailFrame(frameButton.dataset.frame);
   }
 
   const detailAdd = event.target.closest("[data-detail-add]");
@@ -3857,6 +4148,7 @@ document.addEventListener("click", (e) => {
     state.activeCategory = null;
     state.search = "";
     state.selectedProduct = null;
+    catParam = null;
 
     const searchInputs = document.querySelectorAll("#headerSearchInput, [data-search-input], #navSearchInput");
     searchInputs.forEach(inp => { if (inp) inp.value = ""; });
@@ -3894,6 +4186,27 @@ document.addEventListener("click", (e) => {
   const backBtn = e.target.closest(".page-back-btn");
   if (!backBtn) return;
   e.preventDefault();
+  const p = window.location.pathname.replace(/\/+$/, "");
+  const isHome = p === "" || 
+                 p.endsWith("/index.html") || 
+                 p.endsWith("index.html") || 
+                 p.toLowerCase().endsWith("/posterlabstore") || 
+                 p.toLowerCase() === "/posterlabstore";
+
+  if (isHome && typeof productGrid !== "undefined" && productGrid) {
+    catParam = null;
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("cat");
+      url.searchParams.delete("search");
+      window.history.pushState({}, "", url.pathname || "index.html");
+    } catch (_) {}
+    if (typeof renderCatPills === "function") renderCatPills();
+    if (typeof renderProducts === "function") renderProducts();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+
   if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.hostname)) {
     window.history.back();
   } else {
@@ -3940,7 +4253,7 @@ function buildNavMenu() {
       ${lang === "ar" ? "📂 المجموعة" : "📂 Collection"}
     </button>
     <div class="nav-sub-collection" data-sub-collection hidden>
-      ${cats.map(c => `<a class="nav-sub" href="?cat=${c.id}" data-nav-close>${c.label[lang]}</a>`).join("")}
+      ${cats.map(c => `<a class="nav-sub" href="index.html?cat=${c.id}" data-nav-close>${c.label[lang]}</a>`).join("")}
     </div>
     <div class="nav-divider"></div>
     <a href="our-work.html" data-nav-close>${lang === "ar" ? "📸 أعمالنا" : "📸 Our Work"}</a>
@@ -4067,7 +4380,6 @@ window.addEventListener("resize", () => {
 // Run initial configurations
 (async function init() {
   detectDevice();
-  initCardTiltEffects();
   state.user = getSession();
   state.wishlist = getWishlistData();
   updateLanguageUI();
@@ -4111,7 +4423,7 @@ window.addEventListener("resize", () => {
       _lastFilterSearch = null;
       _lastFilterResult = null;
       if (productGrid) {
-        const currentCat = new URLSearchParams(window.location.search).get("cat") || catParam;
+        const currentCat = new URLSearchParams(window.location.search).get("cat");
         if (currentCat) {
           renderSingleCategory(currentCat);
         } else {
@@ -4125,6 +4437,7 @@ window.addEventListener("resize", () => {
     }
   });
   syncCouponsFromFirestore();
+  initLiveSyncChannel();
 
   // FAQ accordion: close others when one opens
   const faqItems = document.querySelectorAll(".faq-item");
@@ -4201,7 +4514,7 @@ const pageProductId = getPageProductId();
 if (pageProductId) {
   const params = new URLSearchParams(window.location.search);
   if (params.has("size")) state.detailSize = params.get("size");
-  if (params.has("frame")) state.detailFrame = params.get("frame");
+  state.detailFrame = params.get("frame") || "Black";
   renderDetail(pageProductId);
 } else if (!productGrid && productDetail) {
   productDetail.hidden = false;
@@ -4217,6 +4530,8 @@ window.saveCouponToFirestore = saveCouponToFirestore;
 window.deleteCouponFromFirestore = deleteCouponFromFirestore;
 window.syncProductsFromFirestore = syncProductsFromFirestore;
 window.syncCouponsFromFirestore = syncCouponsFromFirestore;
+window.isPosterLabAdmin = isPosterLabAdmin;
+window.updateHeaderAdminButton = updateHeaderAdminButton;
 
 // Hide loading screen once all initial content is rendered
 hideLoader();
@@ -4228,6 +4543,7 @@ window.addEventListener("popstate", () => {
   if (cat) {
     renderSingleCategory(cat);
   } else if (productGrid) {
+    catParam = null;
     renderProducts();
   }
 });

@@ -60,8 +60,8 @@ const assemblyCode = `
       isCustom: true,
       image: "assets/Custom/Upload-Your-Custom-Design.webp",
       gallery: ["assets/Custom/Upload-Your-Custom-Design.webp"],
-      basePrice: 60,
-      sizes: { '20x30': 60, '30x40': 80, '40x50': 250, '50x70': 300 },
+      basePrice: 180,
+      sizes: { '20x30': 180, '30x40': 200, '40x50': 250, '50x70': 300 },
       frames: ['None', 'Black', 'White'],
       description: "Upload any photo or design and we'll print it as a high-quality framed poster.",
       descriptionAr: "ارفع أي صورة أو تصميم وسنقوم بطباعته كبوستر مؤطر عالي الجودة."
