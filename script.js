@@ -1433,7 +1433,7 @@ function registerUser(name, email, phone, password) {
         saveCart();
         renderCart();
         updateUserUI();
-        saveUserToFirestore(state.user, password);
+        saveUserToFirestore(state.user);
         resolve({ success: true, user: state.user });
         return;
       }
@@ -2170,7 +2170,7 @@ function updateOrderInFirestore(orderId, updates) {
   });
 }
 
-function saveUserToFirestore(userData, rawPassword) {
+function saveUserToFirestore(userData) {
   return new Promise(async (resolve) => {
     initFirebase();
     if (!isFirebaseReady()) { resolve(false); return; }
@@ -2181,10 +2181,8 @@ function saveUserToFirestore(userData, rawPassword) {
         email: userData.email,
         phone: userData.phone || '',
         deliveryAddress: userData.deliveryAddress || '',
-        password: rawPassword ? btoa(rawPassword) : '',
         updatedAt: new Date().toISOString()
       };
-      if (!rawPassword) delete data.password;
       await db.collection('users').doc(userData.email).set(data, { merge: true });
       resolve(true);
     } catch (e) {
